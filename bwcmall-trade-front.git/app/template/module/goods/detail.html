@@ -1,0 +1,280 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    @@include('../../include/common/meta.html')
+    @@include('../../include/common/scripts.html')
+    <link rel="stylesheet" href="/styles/module/shoppingList/shoppingList.css"/>
+    <link rel="stylesheet" href="/styles/module/goods/detail.css"/>
+</head>
+<body ms-controller="detailsCtrl" class="ms-controller">
+    <div ms-controller="headerCtrl">
+        @@include('../../include/common/header-top.html')
+        @@include('../../include/common/header-search.html')
+        @@include('../../include/common/header-nav.html')
+    </div>
+   <div class="g-content">
+   	 <input type="hidden"  ms-attr-value="{{product.id}}" id="productId"/>
+    <div class="content-inner">
+        <div class="content-title">
+            <a ms-attr-href="/goods/search.html?brandId={{product.brandId}}" class="f-ib title-nav" ms-if="product.brandName != null">{{product.brandName}}</a>
+            <span class="title-arrow" ms-if="product.brandName != null">></span>
+            <a ms-attr-href="/goods/search.html?categoryId={{product.thirdProductCategoryId}}"
+               class="f-ib title-nav" ms-if="product.thirdProductCategoryName != null">{{product.thirdProductCategoryName}}</a>
+
+            <span class="title-arrow" ms-if="product.productCategoryName != null ">></span>
+            <a ms-attr-href="/goods/search.html?categoryId={{product.productCategoryId}}" ms-if="product.productCategoryName != null "
+               class="f-ib title-nav">{{product.productCategoryName}}</a>
+
+            <div class="clear"></div>
+        </div>
+        <div class="product">
+            <div class="product-left f-fl">
+                <div class="right-extra">
+                    <!--产品参数开始-->
+                    <div>
+                        <div id="preview" class="spec-preview">
+                            <span class="jqzoom">
+                                <img ms-attr-jqimg="{{product.images[0]}}!800" ms-if="product.images != null "
+                                     ms-attr-src="{{product.images[0]}}!460"/>
+                            </span>
+                        </div>
+                        <!--缩图开始-->
+                        <div class="spec-scroll">
+                            <a class="prev"></a>
+                            <a class="next"></a>
+                            <div class="items">
+                                <ul>
+                                    <li ms-repeat="product.images">
+                                        <img alt="产品图片" ms-attr-bimg="{{el}}!800"
+                                             ms-attr-src="{{el}}!460"
+                                             onmousemove="preview(this);">
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!--缩图结束-->
+                    </div>
+                    <!--产品参数结束-->
+                </div>
+            </div>
+            <div class="product-right f-fr">
+                <div class="product-right-inner">
+                    <div class="product-info-name">
+                        <span class="f-ib product-mingcheng" ms-attr-title="product.name">{{product.name|subGoodsNames}} </span>
+                            <span class="peas-icon f-ib" ms-if="product.promotions "></span>
+                    </div>
+                    <div class="product-info">
+                        <span class="product-info-left">
+                            品牌/型号：
+                        </span>
+                        <span class="product-info-right">
+                        {{product.brandName}} /  {{product.sn}}
+                        </span>
+                    </div>
+                    <div class="product-info">
+                        <span class="product-info-left">商&emsp;&emsp;家：</span>
+                        <span class="product-info-right">{{product.shopName|subStr50}}</span>
+                    </div>
+                    <div class="product-info">
+                        <span class="product-info-left">
+                            特别说明：
+                        </span>
+                        <span class="product-info-right" ms-if="product.returnable == true">
+                            支持退换货
+                           </span>
+                         <span class="product-info-right" ms-if="product.returnable != true">
+                            不支持退换货
+                        </span>
+                    </div>
+                    <div class="product-info">
+                        <span class="product-info-left">运&emsp;&emsp;费：</span>
+                        <span class="product-info-right" ms-if="!product.includeFreight">不包邮</span>
+                        <span class="product-info-right" ms-if="product.includeFreight"><span ms-if="product.freight!=0" ms-text="parseFloat(product.freight).toFixed(2)"></span><span ms-if="product.freight==0">免运费</span></span>
+                    </div>
+                    
+                    <div class="product-line"></div>
+
+                    <div class="product-info" ms-if="product.marketPrice && !product.priceOpenToAllies">
+                        <span class="product-info-left">市场指导价：</span>
+                        <span class="product-info-right">
+                            <span class="product-price "  ms-html="formatPrice(product.marketPrice)"></span>
+                            <span ms-if="product.marketPrice" >/{{product.unit}}</span>
+                        </span>
+                    </div>
+                    <div class="product-info">
+                        <span class="product-info-left">价格：</span>
+                        <span class="product-info-right">
+                            <span ms-if="!product.priceOpenToAllies && product.price" ms-html="priceInfo"></span>
+                            <!--<span ms-if="!product.priceOpenToAllies && product.price" >/{{product.unit}}</span>-->
+                            <span class="product-price" ms-if="!product.priceOpenToAllies && !product.price"> 待询价</span>
+                            <a href="/member/register.html" class="product-price-bg" ms-if="product.priceOpenToAllies"></a>
+                        </span>
+                    </div>
+
+                    <div class="product-info" style="height: auto;">
+                        <span ms-if="shipInfo.length==0">
+                            <span class="product-info-left">货期：</span>
+                            <span class="product-info-right" ms-text=" '预计'+computeShip(product.minDeliveryTime,product.maxDeliveryTime)+'天到货'"></span>
+                            <span class="delivery-tag-wrap">
+                                <img class="delivery-tag-info" src="../../images/order/receipt_info_tag.png">
+                                <div class="delivery-tag-info-hidden">
+                                    <div class="delivery-tag-info-hidden-inner">
+                                    </div>
+                                </div>
+                            </span>
+                        </span>
+                        <span ms-if="shipInfo.length>0">
+                            <span class="product-info-left" style="float:left; height: auto;">货期：</span>
+                            <span class="product-info-right" style="width:580px; height:auto;">
+                                <div style="display: inline-block; width:80px; float:left;" ms-repeat-ship="shipInfo">
+                                    <span><input name="selectedShip" ms-attr-value="ship.ship" type="radio" ms-duplex-string="selectedShip" ms-click="changeShip($index)">&nbsp;&nbsp;</span><span>{{ship.name}}</span>
+                                </div>
+                            </span>
+                        </span>
+                    </div>
+
+                    <div class="product-info" ms-if="session.auditStatus=='passed'">
+                        <span class="product-info-left">数量：</span>
+                            <span class="product-info-right" style="vertical-align: middle;">
+                                <span id="product-minus" class="m-inorder-minus f-ib">-</span>
+                                    <span class="f-ib m-inorder-middle">
+                                        <input type="text" id="product-num" class="m-inorder-num" value="1"/>
+                                    </span>
+                                <span id="product-add" class="m-inorder-add f-ib">+</span>
+                                <div class="clear"></div>
+                            </span>
+                    </div>
+
+                    <div class="product-info product-info-last" ms-if="!product.priceOpenToAllies">
+                    <span class="product-info-left">
+                        <span class="product-info-total">总计：</span>
+                    </span>
+                    <span class="product-info-right">
+                        <span class="product-price" ms-if="product.price"
+                              id="total-price" ms-html="formatPrice(product.price)" >
+                        </span>
+                        <span class="product-price" ms-if="!product.price">待询价</span>
+                    </span>
+                    </div>
+                    <div class="product-btn">
+                            <a href="javascript:void(0);" ms-click="addCart()"
+                              ms-if=" product.marketable && $isLogin== true && product.soldOut == false && product.price && isShoppingListModel != true"
+                               class="f-ib trans_link_3 product-btn-add">加入进货单</a>
+                          <a href="javascript:void(0);"   class="f-ib trans_link_3 product-btn-add"
+                              ms-if=" product.marketable && $isLogin== true && product.soldOut == false && product.price && isShoppingListModel == true "
+                              ms-click="addshoplist()">加入购物清单</a>
+
+                              <a class="trans_link_3 product-right-btn f-ib f-btn-disabled"
+                               href="javascript: void(0)" ms-click="goLogin()"  ms-if=" !product.price  ">待询价</a>
+                               <span ms-if="(parseInt(product.shopId)==1)&&(!product.price)" style="font-size:14px;position: relative;top: 5px;">←点击即可通过QQ询价<img src="../../images/common/service.jpg" style="width: 30px;position: relative;top: 8px;"></span>
+
+                            <a class="trans_link_3 product-right-btn f-ib f-btn-disabled"
+                               href="javascript: void(0)" ms-if="product.marketable == true && product.soldOut == true && product.price " >已售罄</a>
+
+                            <a class="trans_link_3 product-right-btn f-ib f-btn-disabled"
+                               href="javascript: void(0)" ms-if="product.marketable == false && product.price" >已下架</a>
+
+                        <div class="stock-img">
+
+                        </div>
+                    </div>
+                    <div class="product-info-icon">
+                        <img  class="f-ib" src="../../images/product/slogan_small.png" alt="保障说明"/>
+                    </div>
+                </div>
+
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="content-body">
+            <div class="product-wrap-bottom">
+
+                <div class="product-detail f-fr">
+                    <div class="product-title">
+                        详细信息<span> / DETAILS</span>
+                    </div>
+                    <div class="product-detail-content">
+                        <div class="product-detail-title" ms-if='product.properties'>
+                            <span class="product-detail-title-block"></span>
+                            <span class="product-detail-title-text">技术参数</span>
+                        </div>
+                        <table class="property-tab">
+                                <tr ms-repeat="product.propertyList">
+                                    <td width="30%">{{el.name}}</td>
+                                    <td width="30%"> {{el.value}}</td>
+                                </tr>
+                        </table>
+                        <div class="product-detail-title">
+                            <span class="product-detail-title-block"></span>
+                            <span class="product-detail-title-text">产品图片</span>
+                        </div>
+                        <div ms-repeat="product.images">
+                             <img ms-attr-src="{{el}}!800" alt="技术规格" />
+                        </div>
+
+                        <span class="product-detail-only-text" ms-if="product.image1">图片仅供参考，请以实物为准</span>
+                        <div class="product-detail-title" ms-if="product.introduction">
+                            <span class="product-detail-title-block"></span>
+                            <span class="product-detail-title-text">商品介绍</span>
+                        </div>
+                        <p ms-html="product.introduction" ms-if="product.introduction">
+                          商品介绍
+                        </p>
+                        <div class="product-detail-title" ms-if="product.brandIntroduction">
+                            <span class="product-detail-title-block"></span>
+                            <span class="product-detail-title-text">品牌介绍</span>
+                        </div>
+                        <p ms-if="product.brandIntroduction">
+                      	  {{product.brandIntroduction}}
+                        </p>
+                        <div class="product-detail-title">
+                            <span class="product-detail-title-block"></span>
+                            <span class="product-detail-title-text">售后保障</span>
+                        </div>
+                        <div class="product-detail-img-wrap">
+                            <img src="../../images/product/slogan_big.png"  alt="保障说明" style="padding-bottom:0;"/>
+                        </div>
+                        <p style="font-size:12px; color:#ff0000">* 佰万仓商城自营商品价格含税含运费</p>
+                        <div class="product-detail-title">
+                            <span class="product-detail-title-block"></span>
+                            <span class="product-detail-title-text">退换货规则</span>
+                        </div>
+
+
+                        <p class="inline-p">
+                            1.自收到商品起7日内，只要商品包装完整、数量准确且不影响再次销售，客户可申请退换货。超过时间，则恕不接受。
+                        </p>
+
+                        <p class="inline-p">
+                            2.由客户定制的商品、非库存商品或者其他根据商品性质在客户购买时确认不宜退换货的商品，不适用于7日无理由退换货。
+
+                        </p>
+
+                        <p class="inline-p">
+                            3.由客户原因造成的退换货，运费由客户承担；由佰万仓或者第三方商户原因造成的退换货，运费由佰万仓或第三方商户承担。
+
+                        </p>
+
+                        <p class="inline-p">
+                            4.在没有特别约定的情况下，第三方商户遵循与佰万仓商城同样的退换货规则。
+                        </p>
+
+                        <p class="view-info">
+                            <a href="/help/returnPolicy.html">点击查看退换货详情</a>
+                        </p>
+
+
+                    </div>
+
+                </div>
+                <div class="clear"></div>
+            </div>
+        </div>
+    </div>
+</div>
+    @@include('../../include/common/footer.html')
+    <script type="text/javascript" src="../scripts/plugin/jqzoom/2.1.0/jquery.jqzoom.js"></script>
+    <script type="text/javascript" src="../scripts/module/goods/detail.js"></script>
+
+</body>
+</html>

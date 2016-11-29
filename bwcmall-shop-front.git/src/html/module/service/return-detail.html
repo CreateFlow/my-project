@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>换货订单详情</title>
+    @@include('../../include/common/intro.html')
+    <!-- build:css css/module/service/return-detail.css -->
+    <link rel="stylesheet" href="/css/module/service/return-detail.css"/>
+    <!-- endbuild -->
+</head>
+<body>
+    @@include('../../include/common/header.html')
+    @@include('../../include/common/nav.html')
+    <div class="content" ms-controller="returnDetail">
+    	<div class="nav-bar">卖家中心 > 客户服务 > 退换货订单 > 退换货编号: <span>{{result.sn}}</span></div>
+    	<div class="title">退换货详情<span><button class="fl-right-btn" ms-click="contactBuyer">联系买家</button></span></div>
+    	<div class="box">
+            <table class="base-info">
+                <tr>
+                    <td>换货编号：<span>{{result.sn}}</span></td>
+                    <td>订单编号：<span>{{result.orderSn}}</span></td>
+                    <td>退换货类型：<span>{{result.afterSaleTypeDesc}}</span></td>  
+                    <td>买家名称：<span>{{result.customerName}}</span></td>     
+                    <td>申请时间：<span>{{result.createTime}}</span></td> 
+                    <td>退换货状态：<span>{{result.afterSaleStatusDesc}}</span></td>  
+                </tr>
+                <tr ms-if="result.payMethodType">
+                    <td>支付方式：<span>{{result.payMethodType}}</span></td>        
+                </tr>
+            </table>
+            <div ms-if="result.afterSaleType!=1&&result.afterSaleItem.length>0">
+        	    <div class="title" ms-if="result.afterSaleType==2">换货商品</div>
+                <div class="title" ms-if="result.afterSaleType==0">退货退款商品</div>
+    	    	<table class="goods-list">
+                    <thead  class="header">
+                        <tr>
+                            <th class="field">商品名称</th>
+                            <th class="field">商品小图</th>
+                            <th class="field">品牌</th>
+                            <th class="field">型号</th>
+                            <!-- <th class="field">商品编号</th> -->
+                            <th class="field">SKU编号</th> 
+                            <th class="field"><span ms-if="result.afterSaleType==0">退</span><span ms-if="result.afterSaleType!=0">换</span>货数量</th>
+                            <th class="field">单位</th>
+                            <th class="field">成交单价</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="item" ms-repeat-item="result.afterSaleItem" ms-if="result.afterSaleItem.length>0">
+                            <td class="field">{{item.goodsName}}</td>
+                            <td>
+                                <div>
+                                    <img class="image" ms-src="{{item.mainImage}}"></img>
+                                </div>
+                            </td>
+                            <td><span class="field">{{item.brandSet}}</span></td>
+                            <td><span class="field">{{item.skuSnSet}}</span></td>
+                            <!-- <td><span class="field">商品编号</span></td> -->
+                            <td><span class="field">{{item.skuNoSet}}</span></td>
+                            <td><span class="field">{{item.returnQuantity}}</span></td>
+                            <td><span class="field">{{item.unitName}}</span></td>
+                            <td><span class="field">{{item.price}}</span></td>
+                        </tr>
+                    </tbody>
+        		</table>
+            </div>
+            <div ms-if="result.afterSaleLog.length>0">
+        		<div class="title">协商记录</div>
+                <div ms-repeat-log="result.afterSaleLog" ms-if="result.afterSaleLog.length>0">
+                    <!-- 非驳回类型记录 -->
+                    <div class="item">
+                        <div><span class="title">{{log.ownerType}}</span>  <span class= "time">{{log.createTime}}</span></div>
+                        <div class="line"></div>
+                        <div ms-each-msg="log.messages" ms-if="log.messages.length>0">
+                            <div>{{msg}}</div>
+                        </div>
+                        <div class="item" ms-if="log.buyerOrSalerRes.length>0">
+                            <div class="image-title"><span>{{log.ownerType}}</span>凭证：</div>
+                            <div style="padding-left: 80px;text-indent: initial;">
+                                <div class="image-row" ms-each-res="log.buyerOrSalerRes" ms-if-loop="log.buyerOrSalerRes.length>0">     
+                                    <a href="javascript:void(0)" ms-attr-href="{{res}}" data-lightbox="res-image"><img class="image" ms-src="{{res}}"></img></a>
+                                </div>
+                            </div>
+                        </div> 
+                    </div>
+
+                    <!-- 卖家驳回
+                    <div class="item" ms-if="log.orderAfterStatus==4">
+                        <div><span class="title">{{log.ownerType}}</span>  <span class= "time">{{log.createTime}}</span></div>
+                        <div class="line"></div>
+                        <div>卖家XXXXX 在初审中驳回了您的退货退款/换货 请求</div>
+                        <div>驳回理由：XXXXXXXXX</div>
+                        <div>驳回补充说明：XXXXXXXXX</div>
+                        <div class="item" ms-if="log.buyerOrSalerRes.length>0">
+                            <div class="image-title"><span>{{log.ownerType}}</span>凭证：</div>
+                            <div class="image-row" ms-each-item="result.buyerOrSalerRes" ms-if="result.buyerOrSalerRes.length>0">     
+                                <img class="image" ms-src="{{item}}"></img>
+                            </div>
+                        </div>
+                        <div>卖家XXXXX 已发起退回物流，请注意查收！</div>
+                        <div>物流公司：德邦物流</div>
+                        <div>物流单号：XXXXXXXXXX</div>
+                        <div>退回地址为：上海市，上海市浦东新区南泉路B707 联系人：邓女士 联系电话：18202103778</div>
+                    </div>  -->
+                </div>
+            </div>
+
+            <div style="text-align:center">
+                <button class="default-btn" ms-click="close">关闭</button>
+            </div>
+
+        </div>
+    </div>
+    @@include('../../include/common/outro.html')
+    <script>require(['conf/service/return-detail']);</script>
+</body>
+</html>

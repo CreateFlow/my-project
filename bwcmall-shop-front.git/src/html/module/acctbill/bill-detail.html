@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>账单明细</title>
+        @@include('../../include/common/intro.html')
+        <!-- build:css css/module/acctbill/bill-detail.css -->
+        <link rel="stylesheet" href="/css/module/acctbill/bill-detail.css"/>
+        <!-- endbuild -->
+    </head>
+    <body>
+        @@include('../../include/common/header.html')
+        @@include('../../include/common/nav.html')
+        <div class="main bill-detail"  ms-controller="acctBillDetail">
+            <div class="sidebar">
+                @@include('../../include/common/menu.html')
+            </div>
+            <div class="content">
+                <ul class="breadcrumb">
+                    <li>
+                        <a href="javascript:void(0);">卖家中心</a>
+                    </li>
+                    <li>
+                        <a href="/acctbill/bill-list.html">交易管理</a>
+                    </li>
+                    <li>
+                        <a href="/acctbill/bill-list.html">账单管理</a>
+                    </li>
+                </ul>
+                <div class="panel">
+                    <div class="hd">
+                        <span class="title">账单明细</span>
+                    </div>
+                    <div class="bd">
+                        <div class="loading-wrapper" ms-if="showLoading">
+                            <div class="oni-loading" ms-widget="loading,$,loadingOpt" data-loading-type="spinning-spin"></div>
+                        </div>
+                        <div class="row pline">
+                            <div class="col col-6"><p>客户名称：<span ms-text="billInfo.customerName"></span></p></div>
+                            <div class="col col-6"><p>账单编号：<span ms-text="billInfo.sn"></span></p></div>
+                        </div>
+                        <div class="row pline">
+                            <div class="col col-6"><p>联系电话：<span ms-text="billInfo.customerMobile"></span></p></div>
+                            <div class="col col-6"><p>买家付款方式：<span ms-text="billInfo.payMethodType"></span></p></div>
+                        </div>
+                        <div class="row pline">
+                            <div class="col col-6">
+                                <p style="line-height: 14px;">账单周期：
+                                    <span ms-text="billInfo.billPeriodStart"></span>
+                                    <span>&sim;</span>
+                                    <span ms-text="billInfo.billPeriodEnd"></span>
+                                </p>
+                            </div>
+                            <div class="col col-6"><p>买家付款日期：<span ms-text="billInfo.paymentDate"></span></p></div>
+                        </div>
+                        <div class="row pline">
+                            <div class="col col-6"><p>账单状态：<span ms-text="billInfo.acctBillsType"></span></p></div>
+                            <div class="col col-6"><p>实收金额(元)：<span ms-text="billInfo.amountPaid|currency "></span></p></div>
+                        </div>
+                        <div class="row pline">
+                            <div class="col col-6"><p>应付金额(元)：<span ms-text="billInfo.payableAmount|currency "></span></p></div>
+                        </div>
+                        <div class="divider"></div>
+                        <div class="row pline" ms-if="billInfo.evidence">
+                            <div class="class-title">付款凭证</div>
+                            <div class="img-wrapper">
+                                <img ms-src="{{billInfo.evidence}}">
+                            </div>
+                        </div>
+                        <div class="divider"></div>
+                        <div class="row">
+                            <table class="trade-item-table">
+                                <thead>
+                                    <tr>
+                                        <th width="25%">交易时间</th>
+                                        <th width="50%">交易摘要</th>
+                                        <th width="25%">交易金额(元)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="item" ms-repeat-item="billInfo.detailSellerVOList"
+                                        ms-if="billInfo.detailSellerVOList.length>0" ms-class="tr-bg:($index%2==0)">
+                                        <td><span ms-text="item.createTime"></span></td>
+                                        <td><span ms-text="item.remark"></span>:
+                                            <span ms-if="item.afterSaleType == 0">
+                                                <a ms-href="/return/auditgood.html?id={{item.orderAfterSaleId}}">
+
+                                                    <span ms-text="item.orderAfterSaleSn"></span>
+                                                </a>
+
+                                            </span>
+                                            <span ms-if="item.afterSaleType == 1">
+                                                <a ms-href="/return/auditreturn.html?id={{item.orderAfterSaleId}}">
+
+                                                    <span ms-text="item.orderAfterSaleSn"></span>
+                                                </a>
+                                                
+                                            </span>
+                                            <span ms-if="item.afterSaleType == null">
+                                                <a ms-href="/orderdetail/order-detail.html?id={{item.orderId}}&sn={{item.orderSn}}">
+                                                <span ms-text="item.orderSn||'无'"></span></a>
+                                            </span>
+                                        </td>
+                                        <td><span ms-text="item.amount|currency ||'0.00'"></span></td>
+                                    </tr>
+                                    <tr ms-if="billInfo.detailSellerVOList.length==0">
+                                        <td colspan="9" class="cell-empty">没有交易数据</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="row row-buttons">
+                            <span ms-if="billInfo.acctBillsType == '已出帐单' && billInfo.verificationStatus == '未核销' " ms-click="confirmPaid" class="btn btn-large btn-primary button-back">确认已结清</span>
+                            <span ms-click="exportBillDetail" class="btn btn-large btn-primary button-back border-button">导出账单</span>
+                        </div>
+                    </div>
+                    <div ms-widget="dialog,dlgConfirmPaidOrder,opts1">
+                        <div class="col offerset-2 es-body" style="text-align: center;">
+                            <p>您确认该账单<span class="hl-warn">已结清</span>?</p>
+                        </div>
+                    </div>
+                    <div ms-widget="dialog,dlgInputBankTradeCode,opts2" class="es-body">
+                        <div class="row" style="line-height: 34px;">
+                            <div class="col col-2">&nbsp;</div>
+                            <div class="col col-3">收款时间:</div>
+                            <div class="col col-5">
+                                <input ms-widget="datepicker" ms-duplex="inputTrade.tradeDate"/>
+                            </div>
+                        </div>
+                        <div class="row" style="line-height: 34px;">
+                            <div class="col col-2">&nbsp;</div>
+                            <div class="col col-3">银行流水号:</div>
+                            <div class="col col-5">
+                                <input class="inputbox" ms-duplex="inputTrade.bankStatementSn"/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col col-2">&nbsp;</div>
+                            <div class="col col-8"><span style="color:red" ms-text="showE"></span></div>
+                            
+                        </div>
+                    </div>
+
+                    <div ms-widget="dialog,dlgAfterAlert,alertOpts">
+                        <div class="col offerset-2">
+                            {{confirmReceivedMsg}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @@include('../../include/common/outro.html')
+        <script>require(['conf/acctbill/bill-detail']);</script>
+    </body>
+</html>

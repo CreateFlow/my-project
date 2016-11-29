@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <title>绑定成功</title>
+    <meta name="description" content=""> @@include('../common/meta.html')
+</head>
+
+<body>
+    <div class="page text-center">
+        <div class="weui_msg">
+            <div class="weui_icon_area" style="margin-top: 20%"><i class="weui_icon_success weui_icon_msg"></i></div>
+            <div class="weui_text_area">
+                <h2 class="weui_msg_title" style="font-size: 18px;">恭喜您账号绑定成功！</h2>
+                <p class="weui_msg_desc" style="margin-top: 10px">现在您可以通过微信随时了解订单状态了~</p>
+            </div>
+            <div class="bd spacing" style="margin-top: 50px">
+                <div class="button_sp_area" style="width: 60%; margin: 0 auto">
+                    <button id="btnBack" onclick="goBack()" class="weui_btn weui_btn_warn">返回</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+    function goBack() {
+        wx.closeWindow();
+    }
+    </script>
+</body>
+
+</html>
+

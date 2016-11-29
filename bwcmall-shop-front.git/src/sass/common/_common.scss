@@ -1,0 +1,80 @@
+@charset "UTF-8";
+
+@import "reset";
+@import "variable";
+@import "css3";
+@import "utils";
+@import "float";
+@import "grid";
+@import "icons";
+@import "oniui";
+
+%layout {
+    width: 1200px;
+    margin: 0 auto;
+}
+
+.clearfix {
+    @extend %clearfix;
+}
+
+.pull-right {
+    @extend %float-right;
+}
+
+.pull-left {
+    @extend %float-left;
+}
+
+.reset-float {
+    @include reset-float;
+}
+
+.vertical-top {
+    vertical-align: top;
+}
+
+// Horizontal center
+.center {
+    position: relative;
+    left: 50%;
+    @extend %float-left;
+    @at-root {
+        .center_reset {
+            @extend .center;
+            left: -50%;
+        }
+    }
+}
+
+.hide {
+    @include invisible(false);
+}
+
+.show {
+    @include visible(false);
+}
+
+.affix {
+    position: fixed !important;
+}
+
+.scorll {
+    overflow: auto;
+}
+
+.scorll-x {
+    overflow-x: auto;
+}
+
+.scorll-y {
+    overflow-y: auto;
+}
+
+.whitespace {
+    white-space: pre;
+}
+
+.nowrap {
+    white-space: nowrap;
+}

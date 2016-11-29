@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html> 
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <title>卖家管理</title>
+    @@include('../../include/common/meta.html')
+    @@include('../../include/common/common-include.html') 
+
+    <link rel="stylesheet" type="text/css" href="/styles/module/vendor/vendorlist.css"> 
+    <script src="/scripts/module/vendor/vendorlist.js"></script>
+</head>
+
+<body ms-controller="vendorListCtrl">
+    @@include('../../include/common/header.html')
+    @@include('../../include/common/account-head.html')
+
+     <!--主要内容-->
+    <div class="g-content g-clearfix">
+      <!--header -->
+      <div class="module-header">
+          <div class="index-query-conditions">
+            <div class="index-condition">
+              <span>品牌</span>
+              <div>
+                <select ms-widget="dropdownlist, brandDropListId" ms-duplex="brandId">
+                  <option ms-repeat="brandList"  ms-attr-value="el.id" ms-text="el.name"></option> 
+                </select>
+              </div>
+            </div>
+<!--            
+            <div class="index-condition">
+                <span>SKU型号</span>
+                <input type="text" ms-duplex="searchData.skuSn"/>
+            </div> 
+            <div class="index-condition">
+                <span>商品分类</span>
+                <select id="categoryList" name="categoryList" ms-duplex="searchData.category">
+                    <option value="">全部</option>
+                    <option ms-repeat="categoryList"  ms-attr-value="el.id" ms-text="el.name"></option> 
+                </select> 
+                
+            </div>  
+
+            <div class="index-condition">
+                <span>商品名称</span>  
+                <input type="text" ms-duplex="searchData.goodName"/>
+            </div>
+--> 
+            <div class="index-condition">
+                <span>公司名称</span>
+                <input type="text" ms-duplex="searchData.supplierName" ms-keyup="onKeyup($event)"/>
+            </div> 
+            <div class="index-actions"> 
+                 <button type="button" id="queryVendorBtn" name="queryVendorBtn" class="query_btn" value="" ms-click="doVendorQuery">查询</button> 
+                 <button type="button" id="addSupplierBtn" name="addSupplierBtn" class="add_btn" ms-click="editSupplier(null)">新增临时供应商</button> 
+            </div>
+        </div> 
+      </div>
+
+       <div class="index-table-panel">
+        <table class="index-table">
+          <tbody>
+            <tr>
+              <th width="15%">店铺</th>
+              <th width="15%">公司名称</th>
+              <th width="8%">状态</th>
+              <th width="15%">联系电话</th> 
+              <th width="15%">创建时间</th>
+              <th width="8%">创建人</th> 
+              <th width="10%">品牌备注</th>
+              <th>操作</th>  
+            </tr>
+            <tr  ms-if="dataList.length<=0">
+              <td colspan="10">
+                没有查询到任何数据~~
+              </td>
+            </tr>
+            <tr ms-repeat="dataList" ms-if="dataList.length>0"> 
+              <td ms-text="el.shopName"></td> 
+              <td ms-text="el.supplierName"></td> 
+              <td ms-text="el.supplierStatusDisplayName"></td> 
+              <td ms-text="el.phone"></td>
+              <td ms-text="el.createdTime"></td> 
+              <td ms-text="el.createdByName"></td> 
+              <td ms-text="el.brandRemarks"></td>
+              <td>
+                <span>
+                  <a href="javascript:void(0)" ms-click="editSupplier(el, true)" ms-if="el.supplierId">查看详情</a>
+                  <a href="javascript:void(0)" ms-click="showShopInfo(el)" ms-if="!el.supplierId">查看详情</a>
+                </span>
+                <span ms-if="el.supplierId">
+                  <a href="javascript:void(0)" ms-click="editSupplier(el, false)">编辑</a>
+                </span>
+              </td>
+            </tr> 
+
+          </tbody>
+        </table>
+
+        <div class="paper">
+          <div ms-widget="pager, vendorListPager"></div>
+        </div>
+      </div>
+<!--
+      <div ms-controller="goodsListCtrl" id="goodsListDialogId" ms-widget="dialog,goodsListDialogId,$goodsListDialogOption">
+        <div class="module-header">
+          <div class="index-query-conditions">
+            <div class="index-condition">          
+              <span>品牌</span>
+              <div>
+                <select ms-widget="dropdownlist, brandDropListId" ms-duplex="selectedBrandId">
+                </select>
+              </div>
+            </div>
+            <div class="index-condition">
+                <span>商品名称</span>  
+                <input type="text" ms-duplex="searchData.goodName"/>
+            </div>
+            <div class="index-condition">
+                <span>SKU型号</span>
+                <input type="text" ms-duplex="searchData.skuSn"/>
+            </div> 
+            <div class="index-condition">
+                <span>商品分类</span>
+                <select id="categoryList" name="categoryList" ms-duplex="searchData.category">
+                    <option value="">全部</option>
+                    <option ms-repeat="categoryList"  ms-attr-value="el.id" ms-text="el.name"></option> 
+                </select> 
+            </div> 
+            <div class="index-actions"> 
+                 <button type="button" id="queryGoodsBtn" name="queryGoodsBtn" class="query_btn" value="" ms-click="doGoodsQuery">查询</button> 
+            </div>
+          </div> 
+        </div>
+
+        <div class="index-table-panel">
+          <table class="index-table">
+            <tbody>
+              <tr>
+                <th width="10%">品牌</th>
+                <th width="25%">商品名称</th>
+                <th width="25%">商品型号</th>
+                <th width="10%">单位</th> 
+                <th width="5%">采购价格</th>
+                <th width="5%">销售价</th> 
+              </tr>
+              <tr  ms-if="goodsList.length<=0">
+                <td colspan="10">
+                  没有查询到任何数据~~
+                </td>
+              </tr>
+              <tr ms-repeat="goodsList" ms-if="goodsList.length>0"> 
+                <td ms-text="el.brandName"></td> 
+                <td ms-text="el.goodsName"></td> 
+                <td ms-text="el.sn"></td> 
+                <td ms-text="el.unit"></td>
+                <td ms-text="el.purchasePrice"></td> 
+                <td ms-text="el.salePrice"></td> 
+              </tr> 
+            </tbody>
+          </table>
+          <div class="paper">
+            <div ms-widget="pager, goodsListPager"></div>
+          </div>
+        </div>
+      </div>    
+-->
+      <div ms-controller="addSupplierCtrl" id="addSupplierDialogId" ms-widget="dialog,addSupplierDialogId,$addSupplierDialogOption">
+        <form class="form">
+          <div class="input-group">
+              <label class="label">供应商编号</label>
+              <input type="text" ms-duplex="supplier.sn" class="input" ms-attr-disabled="true"/>
+          </div>
+          <div class="input-group">
+              <label class="label"><span style="color:red;" ms-if="!bViewer">*</span>公司名称</label>
+              <input type="text" ms-duplex="supplier.name" class="input" ms-attr-disabled="bViewer"/>
+          </div>
+          <div class="input-group">
+              <label class="label"><span style="color:red;" ms-if="!bViewer">*</span>联系人</label>
+              <input type="text" ms-duplex="supplier.contacts" class="input" ms-attr-disabled="bViewer"/>
+          </div>
+          <div class="input-group">
+              <label class="label"><span style="color:red;" ms-if="!bViewer">*</span>联系电话</label>
+              <input type="text" ms-duplex="supplier.mobile" class="input" ms-attr-disabled="bViewer"/>
+          </div>
+          <div class="input-group">
+              <label class="label">所在区域</label>
+              <div class="area">
+                  <div class="m-tabselect" style="margin-right:10px">
+                      <div class="m-tabselect-block" ms-click="onTabSelect" ms-text="province"></div>
+                      <div class="m-tabselect-body" ms-if="!bViewer">
+                          <div class="m-tabselect-item-none" ms-click="selectProvince(el.name)" ms-repeat="provinceData" ms-if="provinceData.length>0">{{el.name}}</div>
+                      </div>
+                  </div>
+                  <div class="m-tabselect" style="margin-right:10px">
+                      <div class="m-tabselect-block"  ms-click="onTabSelect" ms-text="city"></div>
+                      <div class="m-tabselect-arrow"></div>
+                      <div class="m-tabselect-body" ms-if="!bViewer">
+                          <div class="m-tabselect-item-none" ms-click="selectCity(el.name)"
+                               ms-repeat="cityData" ms-if="cityData.size()>0">{{el.name}}
+                          </div>
+                      </div>
+                  </div>
+                  <div class="m-tabselect">
+                      <div class="m-tabselect-block" ms-click="onTabSelect" ms-text="county"></div>
+                      <div class="m-tabselect-arrow"></div>
+                      <div class="m-tabselect-body" ms-if="!bViewer">
+                          <div class="m-tabselect-item-none" ms-click="selectCounty(el.name,el.value)"
+                               ms-repeat="countyData" ms-if="countyData.size()>0">{{el.name}}
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="input-group">
+              <label class="label">详细地址</label>
+              <input type="text" ms-duplex="supplier.address" class="input" ms-attr-disabled="bViewer"/>
+          </div>
+
+          <div class="input-group">
+            <label class="label">供应商商类型</label>
+            <select id="supplierType" name="supplierType" ms-duplex="supplier.nature" style="width: 100%;margin-bottom: 15px;" ms-attr-disabled="bViewer">
+              <option ms-repeat="supplierTypeList"  ms-attr-value="el.value" ms-text="el.name"></option> 
+            </select>          
+          </div>  
+          <div class="input-group area">
+              <label class="label">经营品牌</label>
+              <div ms-repeat-supbrand="supplier.brandList" style="height: 95px;margin-bottom: 15px;border-bottom: solid 1px;border-color: gray;">
+                <div style="display: inline-block;">
+                  <select ms-widget="dropdownlist, $" ms-duplex="supbrand.brandId" ms-attr-disabled="bViewer" >
+                    <option ms-if="supbrand.brandId" ms-attr-value="supbrand.brandId" ms-text="supbrand.brandName"></option>
+                  </select>
+                </div>
+
+                <span>是否有授权</span>
+                <select id="accreditStatusList" name="accreditStatusList" ms-duplex="supbrand.accreditStatus" ms-attr-disabled="bViewer" style="width:110px;">
+                    <option ms-repeat="accreditStatusList"  ms-attr-value="el.value" ms-text="el.name"></option> 
+                </select>
+
+                <div> 
+<!--TODO                
+                  <button type="button" ms-click="onUploadFile" style="margin-top: 10px;margin-bottom: 10px;width: 110px;height: 30px;position: relative;left: -110px;top: 5px;" ms-attr-disabled="bViewer">上传资质证书</button>
+                  <input type="text" ms-duplex="supbrand.remarks" class="input"  style="margin-top: 5px;width: 230px;position: relative;top: -42px;left: 120px;" placeholder="填写品牌备注"  ms-attr-disabled="bViewer"></input>
+-->
+                  <input type="text" ms-duplex="supbrand.remarks" class="input"  style="margin-top: 5px;" placeholder="填写品牌备注"  ms-attr-disabled="bViewer"></input>
+                </div>
+
+                <div ms-click="deleteBrand($index)" class="del-class-btn" ms-if="!bViewer">
+                  <img src="/images/ui/closed-gray.png" alt="取消">
+                </div>
+              </div>
+              <div class="validation" ms-if="!bViewer">
+                  <a class="add-class-btn" ms-click="addBrand" href="javascript: void(0)">+</a>
+              </div>
+          </div>
+          <div class="input-group">
+            <label class="label">备注</label>
+            <textarea name="" id="remarks" ms-duplex="supplier.remarks" placeholder="填写备注" ms-attr-disabled="bViewer"></textarea>
+          </div>
+
+          <button type="button" id="saveVendorBtn" name="saveVendorBtn" ms-click="onSave" style="margin-top: 30px;margin-left: 220px;margin-bottom: 20px;width: 120px;height: 30px;" ms-if="!bViewer">保存</button>
+          <button type="button" id="closeVendorBtn" name="closeVendorBtn" ms-click="onCloseDlg" style="margin-top: 30px;margin-left: 220px;margin-bottom: 20px;width: 120px;height: 30px;" ms-if="bViewer">关闭</button>
+        </form>
+      </div>
+      <div ms-controller="shopInfoCtrl" id="shopInfoDialogId" ms-widget="dialog,shopInfoDialogId,$shopInfoDialogOption">
+        <form class="form">
+          <div class="input-group">
+              <label class="label">公司名称</label>
+              <input type="text" ms-duplex="shopInfo.name" class="input" disabled="true"/>
+          </div>
+          <div class="input-group">
+              <label class="label">联系人</label>
+              <input type="text" ms-duplex="shopInfo.contacts" class="input" disabled="true"/>
+          </div>
+          <div class="input-group">
+              <label class="label">联系电话</label>
+              <input type="text" ms-duplex="shopInfo.phone" class="input" disabled="true"/>
+          </div>
+          <div class="input-group">
+              <label class="label">所在区域</label>
+              <div class="area">
+                  <div class="m-tabselect" style="margin-right:10px">
+                      <div class="m-tabselect-block" ms-text="shopInfo.areaProvince"></div>
+                  </div>
+                  <div class="m-tabselect" style="margin-right:10px">
+                      <div class="m-tabselect-block" ms-text="shopInfo.areaCity"></div>
+                  </div>
+                  <div class="m-tabselect">
+                      <div class="m-tabselect-block" ms-text="shopInfo.areaCounty"></div>
+                  </div>
+              </div>
+          </div>
+          <div class="input-group">
+              <label class="label">详细地址</label>
+              <input type="text" ms-duplex="shopInfo.address" class="input" ms-attr-disabled="true"/>
+          </div>
+ 
+          <div class="input-group" ms-if="shopInfo.brandList && (shopInfo.brandList.length>0)">
+              <label class="label">经营品牌</label>
+              <div ms-repeat-brand="shopInfo.brandList">
+                <label class="brand-label">{{brand}}</label>
+              </div>
+          </div>
+
+          <button type="button" id="closeShopBtn" name="closeShopBtn" ms-click="onCloseDlg" style="margin-top: 30px;margin-left: 220px;margin-bottom: 20px;width: 120px;height: 30px;">关闭</button>
+        </form>
+      </div>
+
+      <div ms-controller="alertDialogCtrl" id="alertDialogCtrlId" ms-widget="dialog,alertDialogCtrlId,$alertDialogOption">
+        <p>{{message}}</p>
+        <button type="button" id="closeAlertBtn" name="closeAlertBtn" ms-click="onCloseAlert" style="margin-top: 30px;margin-left: 70px;margin-bottom: 20px;width: 120px;height: 30px;">确定</button>
+      </div>
+
+
+    </div>
+    @@include('../../include/common/footer.html')
+</body>
+
+</html>

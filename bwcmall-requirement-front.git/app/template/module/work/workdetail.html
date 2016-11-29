@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html> 
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <title>单个商品处理详情</title>
+    @@include('../../include/common/meta.html')
+    @@include('../../include/common/common-include.html') 
+
+    <link rel="stylesheet" type="text/css" href="/styles/module/work/workdetail.css"> 
+    <script src="/scripts/module/work/workdetail.js"></script>
+</head>
+
+<body ms-controller="workdetailCtrl">
+    @@include('../../include/common/header.html')
+    @@include('../../include/common/account-head.html')
+    <!--主要内容-->
+    <div class="g-content g-clearfix">
+        <div class="content-head">
+            <div class="module-title">
+                <div><span>单个商品处理详情</span></div>
+            </div>
+        </div>
+        <div class="detail-table-panel">
+            <div class="order-table-wrap">
+                <div class="detail-title">
+                    <div class="detail-title1">
+                        <span>找货单单号：</span><span ms-text="dataList.sn"></span>
+                    </div>
+                    <div class="detail-title2" style="">
+                        <span>完成度：</span><span ms-text="dataList.progress"></span><span style="color:red;margin-left:20px;" ms-text="dataList.requireStatusDesc"></span>
+                    </div>
+                </div>
+                <div class="detail-query-conditions" style="clear:both">
+                    <div class="detail-condition">
+                        <span>名称：</span><span ms-text="dataList.name"></span>
+                    </div>
+                    
+                    <div class="detail-condition">
+                        <span>电话：</span><span ms-text="dataList.mobile"></span>
+                    </div>
+                    <div class="detail-condition">
+                        <span>来源：</span><span ms-text="dataList.sourceDesc"></span>
+                    </div>
+                    <div class="detail-condition">
+                        <span>类型：</span><span ms-text="dataList.typeDesc"></span>
+                    </div>
+                    <div class="detail-condition">
+                        <span>创建者：</span><span ms-text="dataList.createName"></span>
+                    </div>
+                </div>
+                <div class="detail-query-conditions" style="clear:both">
+                    <div class="detail-condition" style="width:400px">
+                        <span>地址：</span><span ms-text="dataList.address"></span>
+                    </div>
+                    <div class="detail-condition" style="width:400px">
+                        <span>备注：</span><span ms-text="dataList.remarks"></span>
+                    </div>
+                    <div class="detail-condition" ms-if="dataList.itemDetail.reason">
+                        <span>无法处理原因：</span><span style="color:red" ms-text="dataList.itemDetail.reason"></span>
+                    </div>
+                </div>
+
+                <div class="order-block" style="clear:both">
+                    <div class="return-detail-row">
+                        <div class="uploaded-image-panel">
+                            <div class="upload-image-col" ms-repeat="dataList.resourceList">
+                                <div class="image-div">
+                                    <img ms-if="el.type != 1" ms-attr-src="el.resources" />
+                                    <a ms-if="el.type == 1" ms-href="el.resources"><img src="/images/common/download.png" /></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="detail-table">
+                    <table cellpadding="0" width="100%">
+                        <!--表单头部-->
+                        <tr class="order-table-top">
+                           
+                            <th width="16%">
+                                品牌
+                            </th>
+                            <th width="16%">
+                                品名
+                            </th>
+                            <th width="16%">
+                                型号
+                            </th>
+                            
+                            <th width="16%">
+                                数量
+                            </th>
+                            <th width="16%">
+                                单位
+                            </th>
+                            <th width="16%">
+                                分类
+                            </th>
+                            
+                        </tr>
+                        <!--商品一行-->
+                        <tr>
+                            <!--品牌-->
+                            <td>
+                                <span ms-text="dataList.itemDetail.brandName"></span>
+                            </td>
+                            <td>
+                                <span ms-text="dataList.itemDetail.itemName"></span>
+                            </td>
+                            <!--型号-->
+                            <td>
+                                <span type="text" ms-text="dataList.itemDetail.skuSnSet"></span>
+                            </td>
+                            <!--数量-->
+                            <td>
+                                <span type="text" ms-text="dataList.itemDetail.requiredQuantity"></span>
+                            </td>
+                            <!--单位-->
+                            <td>
+                                <span type="text" ms-text="dataList.itemDetail.unit"></span>
+                            </td>
+                            <!--销售价-->
+                            <td>
+                                <span type="text" ms-text="dataList.itemDetail.category"></span>
+                            </td>
+
+
+                        </tr>
+                    </table>
+
+
+                    <div class="detail-title" style="margin:50px 0px 0px 0px;">
+                        <div class="detail-title1">
+                            <span>匹配商品详情</span>
+                        </div>
+                    </div>
+
+                    <table cellpadding="0" width="100%">
+                        <!--表单头部-->
+                        <tr class="order-table-top">
+                           
+                            <th width="10%">
+                                品牌
+                            </th>
+                            <th width="10%">
+                                品名
+                            </th>
+                            <th width="10%">
+                                型号
+                            </th>
+                            <th width="10%">
+                                店铺
+                            </th>
+                            <th width="10%">
+                                供应商
+                            </th>
+                            <th width="10%">
+                                单位
+                            </th>
+                            <th width="10%">
+                                销售价
+                            </th>
+                            <th width="10%">
+                                采购价
+                            </th>
+                            <th width="10%">
+                                货期
+                            </th>
+                            <th width="10%">
+                                备注
+                            </th>
+                        </tr>
+                        <!--商品一行-->
+                        <tr ms-repeat="dataList.itemDetail.itemOfferList">
+                            <!--品牌-->
+                            <td>
+                                <span ms-text="el.brandName"></span>
+                            </td>
+                            <td>
+                                <span ms-text="el.itemName"></span>
+                            </td>
+                            <!--型号-->
+                            <td>
+                                <span type="text" ms-text="el.skuSnSet"></span>
+                            </td>
+                            <!--数量-->
+                            <td>
+                                <span type="text" ms-text="el.shopName"></span>
+                            </td>
+                            <td>
+                                <span type="text" ms-text="el.supplierName"></span>
+                            </td>
+                            <!--单位-->
+                            <td>
+                                <span type="text" ms-text="el.unit"></span>
+                            </td>
+                            <td>
+                                <span type="text" ms-text="el.salePrice"></span>
+                            </td>
+                            <td>
+                                <span type="text" ms-text="el.purchasePrice"></span>
+                            </td>
+                            <td>
+                                <span type="text" ms-text="el.shipMin + '-' + el.shipMax + '天'"></span>
+                            </td>
+                            <!--销售价-->
+                            <td>
+                                <span type="text" ms-text="el.remarks"></span>
+                            </td>
+
+                        </tr>
+                    </table>
+
+                </div>
+                
+            </div>
+            
+        </div>
+       </div>
+       
+    @@include('../../include/common/footer.html')
+</body>
+
+</html>

@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <title>订单列表</title>
+    <meta name="description" content=""> @@include('../common/meta.html')
+</head>
+
+<body v-cloak class="order-list-wrap" id="app">
+    <div class="container">
+        <div class="order-nav">
+            <tab :line-width="2" active-color="#e83637" default-color="#424242">
+                <tab-item :selected="navItem.name === item.name" v-for="item in navList" @click="clickTab(item)">{{item.name}}</tab-item>
+            </tab>
+        </div>
+        <div class="order-list" v-show="orderList.length == 0 && !loadingBusy">
+            <div class="text-center">
+                <img class="no-data-img" src="/images/order/no_data.png" alt="暂无数据" />
+                <p style="color: #828282">暂无数据</p>
+            </div>
+        </div>
+        <div class="order-list" v-show="orderList.length > 0">
+            <scroller lock-x scrollbar-y use-pullup :height="winHeight" :pullup-config="{content: '', downContent: '释放加载更多', upContent: '', loadingContent: '加载中...'}" v-on:pullup:loading="pullupLoad" v-ref:scroller>
+                <div>
+                    <div class="weui_panel weui_panel_access" @click="goOrder(o.sn, o.childOrders)" v-for="o in orderList">
+                        <div class="weui_panel_hd">{{o.shopName}}<span class="weui_cell_ft"></span></div>
+                        <div class="weui_panel_bd order-item">
+                            <div class="item-con">
+                                <img class="item-cancel" src="/images/order/order-cancel-icon.png" v-if="o.orderStatusDisplay == '已取消'">
+                                <p><span v-if="o.orderStatusDisplay != '已拆单'">订单单号</span>
+                                    <span v-if="o.orderStatusDisplay == '已拆单'">父单号</span>: {{o.sn}}</p>
+                                <p>下单时间: {{o.createdTime}}:00</p>
+                            </div>
+                            <div class="item-right">
+                                <span v-if="o.orderStatusDisplay != '已拆单'">{{o.orderStatusDisplay}}</span>
+                            </div>
+                        </div>
+                        <div class="weui_panel_bd order-item order-sub-item border-top" @click="goOrder(c.sn)" v-for="c in o.childOrders">
+                            <div class="item-con">
+                                <p>子单号{{$index + 1}}: {{c.sn}}</p>
+                                <p>下单时间:{{c.createdTime}}</p>
+                            </div>
+                            <div class="item-right">
+                                <span>{{c.orderStatusDisplay}}</span>
+                            </div>
+                        </div>
+                        <div class="weui_panel_fd border-top">实付金额:￥{{o.amount}}</div>
+                    </div>
+                </div>
+            </scroller>
+        </div>
+    </div>
+    <loading :show="loadingBusy" :text="loadingText"></loading>
+    @@include('../common/footer.html')
+    <!-- build:js(.) /js/page/order/list-modules.js -->
+    <script src="/bower_components/vux/dist/components/tab/index.js"></script>
+    <script src="/bower_components/vux/dist/components/tab-item/index.js"></script>
+    <script src="/bower_components/vux/dist/components/loading/index.js"></script>
+    <script src="/bower_components/vux/dist/components/scroller/index.js"></script>
+    <!-- endbuild -->
+    <!-- build:js({.tmp,app}) /js/page/order/list.js -->
+    <script src="/js/page/order/list.js"></script>
+    <!-- endbuild -->
+</body>
+
+</html>

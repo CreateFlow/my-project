@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>卖家首页</title>
+    @@include('../include/common/intro.html')
+    <!-- build:css /css/module/index.css -->
+    <link rel="stylesheet" href="/css/module/index.css"/>
+    <!-- endbuild -->
+</head>
+<style>
+    .ms-controller{
+        visibility: hidden
+    }
+</style>
+<body ms-controller="indexCtrl" class="ms-controller">
+    @@include('../include/common/header.html')
+    @@include('../include/common/nav.html')
+    <div class="main mod-index">
+        <div class="sidebar">
+            @@include('../include/common/menu.html')
+        </div>
+        <div class="content">
+            <div class="panel account" ms-if = "accountData.acctStatus == 0">
+                <table class="account-table">
+                    <tr>
+                        <td class="account-border-right">
+                            <div class="account-photo">
+                                <a href="javascript:void(0);">
+                                    <img src="/images/usericon.png">
+                                </a>
+                            </div>
+                            <div class="account-userinfo">
+                                <div class="account-userifo-title"><span ms-text="result.shopName"></span></div>
+                                <div class="userifo-p">
+                                    收款账户：<span style="color:#00AAEE">冻结中</span> <a class="btn btn-small btn-default" href="javascript:void(0);" ms-click="show()" style="margin-left:10px;">解冻</a>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <p class="account-tip" style="position:relative;top:16px;">
+                                <span style="position:absolute;left:-36px;">提示：</span>
+                                <span>解冻收款账户需要您提交相关的企业资质，审核通过后即可在此查看收入并提现至绑定的银行卡！</span>
+                            </p>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="panel account" ms-if = "accountData.acctStatus == 1">
+                <table class="account-table">
+                    <tr>
+                        <td class="account-border-right">
+                            <div class="account-photo">
+                                <a href="javascript:void(0);">
+                                    <img src="/images/usericon.png">
+                                </a>
+                            </div>
+                            <div class="account-userinfo">
+                                <div class="account-userifo-title"><span ms-text="result.shopName"></span></div>
+                                <div class="account-userinfo-p">
+                                    收款账户：<span style="color:green">已通过</span>
+                                </div>
+                                <div class="account-userinfo-p">
+                                    运费：<span ms-if="result.freightFree" ms-text="'单次购买满' + result.freightFreeSill + '元，免运费'"></span>
+                                    <span ms-if="!result.freightFree"><a href="javascripts:void(0)" class="hint" ms-click="setFreight()">免运费设置</a></span>
+                                    <span ms-if="result.freightFree"><a href="javascripts:void(0)" class="hint" ms-click="setFreight()">修改</a></span>
+                                </div>
+                            </div>
+                        </td>
+                        <td style="width:50px;"></td>
+                        <td>
+                            <div>
+                                <p>提现说明：</p>
+                                <p>1，因受国家政策影响，停用了“手动提现”功能；</p>
+                                <p>2，提现，请前往易宝管理后台：<a href="https://www.yeepay.com/selfservice/login.action" class="hint" target="_blank">https://www.yeepay.com/selfservice/login.action</a>，</p>
+                                <p>&nbsp&nbsp&nbsp&nbsp&nbsp设置“自动提现”，即可提取资金；</p>
+                                <p>3，如遇因账户问题，导致提现失败，也可登录修正账户问题，操作提现；</p>
+                                <p>4，如需对账，请登录：<a href="http://o2o.yeepay.com/zgt/login/to_login" class="hint" target="_blank">http://o2o.yeepay.com/zgt/login/to_login</a>，查看提现明细；</p>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="account-userinfo" ms-if="result.shopId != 1">
+                                <div class="account-userifo-title">在途收入（元）</div>
+                                <div class="account-userinfo-p">
+                                    <span style="color:#333333;font-size:20px;" ms-text="accountData.freeze| currency"></span>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="panel account" ms-if = "accountData.acctStatus == 2">
+                <table class="account-table">
+                    <tr>
+                        <td class="account-border-right">
+                            <div class="account-photo">
+                                <a href="javascript:void(0);">
+                                    <img src="/images/usericon.png">
+                                </a>
+                            </div>
+                            <div class="account-userinfo">
+                                <div class="account-userifo-title"><span ms-text="result.shopName"></span></div>
+                                <div class="userifo-p">
+                                    收款账户：<span style="color:#E00000">未通过</span>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <p class="account-tip" style="position:relative;top:16px;">
+                                <span style="position:absolute;left:-36px;">原因：</span>
+                                <span ms-text="accountData.reason"></span>
+                            </p>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+
+            <div class="panel" style="margin-top:20px;height:404px;">
+                <div class="hd">
+                    <span class="title">卖家中心</span>
+                </div>
+                <div class="bd">
+                    <div class="pane" ms-click="goSaleList">
+                        <i class="icon icon-glyph icon-clock"></i>
+                        <div class="pane_bd">
+                            <div class="number" ms-text="result.afterSaleCount">0</div>
+                            <div class="title">退换货中订单</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- set freight dialog -->
+            <div id="dialogFreight" ms-widget="dialog,dialogFreight,$dialogFreightOpts">
+                <div class="line-item">
+                    <label><input type="checkbox" ms-duplex-checked="result.freightFree">&nbsp&nbsp&nbsp满&nbsp&nbsp<input class="inputbox" type="number" ms-duplex="result.freightFreeSill"/>&nbsp&nbsp元，免运费。</label>
+                </div>
+                <div class="line-item">
+                    &nbsp&nbsp&nbsp* 例如录入100，则买家在门店购物的金额，超过100元，就不收运费了。
+                </div>
+                <div class="step-last">
+                    <button class="btn btn-primary btn-large" ms-click="onSaveFreight()">确定</button>
+                </div>
+            </div> 
+    
+        </div>
+	</div>
+    @@include('../include/common/outro.html')
+    <script>require(['conf/index']);</script>
+</body>
+</html>

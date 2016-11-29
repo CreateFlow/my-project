@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>买家账期管理</title>
+    @@include('../../include/common/intro.html')
+    <!-- build:css css/module/payment/list.css -->
+    <link rel="stylesheet" href="/css/module/aftersale/aftersale.css" />
+    <link rel="stylesheet" href="/css/module/payment/payment.css" />
+    <!-- endbuild -->
+</head>
+
+<body>
+@@include('../../include/common/header.html') @@include('../../include/common/nav.html')
+<div class="main mod-demo aftersale">
+    <div class="sidebar">
+        @@include('../../include/common/menu.html')
+    </div>
+    <div class="content ms-controller" ms-controller="paymentList">
+        <div class="section">
+            <ul class="breadcrumb">
+                <li>
+                    <a href="">卖家中心</a>
+                </li>
+                <li>
+                    <a href="">账期支付</a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="panel-h">
+            <div class="row">
+                <div class="col col-2 red-title">什么是账期支付</div>
+            </div>
+            <div class="row margin-30">
+                <div class="col col-12 margin-15">账期支付是指，买家在授信额度内下单后不用付款就可以进货，在最后还款日内完成支付的交易方式。</div>
+            </div>
+
+            <div class="row">
+                <div class="col col-2 red-title">账期类型解释</div>
+            </div>
+            <div class="row">
+                <div class="col col-1">
+                    <img src="/images/days-7.png" class="margin-15"/>
+                </div>
+                <div class="col col-4 margin-15">
+                    <div class="row"><b>周结</b></div>
+                    <div class="row">
+                        <span>按每个自然周作为结算周期，到每周日的凌晨整点出上周的账单。</span>
+                    </div>
+                </div>
+                <div class="col col-1">
+                    &nbsp;
+                </div>
+                <div class="col col-1">
+                    <img src="/images/days-30.png" class="margin-15"/>
+                </div>
+                <div class="col col-4 margin-15">
+                    <div class="row"><b>月结</b></div>
+                    <div class="row">
+                        <span>按每个自然月作为结算周期，到每月最后一天凌晨整点出上月的账单。</span>
+                    </div>
+                </div>
+            </div>
+            <div class="row margin-30">
+                <div class="col col-1">
+                    <img src="/images/days-60.png" class="margin-15"/>
+                </div>
+                <div class="col col-4 margin-15">
+                    <div class="row"><b>双月结</b></div>
+                    <div class="row">
+                        <span>按两个连续自然月作为结算周期，到双月最后一天凌晨整点出上两个月的账单。</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col col-2 red-title">使用流程</div>
+            </div>
+            <div class="row margin-30">
+                <img src="/images/guide-shows.jpg" class="guide-shows"/>
+            </div>
+
+            <div class="row">
+                <div class="col col-2 red-title">注意事项</div>
+            </div>
+            <div class="row">
+                <div class="col col-12 margin-15">1、卖家可以根据情况调整买家的账期类型、最后还款日。调整后将在下一期生效。 </div>
+            </div>
+            <div class="row">
+                <div class="col col-12 margin-15">2、卖家可以根据实际情况提升买家的授信额度，提升额度立即生效。</div>
+            </div>
+            <div class="row">
+                <div class="col col-12 margin-15">3、卖家可随时停用买家享受的账期支付额度，取消后买家无法再使用账期支付。</div>
+            </div>
+            <div class="row">
+                <div class="col col-12 margin-15">4、最后还款日：卖家为每个买家设置最后的还款期限，超过该期限买家不支付账单，则买家不能再使用账期支付。</div>
+            </div>
+            <div class="row">
+                <div class="col col-12 margin-15">5、如果买家的信用额度已使用完毕，或者买家超过最后还款日没有支付账单，则买家不可以继续使用账期支付。</div>
+            </div>
+        </div>
+    </div>
+</div>
+@@include('../../include/common/outro.html')
+<script>
+    require(['conf/payment/list']);
+</script>
+</body>
+
+</html>

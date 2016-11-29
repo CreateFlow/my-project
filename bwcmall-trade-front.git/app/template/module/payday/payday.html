@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html> 
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <title>账期管理</title>
+    @@include('../../include/common/meta.html')
+    @@include('../../include/common/common-include.html') 
+
+    <link rel="stylesheet" type="text/css" href="/styles/module/payday/payday.css"> 
+    <script src="/scripts/module/payday/payday.js"></script>
+</head>
+
+<body>
+    @@include('../../include/common/header.html')
+    <div class="my-header">
+        @@include('../../include/common/account-head.html')
+    </div>
+     <!--主要内容-->
+    <div class="g-content g-clearfix"  ms-controller="paydayCtrl">
+      <!--header -->
+      <div class="module-header">
+          <span class="module-title">账期管理首页</span>
+      </div>
+      <div class="invoice-table-panel2">
+           <table class="payf">
+              <tbody>
+                <tr> 
+                  <td>
+                      <table class="pays">
+                        <tr>
+                          <td width="30%">
+                            <p class="title">总计账期欠款（元）</p>
+                            <p>共<span ms-text="totalData.totleCount"></span>笔</p>
+                            <p class="total"><span ms-text="totalData.totleAmount"></span></p>
+                          </td>
+                          <td width="5%" style="vertical-align:top;text-align:left;font-size:40px">
+                            <p style="text-align:left;position:relative;left:-30px;">=</p>
+                          </td>
+                          <td width="30%">
+                            <p class="title">已出账单待还金额（元）</p>
+                            <p>共<span ms-text="totalData.alreadyGenerateBillCount"></span>笔</p>
+                            <p class="total"><span ms-text="totalData.alreadyGenerateBillAmount"></p>
+                          </td>
+                          <td width="5%" style="vertical-align:top;text-align:left;font-size:40px">
+                            <p style="text-align:left;position:relative;left:-30px;">+</p>
+                          </td>
+                          <td width="30%">
+                            <p class="title">未出账单待还金额（元）</p>
+                            <p>共<span ms-text="totalData.notGenerateBillCount"></span>笔</p>
+                            <p class="total"><span ms-text="totalData.notGenerateBillAmount"></span></p>
+                          </td>
+                        </tr>
+                      </table>
+                  </td> 
+                  <td>
+                      <table class="pays2">
+                        <tr>
+                          <td>
+                            <p class="title">超时未还金额总金额（元）</p>
+                            <p>共<span ms-text="totalData.overtimeBillCount"></span>笔账单</p>
+                            <p class="total"><span ms-text="totalData.overtimeBillAmount"></p>
+                          </td>
+                        </tr>
+                      </table>
+                  </td> 
+                </tr> 
+              </tbody>
+            </table> 
+       </div>
+      <div class="invoice-query-conditions">
+          <div class="invoice-condition" style="width:400px;">
+              <span>按供应商名称查询:</span>
+              <input type="text" id="sn" name="sn" ms-duplex="corpName"/>
+          </div> 
+
+          <div class="invoice-condition">
+              <span>账单状态:</span>  
+                <select id="orderInvoiceStatus" name="orderInvoiceStatus">
+                    <option value="">全部</option>
+                    <option  ms-repeat="statusList" ms-value="el.value" ms-text="el.name"></option> 
+                </select> 
+          </div>  
+      </div> 
+      <div class="invoice-actions"> 
+           <button type="button" id="queryBtn" name="queryBtn" class="query_btn" value="" ms-click="doQuery()">查询</button> 
+      </div>
+
+       <div class="invoice-table-panel">
+           <table class="invoice-table">
+              <tbody>
+                <tr>
+                    <th colspan="2">公司名称</th>
+                    <th>信用额度（元）</th>
+                    <th>应还金额（元）</th>
+                    <th>可用金额（元）</th>  
+                    <th>最后还款时间</th> 
+                    <th>出账单时间</th> 
+                </tr>
+                  <tr  ms-if="dataList.length<=0">
+                      <td colspan="6">
+                          没有查询到任何数据~~
+                      </td>
+                  </tr>
+                  <tr ms-repeat="dataList" ms-if="dataList.length>0"> 
+                      <td style="text-align:right" width="150">
+                        <a ms-href="'/payday/paydetail.html?Sn='+el.id">
+                          <span ms-text="el.corpName"></span>
+                        </a>
+                        
+                      </td> 
+                      <td style="text-align:left">
+                        <span style="color:#7c8e9a;margin-left:20px;" ms-text="el.desc"></span>
+                      </td>
+                      <td ms-text="el.creditAmount"></td> 
+                      <td  ms-text="el.usedAmount"></td> 
+                      <td ms-text="el.availAmount"></td> 
+                      <td ms-text="el.finalPaymentDate"></td>
+                      <td ms-text="el.billingDate"></td>
+                  </tr> 
+
+                </tbody>
+            </table> 
+       </div>
+        <div class="f-fr" style="padding: 20px 0;">
+                <a href="javascript:void(0)" class="trans_link_3 f-ib pager-switch" ms-click="goFirst(1)">第一页</a>
+                <a href="javascript:void(0)" class="trans_link_3 f-ib pager-switch" ms-click="goBefore(1)">上一页</a>
+                    <a name="pageNumber" ms-click="goSubmit(1)" href="javascript:void(0)" class="trans_link_3 f-ib pager-item pager-item-active" ms-text="currentPage"></a>
+                <a href="javascript:void(0)" class="trans_link_3 f-ib pager-switch" ms-click="getAfter(2)">下一页</a>
+                <a href="javascript:void(0)" class="trans_link_3 f-ib pager-switch" ms-click="goLast(1)">最后一页</a>
+                <span class="f-ib pager-num" ms-text="'(共'+maxPageCount+'页)'"></span>
+            </div>
+    </div>
+    @@include('../../include/common/footer.html')
+</body>
+
+</html>

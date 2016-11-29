@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    @@include('../include/common/meta.html')
+    @@include('../include/index/styles.html')
+    @@include('../include/common/scripts.html')
+</head>
+<body ms-controller="indexCtrl">
+    <div ms-controller="headerCtrl">
+        @@include('../include/common/header-top.html')
+        @@include('../include/common/header-search.html')
+        @@include('../include/common/header-nav.html')
+    </div>
+    <div class="head-con">
+        @@include('../include/index/head-content-middle.html')
+        @@include('../include/index/head-content-right.html')
+    </div>
+    @@include('../include/index/content.html')
+    @@include('../include/index/bottom.html')
+    @@include('../include/common/footer.html')
+    @@include('../include/index/scripts.html')
+</body>
+</html>

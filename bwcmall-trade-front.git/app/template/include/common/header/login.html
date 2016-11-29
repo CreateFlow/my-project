@@ -1,0 +1,12 @@
+<a href="/order/list.html">
+    <span ms-if="username" ms-text="username"></span>
+</a>
+<!--<a href="/member/corp-info.html" class="perfect-info" ms-if="!licensePassed">请完善您的注册信息</a>-->
+
+<a href="/member/corp-info.html" class="perfect-info" ms-if="licensePassedStatus==0">请完善您的注册信息</a>
+<span class="perfect-text" ms-if="licensePassedStatus==1">请等待佰万仓审核</span>
+<a href="/member/corp-info.html" class="perfect-info" ms-if="licensePassedStatus==3">已被驳回，重新填写?</a>
+
+<a id="logout" href="javascript:void(0);">退出</a>
+<a href="/order/list.html">买家中心</a>
+<a href="http://shop.earth.dev.bwcmall.cn/" ms-if="shopMerchant">卖家中心</a>

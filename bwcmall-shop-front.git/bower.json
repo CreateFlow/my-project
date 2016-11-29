@@ -1,0 +1,8 @@
+{
+  "name": "BWC",
+  "version": "0.0.1",
+  "devDependencies": {
+    "es5-shim": "4.5.7",
+    "jquery": "1.10.2"
+  }
+}

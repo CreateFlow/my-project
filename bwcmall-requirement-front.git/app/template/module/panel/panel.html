@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+  <meta charset="UTF-8">
+  <meta name="renderer" content="webkit">
+  <title>我的工作面板</title>
+  @@include('../../include/common/meta.html') @@include('../../include/common/common-include.html')
+
+  <link rel="stylesheet" type="text/css" href="/styles/module/panel/panel.css">
+  <script src="/scripts/module/panel/panel.js"></script>
+</head>
+
+<body ms-controller="panelCtrl">
+  @@include('../../include/common/header.html') @@include('../../include/common/account-head.html')
+  <!--主要内容-->
+  <div class="g-content g-clearfix">
+    <!--header -->
+    <div class="module-header">
+      <div class="index-query-conditions">
+        <div class="index-actions">
+          <button type="button" class="query_btn" id="processMatch" ms-click="processMatch(0, true)">开始匹配处理</button>
+          <button type="button" class="add_btn" id="batchProcess" ms-click="batchProcess()">批量处理商品</button>
+          <button type="button" class="add_btn" id="batchSetReason" ms-click="openReasonDlg()">批量标记为无法处理</button>
+          <!---<button type="button" class="add_btn" ms-click="showQueryLinksDlg">生成询价链接</button>-->
+          <button type="button" class="add_btn" style="float:right;" id="clearPanel" ms-click="clearPanel()">清空工作面板</button>
+        </div>
+        <div class="clear"></div>
+      </div>
+    </div>
+
+    <div class="index-table-panel">
+      <table class="index-table">
+        <tbody>
+          <tr>
+            <th width="6%">
+              <span ms-click="checkall()" class="f-ib m-checkbox checkbox-fix" style="cursor: pointer;">
+                <strong ms-if="allstatus" ms-class="m-checkbox-icon m-checkbox-icon-checked"></strong>
+                <strong ms-if="!allstatus" ms-class="m-checkbox-icon"></strong>
+              </span> 全选
+            </th>
+            <th width="14%">品牌</th>
+            <th width="14%">品名</th>
+            <th width="14%">型号</th>
+            <th width="8%">需求数量</th>
+            <th width="8%">单位</th>
+            <th width="10%">分类</th>
+            <th width="10%">状态</th>
+            <th width="6%">处理结果</th>
+            <th>操作</th>
+          </tr>
+          <tr ms-if="dataList.length <= 0">
+            <td colspan="10">
+              没有查询到任何数据~~
+            </td>
+          </tr>
+          <tr ms-repeat="dataList" ms-if="dataList.length > 0">
+            <td>
+              <span ms-click="checkout($index)" class="f-ib m-checkbox checkbox-fix" style="cursor: pointer;">
+                <strong ms-if="el.status" ms-class="m-checkbox-icon m-checkbox-icon-checked"></strong>
+                <strong ms-if="!el.status" ms-class="m-checkbox-icon"></strong>
+              </span>
+            </td>
+            <td ms-text="el.brandName"></td>
+            <td ms-text="el.itemName"></td>
+            <td ms-text="el.skuSnSet"></td>
+            <td ms-text="el.requiredQuantity"></td>
+            <td ms-text="el.unit"></td>
+            <td ms-text="el.category"></td>
+            <td><span ms-if="el.itemStatus==0">待处理</span><span ms-if="el.itemStatus!=0">处理中</span></td>
+            <td ms-text="el.completeResult"></td>
+            <td>
+              <span>
+                    <a href="javascript:void(0)" ms-click="delProduct($index,el.id)">移除</a>
+                </span> |
+              <span>
+                    <a href="javascript:void(0)" ms-click="processMatch($index, false)">匹配处理</a>
+                </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- 单个商品处理 -->
+    <div id="processDialogId" ms-widget="dialog,processDialogId,$processDialogOption">
+      <div class="table-submit">
+        <div class="detail-query-conditions">
+          <div class="detail-condition" style="width:300px;">
+            <input ms-duplex="reason" placeholder="请输入原因" type="text" style="width:280px;">
+          </div>
+          <div class="detail-condition">
+            <button ms-click="setReason" style="height:34px;line-height:34px;width:120px;" type="button" class="red_btn">无法处理</button>
+          </div>
+          <div class="detail-condition">
+            <button ms-click="submit" style="height:34px;line-height:34px;width:160px;" type="button" class="query_btn">保存<span ms-if="batchMatch">，并处理下一条</span></button>
+          </div>
+          <!--
+          <div class="detail-condition"> 
+            <button ms-click="submit" style="height:34px;line-height:34px;width:160px;" type="button"  class="query_btn">完成处理，继续处理下一条</button> 
+          </div>
+          -->
+          <div class="detail-condition" ms-if="batchMatch">
+            <button ms-click="pocessNext(currentGoods.selectedIndex+1)" style="height:34px;line-height:34px;width:160px;" type="button"
+              class="query_btn">处理下一条</button>
+          </div>
+        </div>
+      </div>
+      <div class="goods-table">
+        <table cellpadding="0" width="100%">
+          <tr class="goods-table-top">
+            <th width="15%">品牌</th>
+            <th width="15%">品名</th>
+            <th width="20%">型号</th>
+            <th width="10%">数量</th>
+            <th width="10%">单位</th>
+            <th width="10%">分类</th>
+            <th width="20%">操作</th>
+          </tr>
+          <!--商品一行-->
+          <tr class="goods-table-row" style="height:40px;">
+            <td>
+              <div class="table-condition">
+                <input type="text" ms-duplex="currentGoods.brandName">
+              </div>
+            </td>
+            <td>
+              <div class="table-condition">
+                <input type="text" ms-duplex="currentGoods.itemName">
+              </div>
+            </td>
+            <td>
+              <div class="table-condition">
+                <input type="text" ms-duplex="currentGoods.skuSnSet">
+              </div>
+            </td>
+            <td>
+              <span ms-text="currentGoods.requiredQuantity"></span>
+            </td>
+            <td>
+              <span ms-text="currentGoods.unit"></span>
+            </td>
+            <td>
+              <span ms-text="currentGoods.category"></span>
+            </td>
+            <td>
+              <button type="button" style="height: 30px; line-height: 30px;" class="add_btn" ms-click="matchGoods(currentGoods, 'showError')">匹配</button>
+            </td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="goods-table" ms-if="selectedGoodsList.length>0">
+        <table cellpadding="0" width="100%">
+          <tr class="goods-table-top" style="background:#fafafa">
+            <th colspan="12">已选区</th>
+          </tr>
+          <tr class="goods-table-top">
+            <th width="8%">品牌</th>
+            <th width="8%">品名</th>
+            <th width="8%">型号</th>
+            <th width="8%">单位</th>
+            <th width="8%">分类</th>
+            <th width="8%">店铺</th>
+            <th width="12%">供应商</th>
+            <th width="8%">销售价格</th>
+            <th width="8%">采购价</th>
+            <th width="10%">货期</th>
+            <th width="10%">备注</th>
+            <th>操作</th>
+          </tr>
+          <!--商品一行-->
+          <tr ms-repeat="selectedGoodsList" class="goods-table-row">
+            <td><span ms-text="el.brandName"></span></td>
+            <!--品牌-->
+            <td><span ms-text="el.itemName"></span></td>
+            <!--品名-->
+            <td><span ms-text="el.skuSnSet"></span></td>
+            <!--型号-->
+            <td> <span ms-text="el.unit"></span></td>
+            <!--单位-->
+            <td><span ms-text="el.spuCategoryName"></span></td>
+            <!--分类-->
+            <td><span ms-text="el.shopName"></span></td>
+            <!--店铺-->
+            <!--供应商-->
+            <td>
+              <span ms-if="el.supplierList.length == 1" ms-text="el.supplierList[0].name"></span>
+              <div class="table-condition" ms-if="el.supplierList.length > 1">
+                <select id="typeList" name="typeList" ms-duplex="el.supplierId" ms-change="selectedSupplier($index,el.supplierId)">
+                  <option ms-repeat-sup="el.supplierList" ms-attr-value="sup.id" ms-text="sup.name"></option> 
+                </select>
+              </div>
+            </td>
+            <td>
+              <div class="table-condition">
+                ￥<input type="text" ms-duplex="el.salePrice">
+              </div>
+            </td>
+            <!--采购价格-->
+            <td>
+              <div class="table-condition">
+                ￥<input type="text" ms-duplex="el.purchasePrice">
+              </div>
+            </td>
+            <!--货期-->
+            <td>
+              <div class="table-condition">
+                <input type="text" ms-duplex="el.shipMin" style="width:2em">-<input type="text" ms-duplex="el.shipMax" style="width:2em">天
+              </div>
+            </td>
+            <!--            
+            <td><span ms-html="formatPrice(el.salePrice)"></span></td> 
+            <td><span ms-html="formatPrice(el.purchasePrice)"></span></td>
+            <td><span><span ms-text="el.shipMin"></span>-<span ms-text="el.shipMax"></span>天</span></td>
+-->
+            <!--备注-->
+            <td>
+              <div class="table-condition">
+                <input type="text" ms-duplex="el.remarks">
+              </div>
+            </td>
+            <!--操作-->
+            <td>
+              <span class="f-ib goods-del" ms-click="unselectedGoods($index)">
+                <!--<img style="width:32px;height:32px;" src="goods-del0.jpg"/>-->
+              </span>
+            </td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="goods-table" ms-if="matchGoodsList.length>0">
+        <table cellpadding="0" width="100%">
+          <tr class="goods-table-top" style="background:#fafafa">
+            <th colspan="11">备选区</th>
+          </tr>
+          <tr class="goods-table-top">
+            <th width="8%">品牌</th>
+            <th width="8%">品名</th>
+            <th width="20%">型号</th>
+            <th width="8%">单位</th>
+            <th width="8%">分类</th>
+            <th width="8%">店铺</th>
+            <th width="8%">图片</th>
+            <th width="8%">销售价</th>
+            <th width="8%">单位</th>
+            <th width="8%">货期</th>
+            <th>操作</th>
+          </tr>
+          <!--商品一行-->
+          <tr ms-repeat="matchGoodsList" class="goods-table-row">
+            <td><span ms-text="el.brandName"></span></td>
+            <td><span ms-text="el.goodsName"></span></td>
+            <td><span ms-text="el.sn"></span></td>
+            <td><span ms-text="el.unit"></span></td>
+            <td><span ms-text="el.firstCatName"></span></td>
+            <td><span ms-text="el.shopName"></span></td>
+            <td><img ms-if="el.mainImage" ms-src="el.mainImage" width="60" height="60" style="position:relative;top:5px;"></td>
+            <td><span ms-html="formatPrice(el.salePrice)"></span></td>
+            <td><span ms-text="el.unit"></span></td>
+            <td><span ms-text="el.minDeliveryTime"></span>-<span ms-text="el.maxDeliveryTime"></span>天</td>
+            <td><a href="javascript:void(0)" ms-click="selectedGoods(el)">使用</a></td>
+          </tr>
+        </table>
+        <div class="paper">
+          <div ms-widget="pager, matchGoddsListPager"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 批量商品处理 -->
+    <div id="batchProcessDialogId" ms-widget="dialog,batchProcessDialogId,$batchProcessDialogOption">
+      <div class="table-submit">
+        <div class="batch-condition">
+          <span><font color="red">*</font>品牌：</span>
+          <!--<span ms-if="brandList.length > 0">
+            <select ms-duplex="selectedBrandId">
+              <option ms-repeat-brand="brandList" ms-attr-value="brand.id" ms-text="brand.name"></option> 
+            </select>
+          </span>
+          <span ms-if="brandList.length <= 0">
+            <select ms-widget="dropdownlist, brandDropListId" ms-duplex="selectedBrandId">
+            </select>
+          </span>-->
+          <span>
+            <select ms-widget="dropdownlist, brandDropListId" ms-duplex="selectedBrandId">
+            </select>
+          </span>
+          <span><font color="red">*</font>供应商：</span>
+          <select ms-duplex="selectedSupplierId" style="width: 260px;">
+            <option ms-repeat-sup="supplierList" ms-attr-value="sup.id" ms-text="sup.name"></option> 
+          </select>
+          <button type="button" class="add_btn" id="saveGoods" ms-click="saveGoods()">保存</button>
+        </div>
+      </div>
+      <div class="goods-table">
+        <table cellpadding="0" width="100%">
+          <tr class="goods-table-top">
+            <th width="15%">
+              <font color="red">*</font>品名</th>
+            <th width="20%">
+              <font color="red">*</font>型号</th>
+            <th width="8%">
+              <font color="red">*</font>单位 </th>
+            <th width="10%">分类</th>
+            <th width="8%">销售价格</th>
+            <th width="8%">采购价</th>
+            <th width="10%">货期</th>
+            <th width="10%">备注</th>
+            <th>操作</th>
+          </tr>
+          <tr ms-repeat="batchGoodsList" ms-if="batchGoodsList.length>0" class="goods-table-row">
+            <!--品名-->
+            <td>
+              <div class="table-condition">
+                <input type="text" ms-duplex="el.itemName">
+              </div>
+            </td>
+            <!--型号-->
+            <td>
+              <div class="table-condition">
+                <input type="text" ms-duplex="el.skuSnSet">
+              </div>
+            </td>
+            <td>
+              <div class="table-condition">
+                <select ms-widget="dropdownlist,$,dropdownListOption" ms-duplex="el.unitId">
+                  <option value="">-请选择单位-</option>
+                  <option ms-repeat-elunit="unitList" ms-attr-value="elunit.value" ms-text="elunit.name"></option> 
+                </select>
+              </div>
+            </td>
+
+            <td>
+              <div class="table-condition">
+                <select ms-widget="dropdownlist,$,dropdownListOption" style="width:150px;" ms-duplex="el.spuCategoryId">
+                  <option value="">-请选择分类-</option>
+                  <option ms-repeat-elcategory="categoryList" ms-attr-value="elcategory.id" ms-text="elcategory.name"></option> 
+                </select>
+              </div>
+            </td>
+            <!--销售价格-->
+            <td>
+              <div class="table-condition">
+                ￥<input type="text" ms-duplex="el.salePrice">
+              </div>
+            </td>
+            <!--采购价格-->
+            <td>
+              <div class="table-condition">
+                ￥<input type="text" ms-duplex="el.purchasePrice">
+              </div>
+            </td>
+            <!--货期-->
+            <td>
+              <div class="table-condition">
+                <input type="text" ms-duplex="el.shipMin" style="width:2em">-<input type="text" ms-duplex="el.shipMax" style="width:2em">天
+              </div>
+            </td>
+            <!--备注-->
+            <td>
+              <div class="table-condition">
+                <input type="text" ms-duplex="el.remarks">
+              </div>
+            </td>
+            <td>
+              <span>
+                <a href="javascript:void(0)" ms-click="removeFromBatchList($index)">移除</a>
+              </span>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div id="reasonDialogCtrlId" ms-widget="dialog,reasonDialogCtrlId,$reasonDialogOption">
+    <textarea ms-duplex="batchReason" placeholder="请输入原因" type="text" style="width:450px;height:80px;"></textarea>
+    <button type="button" ms-click="onBatchSetReason" style="margin-top: 30px;margin-left: 70px;margin-bottom: 20px;width: 120px;height: 30px;">确定</button>
+    <button type="button" ms-click="onCloseReasonDlg" style="margin-top: 30px;margin-left: 70px;margin-bottom: 20px;width: 120px;height: 30px;">取消</button>
+  </div>
+
+  <div id="alertDialogCtrlId" ms-widget="dialog,alertDialogCtrlId,$alertDialogOption">
+    <p>{{message}}</p>
+    <button type="button" id="closeAlertBtn" name="closeAlertBtn" ms-click="onCloseAlert" style="margin-top: 30px;margin-left: 70px;margin-bottom: 20px;width: 120px;height: 30px;">确定</button>
+  </div>
+
+
+
+  <div id="yesNoDialogCtrlId" ms-widget="dialog,yesNoDialogCtrlId,$yesNoDialogOption">
+    <p>{{message}}</p>
+    <button type="button" ms-click="onYes" style="margin-top: 30px;margin-left: 70px;margin-bottom: 20px;width: 120px;height: 30px;">是</button>
+    <button type="button" ms-click="onNo" style="margin-top: 30px;margin-left: 70px;margin-bottom: 20px;width: 120px;height: 30px;">否</button>
+  </div>
+  @@include('../../include/common/footer.html')
+</body>
+
+</html>

@@ -1,0 +1,79 @@
+.return-table td img{
+	padding: 10px;
+}
+
+.return-negotiation-panel{
+	border-top: 1px solid #ddd;
+	font-size: 14px;
+}
+.negotiation-row{
+	margin: 50px 10px 10px 10px;
+}
+
+.log-title{
+    border-bottom: 1px dotted #ddd; 
+    height: 30px;
+}
+.log-time{
+	margin-left: 50px;
+}
+.log-title span{
+	padding-top:5px;
+}
+.log-content-panel{
+	margin-top: 20px;
+	margin-bottom:20px;
+	margin-left: 20px;
+}
+.log-row{
+	margin-top: 15px;
+} 
+.log-user-type{
+	margin-left: 20px;
+	font-weight: bold;
+}
+.log-image-title{
+	float: left;
+	margin-right: 10px;
+}
+.log-image-panel{
+
+}
+.log-image-content{
+	 width: 200px;
+    height: 200px; 
+    float: left;
+    border: 1px solid #ddd;
+      margin: 0 10px 10px 10px;
+} 
+.log-image-content img {
+	 width: 200px;
+    height: 200px;
+}
+.log-image-btn{
+
+}
+.log-image{
+
+}
+.red {
+	color: red;
+}
+
+.oni-icon-times{
+	cursor: pointer;
+}
+input:disabled{
+	border: none;
+}
+textarea:disabled{
+	border: none;
+} 
+.readonly-text{
+	line-height: 30px;
+}
+
+.uploaded-image-panel {
+    margin-left: 90px;
+}
+

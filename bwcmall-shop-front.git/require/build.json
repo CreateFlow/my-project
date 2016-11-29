@@ -1,0 +1,26 @@
+{
+    "baseUrl": "<%= options.src %>/js",
+    "dir": ".js",
+    "skipDirOptimize": true,
+    "optimize": "uglify",
+    "preserveLicenseComments": false,
+    "paths": {
+        "jquery": "lib/jquery/jquery",
+        "events": "lib/core/events/emitter",
+        "oniui": "lib/oniui",
+        "avalon": "lib/oniui/avalon.shim",
+        "text": "lib/oniui/combo/text",
+        "css": "lib/oniui/combo/css",
+        "css-builder": "lib/oniui/combo/css-builder",
+        "normalize": "lib/oniui/combo/normalize",
+        "domReady": "lib/oniui/combo/domReady",
+        "uploadify": "lib/plugins/uploadify/uploadify"
+    },
+    "modules": {
+        "baseDir": "conf",
+        "bundleDir": "lib",
+        "alias": ["jquery", "avalon", "uploadify"],
+        "include": ["require", "request", "session", "base64", "cookie", "url"],
+        "exclude": []
+    }
+}

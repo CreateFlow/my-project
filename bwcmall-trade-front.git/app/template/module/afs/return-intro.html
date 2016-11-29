@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html> 
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <title>售后中心</title>
+    @@include('../../include/common/meta.html')
+    @@include('../../include/common/common-include.html')
+    <link rel="stylesheet" type="text/css" href="/styles/module/afs/return-intro.css"> 
+    <script src="/scripts/module/afs/return-intro.js"></script>
+</head>
+
+<body>
+    @@include('../../include/common/header.html')
+    <div class="my-header">
+        @@include('../../include/common/account-head.html')
+    </div>
+     <!--主要内容-->
+    <div class="g-content g-clearfix"  ms-controller="returnIntroCtrl">
+      <!--header -->
+       <div>
+            <div class="module-header">
+                <span class="module-title">请选择您要申请的售后类型</span>
+            </div> 
+            <div class="return-type-panel">
+                 <div ms-repeat="orderInfo.afterSaleTypeList" ms-click="goReturnApply(el.type)"  ms-text="el.name">退货退款</div> 
+            </div>
+            <div class="return-order-panel">
+                <div class="order-title">订单信息</div>
+                <div class="order-info"> 
+                    <div class="title" style="width:90px">订单编号:</div><div><a target="_blank" ms-href="'/order/detail.html?orderSn='+sn" class="order-link" ms-text="sn"></a></div>
+                    <div class="title" style="width:90px">订单金额(元):</div><div class="money" ms-html="formatPrice(orderInfo.amountPaid )"></div>
+                    <div class="title" style="width:90px">卖家:</div><div ms-text="orderInfo.shopName "></div>  
+                </div>
+                <div class="link" ms-mouseover="showShopInfo(this)" ms-mouseleave="hideShopInfo(this)"><i class="link-icon"></i>联系卖家</div>
+                  <div class="odgo-changetips">
+                    <p ms-html="'联系人：'+orderInfo.sellerName+'<br/>联系电话：'+orderInfo.sellerPhone"> </p> 
+                </div>
+            </div> 
+            <div class="module-header" >
+                <span class="module-title">售后类型介绍</span>
+            </div> 
+               <div class="return-intro-panel">
+                  <div class="intro-title">  1、退货退款：</div>
+                 <div  class="intro-content">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;适用于符合7天无理由退货政策或者买卖双方另行约定的情形，买家可以发起“退货退款”,详情请见<a href="/help/returnPolicy.html" target="_blank">退换货政策</a>。
+                </div>
+                <div class="intro-title">2、换货：</div>
+                <div class="intro-content">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;适用于符合15天无理由换货政策或者买卖双方另行约定的情形，买家可以发起“换货”,详情请见<a href="/help/returnPolicy.html" target="_blank">退换货政策</a>。
+                </div>
+
+                <div class="intro-title">   3、仅退款：</div>
+                <div class="intro-content">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;适用于卖家还未发货但买家已经支付货款或者买卖双方另行约定的情形，买家可以发起“仅退款”。</div>
+                </div>
+           </div> 
+       </div> 
+    </div>
+    @@include('../../include/common/footer.html')
+</body>
+
+</html>

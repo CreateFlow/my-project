@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>注册</title>
+    @@include('../../include/common/common-include.html')
+    <script src="/scripts/plugin/uploadifive/jquery.uploadify.min.js"></script>
+    <script src="/scripts/plugin/uploadifive/jquery.uploadifive.min.js"></script>
+    <script src="/scripts/module/common/upload-button.js"></script>
+    <link rel="stylesheet" type="text/css" href="/styles/common/upload_button.css"/>
+    <link rel="stylesheet" href="/styles/module/member/corp-info.css"/>
+</head>
+<body ms-controller="corpInfoCtrl">
+    <div class="main mod-register mod-corpinfo">
+        <div class="main_content">
+            @@include('../../include/common/member-header.html')
+            <div class="center">
+                <div class="flow">
+                    <div class="progress"><div class="progress_bar step2"></div></div>
+                    <ul>
+                        <li>
+                            <div class="step checked">
+                                <div class="step_bg">
+                                    <span class="step_num">1</span>
+                                </div>
+                                <div>
+                                    <span class="text">设置登录名</span>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="step checked">
+                                <div class="step_bg">
+                                    <span class="step_num">2</span>
+                                </div>
+                                <div>
+                                    <span class="text">完善用户信息</span>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="step">
+                                <div class="step_bg">
+                                    <span class="step_num">3</span>
+                                </div>
+                                <div>
+                                    <span class="text">等待佰万仓审核</span>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="step">
+                                <div class="step_bg">
+                                    <span class="step_num">4</span>
+                                </div>
+                                <div>
+                                    <span class="text">完成</span>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <form class="form">
+                    <div class="input-group">
+                        <label class="label"><span style="color:red;">*</span>  公司名称</label>
+                        <input ms-blur="checkCorp" type="text" ms-duplex="company.corpName" class="input" />
+                        <div class="validation">
+                            <i class="icon icon-correct" ms-visible="companyFlag.name"></i>
+                            <span class="text" ms-visible="!companyFlag.name&&companyInfo.nameError!=''"><i class="icon icon-false"></i><span ms-text="companyInfo.nameError"></span></span>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label class="label"><span style="color:red;">*</span> 联系人</label>
+                        <input ms-blur="checkContact" type="text" ms-duplex="company.contactName" class="input" />
+                        <div class="validation">
+                            <i class="icon icon-correct" ms-visible="companyFlag.contactName"></i>
+                            <span class="text" ms-visible="!companyFlag.contactName&&companyInfo.contactNameError!=''"><i class="icon icon-false"></i><span ms-text="companyInfo.contactNameError"></span></span>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label class="label"><span style="color:red;">*</span> 电子邮箱</label>
+                        <input ms-blur="checkEmail" type="text" ms-duplex="company.email" class="input" />
+                        <div class="validation">
+                            <i class="icon icon-correct" ms-visible="companyFlag.email"></i>
+                            <span class="text" ms-visible="!companyFlag.email&&companyInfo.emailError!=''"><i class="icon icon-false"></i><span ms-text="companyInfo.emailError"></span></span>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label class="label"><span style="color:red;">*</span> 所在区域</label>
+                        <div class="area">
+                            <div class="m-tabselect">
+                                <div class="m-tabselect-block" ms-text="province"></div>
+                                <div class="m-tabselect-body">
+                                    <div class="m-tabselect-item-none" ms-click="selectProvince(el.name)" ms-repeat="provinceData" ms-if="provinceData.length>0">{{el.name}}</div>
+                                </div>
+                            </div><div class="m-tabselect">
+                                <div class="m-tabselect-block" ms-text="city"></div>
+                                <div class="m-tabselect-arrow"></div>
+                                <div style="margin-left: -116px;" class="m-tabselect-body">
+                                    <div class="m-tabselect-item-none" ms-click="selectCity(el.name)"
+                                         ms-repeat="cityData" ms-if="cityData.size()>0">{{el.name}}
+                                    </div>
+                                </div>
+                            </div><div class="m-tabselect">
+                                <div class="m-tabselect-block" ms-text="county"></div>
+                                <div class="m-tabselect-arrow"></div>
+                                <div style="margin-left: -232px;" class="m-tabselect-body">
+                                    <div class="m-tabselect-item-none" ms-click="selectCounty(el.name,el.value)"
+                                         ms-repeat="countyData" ms-if="countyData.size()>0">{{el.name}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="validation">
+                            <i class="icon icon-correct" ms-visible="companyFlag.area"></i>
+                            <span class="text" ms-visible="!companyFlag.area&&companyInfo.areaError!=''"><i class="icon icon-false"></i><span ms-text="companyInfo.areaError"></span></span>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label class="label"><span style="color:red;">*</span> 详细地址</label>
+                        <input ms-blur="checkAdress" type="text" ms-duplex="company.address" class="input" />
+                        <div class="validation">
+                            <i class="icon icon-correct" ms-visible="companyFlag.text"></i>
+                            <span class="text" ms-visible="!companyFlag.text&&companyInfo.textError!=''"><i class="icon icon-false"></i><span ms-text="companyInfo.textError"></span></span>
+                        </div>
+                    </div>
+                    <!-- <div class="input-group">
+                        <label class="label"><span style="color:red;">*</span> 主营品类</label>
+                        <div class="category">
+                            <div class="m-tabselect m-tabselect-full" ms-repeat="productData" ms-if="productData.length>0">
+                                <div class="business-value m-tabselect-block" ms-click="dropDown">
+                                    请选择分类
+                                    <div class="m-tabselect-arrow"></div>
+                                </div>
+                                 <div ms-click="delChoose" class="del-class-btn" style="display:none;">
+                                    <img src="/images/category/order_cancel.gif" alt="取消">
+                                 </div>
+                                <div class="m-tabselect-body"  style="z-index: 1000;" ms-click="addChoose">
+                                    <div class="m-tabselect-item">请选择分类</div>
+                                    <div class="m-tabselect-nav" ms-repeat-al="el" ms-if="el.length>0">
+                                        <div class="m-tabselect-nav-title">
+                                            <a href="javascript: void(0)" ms-click="addDown" class="trans_link_3 f-ib">－</a>
+                                            <span class="f-ib">{{al.title}}</span>
+                                        </div>
+                                        <div class="m-tabselect-item-wrap">
+                                            <div class="m-tabselect-item" ms-click="addChoose" ms-attr-cValue="all.val"
+                                                 ms-repeat-all="al.list" ms-if="al.list.length>0">{{all.text}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="validation">
+                            <a id="addClassBtn" class="add-class-btn" ms-click="addBtn" href="javascript: void(0)">+</a>
+                        </div>
+                    </div> -->
+                    <div class="input-group main-core">
+                        <label class="label"><span style="color:red;">*</span> 主营品类</label>
+                        <div class="category">
+                            <div class="m-tabselect m-tabselect-full" ms-repeat="productData" ms-if="productData.length>0">
+                                <div class="business-value m-tabselect-block" ms-click="dropDown">
+                                    请点击主营品类（可多选）
+                                    <div class="m-tabselect-arrow"></div>
+                                </div>
+                                <div class="m-tabselect-body"  style="z-index: 1000;">
+                                    <div class="m-tabselect-each" ms-repeat-al="el" ms-if="el.length>0">
+                                        <span class="f-ib" ms-click="addChoose" ms-attr-cValue="al.id">{{al.title}}</span>
+                                    </div>
+                                    <div class="tabselect-line"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label class="label"><span style="color:red;">*</span> 业务类型</label>
+                        <div class="m-tabselect m-tabselect-full">
+                            <div class="m-tabselect-block"></div>
+                            <div class="m-tabselect-arrow"></div>
+                            <div class="m-tabselect-body" style="z-index: 1000;">
+                                <div class="m-tabselect-item" ms-click="addChoose" ms-attr-bValue="el.id" ms-repeat="businessData"
+                                     ms-if="businessData.size()>0">{{el.name}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="validation">
+                            <i class="icon icon-correct" ms-visible="companyFlag.business"></i>
+                            <span class="text" ms-visible="!companyFlag.business&&companyInfo.businessClassError!=''"><i class="icon icon-false"></i><span ms-text="companyInfo.businessClassError"></span></span>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label class="label"><span style="color:red;">*</span> 上传附件</label>
+                        <div class="tabs">
+                            <div class="tablist">
+                                <label for="" class="radio"><input type="radio" value="1" ms-click="select" ms-attr-checked="tabs.activeIndex=='1'" />三证</label>
+                                <label for="" class="radio"><input type="radio" value="2" ms-click="select" ms-attr-checked="tabs.activeIndex=='2'"/>三证合一</label>
+                            </div>
+                            <div class="tabpanel" ms-visible="tabs.activeIndex=='1'">
+                                <ul>
+                                    <li class="licensePic">
+                                        <div ms-visible="companyInfo.licensePic==''" ><input id="licensePic" name="licensePic" type="file" /><div id="fileQueue" style="display:none"></div></div>
+                                        <div class="img"><img ms-visible="companyInfo.licensePic!=''" ms-src="companyInfo.licensePic" alt="" /></div>
+                                        <a ms-click="deleteLicensePic" ms-visible="companyInfo.licensePic!=''" href="javascript:void(0)" class="btn"><i class="icon"></i></a>
+                                    </li>
+                                    <li class="orgazitionPic">
+                                        <div ms-visible="companyInfo.orgnizationPic==''" ><input id="orgazitionPic" name="orgazitionPic" type="file" /><div id="fileQueue" style="display:none"></div></div>
+                                        <div class="img"><img ms-visible="companyInfo.orgnizationPic!=''" ms-src="companyInfo.orgnizationPic" alt="" /></div>
+                                        <a ms-click="deleteOrgnizationPic" ms-visible="companyInfo.orgnizationPic!=''" href="javascript:void(0)" class="btn"><i class="icon"></i></a>
+                                    </li>
+                                    <li class="taxPic">
+                                        <div ms-visible="companyInfo.taxPic==''" ><input id="taxPic" name="taxPic" type="file" /><div id="fileQueue" style="display:none"></div></div>
+                                        <div class="img"><img ms-visible="companyInfo.taxPic!=''" ms-src="companyInfo.taxPic" alt="" /></div>
+                                        <a ms-click="deleteTaxPic" ms-visible="companyInfo.taxPic!=''" href="javascript:void(0)" class="btn"><i class="icon"></i></a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="tabpanel" ms-visible="tabs.activeIndex=='2'">
+                                <ul>
+                                    <li class="licensePic">
+                                        <div ms-visible="companyInfo.licenseAllPic==''" ><input id="licensePicAll" name="licensePicAll" type="file" /><div id="fileQueue" style="display:none"></div></div>
+                                        <div class="img"><img ms-visible="companyInfo.licenseAllPic!=''" ms-src="companyInfo.licenseAllPic" alt="" /></div>
+                                        <a ms-click="deleteLicenseAllPic" ms-visible="companyInfo.licenseAllPic!=''" href="javascript:void(0)" class="btn"><i class="icon"></i></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="validation">
+                            <i class="icon icon-correct" ms-visible="companyFlag.licensePic"></i>
+                            <span class="text" ms-visible="!companyFlag.licensePic&&companyInfo.licenseError!=''"><i class="icon icon-false"></i><span ms-text="companyInfo.licenseError"></span></span>
+                        </div>
+                    </div>
+                    <div class="btn-group">
+                        <a href="javascript: void(0)" ms-visible="btnVisible"  ms-click="regist" class="btn">提交</a>
+                        <a href="javascript: void(0)" ms-visible="!btnVisible" class="btn btn-disabled">提交中...</a>
+                    </div>
+                </form>
+            </div>
+            <div class="footer">
+                版权所有@2015 佰万仓网络科技有限公司&nbsp;&nbsp;
+                <a class="link" target="_blank" href="/images/index/zhizhao.jpg">沪ICP备15032859号-1
+                    <img class="f-ib" src="/images/common/icp_icon.png" alt="ICP"/>
+                </a>
+            </div>
+        </div>
+    </div>
+    <script src="/scripts/module/member/corpInfo.js"></script>
+</body>
+</html>

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>订单详细</title>
+        @@include('../../include/common/intro.html')
+        <!-- build:css css/module/order/orderdetail.css -->
+        <link rel="stylesheet" href="/css/module/order/orderdetail.css"/>
+        <!-- endbuild -->
+    </head>
+    <body>
+        @@include('../../include/common/header.html')
+        @@include('../../include/common/nav.html')
+        <div class="main mod-orderdetail"  ms-controller="orderDetail">
+            <div class="sidebar">
+                @@include('../../include/common/menu.html')
+            </div>
+            <div class="content">
+                <ul class="breadcrumb">
+                    <li>
+                        <a href="javascript:void(0);">卖家中心</a>
+                    </li>
+                    <li>
+                        <a href="/order/list.html">订单管理</a>
+                    </li>
+                    <li>
+                        <a href="/order/list.html">订单管理首页</a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);">订单详细</a>
+                    </li>
+                </ul>
+                <div class="panel">
+                    <div class="hd">
+                        <span class="title">订单详细</span>
+                    </div>
+                    <div class="bd">
+                        <div class="loading-wrapper" ms-if="showLoading">
+                            <div class="oni-loading" ms-widget="loading,$,loadingOpt" data-loading-type="spinning-spin"></div>
+                        </div>
+                        <div class="row pline">
+                            <div class="class-title">订单信息</div>
+                            <div class="col col-4"><p>订单号：<span ms-text="orderInfo.orderSn"></span></p></div>
+                            <div class="col col-4"><p>订单金额：<span ms-text="orderInfo.totalAmount"></span></p></div>
+                            <div class="col col-4"><p>订单状态：<span ms-text="orderInfo.orderStatusName"></span></p></div>
+                        </div>
+                        <div class="row pline">
+                            <div class="col col-4"><p>支付状态：<span ms-text="orderInfo.paymentStatusName"></span></p></div>
+                            <div class="col col-4"><p>支付方式：<span ms-text="orderInfo.payMethod"></span></p></div>
+                        </div>
+                        <div class="divider"></div>
+                        <div class="row pline">
+                            <div class="class-title">账户信息</div>
+                            <div class="col col-4"><p>用户名：<span ms-text="orderInfo.customerName"></span></p></div>
+                            <div class="col col-4"><p>公司名称：<span ms-text="orderInfo.serviceBuyerName"></span></p></div>
+                            <div class="col col-4"><p>联系电话：<span ms-text="orderInfo.phone"></span></p></div>
+                        </div>
+                        <div class="divider"></div>
+                        <div class="row">
+                            <div class="class-title">订单列表</div>
+
+                            <table class="sale-item-table">
+                                <thead>
+                                <tr>
+                                    <th width="10%">佰万仓编号</th>
+                                    <th width="10%">品牌</th>
+                                    <th width="10%">型号</th>
+                                    <th width="15%">商品名称</th>
+                                    <th width="10%">参数</th>
+                                    <th width="10%">订购数量</th>
+                                    <th width="5%">单位</th>
+                                    <th width="10%">成交单价(元)</th>
+                                    <th width="10%"><span>优惠单价(元)</span>
+                                    </th>
+                                    <th width="10%">小计</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr class="item" ms-repeat-item="orderInfo.shopOrderItemDetailVOList"
+                                    ms-if="orderInfo.shopOrderItemDetailVOList.length>0">
+                                    <td><span ms-text="item.orderItemId"></span></td>
+                                    <td><span ms-text="item.brandSet"></span></td>
+                                    <td><span ms-text="item.skuSnSet"></span></td>
+                                    <td><span ms-text="item.goodsName"></span></td>
+                                    <td><span ms-text="item.attributeSet"></span></td>
+                                    <td><span ms-text="item.quantity"></span></td>
+                                    <td><span ms-text="item.unitName"></span></td>
+                                    <td><span ms-text="item.salePrice"></span></td>
+                                    <td><span ms-if="!editingPrice" ms-text="item.salePrice"></span>
+                                    </td>
+                                    <td><span ms-text="item.totalPrice"></span></td>
+                                </tr>
+                                <tr class="item">
+                                    <td colspan="12" class="item_total">
+                                        <div ms-if="orderInfo.freight>=0.01" style="line-height:30px">
+                                            <span>
+                                                商品共计：<span ms-text="orderInfo.goodsAmount"></span>元&nbsp&nbsp运费共计：<span ms-text="parseFloat(orderInfo.freight).toFixed(2)"></span>元&nbsp&nbsp
+                                            </span>
+                                        </div>
+                                        <div style="line-height:30px">
+                                            总金额：<span ms-text="orderInfo.totalAmount"></span>元
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr ms-if="orderInfo.shopOrderItemDetailVOList.length==0">
+                                    <td colspan="9" class="cell-empty">没有商品数据</td>
+                                </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="divider"></div>
+                        <div class="row pline">
+                            <div class="class-title">收货人信息</div>
+                            <div class="col col-12"><p>用户名：<span ms-text="orderInfo.consignee"></span></p></div>
+                            <div class="col col-12"><p>收货地址：<span ms-text="orderInfo.address"></span></p></div>
+                            <div class="col col-12"><p>联系电话：<span ms-text="orderInfo.phone"></span></p></div>
+                            <div class="col col-12"><p>备注：<span ms-text="orderInfo.remarks"></span></p></div>
+                        </div>
+                        <div class="divider"></div>
+                        <div class="row pline">
+                            <div class="col col-12">
+                                <p><span class="item-required"></span>物流公司：
+                                    <span ms-text="orderInfo.shippingCorpName"></span>
+                                </p></div>
+                            <div class="col col-12">
+                                <p><span class="item-required"></span>运单号：
+                                    <span ms-text="orderInfo.trackingNo||'无'"></span>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="divider"></div>
+                        <div class="row pline">
+                            <div class="col col-12">
+                                <p>订单取消原因：<span ms-text="orderInfo.cancelReasonTypeName"></span>
+                                </p></div>
+                            <!--<div class="col col-12">-->
+                                <!--<p>取消时间：-->
+                                    <!--<span ms-text="orderInfo.payMethodType"></span>-->
+                                <!--</p>-->
+                            <!--</div>-->
+                            <div class="col col-12">
+                                <p>备注：
+                                    <span ms-text="orderInfo.cancelReason"></span>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row row-buttons">
+                            <span ms-click="goBack" class="btn btn-large btn-default button-back">返回</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @@include('../../include/common/outro.html')
+        <script>require(['conf/order/orderdetail']);</script>
+    </body>
+</html>

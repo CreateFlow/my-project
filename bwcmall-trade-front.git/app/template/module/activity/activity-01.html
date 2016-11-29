@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>士诺超空气系统</title>
+    @@include('../../include/common/scripts.html')
+    <link rel="stylesheet" href="/styles/module/activity/findgoods.css"/>
+    <style>
+        img{ outline-width:0px; vertical-align:top;}
+    </style>
+</head>
+<body>
+    <div ms-controller="headerCtrl">
+        @@include('../../include/common/header-top.html')
+        @@include('../../include/common/header-search.html')
+        @@include('../../include/common/header-nav.html')
+    </div>
+    <div style=" min-width:1200px; overflow:hidden;">
+        <div style="position:relative; left:50%; margin-left:-1280px; width:2560px; text-align:center;">
+            <div style="background-color:#fcfcfc;">
+                <img src="/images/activity/snc01.jpg" alt="">
+            </div>
+            <div>
+                <div style="padding-top:50px;">
+                    <img src="/images/activity/snc02.jpg" alt="">
+                </div>
+                <div style="width:900px; height:500px; margin: 50px auto 100px; border:1px solid #d9d9d9;">
+                    <embed src="http://101.227.211.41/67743CAAE504B843A942383563/030008010057BFEB8D019A2B20C028E85CA655-5F7C-0C61-B32E-A39BB60CE0A0.mp4" autostart="true" loop="true" width="100%" height="100%"></embed>
+                </div>
+            </div>
+            <div style="background-color:#f7f7f7;">
+                <img src="/images/activity/snc03.jpg" alt="">
+            </div>
+            <div>
+                <img src="/images/activity/snc04.jpg" alt="">
+            </div>
+            <div>
+                <img src="/images/activity/snc05.jpg" alt="">
+            </div>
+            <div>
+                <img src="/images/activity/snc06.jpg" alt="">
+            </div>
+            <div>
+                <img src="/images/activity/snc07.jpg" alt="">
+            </div>
+            <div>
+                <img src="/images/activity/snc08.jpg" alt="">
+            </div>
+            <div class="ljbm" style="position:relative; background-color:#f2f2f2;">
+                <img src="/images/activity/snc09.jpg" alt="">
+                <a href="http://form.mikecrm.com/Cf13Un" style="position:absolute; top:170px; left:50%; margin-left:-100px; display:block; width:200px; height:50px; line-height:50px; background-color:#72c01e; font-size:18px; color:#fff; border-radius:5px;">立即报名</a>
+            </div>
+            <div class="fix-ljbm" style="position:fixed; bottom:0; left:0; width:100%; height:100px; background:url(../images/activity/snc11.png) repeat;">
+                <img src="/images/activity/snc10.png" alt="" style="margin-top:-25px;">
+                <a href="http://form.mikecrm.com/Cf13Un" style="position:absolute; right:140px; top:25px; display:block; width:161px; height:50px;"></a>
+            </div>
+        </div>
+    </div>
+
+    @@include('../../include/common/footer.html')
+
+    <script>
+        (function($){
+            $(window).scroll(function(){
+                var oheight=$('.ljbm').offset().top;
+                var sheight=$(document).scrollTop();
+                var wheight=$(window).height();
+                if(sheight+wheight>=oheight){
+                    $('.fix-ljbm').fadeOut(400);
+                }else{
+                    $('.fix-ljbm').fadeIn(400);
+                }
+            })
+        }(jQuery))
+    </script>
+</body>
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html> 
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <title>仅退款-申请</title>
+    @@include('../../include/common/meta.html')
+    @@include('../../include/common/common-include.html')
+    <link rel="stylesheet" type="text/css" href="/styles/module/payday/payback.css"> 
+    <script src="/scripts/plugin/uploadifive/jquery.uploadify.min.js"></script> 
+    <script src="/scripts/plugin/uploadifive/jquery.uploadifive.min.js"></script> 
+    <script src="/scripts/module/common/upload-button.js"></script> 
+    <link rel="stylesheet" type="text/css" href="/styles/common/upload_button.css"/>
+    <script src="/scripts/module/payday/payback.js"></script>
+</head>
+
+<body>
+    @@include('../../include/common/header.html')
+    <div class="my-header">
+        @@include('../../include/common/account-head.html')
+    </div> 
+     <!--主要内容-->
+    <div class="g-content" ms-controller="paybackCtrl">
+        <div class="module-header">
+            <span class="module-title">账期还款</span>
+        </div>
+
+
+        <div class="order-block">
+            <div class="order-block-body" style="padding:0px 20px 20px 20px;">
+                <span class="content-body-title">应还金额（元）：<span style="color:#E00000" ms-text="dataList.amount"></span></span>
+                <p><span ms-text="dataList.name"></span></p>
+                <div class="link" style=""><i class="link-icon"></i>联系卖家</div>
+            </div>
+        </div>
+
+        <div class="order-block">
+            <div class="order-block-title">
+                <em class="f-ib"></em>
+                <span class="f-ib">选择还款支付方式</span>
+            </div>
+            <div class="order-block-body">
+                <div class="order-info-table order-payment">
+                    <ul ms-each-tab="paytabs">
+                        <li class="paymentstatus" ms-hover="xian" ms-class-paymentcheck="paymentCheck === $index" ms-click="payCheck">
+                            
+                            <div>{{tab.title}} 
+                                <img ms-if="tab.panel" class="payment-tag-info" src="../../images/order/receipt_info_tag.png">
+                            </div>
+                            <div class="paymentTip" ms-if="tab.title == '个人网银'">
+                            </div>
+                            <div class="paymentTip paymentTip2" ms-if="tab.title == '企业网银'">
+                            </div>
+                            <div class="paymentTip paymentTip3" ms-if="tab.title == '快捷支付'">
+                            </div>
+                            <div class="paymentTip paymentTip4" ms-if="tab.title == '银行转账'">
+                            </div>
+                        </li>
+
+                    </ul>
+                </div>
+                <div class="order-info-table" style="padding:20px">
+                <p>提示：</p>
+                <p>1、平台目前暂不提供线上直接还款的功能，您可以选择线下付款的方式进行账期还款</p>
+                <p>2、如果您已经通过线下付款的方式结清了账期的欠款。请联系卖家在系统中确认收款。</p>
+                <p>3、卖家认可后，完成还款。</p>
+                </div>
+            </div>
+        </div>
+        <div class="order-block">
+            <div class="order-block-title">
+                <em class="f-ib"></em>
+                <span class="f-ib">收款账号</span>
+            </div>
+            <div class="order-block-body" style="padding:20px;">
+                <p><span ms-text="dataList.name"></span><span style="margin-left:50px;" ms-text="dataList.bankName"></span></p>
+                <p><span ms-text="dataList.bankAccount"></span></p>
+                
+            </div>
+        </div>
+
+        <div class="order-block">
+            <div class="order-block-title">
+                <em class="f-ib"></em>
+                <span class="f-ib">上传付款凭证</span>
+            </div>
+
+            <div class="return-detail-row">
+                <button  type="button" id="fileUploadBtn">选择凭证图片</button>
+                <div id="fileQueue"></div>
+                <div class="uploaded-image-panel">
+                    <div class="upload-image-col" ms-repeat="uploadImagesList">
+                       <div class="image-action-panel">
+                          
+                            <div class="image-delete-btn" ms-click="deleteImage(el.id)">删除</div>
+                        </div>
+                        <div class="image-div">
+                            <img ms-attr-src="el.resources" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="order-block" style="padding:50px 0px 50px 0px;">
+            <button type="button" id="queryBtn" name="queryBtn" class="query_btn" ms-click="submit">确定</button>
+        </div>
+    </div>
+ 
+@@include('../../include/common/footer.html')
+</body>
+
+</html>

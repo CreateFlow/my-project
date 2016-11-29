@@ -1,0 +1,116 @@
+<!--一个完整订单的header-->
+    <!--一
+        <#list group[1..] as order>
+    <#assign totalprice ="" totalprice + order.totalprice>
+    </#list>
+    <#assign totalprice ="" totalprice|date("0.00")>
+         -->
+    <div class="order-one-header">
+        <i class="arrow" ms-if-loop="order.orderStatus != 'Canceled'"></i>
+        <span class="g-ib ooh-time1">{{order.createdTime}}</span>
+        <span class="g-ib ooh-time2"><!-- {{order.createdTime}} --></span>
+        <span class="g-ib ooh-line"></span>
+        <div ms-if-loop=" order.orderstatus == 'Canceled'">
+             <span class="g-ib ooh-dot0"></span>
+        </div>
+        <div ms-if-loop="!( order.orderStatus == 'Canceled')">
+             <span class="g-ib ooh-dot"></span>
+        </div>
+        <span>订单号：</span> 
+        <span ms-text="order.sn"></span><b ms-text="'('+order.generalStatus+')'"></b> 
+         <ph class="order-shop-info">
+            <span ms-text="order.shopName"></span> 
+            <div class="link" style=""  ms-mouseover="showShopInfo(this)" ms-mouseleave="hideShopInfo(this)"><i class="link-icon"></i>联系卖家</div>
+            <div class="oogo-changetips" style="right: 365px;">
+               <p ms-html="'联系人：'+order.sellerName+'<br/>联系电话：'+order.sellerPhone"> </p> 
+            </div>
+        </ph>
+        <span class="g-ib gc-5b5">（您的商品在不同库房，已被分开配送，给您带来不便还请谅解）</span>  
+        <a ms-click="orderExport(order.sn)" href="javascript: void(0)" class="export-btn">导出订单</a> 
+    </div>
+    <!-- 创建一个变量用于判断子订单是否全部被确认 -->
+    <div class="suborder-one" ms-repeat-order="order.childOrders" > 
+        <!--子订单header--> 
+        <div class="suborder-one-header" >
+            <span ms-text="'订单号：'+ order.sn"></span>
+            <a class="g-ib ga-382 sooh-num" ms-href="'/order/detail.html?orderSn='+order.sn" style="color:#F3A206" > (订单详情)</a> 
+            <!--  <span ms-if-loop="order.orderStatu != 'Canceled'" ms-text="'预计'+computeShip(order.shipMin,order.shipMax)+'天送达'">&nbsp;  </span> --> 
+            <span class="sooh-money">金额：<span class="gc-e83" ms-html="formatPrice(order.totalPrice)"></span></span>
+             <span class="sooh-money" >  
+                <a ms-if=" order.orderAfsStatus == 'Available'  " class="g-ib ga-382 " href="javascript: void(0)"     ms-click="toApply(order)">申请售后</a>
+                <a  ms-if=" order.orderAfsStatus == 'InProgress'  " class="g-ib ga-382 " ms-click="viewAfsDetail(order.currentAfterSale)" href="javascript: void(0)" >售后处理中</a>  
+            </span>
+        </div> 
+        <div>
+            <!--订单商品列表-->
+            <div class="suborder-one-goods" > 
+                 <span class="g-ib ooh-line" style="left: -59px;"></span>
+                <div ms-repeat-item="order.orderItems">
+                    <div ms-if-loop="$index<=5">
+                        <div class="oog-one">
+                            <span class="g-ib oogo-img"><img ms-src="{{item.image}}!64"/></span>
+                            <a class="g-ib oogo-name" ms-href="'/goods/detail.html?id='+item.goodsId" 
+                            target="_blank" ms-attr-title="item.name">{{item.brandName}} {{item.sn|subStr15}} {{item.name|subStr25}}</a>
+                            <span class="g-ib oogo-price gc-e83" ms-html="formatPrice(item.price)"></span>
+                            <span class="oogo-num-pos">
+                                <span class="g-ib oogo-num">×{{item.quantity}}
+                                    <div ms-if-loop="item.requiredQuantity != item.quantity">
+                                        <span class="oogo-num-tips">&nbsp; <span style="text-decoration:line-through;"></span></span>
+                                    </div>
+                                </span>
+                                <span><span ms-if="item.ship==0">当天</span><span ms-if="item.ship!=0" ms-text="item.ship+'天'"></span></span>
+                                <span class="oogo-num-tips-info">
+                                    <i class="arrow"></i>
+                                    <span>下单{{item.requiredQuantity}}，发货{{item.quantity}}</span>
+                                </span>
+                            </span>
+                            <!-- <div ms-if-loop="item.returnType == 0">
+                                <a class="g-ib oogo-change" href="javascript:void(0)" >退换货</a>
+                            </div>  -->
+                        </div>
+                    </div>
+                </div>
+                <div class="oog-one-more g-dn" ms-if-loop="order.orderItems.length>5  ">
+                    <span class="g-ibv oogom-img"></span>
+                    <span class="g-ib oogom-all" ms-click="allProduct('order.sn')">所有商品</span>
+                </div>
+                 <div ms-if-loop="order.orderStatus == 'Canceled'">
+                    <div class="oog-cancel"></div>
+                </div>
+            </div>
+            <!--订单状态信息-->
+            <div class="suborder-one-info" >
+                <!--订单状态-->
+                <span class="g-ib ooi-status">
+                    <span class="g-ib oois-img">
+                         <div ms-if-loop="order.orderStatus == 'Canceled' || order.orderStatus == 'PendingPay' ">
+                            <img src="/images/order/payment1.png"/>
+                        </div>  
+                        <div ms-if-loop="order.orderStatus == 'PendingDelivery' ">
+                            <img src="/images/order/shipping1.png"/>
+                        </div>
+                         <div ms-if-loop="order.orderStatus == 'Shipped' ">
+                            <img src="/images/order/shipping2.png"/>
+                        </div>
+                          <div ms-if-loop="order.orderStatus == 'Received' ">
+                            <img src="/images/order/shipping3.png"/>
+                        </div>
+                         <div ms-if-loop="order.orderStatus == 'Finished' ">
+                            <img src="/images/order/finished3.png"/>
+                        </div>
+                    </span>
+                    <span class="g-ib oois-info" ms-text="'订单：'+order.generalStatus"></span>
+                </span>
+                  <div class="ooi-pay" style="position:relative !important;margin-left:150px;bottom:0px;"> 
+                     <div ms-if-loop="order.orderStatus == 'Shipped'  &&  order.orderAfsStatus != 'InProgress' ">
+                        <div>
+                            <p class="ooip-paynow" ms-click="ConfirmReceived(order.sn)">
+                                确认收货
+                            </p>
+                        </div>
+                    </div>
+                </div>
+             </div>
+        </div>
+    <div class="clear"></div> 
+ </div>

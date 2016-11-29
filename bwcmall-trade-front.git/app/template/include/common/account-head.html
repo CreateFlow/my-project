@@ -1,0 +1,59 @@
+<div class="gs-header" >
+    <div class="gs-header-inner" ms-controller="accountHeadCtrl">
+        <div class="header-logo f-fl">
+            <a href="/" class="header-logo-left f-ib"></a>
+            <span class="header-logo-text f-ib">个人中心</span>
+        </div>
+        <div class="header-nav f-fr">
+            <ul>
+                <li class="header-nav-li">
+                    <a ms-class="header-nav-item-active:currentNavInfo=='index'" class="header-nav-item trans_link_3"
+                       href="/wholesale.html">商城首页</a>
+                </li>
+                <li class="header-nav-li">
+                    <a ms-class="header-nav-item-active:currentNavInfo=='order'" class="header-nav-item trans_link_3"
+                       href="/order/list.html">订单中心</a>
+                </li>
+                 <li class="header-nav-li">
+                    <a ms-class="header-nav-item-active:currentNavInfo=='afs'" class="header-nav-item trans_link_3"
+                       href="/afs/return-list.html">售后中心</a>
+                </li>
+                <li class="header-nav-li">
+                    <a ms-class="header-nav-item-active:currentNavInfo=='inOrder'" class="header-nav-item trans_link_3"
+                       href="/cart/list.html">进货单</a>
+                </li>
+                <li class="header-nav-li"   ms-mouseenter="showSubMenu()" ms-mouseleave="hideSubMenu()" >
+                    <a ms-class="header-nav-item-active:currentNavInfo=='invoice'" class="header-nav-item trans_link_3" 
+                       href="javascript:void(0)">发票管理<span class="header-nav-arrow"></span></a>
+                    <ul class="header-subnav" style="display: none;">
+                        <li class="header-subnav-item"  >
+                            <a class="header-subnav-link" href="/invoice/invoice.html">发票设置</a>
+                        </li> 
+                           <li class="header-subnav-item"   >
+                            <a class="header-subnav-link" href="/invoice/invoice-list.html">我要开票</a>
+                        </li> 
+                    </ul>   
+                </li>
+                <li class="header-nav-li"  ms-mouseenter="showSubMenu()" ms-mouseleave="hideSubMenu()" >
+                    <a ms-class="header-nav-item-active:currentNavInfo=='payday'" class="header-nav-item trans_link_3" 
+                       href="javascript:void(0)">账期管理<span class="header-nav-arrow"></span></a>
+                    <ul class="header-subnav" style="display: none;">
+                        <li class="header-subnav-item"  >
+                            <a class="header-subnav-link" href="/payday/payday.html">我的账期</a>
+                        </li> 
+                           <li class="header-subnav-item"   >
+                            <a class="header-subnav-link" href="/payday/payrule.html">账期规则说明</a>
+                        </li> 
+                    </ul>   
+                </li>
+                <li class="header-nav-li">
+                    <a ms-class="header-nav-item-active:currentNavInfo=='address'" class="header-nav-item trans_link_3"
+                       href="/address/address.html">地址管理</a>
+                </li>
+               
+                <li class="clear"></li>
+            </ul>
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>

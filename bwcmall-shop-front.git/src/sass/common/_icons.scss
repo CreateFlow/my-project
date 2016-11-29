@@ -1,0 +1,10 @@
+@charset "UTF-8";
+
+@import "font";
+
+.icon-glyph {
+    @include icon-glyph("iconfont");
+}
+
+.icon-clock:before { content: "\e600"; }
+.icon-edit:before { content: "\e601"; }

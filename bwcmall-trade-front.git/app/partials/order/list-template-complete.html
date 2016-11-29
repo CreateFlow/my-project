@@ -1,0 +1,11 @@
+
+<div ms-repeat-order="orderlist">
+     <!--无拆单的订单-->
+    <div class="order-one" ms-if="!order.childOrders"  ms-visible="order.orderStatus == 'Finished'"  ms-if="order.orderStatus == 'Finished'">
+        <div ms-include-src="'/partials/order/list-template-single-order.html'" data-include-rendered='render' ms-if="order.orderStatus == 'Finished'"></div>  
+    </div>
+    <!--有拆单的订单-->
+    <div class="order-one" ms-if="order.childOrders != null" ms-visible="order.orderStatus == 'Finished'"  ms-if="order..orderStatus == 'Finished'">
+         <div ms-include-src="'/partials/order/list-template-split-order.html'" data-include-rendered='render'  ms-if="order.orderStatus == 'Finished'"></div>    
+    </div>
+</div>

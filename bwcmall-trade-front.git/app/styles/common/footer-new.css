@@ -1,0 +1,284 @@
+.where-me{
+    color:red;
+}
+
+.info-icon-center {
+    display: inline-block;
+    height: 13px;
+    padding: 0 3px;
+    line-height: 13px;
+    color: #fff;
+    font-weight: bold;
+    background-image: url("/images/common/info_icon_center.png");
+    background-repeat: repeat-x;
+    background-position: center center; }
+
+.info-icon-left {
+    display: inline-block;
+    height: 13px;
+    width: 6px;
+    line-height: 13px;
+    color: #fff;
+    font-size: 12px;
+    font-weight: bold;
+    background-image: url("/images/common/info_icon_left.png");
+    background-repeat: no-repeat;
+    background-position: left center; }
+
+.info-icon-right {
+    display: inline-block;
+    height: 13px;
+    width: 3px;
+    line-height: 13px;
+    color: #fff;
+    font-size: 12px;
+    font-weight: bold;
+    background-image: url("/images/common/info_icon_right.png");
+    background-repeat: no-repeat;
+    background-position: right center; }
+
+.collection-icon {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    background-image: url("/images/index/collection_icon.png");
+    background-repeat: no-repeat;
+    background-position: center center; }
+
+/* header end */
+/* footer start */
+.g-footer {
+    background-color: #f5f5f5;
+}
+
+.g-footer-inner {
+    max-width:1200px;
+    margin: 0 auto;
+    /*padding: 50px 70px 50px 130px;*/
+    padding: 50px 20px 30px;
+}
+
+.footer-logo {
+    float: left;
+    margin-right: 100px; }
+
+.footer-head {
+    float: left;
+    width:82%;
+}
+
+.footer-list {
+    width: 16.6666%;
+    /*margin-right: 20px; */
+}
+
+.footer-list-title {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 15px; }
+
+.footer-item {
+    margin-bottom: 10px; }
+
+.footer-item a {
+    font-size: 12px;
+    color: #666; }
+
+.footer-item a:hover {
+    color: #333;
+    -webkit-transition: all .2s ease-in;
+    -moz-transition: all .2s ease-in;
+    -ms-transition: all .2s ease-in;
+    -o-transition: all .2s ease-in;
+    transition: all .2s ease-in; }
+
+.footer-code {
+    width: 18%;
+    float:right;
+    text-align:center;
+    position:relative;
+}
+
+.footer-line-v{
+    height: 143px;
+    display: inline-block;
+    border-left: 1px solid #e0e0e0;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.footer-line-h{
+    width: 100%;
+    display: inline-block;
+    border-bottom: 1px solid #e0e0e0;
+    position: absolute;
+    top: 170px;
+    right: 0;
+}
+
+.footer-code p {
+    font-size: 12px;
+    color: #666;
+    text-align: center;
+    margin-top: 10px; }
+
+.footer-bottom {
+    font-size: 12px;
+    color: #666;
+    text-align:center;
+    margin-top: 30px;
+    padding-top: 35px;
+    border-top:1px solid #e0e0e0; }
+
+.footer-bottom a {
+    color: #333; }
+
+.footer-bottom a:hover {
+    text-decoration: underline; }
+
+.footer-bottom img {
+    margin-left: 6px;
+    margin-top: -4px; }
+
+.footer-p1{ margin:0 15px 10px 0;}
+.footer-breack{ display:none; }
+
+
+@media screen and (max-width:800px){
+    .footer-code{ display:none; }
+    .footer-head{ width:100%; }
+}
+
+@media screen and ( max-width:700px){
+    .footer-list{ width:33%; margin-bottom:30px;}
+    .footer-breack{ display:block;}
+    .footer-list-title{ font- }
+}
+
+@media screen and ( max-width:500px){
+    .footer-list-title{ font-size:14px;}
+    .footer-p1{ display:block;}
+}
+
+/* footer end */
+/* center header start */
+.gs-header {
+    width: 100%;
+    background-color: #5c393b;
+    height: 54px; }
+
+.gs-header-inner {
+    width: 1200px;
+    margin: 0 auto;
+    position: relative; }
+
+.header-logo {
+    height: 66px;
+    width: 250px; }
+
+.header-logo-left {
+    width: 100px;
+    height: 50px;
+    background: url("/images/common/supplier_logo.png");
+    background-position: left top;
+    background-repeat: no-repeat; }
+
+.header-logo-text {
+    font-size: 18px;
+    vertical-align: bottom;
+    color: #fff;
+    line-height: 60px; }
+
+.header-nav {
+    /*margin-left: 60px;*/ }
+
+.header-nav-li {
+    float: left;
+    height: 54px;
+    line-height: 54px; }
+
+.header-nav-arrow {
+    display: inline-block;
+    width: 10px;
+    height: 6px;
+    background-image: url("/images/account/nav_arrow_down.png");
+    background-position: center center;
+    background-repeat: no-repeat;
+    margin-left: 7px; }
+
+.header-nav-item {
+    display: block;
+    height: 54px;
+    color: #fff;
+    font-size: 16px;
+    padding: 0 32px; }
+
+.header-nav-item-active {
+    background-color: #382223; }
+
+.header-nav-item:hover {
+    background-color: #382223; }
+
+.header-account {
+    display: inline-block;
+    margin-top: 11px;
+    height: 32px;
+    background: url("/images/common/supplier_head_account_bg.png");
+    background-repeat: repeat-x;
+    background-position: left top; }
+
+.header-account-left {
+    width: 32px;
+    height: 32px;
+    background-image: url("/images/common/supplier_head_account.png");
+    background-repeat: no-repeat;
+    background-position: center center; }
+
+.header-account-right {
+    position: relative;
+    height: 32px;
+    line-height: 32px;
+    font-size: 14px;
+    color: #fff; }
+
+.header-account-right em {
+    padding: 0 26px 0 20px; }
+
+.header-subnav {
+    position: relative;
+    z-index: 99;
+    display: none;
+    width: 132px;
+    padding: 6px 1px;
+    -webkit-box-shadow: 1px 2px 5px #ccc;
+    -moz-box-shadow: 1px 2px 5px #ccc;
+    box-shadow: 1px 2px 5px #ccc;
+    background-color: #fff; }
+
+.header-subnav-item {
+    width: 130px;
+    height: 36px;
+    line-height: 36px;
+    margin: 0 auto; }
+
+.header-subnav-link {
+    display: block;
+    font-size: 14px;
+    color: #333;
+    text-align: center; }
+
+.header-subnav-link:hover {
+    background-color: #f4e7d5; }
+
+.header-account-right-icon {
+    position: absolute;
+    width: 10px;
+    height: 6px;
+    top: 13px;
+    right: 12px;
+    background-image: url("/images/common/supplier_head_account_arrow_down.png");
+    background-repeat: no-repeat;
+    background-position: center center; }
+
+/* center header end */

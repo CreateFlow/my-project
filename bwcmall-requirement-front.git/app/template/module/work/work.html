@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html> 
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <title>工作池</title>
+    @@include('../../include/common/meta.html')
+    @@include('../../include/common/common-include.html') 
+
+    <link rel="stylesheet" type="text/css" href="/styles/module/work/work.css"> 
+    <script src="/scripts/module/work/work.js"></script>
+</head>
+
+<body ms-controller="workCtrl">
+    @@include('../../include/common/header.html')
+    @@include('../../include/common/account-head.html')
+     <!--主要内容-->
+    <div class="g-content g-clearfix">
+      <!--header -->
+      <div class="module-header">
+          <div class="index-query-conditions">
+            <div class="index-condition">
+                <span>需求单类型</span>
+                <select id="typeList" name="typeList" ms-duplex="searchData.type" ms-change="doQuery()">
+                    <option value="">全部</option>
+                    <option ms-repeat="typeList" ms-attr-value="el.value" ms-text="el.name"></option> 
+                </select> 
+            </div>
+            <div class="index-condition">
+                <span>需求单号（父单）</span>
+                <input type="text" ms-duplex="searchData.requirementSn" ms-keyup="onKeyup($event)"/>
+            </div>  
+
+            <div class="index-condition">
+                <span>状态</span>  
+                  <select id="statusList" name="statusList" ms-duplex="searchData.itemStatus" ms-change="doQuery()">
+                      <option value="">全部</option>
+                      <option ms-repeat="statusList"  ms-attr-value="el.value" ms-text="el.name"></option> 
+                  </select> 
+            </div>
+            
+            <div class="index-condition">
+                <span>品牌</span>
+                <input type="text" ms-duplex="searchData.brandName" ms-keyup="onKeyup($event)"/>
+            </div> 
+            <div class="index-condition">
+                <span>买家公司名</span>
+                <input type="text" ms-duplex="searchData.buyerName" ms-keyup="onKeyup($event)"/>
+            </div>
+            <div class="index-condition" style="clear:both;">
+                <span>一级分类</span>
+                <select id="categoryList" name="categoryList" ms-duplex="searchData.categoryId" ms-change="doQuery()">
+                    <option value="">全部</option>
+                    <option ms-repeat="categoryList" ms-attr-value="el.id" ms-text="el.name"></option> 
+                </select>
+            </div> 
+            <div class="index-condition">
+                <span>创建时间（开始）</span>
+                <input ms-widget="datepicker" ms-duplex="searchData.startTime"/>
+            </div> 
+            <div class="index-condition">
+                <span>创建时间（结束）</span>
+                <input ms-widget="datepicker" ms-duplex="searchData.endTime"/>
+            </div> 
+            <div class="index-actions"> 
+                 <button type="button" id="queryBtn" name="queryBtn" class="query_btn" value="" ms-click="doQuery()">查询</button> 
+                 <button type="button" id="addBtn" ms-click="addBtn" name="addSupplierBtn" class="add_btn">选中加入到工作面板</button>
+                 <button type="button" class="add_btn" ms-click="showQueryLinksDlg">生成询价链接</button>
+            </div>
+            <div class="clear"></div>
+        </div> 
+      </div>
+
+       <div class="index-table-panel">
+           <table class="index-table">
+              <tbody>
+                <tr>
+                    <th width="6%">
+                      <span ms-click="checkall()" class="f-ib m-checkbox checkbox-fix" style="cursor: pointer;">
+                        <strong ms-if="allstatus" ms-class="m-checkbox-icon m-checkbox-icon-checked"></strong>
+                        <strong ms-if="!allstatus" ms-class="m-checkbox-icon"></strong>
+                      </span>
+                    全选
+                    </th>
+                    <th width="12%">父单号</th>
+                    <th width="6%">品牌</th>  
+                    <th width="6%">创建人</th> 
+                    <th width="6%">类型</th>
+                    <th width="6%">一级分类</th>
+                    <!--<th width="8%">商品状态</th>-->
+                    <!--<th width="8%">父单报价进度</th> -->
+                    <th width="8%">状态</th>
+                    <th width="8%">处理结果</th>
+                    <th width="10%">无法处理原因</th>
+                    <th width="12%">创建时间</th>  
+                    <th width="8%">处理人</th>
+                    <th>操作</th> 
+                </tr>
+                  <tr ms-if="dataList.length <= 0">
+                      <td colspan="12">
+                          没有查询到任何数据~~
+                      </td>
+                  </tr>
+                  <tr ms-repeat="dataList" ms-if="dataList.length > 0"> 
+                      <td>
+                          <span ms-click="checkout($index)" class="f-ib m-checkbox checkbox-fix" style="cursor: pointer;">
+                              <strong ms-if="el.status" ms-class="m-checkbox-icon m-checkbox-icon-checked"></strong>
+                              <strong ms-if="!el.status" ms-class="m-checkbox-icon"></strong>
+                          </span>
+                      </td> 
+                      <td ms-text="el.requermentSn"></td> 
+                      <td ms-text="el.brandName"></td>
+                      <td ms-text="el.createName"></td>
+                      <td ms-text="el.type"></td> 
+                      <td ms-text="el.category"></td> 
+                      <!--<td ms-text="el.itemStatusDesc"></td> -->
+                      <!--<td ms-text="el.parentStatus"></td> -->
+                      <td><span ms-if="el.itemStatus==0">待处理</span><span ms-if="el.itemStatus!=0">处理中</span></td> 
+                      <td ms-text="el.completeResult"></td> 
+                      <td ms-text="el.reason"></td>
+                      <td ms-text="el.createTime"></td>
+                      <td ms-text="el.handlerName"></td>
+                      
+                      <td>
+                        <span>
+                            <a href="javascritp:void(0)" ms-click="goToDetail(el, false)" >查看详情</a>｜
+                            <a href="javascritp:void(0)" ms-click="goToDetail(el, true)" >我要处理</a>
+                        </span>
+                      </td>
+                  </tr> 
+                </tbody>
+            </table>
+            <div class="paper">
+              <div ms-widget="pager, pp"></div>
+            </div>
+        </div>
+        
+    </div>
+
+    <!-- 询价链接页面 -->
+    <div id="queryLinksDialogId" ms-widget="dialog,queryLinksDialogId,$queryLinksDialogOption">
+      <div class="inline-block">
+        <span>供应商：</span>
+        <select id="supplierList" name="supplierList" ms-duplex="selectedSupplierId" ms-change="selectedSupplier()">
+          <option value="">请选择供应商</option>
+          <option ms-repeat="supplierList" ms-attr-value="el.id" ms-text="el.name"></option> 
+        </select>
+        <button type="button" ms-click="openQueryLink" class="add_btn">确认生成链接</button>
+      </div> 
+      <table cellpadding="0" width="100%">
+        <tr class="table-top">
+          <th width="5%">
+            <span ms-click="selectedAllOffer()" class="f-ib m-checkbox checkbox-fix" style="cursor: pointer;">
+              <strong ms-if="allOfferStatus" ms-class="m-checkbox-icon m-checkbox-icon-checked"></strong>
+              <strong ms-if="!allOfferStatus" ms-class="m-checkbox-icon"></strong>
+            </span>
+            全选
+          </th>
+          <th width="5%">品牌</th>
+          <th width="10%">品名</th>
+          <th width="5%">型号</th>
+          <th width="5%">单位</th>
+          <th width="10%">销售价</th>
+          <th width="10%">采购价</th>
+          <th width="10%">货期</th>
+          <th width="10%">备注</th>
+        </tr>
+
+        <tr ms-if="supplierOfferList.length > 0" ms-repeat="supplierOfferList" class="table-row">
+          <td>
+            <span ms-click="checkedOfferItem($index)" class="f-ib m-checkbox checkbox-fix" style="cursor: pointer;">
+              <strong ms-if="el.status" ms-class="m-checkbox-icon m-checkbox-icon-checked"></strong>
+              <strong ms-if="!el.status" ms-class="m-checkbox-icon"></strong>
+            </span>
+          </td>
+          <td><span ms-text="el.brandName"></span></td>
+          <td><span ms-text="el.itemName"></span></td>
+          <td><span type="text" ms-text="el.skuSnSet"></span></td>
+          <td><span type="text" ms-text="el.unit"></span></td>
+          <td>
+            <div class="table-condition">
+            ￥ <span type="text" ms-text="el.salePrice"></span>
+            </div>    
+          </td>
+          <td>
+            ￥ <span type="text" ms-text="el.purchasePrice"></span>
+          </td>
+          <td>
+            <span type="text" ms-text="el.shipMin + '-' + el.shipMax + '天'"></span>
+          </td>
+          <td>
+            <span type="text" ms-text="el.remarks"></span>
+          </td>
+        </tr>    
+        <tr ms-if="supplierOfferList <= 0">
+          <td colspan="9">
+            没有查询到任何数据~~
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div id="alertDialogCtrlId" ms-widget="dialog,alertDialogCtrlId,$alertDialogOption">
+      <p>{{message}}</p>
+      <button type="button" id="closeAlertBtn" name="closeAlertBtn" ms-click="onCloseAlert" style="margin-top: 30px;margin-left: 70px;margin-bottom: 20px;width: 120px;height: 30px;">确定</button>
+    </div>    
+    @@include('../../include/common/footer.html')
+</body>
+
+</html>

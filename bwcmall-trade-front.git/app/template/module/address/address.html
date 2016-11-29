@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>填写订单信息</title>
+    @@include('../../include/common/meta.html') @@include('../../include/common/common-include.html')
+    <link rel="stylesheet" type="text/css" href="/styles/module/address/address.css"> 
+    <script src="/scripts/module/address/address.js"></script>
+</head>
+
+<body ms-controller="addressCtrl">
+    @@include('../../include/common/header.html')
+    <div class="gs-header">
+        @@include('../../include/common/account-head.html')
+    </div> 
+
+    <div class="g-content">
+        <div class="order-table-wrap">
+            <div class="order-table-title">
+                <span class="order-table-span f-ib">地址管理</span>
+            </div>
+        </div>
+        <div class="order-block">
+            <div class="invoice-desc-panel">
+                在此可以维护您的收货和收发票地址，下单或申请开票时可以选择如下地址
+            </div>
+            <div class="order-block-body" id="receiverList">
+                <div class="f-fl adress-block" ms-repeat="addresses">
+                    <input class="receiverId" type="hidden" ms-attr-value="el.id" />
+                    <div ms-attr-class="el.defaultStatus == 1 ? 'adress-title adress-title-active':'adress-title '">
+                    <span class="f-ib m-checkbox" ms-click="setDefault(el.id)">
+                        <input name="adressFlag" class="m-checkbox-check" type="checkbox" value="true" 
+                               ms-attr-checked="el.defaultStatus?'checked':''">
+                       <strong ms-attr-class="el.defaultStatus?'m-checkbox-icon select-adress-block m-checkbox-icon-checked':'m-checkbox-icon select-adress-block' "></strong>
+                    </span>
+                    <span ms-attr-class="el.defaultStatus == 1?'f-ib adress-title-text adress-title-text-bold':'f-ib adress-title-text' "
+                    ms-text="'设为默认地址'"></span>
+                    <span class="f-ib f-fr adress-btn-wrap">
+                        <a href="javascript: void(0)" ms-click="queryAdress(el.id,1)" class="adress-edit-btn">修改</a>
+                        <a href="javascript: void(0)" ms-click="delAdress(el.id)" class="adress-edit-btn">删除</a>
+                    </span>
+                    <div class="clear"></div>
+                </div>
+                    <table class="adress-tab">
+                        <tr>
+                            <td>收货人</td>
+                            <td ms-text="el.consignee"></td>
+                        </tr>
+                        <tr>
+                            <td width="20%">公司</td>
+                            <td width="80" ms-text="el.corpName"></td>
+                        </tr>
+                        
+                        <tr>
+                            <td>联系电话</td>
+                            <td ms-text="el.phone"></td>
+                        </tr>
+                        <tr>
+                            <td>收货地址</td>
+                            <td ms-text="subAddress(el.areaVO.provinceName+el.areaVO.cityName+el.areaVO.districtName+el.address)"
+                            ms-attr-title="el.areaVO.provinceName+el.areaVO.cityName+el.areaVO.districtName+el.address"></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="adress-block-add f-fl trans_link_3" ms-click="show('adressPopup',0)">
+                    <span>+</span>
+                    <div>新增收货地址</div>
+                </div>
+                <div class="clear"></div>
+               <div id="adressPopup" ms-widget="dialog,adressPopup,$adressPopupOptions">
+                    <div class="dialog-header">
+                        <div class="dialog-title">
+                            <div><span>地址管理</span></div>
+                        </div>    
+                        <div class="pop-close"> 
+                             <div class="icon-close" ms-click="closeDialog('adressPopup')"></div>
+                        </div>
+                    </div>
+                    <table class="adress-popup-table">
+                        <tr>
+                            <td width="20%" class="table-text-right">公司</td>
+                            <td width="80%">
+                                <input type="text" id="corpName" class="crop-name-input" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="table-text-right">收货人</td>
+                            <td>
+                                <input  type="text" id="consignee"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="table-text-right">联系电话</td>
+                            <td>
+                                <input type="text" id="phone"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="table-text-right">
+                                <span class="tab-label">所在区域</span>
+                            </td>
+                            <td> 
+                                <div class="m-tabselect m-tabselect-half  f-fl">
+                                    <div class="m-tabselect-block" ms-text="province"></div>
+                                    <div class="m-tabselect-arrow"></div>
+                                    <div class="m-tabselect-body">
+                                        <div class="m-tabselect-item-none" ms-click="selectProvince(el.name)"
+                                             ms-repeat="provinceData" ms-if="provinceData.length>0">{{el.name}}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style="margin-left: 12px;" class="m-tabselect m-tabselect-half f-fl">
+                                    <div class="m-tabselect-block" ms-text="city"></div>
+                                    <div class="m-tabselect-arrow"></div>
+                                    <div style="margin-left: -148px;" class="m-tabselect-body">
+                                        <div class="m-tabselect-item-none" ms-click="selectCity(el.name)"
+                                             ms-repeat="cityData" ms-if="cityData.length>0">{{el.name}}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="clear"></div>
+                            </td>
+                            <td>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                            </td>
+                            <td>
+                                <div class="m-tabselect">
+                                    <div class="m-tabselect-block" ms-text="county"></div>
+                                    <div class="m-tabselect-arrow"></div>
+                                    <div class="m-tabselect-body">
+                                        <div class="m-tabselect-item-none" ms-click="selectCounty(el.name,el.value)"
+                                             ms-repeat="countyData" ms-if="countyData.length>0">{{el.name}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>详细地址</td>
+                            <td>
+                                <textarea name="" id="address" cols="35" rows="8"></textarea>
+                            </td>
+                        </tr>
+                        <!-- <tr>
+                            <td class="table-text-right">默认地址</td>
+                            <td>
+                                <input type="checkbox" id="isDefault" name="isDefault" style="height:20px;width:20px;"/>
+                            </td>
+                        </tr> -->
+                        <tr>
+                            <td></td>
+                            <td ms-html="errorInfo" class="error-info"></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>
+                                <a href="javascript: void(0)" ms-click="save" class="trans_link_3 btn-save f-ib">保存</a>
+                                <a href="javascript: void(0)" ms-click="closeDialog('adressPopup')"
+                                   class="trans_link_3 btn-cancel f-ib">取消</a>
+                            </td>
+                        </tr>
+
+
+                    </table>
+                </div>
+                <div id="errorPopup" ms-widget="dialog,errorDialog,$errorDialogOptions">
+                    <div class="error-dialog-text" ms-text="errorText">
+                    </div>
+                </div>
+            </div>
+        </div> 
+
+    </div>
+    @@include('../../include/common/footer.html')
+</body>
+
+</html>

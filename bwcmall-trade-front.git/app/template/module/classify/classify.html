@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    @@include('../../include/common/scripts.html')
+    <link rel="stylesheet" href="/styles/module/classify/classify.css"/>
+</head>
+<body ms-controller="categoryPageCtrl">
+    <div ms-controller="headerCtrl">
+        @@include('../../include/common/header-top.html')
+        @@include('../../include/common/header-search.html')
+        @@include('../../include/common/header-nav.html')
+    </div>
+    <div class="classify-wrap">
+		<div class="classify-left">
+			<div class="classify-each" ms-repeat="navData">
+				<div class="classify-each-title" ms-repeat-elst="el.firstCategoryList" ms-text="elst.name"></div>
+				<div class="classify-each-block" ms-repeat-elrd="el.secondCategoryList">
+					<div class="small-title" ms-text="elrd.name"></div>
+					<div class="small-block">
+						<a ms-href="/goods/search.html?categoryId={{ellrd.id}}" ms-repeat-ellrd="elrd.list" ms-text="ellrd.name" target="_blank"></a>
+					</div>
+					<div class="cut-role"></div>
+				</div>
+			</div>
+		</div>
+		<div class="classify-right">
+			<ul>
+				<li ms-repeat="navData" ms-repeat-elst="el.firstCategoryList" ms-text="elst.name"></li>
+			</ul>
+		</div>
+		<div class="clear"></div>
+	</div>
+	@@include('../../include/common/footer.html')
+	<script type="text/javascript" src="/scripts/module/classify/classify.js"></script> 	
+</body>
+</html>
+

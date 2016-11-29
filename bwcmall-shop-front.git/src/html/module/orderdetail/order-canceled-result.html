@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>订单详情</title>
+        @@include('../../include/common/intro.html')
+        <!-- build:css css/module/order/ordercanceled.css -->
+        <link rel="stylesheet" href="/css/module/order/ordercanceled.css"/>
+        <!-- endbuild -->
+    </head>
+    <body>
+        @@include('../../include/common/header.html')
+        @@include('../../include/common/nav.html')
+        <div class="main mod-ordercanceled"  ms-controller="orderCancel">
+            <div class="sidebar">
+                @@include('../../include/common/menu.html')
+            </div>
+            <div class="content">
+                <ul class="breadcrumb">
+                    <li>
+                        <a href="javascript:void(0);">卖家中心</a>
+                    </li>
+                    <li>
+                        <a href="/order/list.html">订单管理</a>
+                    </li>
+                    <li>
+                        <a href="/order/list.html">订单管理首页</a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);">订单详细</a>
+                    </li>
+                </ul>
+                <div class="panel">
+                    <div class="hd">
+                        <span class="title">订单详情</span>
+                    </div>
+                    <div class="bd bd-center" ms-if="result.success">
+                        <div class="row">
+                            <div class="col col-5" style="text-align: right">
+                                <img src="/images/ic.png">
+                            </div>
+                            <div class="col col-5 result-msg">
+                                <p><span ms-text="result.order.customerName"></span> 的订单 <a ms-href="{{orderLink}}">
+                                    <span ms-text="result.order.orderSn"></span>
+                                </a></p>
+                                <p>已经被取消，所支付的款项将被退回！</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <span ms-click="confirmAndBack" class="btn btn-large btn-primary">确定并返回</span>
+                        </div>
+                    </div>
+                    <div class="bd bd-center" ms-if="!result.success">
+                        <div class="row">
+                            <div class="col col-5" style="text-align: right"><img src="/images/ic.png"></div>
+                            <div class="col col-5 result-msg">
+                                <div>
+                                    <p>很抱歉， 订单取消出现</p>
+                                    <p><span class="warning">
+                                        <span ms-text="result.message"></span>错误！</span>请重试</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <span ms-click="cancel" class="btn btn-large btn-default">返回</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @@include('../../include/common/outro.html')
+        <script>require(['conf/order/orderCancel']);</script>
+    </body>
+</html>

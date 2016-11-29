@@ -1,0 +1,96 @@
+<script type="text/javascript" src="/scripts/module/footer/shoplist.js"></script>
+<div ms-controller="openlist">
+	<div class="shoplist_bar" >
+		<div class="prevshoplist">
+			<ul>
+				<li ms-repeat="listdata.result" class='shopListItem'>
+					<span class="shopListItemId" hidden="">{{el.id}}</span>
+					<a href='javascript:;' class="listopen">购物清单<i>{{el.listnumber}}</i></a>
+					<a href="javascript:;" class="listdelete"></a>
+				</li>
+			</ul>
+		</div>
+		<div class="shoplist shoplist_btn_a">
+			<a href="javascript:;">购物清单</a>
+		</div>
+		<div class="addshoplist shoplist_btn_a" >
+			<a href="javascript:;">新建清单</a>
+		</div>
+		<div class="quitshoplist shoplist_btn_a">
+			<a href="javascript:;">退出</a>
+		</div>
+	</div>
+
+	<div class="shoplistpage">
+		<div class="shopListItemDetail pushconfirm pushcookie" style="display: none;">
+			<span class="shopListItemDetailid" hidden ></span>
+			<h3>
+				选购清单
+				<div class="uneditdiv">
+					<a href="javascript:;" class="concel">取消</a>
+					<a href="javascript:;" class="confirm">确定</a>
+				</div>
+				<div class='editdiv'>
+					<a href='javascript:;' class='edit'>编辑</a>
+					<a href="javascript:;" class="concel">收起</a>
+				</div>
+			</h3>
+			<div class="shopListItemDetail_content">
+				<table class="" >
+					<tr>
+						<th class="itemspaixu" ></th>
+						<th  class="itemsmc">名称</th>
+						<th  class="itemssl" >数量</th>
+						<th  class="itemszhuangtai">状态</th>
+						<th class="itemsmingcheng" >商品详情</th>
+						<th class="itemsxiangqing" ></th>
+						<th  class="itemsdanjia" >单价</th>
+						<th  class="itemsshuliang" >数量</th>
+						<th  class="itemscaozuo" >操作</th>
+					</tr>
+					<tr class='shoplistitem_main' ms-repeat="listetail"> 
+						<td hidden class="itemid"><span hidden >{{el.id}}</span></td>
+						<td class='list_id' data-id="{{el.id}}"></td>
+						<td><input type="text" class="shopinput" ms-value="{{el.itemName}}" name="itemName" readonly  ms-change="inputName()"><span hidden>{{el.itemName}}</span></td>
+						<td><input class="shopinput count" tpye="tel" name="requiredQuantity" ms-value="{{el.requiredQuantity}}" readonly ms-change="inputNumber()"><span hidden>{{el.requiredQuantity}}</span></td>
+						<td class="status">
+						<span hidden>{{el.itemStatus}}</span></td>
+						<td class="detail nogoods" data-goodsid="" valign="middle">
+							<span class="shopListItemgoodsid" hidden>{{el.goodsId}}</span> 
+							<div>
+								<a ms-href="'/goods/detail.html?id='+el.goodsId ">{{el.goodsName}}</a>
+							</div>
+						</td>
+						<td class="detail_else nogoods">
+							<div> 
+ 								<p class="goodssn"><span  ms-text="型号{{el.goodsSn}}">型号: {{el.goodsSn}}</span></p> 
+ 								<p class="huoqi">货期:<span  ms-text="{{el.shipMin}}-{{el.shipMax}}"> {{el.shipMin}}-{{el.shipMax}}</span>天</p>
+ 							</div>
+						</td>
+						<td class="nogoods" ms-text="{{el.price}}">￥<span>{{ el.price | number(2)}}</span></td>
+						<td class="nogoods" ms-text="{{el.requiredQuantity}}">
+							<div class="">
+								<div class="num">
+									<span class="tb-stock" id="J_Stock">
+										<a href="javascript:void(0);" title="减1" class="num_btn product-minus">-</a>
+										<input id="J_IptAmount" type="text" class="num_text product-num" ms-attr-value="{{el.quantity}}" maxlength="8" title="请输入购买量" name="sNumber">
+										<a href="javascript:void(0);" class="num_btn product-add" title="加1">+</a>
+									</span>
+								</div>
+							</div>
+						</td>
+						<td class="nogoods"><a href='javascript:;' class='delete'>删除</a></td>
+					</tr>
+				</table>
+			</div>
+			<a href="javascript:;" class="shoplist_add" ></a>
+			<div class="list_footer">
+				<span class="phone_number">咨询电话: 400-021-9898</span>
+				<div class="jisuan">
+					<a href="javascript:;" class="settle_btn ">结算</a>
+					<p>共&nbsp<span class="selectedQuantity" ms-text="total.result.selectedQuantity">{{total.result.selectedQuantity}}</span>&nbsp商品&nbsp&nbsp&nbsp&nbsp总金额:<span class="selectedPrice">￥</span><span class="selectedPrice" ms-text="total.result.selectedPrice">{{total.result.selectedPrice}}</span></p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

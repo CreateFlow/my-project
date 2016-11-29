@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>品牌导航</title>
+    @@include('../../include/common/scripts.html')
+    <link rel="stylesheet" href="/styles/module/shoppingList/shoppingList.css"/> 
+    <link rel="stylesheet" href="/styles/module/brand/brand-nav.css"/>
+</head>
+<body ms-controller="brandNavCtrl">  
+    <div ms-controller="headerCtrl">
+        @@include('../../include/common/header-top.html')
+        @@include('../../include/common/header-search.html')
+        @@include('../../include/common/header-nav.html')
+    </div>
+    <div class="g-content">
+        <div class="content-inner">
+            <div class="fix-brand-menu">
+                <ul>
+                    <li class="brand-menu-item" ms-repeat="brandList">
+                        <a href="javascript:;" class="brand-menu-link trans_link_3" ms-click="menuClick()" ms-class="brand-menu-link-active:getIndex()==0"
+                         ms-text="el.navigationText=='其他'?'#':el.navigationText"></a>
+                    </li>
+
+                </ul>
+            </div>
+            <div class="brand-content-wrap">
+                <div class="brand-block-wrap" ms-repeat="brandList">
+                    <div class="brand-nav-tag" ms-attr-id="{{el.navigationText=='其他'?'other':el.navigationText}}"
+                      ms-text="el.navigationText=='其他'?'#':el.navigationText" ></div>
+                    <a ms-attr-href="/goods/search.html?brandId={{el.id}}" class="brand-block-item" ms-repeat="el.brandVOList" 
+                        ms-mouseenter="itemmouseenter()" ms-mouseleave ="itemmouseleave()">
+                        <div class="brand-block-item-img"><img ms-src="el.logo" ms-attr-alt="el.name"/></div>
+                        <span class="brand-block-item-word">{{el.name}}<em>{{el.nameEn?' / '+el.nameEn:''}}</em></span>
+                    </a>
+                    <div class="clear"></div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+ 
+    @@include('../../include/common/footer.html')
+   <script src="../scripts/module/brand/brand-nav.js"></script> 
+
+</body>
+</html>

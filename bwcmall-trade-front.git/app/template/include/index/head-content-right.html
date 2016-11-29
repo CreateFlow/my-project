@@ -1,0 +1,86 @@
+<div class="head-content-right mod-index-login">
+    <div ms-if="!isLogin">
+        <div class="head-con-top">
+            <div class="head-con-left"></div>
+            <div class="head-con-right">
+                <p class="head-con-p1">Hi~您好！</p>
+                <p>欢迎来到佰万仓商城！</p>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="login-box">
+            <!--<a href="/member/login.html"><i class="dl"></i>登录</a>-->
+            <a href="javascript:void(0);" ms-click="goLogin()"><i class="dl"></i>登录</a>
+            <span class="log-mid-line"></span>
+            <a href="/member/register.html"><i class="zc"></i>注册</a>
+            <div class="clear"></div>
+        </div>
+    </div>
+    <div ms-if="isLogin">
+        <div class="head-con-top">
+            <div class="head-con-left"></div>
+            <div class="head-con-right">
+                <p class="head-con-p1">Hi~<span ms-text="userName"></span></p>
+                <p>欢迎来到佰万仓商城！</p>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="login-back">
+            <dl>
+                <a href="/order/list.html">
+                    <dt ms-text="loginData.unconfirmedOrderCount"></dt>
+                    <dd>待确认</dd>
+                </a>
+            </dl>
+            <dl>
+                <a href="/order/list.html">
+                    <dt ms-text="loginData.nonPaymentOrderCount"></dt>
+                    <dd>待付款</dd>
+                </a>
+            </dl>
+            <dl>
+                <a href="/order/list.html">
+                    <dt ms-text="loginData.notReceivingOrderCount"></dt>
+                    <dd>待收货</dd>
+                </a>
+            </dl>
+            <div class="clear"></div>
+        </div>
+    </div>
+    <a href="/order/fast-order.html" class="trans_link_3 head-login-btn"><i class="ksxd"></i>快速下单</a>
+    <div class="head-login-icon">
+        <div class="head-login-icon-block f-fl" title="正品保障">
+            <img src="/images/index/zhengpin_small.png" alt="正品保障"/>
+        </div>
+        <div class="head-login-icon-block f-fl" title="全品类供应">
+            <img src="/images/index/mianyun_small.png" alt="全品类供应"/>
+        </div>
+        <div class="head-login-icon-block f-fl" title="增值税发票">
+            <img src="/images/index/fapiao_small.png" alt="增值税发票"/>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="notice-block">
+        <div class="notice-block-inner">
+            <ul>
+                <li class="notice-item">
+                    <a class="notice-link" href="/supplier.html" target="_blank">【公告】8月卖家入驻送豪礼</a>
+                </li>
+                <li class="notice-item">
+                    <a class="notice-link" href="/activity/findgoods.html" target="_blank">【公告】找货就来佰万仓</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<script>
+    $(function(){
+        var oul=$('.notice-block-inner ul');
+        var hli=$('.notice-block-inner li').height();
+        setInterval(function(){
+            oul.animate({'top':-hli+'px'},300,function(){
+                oul.append(oul.find('li:first')).css('top',0); 
+            });
+        },3000)
+    })
+</script>

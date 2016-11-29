@@ -1,0 +1,57 @@
+<div class="g-content mod-floor" ms-controller="brandCtrl">
+    <div class="product-wrap" ms-repeat-brand="indexBrands">
+        <div class="product-title">
+            <a ms-attr-href="/goods/search.html?brandId={{brand.brandId}}" ms-html="brand.brandName + '<span> / ' + brand.brandNameEn + '</span>'">博世 / BOSCH</a>
+            <a class="product-title-more" ms-attr-href="/goods/search.html?brandId={{brand.brandId}}">更多</a>
+        </div>
+        <div class="product-left f-fl">
+            <a class="product-title-wrap" ms-attr-href="/goods/search.html?brandId={{brand.brandId}}" target="_blank">
+               <img class="product-left-img" ms-attr-src="{{brand.imageUrl}}" ms-attr-alt="{{brand.brandName}}"/>
+            </a>
+            <div class="product-category-wrap f-oh">
+                <div class="product-category-wrap-inner">
+                    <div class="product-category f-fl">
+                        <div class="product-category-list f-fl" ms-each-category="brand.productCategories">
+                            <a ms-if="$index % 2 == 0" ms-attr-href="/goods/search.html?categoryId={{category.id}}"
+                               class="product-category-item" ms-attr-title="category.name"
+                               target="_blank" ms-text="subStr(category.name, 5)">充电电钻</a>
+                        </div>
+                        <div class="product-category-line f-fl"></div>
+                        <div class="product-category-list f-fl" ms-each-category="brand.productCategories">
+                            <a ms-if="$index % 2 != 0" ms-attr-href="/goods/search.html?categoryId={{category.id}}"
+                               class="product-category-item" ms-attr-title="category.name"
+                               target="_blank"><span ms-text="subStr(category.name, 5)">充电扳手</span></a>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="product-right f-fr">
+            <div class="trans_link_3 product-item f-fl" ms-repeat-product="brand.cmsGoodsVOList" ms-attr-title="product.brandName+product.name">
+                <div class="product-img">
+                    <a ms-attr-href="goods/detail.html?id={{product.goodsId}}" target="_blank">
+                        <img ms-attr-src="{{product.image}}!190"/>
+                    </a>
+                </div>
+                <div class="product-right-text" >{{product.brandName|subStr10}} {{product.name|subStr25}}</div>
+                <div class="product-right-no" >{{product.shopName|subStr25}}</div>
+                <div class="product-right-no" ms-text="'商品型号：'+product.sn"></div>
+                <div class="product-right-num" ms-if="product.marketPrice  && !product.priceOpenToAllies" ><span ms-html=" '市场指导价: '+formatPrice(product.marketPrice)"></span><span ms-if="product.unit" ms-text="'/'+product.unit"></span></div>
+                <div class="product-right-num" ms-if="!product.priceOpenToAllies && product.price" > <span ms-html=" '销售价格: '+formatPrice(product.price)"></span><span ms-if="product.unit" ms-text="'/'+product.unit"></span><label class="morethan" ms-if="product.shipPrices.length>0">起</label></div>
+                <div class="product-right-num" ms-if="!product.priceOpenToAllies && !product.price" >销售价格: <span style="color:red">待询价</span></div>
+                <!--<div class="product-right-num" ms-if=" !product.price  ">待询价</div>-->
+                <a class="product-right-num-bg" href="/member/register.html" ms-if="product.priceOpenToAllies"></a>
+                <a class="trans_link_3 product-right-btn f-ib stock-link" ms-if="product.marketable == false && product.price">已下架</a>
+                <a class="trans_link_3 product-right-btn f-ib stock-link" ms-if="product.marketable == true && product.soldOut == true ">已售罄</a>
+                <a href="javascript: void(0);" ms-click="goLogin(product)" class="trans_link_3 product-right-btn f-ib f-btn-disabled" ms-if="product.marketable == true && product.soldOut == false && !product.price">待询价</a>
+                <a class="trans_link_3 product-right-btn f-ib stock-link" ms-if="product.marketable == true && product.soldOut == false && product.price && isShoppingListModel != true"
+                ms-click="addCart(product, 1, $event)" href="javascript:void(0);">加入进货单</a>
+                 <a class="trans_link_3 product-right-btn f-ib stock-link"
+                    ms-if="product.marketable == true && product.soldOut == false && product.price && isShoppingListModel == true " href="javascript:void(0);" ms-click="addshoplist(product.goodsId)">加入购物清单</a>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>

@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>商品列表</title>
+    @@include('../../include/common/intro.html')
+    <!-- build:css css/module/goods/goods.css -->
+    <link rel="stylesheet" href="/css/module/goods/addStepSKU.css" />
+    <!-- endbuild -->
+</head>
+
+<body>
+    @@include('../../include/common/header.html') @@include('../../include/common/nav.html')
+    <div class="main mod-demo">
+        <div class="sidebar">
+            @@include('../../include/common/menu.html')
+        </div>
+
+        <div class="content ms-controller goods-step-sku" ms-controller="goodsStepSKU">
+	        <div class="panel" ms-visible="step1">
+                <div class="hd">
+                    <span class="title">新增商品</span>
+                </div>
+                <div class="bd">
+		        	<div class="goods-step-two">
+		        		<div class="box" ms-if="spuMainAttr.values">
+			        		<div class="box-title">
+			        			<span class="title">根据主属性，上传图片</span>
+			        		</div>
+			        		<div class="box-cont mainattr-img">
+			    				<div class="attr-item-inline">
+			    					<div class="mainattr-radio-wrap">
+			    						<span class="mainattr-label">{{spuMainAttr.name}}:</span>
+			    						<div class="radio-inline" ms-repeat-el="spuMainAttr.values">
+			    							<label>
+				    							<input type="radio" name="spuMainAttr" ms-click="clickedMainAttr($index)"/>
+												<span>{{el.attributeValue}}</span>
+											</label>
+											<br>
+			    						</div>
+			    					</div>
+									<div class="imgs-wrap" ms-repeat-el="spuMainAttr.values">
+										<div ms-if="checkedMainAttrIndex==$index">
+						            		<div class="img-item" ms-repeat-elem="el.attributeValueResources">
+						            			<img ms-attr-src="{{elem.resources}}" />
+						            			<div class="btns">
+						            			    <button class="btn" ms-click="delMainAttrImg($index)">删除</button>
+			            							<button class="btn btn-primary" ms-click="setMainAttrImg($index)">设为主图</button>
+						            			</div>
+						            		</div>											
+										</div>
+					            	</div>
+					            	<div class="upload-pic-wrap" ms-if="showMainAttrUpload">
+					            		<input id="uploadAttrPic" name="uploadAttrimg" type="file" multiple="true" />
+					            	</div>	    				
+				    			</div>	
+			        		</div>
+		        		</div>
+		        		<div class="box">
+		        			<div class="box-title">
+		        				<span class="title">基本信息</span>
+		        			</div>
+		        			<div class="box-cont">
+		        				<div class="item">
+					        		<span class="item_label">标为待询价<span class="required">*</span></span>
+					        		<div class="item_value">
+					        			<div class="radio-inline">
+					            			<label><input name="priceStatus" value="1" type="radio">&nbsp&nbsp是</label>
+					            		</div>
+					            		<div class="radio-inline">
+					            			<label><input name="priceStatus" value="0" checked="true" type="radio">&nbsp&nbsp否</label>
+					            		</div>
+					        		</div>
+					        	</div>
+					        	<div class="item">
+					        		<span class="item_label">上架设定<span class="required">*</span></span>
+					        		<div class="item_value">
+					        			<div class="radio-inline">
+					        				<label><input name="marketStatus" value="1" checked="true" type="radio">&nbsp&nbsp立即上架</label>
+					        			</div>
+					        			<div class="radio-inline">
+					        				<label><input name="marketStatus" value="0" type="radio">&nbsp&nbsp暂不上架</label>
+					        			</div>
+					        		</div>
+					        	</div>
+					        	<div class="item">
+					        		<span class="item_label">是否支持退换货<span class="required">*</span></span>
+					        		<div class="item_value">
+					        			<div class="radio-inline">
+					            			<label><input name="returnStatus" value="1" checked="true" type="radio">&nbsp&nbsp支持</label>
+					            		</div>
+					            		<div class="radio-inline">
+					            			<label><input name="returnStatus" value="0" type="radio">&nbsp&nbsp不支持</label>
+					            		</div>
+					        		</div>
+					        	</div>
+					        	<div class="item">
+					        		<span class="item_label">运费设置</span>
+					        		<div class="item_value">
+					        			<div class="radio-inline">
+					            			<label><input name="freightStatus" value="0" type="radio" ms-duplex-string="freightStatus">&nbsp&nbsp免运费</label>
+					            		</div>
+					            		<div class="radio-inline" style="width:400px;">
+					            			</label><input name="freightStatus" value="1" type="radio" ms-duplex-string="freightStatus">&nbsp&nbsp<input class="inputbox" type="number" ms-duplex="freight" placeholder="请输入运费" />元/笔订单（不管单次购买多少此件商品）</label>
+					            		</div>
+					        		</div>
+					        	</div>					        	
+		        			</div>
+		        		</div>		        		
+			        	<div class="box">
+				        	<div class="box-title table-related">
+			        			<span class="title">根据关键属性，延伸出的商品</span>
+			        			<button class="btn btn-primary" ms-click="onOpenAddSKU('dialogAddSKU')">添加新的SKU</button>
+			        		</div>
+			        		<div class="box-cont table-wrap">
+			        			<table class="ctable">
+			                        <thead>
+			                            <tr width="100%" class="thb ctr">
+			                                <th>
+			                                    <input id="select_all" type='checkbox'>全选</th>
+			                                <th class="th-attr">属性/值</th>
+			                                <th>SKU型号</th>
+			                                <th>SKU名称</th>
+			                                <!--<th>货期（天）</th>-->
+			                                <th>单位</th>
+			                                <th>商品名称</th>
+			                                <th class="th-price">售价（不填写，则不售卖）</th>
+			                                <th>操作</th>
+			                            </tr>
+			                        </thead>
+			                        <tbody id="sku-tab">
+			                            <tr class="ctr tr-bg" ms-repeat-el="skuListData" ms-class="tr-bg:($index%2==0)" ms-class="checked-tr:(el.id==checkedSkuId)" ms-click="clickedSKURow($event, $index)">
+			                                <td>
+			                                    <input type='checkbox' ms-attr-index="$index" ms-attr-value='el.id'></td>
+			                                <td>
+			                                	<span ms-repeat-elem="el.attributes" ms-if-loop="elem.type">
+			                                		{{elem.attributeName + ':' + elem.attributeValue}}
+			                                		<span>;</span>
+			                                	</span>
+			                                </td>
+			                                <td>
+			                                	<span ms-if="!el.isEdit">{{el.sn}}</span>
+			                                	<input data-sku="true" class="inputbox" ms-if="el.isEdit" data-name="sn" type="text" ms-change="changeVal" />
+			                                </td>
+			                                <td>
+			                                	<span ms-if="!el.isEdit">{{el.name}}</span>
+			                                	<input data-sku="true" class="inputbox" ms-if="el.isEdit" data-name="name" type="text" ms-change="changeVal" />
+			                                </td>
+			                                <!--<td><input data-reg="^[0-9]*$" placeholder="仅限数字" data-name="deliveryTime" class="inputbox" type="text" ms-keydown="keydownVal" ms-change="changeVal" ms-input="enterText" ms-focus="focusTextbox" /></td>-->
+			                                <td>
+			                                	<select data-name="unit" ms-change="changeVal">
+			                                		<option ms-attr-value="el.value|emptyVal" ms-repeat-el="unitData">{{el.name}}</option>
+			                                	</select>
+			                                </td>
+			                                <td><input data-name="name" class="inputbox" type="text" ms-change="changeVal" /></td>
+			                                <td><label><input data-reg="" placeholder="仅限数字" data-name="salePrice" class="inputbox" type="number" ms-change="changeVal" ms-keydown="keydownVal" ms-input="enterText" ms-focus="focusTextbox" />
+											
+											<!--&nbsp&nbsp<a href="javascript:void(0)" ms-click="configPrices($index)">配置</a>-->
+											</label></td>
+			                                <td>
+			                                	<a href="javascript:void(0)" ms-click="copySKU($index)">复制</a>
+			                                	<a href="javascript:void(0)" ms-click="deleteSKU($index)">删除</a>
+			                                </td>
+			                            </tr>
+			                        </tbody>
+			                    </table>
+			        		</div>
+		        		</div>
+		        	</div>
+		        	<div class="box goods-step-thrid" ms-if="goodsEditInfoVisible">
+		        		<div class="box-title">
+		        			<span class="title">商品图片上传（选填）</span>
+		        			<!-- <button class="btn btn-primary">点击查看示例效果</button> -->
+		        		</div>
+			            <div class="box-cont goods-detail-info">
+			            	<div class="imgs-wrap">
+			            		<div class="img-item" ms-repeat-el="selectedSkuData">
+			            			<img ms-attr-src="el.resources"/>
+			            			<div class="btns">
+			            				<button class="btn" ms-click="deleteSkuImg(el.resources, $index)">删除</button>
+			            				<button class="btn btn-primary" ms-click="setSkuImg(el.resources, $index)">设为封面</button>
+			            			</div>
+			            		</div>
+			            	</div>
+			            	<div class="upload-pic-wrap">
+			            		<input id="uploadPic" name="uploadPic" type="file" multiple="true" />
+			            	</div>
+			            	<div class="editor-wrap">
+				            	<textarea ms-widget="kindeditor,$,$opts" ms-duplex="editorCont">{{editorCont}}</textarea>
+				            </div>
+			            </div>
+		        	</div>
+		        	<div class="step-last">
+		        		<button class="btn btn-primary btn-large" ms-click="save">提交</button>
+		        	</div>
+					
+					<!-- add sku dialog -->
+				    <div ms-widget="dialog,dialogAddSKU,$dialogSKUOpts" class="dialog-add-sku" id="dialog-add-sku">
+				    	<div class="attr-check" id="dialog-attrs">
+				    		<div class="attr-line" ms-repeat-el="spuAttributes">
+				    			<label class="attr-label">{{el.name}}</label>
+				    			<div class="attr-item-inline" ms-repeat-elem="el.values" ms-attr-spuattr-id="el.spuAttrId" ms-attr-data-id="elem.attributeValueId" ms-attr-data-name="elem.attributeName">
+				    				<label><input type="checkbox"><span>{{elem.attributeValue}}</span></label>
+				    			</div>
+				    			<button class="btn btn-primary" data-id="el.attrId" ms-click="addAttr($index)">添加</button>
+				    		</div>
+				    	</div>
+				    	<div class="operation">
+			    			<button class="btn btn-primary" ms-click="onConfrimAttr" ms-if="spuAttributes.length > 0">确定</button>
+			    		</div>
+				    	<div class="table-wrap">
+							<table class="ctable">
+				                <thead>
+				                    <tr class="thb ctr">
+				                        <th>编号</th>
+				                        <th class="th-attr">关键属性说明</th>
+				                    </tr>
+				                </thead>
+				                <tbody>
+				                    <tr class="ctr tr-bg" ms-class="tr-bg:($index%2==0)" ms-repeat-el="spuAttrGroups">
+				                        <td>{{$index + 1}}</td>
+				                        <td>
+				                        	<span ms-repeat-elem="el.attributes">
+												<span ms-if="$index > 0">/</span>
+			                            		{{elem.attributeName + ':' + elem.attributeValue}}
+			                            	</span>
+				                        </td>
+				                    </tr>
+				                </tbody>
+				            </table>
+						</div>
+				    </div>  
+
+					<div ms-widget="dialog,dialogAddAttr,$addAttrOpts" class="dialog-add-attr">
+						<div class="item">
+							<span class="label">属性名：</span>
+							<input type="text" disabled="disabled" ms-value="{{newAttrName}}" />
+						</div>
+						<div class="item">
+							<span class="label">属性值：</span>
+							<input type="text" ms-duplex="newAttrValue" />
+						</div>
+					</div>
+
+				    <div id="dialogAlert" ms-widget="dialog,dialogAlert,$alertOpts">
+                        <div>{{alertMessage}}</div>
+                        <div class="step-last">
+                            <button class="btn btn-primary" ms-click="onCloseDailog('dialogAlert')">确定</button>
+                        </div>
+				    </div>
+
+				    <div id="dialogSubmitTip" ms-widget="dialog,dialogSubmitTip,$submitTipOpts">
+                        <div>保存成功</div>
+                        <div class="step-last">
+                            <button class="btn btn-primary" ms-click="onConfirm()">确定</button>
+                        </div>
+				    </div>
+
+					<!-- config prices dialog -->
+				    <div id="dialogConfigPrices" ms-widget="dialog,dialogConfigPrices,$dialogConfigPricesOpts">
+						<div class="box-cont">
+                            <div class="item">
+                                <span class="item_label">货期：</span>
+                                <label><input class="item_value inputbox" ms-duplex="goodsPrice.ship" type="number" style="width:250px">&nbsp天<span style="color:gray;">（必填，填入0天，即为当天发货）</span></label>
+                            </div>
+                            <div class="item">
+                                <span class="item_label">区间：</span>
+                                <lable>
+	                                从&nbsp<input class="item_value inputbox" type="number" style="width:104px" ms-duplex="goodsPrice.quantityMin">&nbsp&nbsp至&nbsp&nbsp<input class="item_value inputbox" type="number" style="width:104px" ms-duplex="goodsPrice.quantityMax">
+                                </lable>
+                            </div>
+                            <div class="item">
+                                <span class="item_label">价格：</span>
+	                            <input class="item_value inputbox" type="number" style="width:250px" ms-duplex="goodsPrice.price"> <button class="btn btn-primary" ms-click="addPrice()" style="margin-left:50px;">添加</button>
+                            </div>
+                            <div>
+                            	<label>注：请录入采购区间的定价，最多支持3个区间。</label>
+                            </div>
+                        </div>
+
+				    	<div class="table-wrap">
+							<table class="ctable">
+				                <thead>
+				                    <tr class="thb ctr">
+				                        <th style="width:100px;">货期（天）</th>
+				                        <th style="width:250px;">区间</th>
+				                    	<th style="width:100px;">售价（元）</th>
+				                    	<th style="width:50px;">操作</th>
+				                    </tr>
+				                </thead>
+				                <tbody>
+				                    <tr class="ctr tr-bg" ms-class="tr-bg:($index%2==0)" ms-repeat-item="selectedGoodsPrices">
+				                        <td><span ms-if="item.ship!=0">{{item.ship}}</span><span ms-if="item.ship==0">当天</span></td>
+				                        <td><span>{{item.quantityMin}}</span><span ms-if="item.quantityMax!=-1">~{{item.quantityMax}}</span><span ms-if="item.quantityMax==-1">以上</span></td>
+				                        <td>{{item.price}}</td>
+ 										<td><a href="javascript:void(0)" ms-click="deletePrice($index)">删除</a></label></td>				                        
+				                    </tr>
+				                </tbody>
+				            </table>
+						</div>
+				    	<div class="step-last">
+                            <button class="btn btn-primary" ms-click="onSavePrices()">确定</button>
+                        </div>
+				    </div> 				    
+	    		</div>
+		    </div>  	
+        </div>
+    </div>
+
+    @@include('../../include/common/outro.html')
+    <script>
+    require(['conf/goods/addStepSKU']);
+    </script>
+</body>
+
+</html>

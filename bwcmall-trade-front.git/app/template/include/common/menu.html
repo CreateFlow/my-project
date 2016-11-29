@@ -1,0 +1,36 @@
+<script type="text/javascript" src="/scripts/include/common/menu.js"></script>
+<div class="m-menu" ms-controller="categoryMenuCtrl">
+    <div class="m-menu-title">
+        <a href="/classify/classify.html"><i class="menu-icon1"></i>全部商品分类<i class="menu-icon2"></i></a>
+    </div>
+    <div class="m-menu-left">
+        <div id="nav" class="m-menu-left-content" data-loading-type="spokes"
+               ms-widget="loading,leftNavLoading,$leftNavLoadingOptions">
+            <ul class="m-menu-ul">
+                <li class="m-menu-li" ms-repeat="navData" ms-if="navData.length>0">
+                    <a ms-repeat-elst="el.firstCategoryList" ms-if="el.firstCategoryList.length>0" class="m-menu-li-item"
+                       ms-href="/goods/search.html?categoryId={{elst.id}}"  class="m-menu-link"
+                       target="_blank"
+                       ms-text="elst.name"></a>
+                    <i class="m-right-icon"></i>
+                </li>
+            </ul>
+        </div>
+        <div class="m-menu-right">
+            <div class="m-menu-right-logo">
+                <div class="m-menu-right-logo-top">
+                    <a  ms-href="/goods/search.html?brandId={{elth.id}}"  ms-repeat-elth="navItemData.brandList">
+                        <img ms-src="elth.logo" alt="elth.name"/>
+                    </a>
+                </div>
+            </div>
+            <div class="m-menu-right-block" ms-repeat-elrd="navItemData.secondCategoryList">
+                <a ms-href="/goods/search.html?categoryId={{elrd.id}}"
+                   class="m-menu-right-block-title" ms-text="elrd.name" target="_blank"></a>
+                <a ms-repeat-ellrd="elrd.list" ms-text="ellrd.name"
+                   ms-href="/goods/search.html?categoryId={{ellrd.id}}"
+                   class="m-menu-item" target="_blank"></a>
+            </div>
+        </div>
+    </div>
+</div>

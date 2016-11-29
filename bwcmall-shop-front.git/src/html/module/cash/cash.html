@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>提现</title>
+    @@include('../../include/common/intro.html')
+    <!-- build:css css/module/cash/cash.css -->
+    <link rel="stylesheet" href="/css/module/cash/cash.css"/>
+    <!-- endbuild -->
+    <style>
+    .ms-controller{
+        visibility: hidden
+    }
+    </style>
+</head>
+<body>
+@@include('../../include/common/header.html')
+@@include('../../include/common/nav.html')
+<div class="main mod-cash">
+    <div class="sidebar">
+        @@include('../../include/common/menu.html')
+    </div>
+    <div class="content ms-controller" ms-controller="cashCtrl">
+        <div class="section">
+            <ul class="breadcrumb">
+                <li>
+                    <a href="javascript:void(0);">卖家中心</a>
+                </li>
+                <li>
+                    <a href="javascript:void(0);">首页</a>
+                </li>
+                <li>
+                    <a href="javascript:void(0);">提现</a>
+                </li>
+            </ul>
+        </div>
+        
+        <div class="panel" style="height:506px;" ms-if="panel == 1">
+            <div class="hd">
+                <span class="title">提现</span>
+            </div>
+            <div class="bd">
+
+                <table class="cash-table" style="height:265px;">
+                    <tr>
+                        <td class="cash-border-right">
+                            <div class="cash-account">
+                                <p><span style="color:#666666;font-size:14px;line-height:2em;">提现至以下银行卡</span></p>
+                                <p>开户名：<span ms-text="yibaoData.signedName"></span> </p>
+                                <p>开户省：<span ms-text="yibaoData.bankProvince"></span> </p>
+                                <p>开户市：<span ms-text="yibaoData.bankCity"></span> </p>
+                                <p>开户行：<span ms-text="yibaoData.bankName"></span> </p>
+                                <p>银行卡类别：<span ms-text="yibaoData.customerTypeShowName"></span> </p>
+                                <p>银行卡号：<span ms-text="yibaoData.bankAccountNumber"></span></p>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="cash-account">
+                                <p><span style="color:#666666;font-size:14px;line-height:2em;">可提现金额（元）</span></p>
+                                <p><span ms-text="yibaoData.balance| currency" style="color:#333333;font-size:24px;line-height:2em;"></span></p>
+<!--                                
+                                <p style="margin-top:30px;"><span style="color:#666666;font-size:14px;line-height:2em;">提现金额（元）</span></p>
+                                <div class="search" style="text-indent:0px;margin-left:150px;">
+                                        <div style="display:inline-block">
+                                            <input ms-duplex="money" class="inputbox" type="text" name="" style="width:150px;">
+                                        </div>
+                                        <div style="display:inline-block">
+                                            <span class="btn btn-default" style="text-indent:0px;text-align:center;width:80px;height:36px;line-height:24px;position:relative;top:1px;" ms-click="all">全部提现</span>
+                                        </div>
+                                        <div style="color:#f00" ms-text="refusePicInfo"></div>
+                                </div>
+-->
+                                <div>
+                                    <p>提现说明：</p>
+                                    <p>1，因受国家政策影响，停用了“手动提现”功能；</p>
+                                    <p>2，提现，请前往易宝管理后台：</p>
+                                    <p>&nbsp&nbsp&nbsp&nbsp&nbsp<a href="https://www.yeepay.com/selfservice/login.action" class="hint" target="_blank">https://www.yeepay.com/selfservice/login.action</a>，</p>
+                                    <p>&nbsp&nbsp&nbsp&nbsp&nbsp设置“自动提现”，即可提取资金；</p>
+                                    <p>3，如遇因账户问题，导致提现失败，也可登录</p>
+                                    <p>&nbsp&nbsp&nbsp&nbsp&nbsp修正账户问题，操作提现；</p>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+<!--
+                <div style="text-align:center;margin-top:60px;">
+
+                    <span class="btn btn-large btn-primary" style="margin:0px auto;" ms-click="submit">确认提现</span>
+                </div>
+-->
+            </div>
+        </div>
+
+
+        <div class="panel" style="height:506px;"  ms-if="panel == 2">
+            <div class="hd">
+                <span class="title">提现</span>
+            </div>
+            <div class="bd">
+
+                <table class="cash-table" style="height:265px;">
+                    <tr>
+                        <td>
+                            <img src="/images/cash-ok.png">
+                        </td>
+                    </tr>
+                </table>
+
+                <div style="text-align:center;margin-top:60px;">
+                    <span class="btn btn-large btn-default" style="margin:0px auto;" ms-click="reindex">返回首页</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel" style="height:506px;"  ms-if="panel == 3">
+            <div class="hd">
+                <span class="title">提现</span>
+            </div>
+            <div class="bd">
+
+                <table class="cash-table" style="height:265px;">
+                    <tr>
+                        <td>
+                            <img src="/images/cash-no.png">
+                        </td>
+                    </tr>
+                </table>
+
+                <div style="text-align:center;margin-top:60px;">
+                    <span class="btn btn-large btn-default" style="margin:0px auto;" ms-click="resub">重新提现</span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+@@include('../../include/common/outro.html')
+<script>require(['conf/cash/cash']);</script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Test</title>
+        @@include('../../include/common/intro.html')
+        <!-- build:css /css/module/test/test.css -->
+        <link rel="stylesheet" href="/css/module/test/test.css"/>
+        <!-- endbuild -->
+    </head>
+    <body>
+        @@include('../../include/common/header.html')
+        @@include('../../include/common/nav.html')
+        <div ms-controller="demo">
+            <input ms-widget="datepicker"/>
+        </div>
+        @@include('../../include/common/outro.html')
+        <script>require(['conf/test/test']);</script>
+    </body>
+</html>

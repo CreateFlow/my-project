@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="renderer" content="webkit" charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1,requiresActiveX=true">
+    <title>供应商注册绑定</title>
+    <link rel="stylesheet" href="../../css/common.css"/>
+    <link rel="stylesheet" href="../../css/weui.min.css"/>
+    <script src="../../js/lib/zepto.min.js"></script>
+    <script src="../../js/lib/fastclick.js"></script>
+    <script src="../../js/lib/vue.js"></script>
+    <script src="../../js/config.js"></script>
+    <script src="../../js/common.js"></script>
+    <script src="../../js/page/supplier/supplier-regist.js"></script>
+    <style>
+        body {
+            background-color: #efefef;
+            height: 100%;
+        }
+        .weui_label {
+            width: 5em;
+        }
+    </style>
+</head>
+<body>
+<div class="content-body" id="supplierRegist">
+    <div class="weui_toptips weui_warn js_tooltips">{{errorInfo}}</div>
+    <div class="weui_dialog_alert" id="dialog2" style="display: none;">
+        <div class="weui_mask"></div>
+        <div class="weui_dialog">
+            <div class="weui_dialog_hd"><strong class="weui_dialog_title">注册出错</strong></div>
+            <div class="weui_dialog_bd">{{errorResult}}</div>
+            <div class="weui_dialog_ft">
+                <a href="javascript:;" class="weui_btn_dialog primary">确定</a>
+            </div>
+        </div>
+    </div>
+    <div class="banner" class="weui_cells">
+        <img src="../../images/supplier/banner1.png" alt=""/>
+    </div>
+    <div class="weui_cells weui_cells_form weui_cells_form_custom">
+        <div class="weui_cell" v-bind:class="{'weui_cell_warn': !flag.corpFlag&&errorInfo!==''}">
+            <div class="weui_cell_hd"><label class="weui_label">公司名称:</label></div>
+            <div class="weui_cell_bd weui_cell_primary">
+                <input class="weui_input" type="text" placeholder="" v-model="form.corpName"/>
+            </div>
+            <div class="weui_cell_ft" v-show="!flag.corpFlag&&errorInfo!==''">
+                <i class="weui_icon_warn"></i>
+            </div>
+        </div>
+        <div class="weui_cell" v-bind:class="{'weui_cell_warn': !flag.contactFlag&&errorInfo!==''}">
+            <div class="weui_cell_hd"><label class="weui_label">联系人:</label></div>
+            <div class="weui_cell_bd weui_cell_primary">
+                <input class="weui_input" type="text"  placeholder="" v-model="form.contactPerson"/>
+            </div>
+            <div class="weui_cell_ft" v-show="!flag.contactFlag&&errorInfo!==''">
+                <i class="weui_icon_warn"></i>
+            </div>
+        </div>
+        <!--<div class="weui_cell" v-bind:class="{'weui_cell_warn': !flag.phoneFlag&&errorInfo!==''}">
+            <div class="weui_cell_hd"><label class="weui_label">手机号码：</label></div>
+            <div class="weui_cell_bd weui_cell_primary">
+                <input class="weui_input" type="tel" placeholder="手机号作为登录账号"  v-model="form.phone"/>
+            </div>
+            <div class="weui_cell_ft" v-show="!flag.phoneFlag&&errorInfo!==''">
+                <i class="weui_icon_warn"></i>
+            </div>
+        </div>-->
+        <div class="weui_cell">
+            <div class="weui_cell_hd"><label class="weui_label">所在区域:</label></div>
+            <div class="weui_cell_bd weui_cell_primary">
+                <div class="m-tabselect-supplier m-tabselect-supplier-half  f-fl" onclick="domSelect(this)">
+                    <div class="m-tabselect-supplier-block" id="province"></div>
+                    <div class="m-tabselect-supplier-arrow"></div>
+                    <div class="m-tabselect-supplier-body">
+                        <div class="m-tabselect-supplier-item" onclick="selectProvince(1,'上海')">上海</div>
+                    </div>
+                </div>
+            </div>
+            <div class="weui_cell_bd weui_cell_primary">
+                <div class="m-tabselect-supplier m-tabselect-supplier-half f-fl" onclick="domSelect(this)">
+                    <div class="m-tabselect-supplier-block" id="city"></div>
+                    <div class="m-tabselect-supplier-arrow"></div>
+                    <div style="" class="m-tabselect-supplier-body">
+                        <div class="m-tabselect-supplier-item" onclick="selectCity(1, '上海')">上海</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="clear"></div>
+
+        </div>
+        <div class="weui_cell">
+            <div class="weui_cell_hd"><label class="weui_label"></label></div>
+            <div class="weui_cell_bd weui_cell_primary">
+                <div class="m-tabselect-supplier" onclick="domSelect(this)">
+                    <div class="m-tabselect-supplier-block" id="county"></div>
+                    <div class="m-tabselect-supplier-arrow"></div>
+                    <div class="m-tabselect-supplier-body">
+                        <div class="m-tabselect-supplier-item" onclick="selectCounty(1, '松江区')">松江区</div>
+                        <div class="m-tabselect-supplier-item" onclick="selectCounty(2, '青浦区')">青浦区</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="weui_cell">
+            <div class="weui_cell_hd"><label class="weui_label">产品线:</label></div>
+            <div class="weui_cell_bd weui_cell_primary">
+                <div class="m-tabselect-supplier" onclick="domSelect(this)">
+                    <div class="m-tabselect-supplier-block" id="productLine"></div>
+                    <div class="m-tabselect-supplier-arrow"></div>
+                    <div class="m-tabselect-supplier-body">
+                        <div class="m-tabselect-supplier-item" onclick="changeProductLine(1, '工具')">工具</div>
+                        <div class="m-tabselect-supplier-item" onclick="changeProductLine(2, '加工作业')">加工作业</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="weui_cell">
+            <div class="weui_cell_hd"><label class="weui_label">性质:</label></div>
+            <div class="weui_cell_bd weui_cell_primary">
+                <div class="m-tabselect-supplier" onclick="domSelect(this)">
+                    <div class="m-tabselect-supplier-block" id="supplierNature"></div>
+                    <div class="m-tabselect-supplier-arrow"></div>
+                    <div class="m-tabselect-supplier-body">
+                        <div class="m-tabselect-supplier-item" onclick="changeNature(1,'厂家')">厂家</div>
+                        <div class="m-tabselect-supplier-item" onclick="changeNature(1,'授权经销商')">授权经销商</div>
+                        <div class="m-tabselect-supplier-item" onclick="changeNature(1,'综合供应商')">综合供应商</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="weui_cell" v-bind:class="{'weui_cell_warn': !flag.corpFlag&&errorInfo!==''}">
+            <div class="weui_cell_hd"><label class="weui_label">品牌:</label></div>
+            <div class="weui_cell_bd weui_cell_primary">
+                <input class="weui_input" type="text" placeholder="" v-model="form.brand"/>
+            </div>
+            <div class="weui_cell_ft" v-show="!flag.corpFlag&&errorInfo!==''">
+                <i class="weui_icon_warn"></i>
+            </div>
+        </div>
+        <!--<div class="weui_cell weui_cell_select weui_select_before" v-bind:class="{'weui_cell_warn': !flag.phoneFlag&&errorInfo!==''}">-->
+        <!--<div class="weui_cell_hd" style="width: 5em">-->
+        <!--<select class="weui_select" name="select2">-->
+        <!--<option value="1">+86</option>-->
+        <!--<option value="2">+80</option>-->
+        <!--<option value="3">+84</option>-->
+        <!--<option value="4">+87</option>-->
+        <!--</select>-->
+        <!--</div>-->
+        <!--<div class="weui_cell_bd weui_cell_primary">-->
+        <!--<input class="weui_input" type="tel" placeholder="" v-model="form.phone"/>-->
+        <!--</div>-->
+        <!--<div class="weui_cell_ft" v-show="!flag.phoneFlag&&errorInfo!==''">-->
+        <!--<i class="weui_icon_warn"></i>-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--<div class="weui_cell weui_vcode" v-bind:class="{'weui_cell_warn': !flag.codeFlag&&errorInfo!==''}">
+            <div class="weui_cell_hd"><label class="weui_label">验证码：</label></div>
+            <div class="weui_cell_bd weui_cell_primary">
+                <input class="weui_input" type="number" placeholder="" v-model="form.verCode"/>
+            </div>
+            <div class="weui_cell_ft" v-show="!flag.codeFlag&&errorInfo!==''">
+                <i class="weui_icon_warn"></i>
+            </div>
+            <div class="weui_cell_ft" style="padding: 8px 0;">
+                <a href="javascript:;" v-on:click="sendMessage()" style="margin: 0px 15px 0px 10px; max-width: 120px; font-size: 12px; padding: 0 12px; line-height: 2.5; border-color: #ef4f4f; color: #ef4f4f;" class="weui_btn wei_btn_mini weui_btn_plain_primary">{{buttonText}}</a>
+            </div>
+        </div>
+
+        <div class="weui_cell" v-bind:class="{'weui_cell_warn': !flag.passwordFlag&&errorInfo!==''}">
+            <div class="weui_cell_hd"><label class="weui_label">设置密码：</label></div>
+            <div class="weui_cell_bd weui_cell_primary">
+                <input class="weui_input" type="password" placeholder="" v-model="form.password"/>
+            </div>
+            <div class="weui_cell_ft" v-show="!flag.passwordFlag&&errorInfo!==''">
+                <i class="weui_icon_warn"></i>
+            </div>
+        </div>-->
+        <div class="supplier-bottom">
+            <div class="spacing">
+                <a href="javascript:;" v-on:click="subRegist()" class="weui_btn weui_btn_warn">注册</a>
+            </div>
+            <div class="spacing" style="padding-top: 15px;padding-bottom: 10px">
+                <p>
+                    如果您有意向成为佰万仓商城的合作供应商，请在此注册留下贵司的联系方式，我们会尽快与您沟通！
+                </p>
+            </div>
+        </div>
+
+    </div>
+
+
+</div>
+</body>
+</html>

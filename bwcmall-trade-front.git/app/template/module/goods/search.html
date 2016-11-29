@@ -1,0 +1,246 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>佰万仓商品检索</title>
+
+	@@include('../../include/common/meta.html')
+    @@include('../../include/common/scripts.html')
+	<link rel="stylesheet" href="/styles/module/shoppingList/shoppingList.css"/>
+	<link rel="stylesheet" href="/styles/module/goods/search.css" />
+</head>
+<body ms-controller="searchCtrl" class="ms-controller">
+    <div ms-controller="headerCtrl">
+        @@include('../../include/common/header-top.html')
+        @@include('../../include/common/header-search.html')
+        @@include('../../include/common/header-nav.html')
+    </div>
+	<div class="g-content">
+		<div class="content-inner">
+			<div class="content-top">
+				<div class="content-title">
+					<div class="f-ib title-nav" ms-repeat="crumbsNavigation" ms-if="crumbsNavigation " >
+						<a  href="javascript:void(0)" ms-click="searchByCondition('','',el.code,$priceStatus)" ms-text="el.name"></a>
+						<span class="title-arrow" ms-if="!$last">></span>
+					</div>
+					<a href="javascript:void(0)" class="f-ib title-tag"  ms-click="clearKeywords()" ms-if="searchwords">
+						<span ms-text="'关键字：'+searchwords"></span>
+						<span class="f-fr f-ib" style="margin-left:10px;">╳</span>
+					</a>
+					<span class="f-ib title-tag-wrap" ms-if="searchBrand.id">
+			            <a class="f-ib f-fr title-tag" href="javascript:void(0)" ms-click="clearBrandId()">
+			            	<span ms-text="searchBrand.name"></span>
+			            	<span class="f-fr f-ib" style="margin-left:10px;">╳</span>
+			            	<div class="clear"></div>
+			           	</a>
+			            <div class="clear"></div>
+	           		</span>
+	           		<span class="f-ib title-tag-wrap" ms-if="searchShop.id">
+			            <a class="f-ib f-fr title-tag" href="javascript:void(0)" ms-click="clearShopId()">
+			            	<span ms-text="searchShop.name"></span>
+			            	<span class="f-fr f-ib" style="margin-left:10px;">╳</span>
+			            	<div class="clear"></div>
+			           	</a>
+			            <div class="clear"></div>
+	           		</span>
+					<div class="total-num">
+						共<em ms-text='searchResult.productPager.rowsCount' ms-if='searchResult.productPager' ></em>件相关商品
+					</div>
+				</div>
+				<div class="select-block shoplistsearchresult" ms-if="isShoppingListModel == true">
+					<div class="select-tag-right f-fl">
+						<ul>
+							<li class="select-tag-item shopListSearchResultli" ms-repeat='shopListSearchResult.itemList' >
+								<a  href="javascript:void(0)" ms-click="shopingListItemClick(el.id,el.itemName)" ms-text='el.itemName'></a>
+								<span class="shopListSearchtrue"></span>
+								<span class="shopListSearchitemid" style="display:none" ms-text="el.id"></span>
+								<span style="display:none" class='needquatity' ms-text="el.requiredQuantity"></span>
+							</li>
+							<li class="clear"></li>
+						</ul>
+					</div>
+					<div class="clear"></div>
+				</div>
+				<div class="select-block"  ms-if='filterShops && filterShops.length>0'>
+					<div class="select-tag-left f-fl">
+						<span>店铺：</span>
+					</div>
+					<div class="select-tag-right f-fl">
+						<ul>
+							<li class="select-tag-item" ms-repeat='filterShops' >
+								<a  href="javascript:void(0)" ms-click="searchByCondition(el.id,'','',$priceStatus)" ms-text='el.name'></a>
+							</li>
+								<li class="clear"></li>
+						</ul>
+					</div>
+					<div class="clear"></div>
+					<a href="javascript: void(0)" class="get-more trans_link_3" ms-if="filterShops.length>9">
+						<span class="get-more-text a-fadein f-fl">更多</span>
+						<span class="get-more-icon f-ib f-fr trans_link_5 f-fl">∨</span>
+						<div class="clear"></div>
+					</a>
+				</div>
+				<div class="select-block"  ms-if='filterBrands && filterBrands.length>0'>
+					<div class="select-tag-left f-fl">
+						<span>品牌：</span>
+					</div>
+					<div class="select-tag-right f-fl">
+						<ul>
+							<li class="select-tag-item" ms-repeat='filterBrands' >
+								<a  href="javascript:void(0)" ms-click="searchByCondition('',el.id,'',$priceStatus)" ms-text='el.name'></a>
+							</li>
+								<li class="clear"></li>
+						</ul>
+					</div>
+					<div class="clear"></div>
+					<a href="javascript: void(0)" class="get-more trans_link_3" ms-visible="filterBrands.length>9">
+						<span class="get-more-text a-fadein f-fl">更多</span>
+						<span class="get-more-icon f-ib f-fr trans_link_5 f-fl">∨</span>
+						<div class="clear"></div>
+					</a>
+				</div>
+				<div class="select-block" ms-if='filterCategorys && filterCategorys.length>0'>
+					<div class="select-tag-left f-fl">
+						<span>类型：</span>
+					</div>
+					<div class="select-tag-right f-fl">
+						<ul>
+							<li class="select-tag-item"  ms-repeat='filterCategorys'>
+								<a  href="javascript:void(0)" ms-click="searchByCondition('','',el.id,$priceStatus)" ms-text='el.name'></a>
+							</li>
+							<li class="clear"></li>
+						</ul>
+					</div>
+					<div class="clear"></div>
+					<a href="javascript: void(0)" class="get-more trans_link_3" ms-visible="filterCategorys.length>7">
+						<span class="get-more-text a-fadein f-fl">更多</span>
+						<span class="get-more-icon f-ib f-fr trans_link_5 f-fl">∨</span>
+						<div class="clear"></div>
+					</a>
+				</div>
+				<div class="select-block transparent" ms-if='filterPrices && filterPrices.length>0'>
+					<div class="select-tag-left f-fl">
+						<span>价格：</span>
+					</div>
+					<div class="select-tag-right f-fl">
+						<ul>
+							<li ms-attr-class="$priceStatus==el.id||(!$priceStatus&&''==el.id)?'select-tag-item select-tag-item-active':'select-tag-item'" ms-repeat='filterPrices'>
+								<a  href="javascript:void(0)" ms-click="searchByCondition('','','',el.id)" ms-text='el.name'></a>
+							</li>
+							<li class="clear"></li>
+						</ul>
+					</div>
+					<div class="clear"></div>
+					<div class="mask" ms-if="getReadFlag() == undefined">
+						<div class="mask-con">
+							<p>不想看到待询价的商品？一键筛选</p>
+							<button id="know">我知道了</button>
+							<img src="/images/category/mask-arrow.png" alt="">
+						</div>
+						<div class="area"></div>
+					</div>
+				</div>
+				<div class="m-sort">
+					<div class="f-fl">
+						<a href="javascript:void(0)" ms-click="changeOrderBy('default')" ms-attr-class="$order!='sales' && $order!='price'?'m-sort-item m-sort-default m-sort-active':'m-sort-item m-sort-default  '" >默认排序</a>
+						<a href="javascript:void(0)" ms-click="changeOrderBy('sales')"  ms-attr-class="$order=='sales'?'m-sort-item m-sort-active':'m-sort-item'">销量排序
+							<span ms-if="$order=='sales'" ms-attr-class=" $direction == 'desc' && $order=='sales' ? 'm-sort-sales m-sort-price-down':'m-sort-sales  m-sort-price-up' "></span>
+							<span ms-if="$order!='sales'" class=" m-sort-sales "></span>
+						</a>
+						<a  href="javascript:void(0)" ms-click="changeOrderBy('price')"  ms-attr-class="$order=='price'?'m-sort-item m-sort-active':'m-sort-item'">价格排序
+							<span ms-if="$order=='price'" ms-attr-class=" $direction == 'desc' && $order=='price' ? 'm-sort-price m-sort-price-down' :'m-sort-price  m-sort-price-up' "></span>
+							<span ms-if="$order!='price'" class=" m-sort-price "></span>
+						</a>
+					</div>
+					<div class="mode f-fr">
+						<a href="javascript:void(0)" ms-attr-class="tab !=='grid'?'list-mode-icon cur-mode':'list-mode-icon'" ms-click="changeModeBy('list')"></a>
+						<a href="javascript:void(0)" ms-attr-class="tab =='grid'?'grid-mode-icon cur-mode':'grid-mode-icon'" ms-click="changeModeBy('grid')"></a>
+					</div>
+					<div class="clear"></div>
+				</div>
+			</div>
+			<div class="content-body">
+				<div class="product-right" ms-if="searchResult.productPager.pageItems" id="searchResultPannel"  style="display:none;">
+					<div ms-if="tab!=='grid'">
+						<div class="list-item" ms-repeat="searchResult.productPager.pageItems">
+	                        <div class="product-img f-fl" ms-click="trackUserHobby('enter',$index,el.id)">
+	                            <a ms-href="/goods/detail.html?id={{el.id}}" target="_blank">
+	                                <img ms-src="el.image + '!120'" ms-attr-alt="el.name" />
+	                            </a>
+	                        </div>
+	                        <div class="list-text f-fl">
+		                        <a ms-href="/goods/detail.html?id={{el.id}}" target="_blank" class="list-item-text" ms-attr-title="el.name">
+		                            {{el.name | subGoodsNames}}
+		                        </a>
+		                        <div class="list-item-no" ms-click="trackUserHobby('click',$index,el.id)"  ms-text="'型号：'+el.sn"></div>
+		                    </div>
+	                        <div class="list-price f-fl" ms-if="!el.priceOpenToAllies">
+	                            <div ms-if="el.price"><span ms-html="formatPrice(el.price)"></span><span ms-if="el.unit" ms-text="' /'+el.unit"></span><label class="morethan" ms-if="el.shipPrices.length>0">起</label></div>
+	                            <div ms-if="!el.price" ms-html="<em>待询价</em>'"></div>
+	                        </div>
+	                        <div class="list-num-wrap f-fl">
+	                    		<span class="list-num-min" ms-click="numMin()">-</span>
+	                            <input type="text" class="purchase-input" ms-on-keyup="inputKeyup()" value="1">
+	                            <span class="list-num-add" ms-click="numAdd()">+</span>
+	                        </div>
+	                        <a href="javascript: void(0);" class="trans_link_3 list-item-btn f-ib f-btn-disabled" ms-if="el.marketable == false && el.price">已下架</a>
+	                        <a href="javascript: void(0);" class="trans_link_3 list-item-btn f-ib f-btn-disabled" ms-if="el.marketable == true && el.soldOut == true">已售罄</a>
+	                        <a href="javascript: void(0);" ms-click="goLogin(el)" class="trans_link_3 list-item-btn f-ib f-btn-disabled" ms-if="el.marketable == true && el.soldOut == false && !el.price">待询价</a>
+	                        <a class="trans_link_3 list-item-btn f-ib" href="javascript: void(0);"  ms-if="isShoppingListModel != true && el.marketable == true && el.soldOut == false && el.price " ms-click="addCart(el)">加入进货单</a>
+	                        <a class="trans_link_3 list-item-btn f-ib" href="javascript: void(0);"  ms-if="isShoppingListModel == true && el.marketable == true && el.soldOut == false && el.price " ms-click="addshoplist(el.id)">加入购物清单</a>
+		                    <div class="list-right f-fr">
+		                    	<div>
+			                    	<p ms-if="el.returnable"><img src="/images/category/service01.png" alt="">支持退换货</p>
+			                    	<p ms-if="!el.freight&&el.includeFreight"><img src="/images/category/service02.png" alt="">免运费</p>
+		                    	</div>
+		                    </div>
+		                    <div class="clear"></div>
+	                    </div>
+                    </div>
+                    <div ms-if="tab=='grid'">
+	                    <div class="trans_link_3 product-item product-each f-fl" ms-repeat="searchResult.productPager.pageItems"
+	                         ms-attr-title="el.name">
+	                        <div class="product-img" ms-click="trackUserHobby('enter',$index,el.id)">
+	                            <a ms-href="/goods/detail.html?id={{el.id}}" target="_blank">
+	                                <img ms-src="el.image" 	ms-attr-alt="el.name" />
+	                            </a>
+	                        </div>
+	                        <div class="product-right-text" ms-attr-title="el.name">
+	                            {{el.name | subGoodsNames}}
+	                        </div>
+	                        <div class="product-right-no"  >{{el.shopName|subStr25}}</div>
+	                        <div class="product-right-no" ms-click="trackUserHobby('click',$index,el.id)"  ms-text="'商品型号：'+el.sn"></div>
+	                        <a href="/member/register.html" class="wait-text product-right-num-bg" ms-if=" el.priceOpenToAllies  "></a>
+	                        <div class="product-right-num" ms-if="el.marketPrice  && !el.priceOpenToAllies" ><span ms-html=" '市场指导价: '+formatPrice(el.marketPrice)"></span><span ms-if="el.unit" ms-text="'/'+el.unit"></span></div>
+	                        <div class="wait-text product-right-num" ms-if="!el.priceOpenToAllies">
+	                            <div ms-if="el.price"><span ms-html="'销售价格：'+formatPrice(el.price)"></span><span ms-if="el.unit" ms-text="'/'+el.unit"></span><label class="morethan" ms-if="el.shipPrices.length>0">起</label></div>
+	                            <div ms-if="!el.price" ms-html="'销售价格：'+ '<em>待询价</em>'"></div>
+	                        </div>
+	                        <a href="javascript: void(0);" class="trans_link_3 product-right-btn f-ib f-btn-disabled" ms-if="el.marketable == false && el.price">已下架</a>
+	                        <a href="javascript: void(0);" class="trans_link_3 product-right-btn f-ib f-btn-disabled" ms-if="el.marketable == true && el.soldOut == true">已售罄</a>
+	                        <a href="javascript: void(0);" ms-click="goLogin(el)" class="trans_link_3 product-right-btn f-ib f-btn-disabled" ms-if="el.marketable == true && el.soldOut == false && !el.price">待询价</a>
+	                        <a class="trans_link_3 product-right-btn f-ib" href="javascript: void(0);"  ms-if="isShoppingListModel != true && el.marketable == true && el.soldOut == false && el.price " ms-click="addCart(el)">加入进货单</a>
+	                        <a class="trans_link_3 product-right-btn f-ib" href="javascript: void(0);"  ms-if="isShoppingListModel == true && el.marketable == true && el.soldOut == false && el.price " ms-click="addshoplist(el.id)">加入购物清单</a>
+	                    </div>
+	                    <div class="clear"></div>
+                    </div>
+				</div>
+				<div class="product-right"  style="display:none;" id="searchError">
+					<div class="content-null">
+						<img width="100" src="/images/product/sorry_null.png" alt="没有数据">
+						<span class="f-ib content-null-text">抱歉，没有搜索到您需要的商品</span>
+
+						<div class="clear"></div>
+					</div>
+					<div class="clear"></div>
+				</div>
+				<div class="clear"></div>
+			</div>
+		</div>
+	</div>
+	@@include('../../include/index/bottom.html')
+	@@include('../../include/common/footer.html')
+	<script src="../scripts/module/goods/search.js"></script>
+</body>
+</html>

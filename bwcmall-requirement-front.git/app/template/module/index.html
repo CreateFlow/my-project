@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html> 
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <title>需求单管理</title>
+    @@include('../include/common/meta.html')
+    @@include('../include/common/common-include.html') 
+
+    <link rel="stylesheet" type="text/css" href="/styles/module/index/index.css"> 
+    <script src="/scripts/module/index.js"></script>
+</head>
+
+<body ms-controller="indexCtrl">
+    @@include('../include/common/header.html')
+    @@include('../include/common/account-head.html')
+
+     <!--主要内容-->
+    <div class="g-content g-clearfix">
+      <!--header -->
+      <div class="module-header">
+          <div class="index-query-conditions">
+            <div class="index-condition">
+                <span>需求单类型</span>
+                <select id="typeList" name="typeList" ms-duplex="searchData.type" ms-change="doQuery()">
+                    <option value="">全部</option>
+                    <option ms-repeat="typeList" ms-attr-value="el.value" ms-text="el.name"></option> 
+                </select> 
+            </div>
+            <div class="index-condition">
+                <span>需求单号（父单）</span>
+                <input type="text" ms-duplex="searchData.sn" ms-keyup="onKeyup($event)"/>
+            </div> 
+            <div class="index-condition">
+                <span>需求单状态（父单）</span>
+                <select id="statusList" name="statusList" ms-duplex="searchData.status" ms-change="doQuery()">
+                    <option value="">全部</option>
+                    <option ms-repeat="statusList"  ms-attr-value="el.value" ms-text="el.name"></option> 
+                </select> 
+                
+            </div>  
+
+            <div class="index-condition">
+                <span>买家名称</span>  
+                <input type="text" ms-duplex="searchData.buyerName" ms-keyup="onKeyup($event)"/>
+            </div>
+            <div class="index-condition">
+                <span>买家电话</span>
+                <input type="text" ms-duplex="searchData.mobile" ms-keyup="onKeyup($event)"/>
+            </div> 
+            <div class="index-condition" style="clear:both;">
+                <span>品牌</span>  
+                <input type="text" ms-duplex="searchData.brandName" ms-keyup="onKeyup($event)"/>
+            </div>
+            <div class="index-condition">
+                <span>型号</span>
+                <input type="text" ms-duplex="searchData.skuSnSet" ms-keyup="onKeyup($event)"/>
+            </div> 
+            <div class="index-actions"> 
+                 <button type="button" id="queryBtn" name="queryBtn" class="query_btn" value="" ms-click="doQuery()">查询</button> 
+                 <button type="button" id="queryBtn" name="queryBtn" class="add_btn" ms-click="addDemand">新建需求单</button> 
+            </div>
+        </div> 
+      </div>
+
+      
+
+       <div class="index-table-panel">
+           <table class="index-table">
+              <tbody>
+                <tr>
+                    <th width="15%">需求单号</th>
+                    <th width="15%">买家</th>
+                    <th width="8%">买家联系手机</th>
+                    <th width="15%">创建时间</th> 
+                    <th width="8%">类型</th>
+                    <th width="8%">需求单状态</th> 
+                    <th width="8%">处理进度</th> 
+                    <th width="">备注</th>
+                    <th>操作</th>  
+                </tr>
+                  <tr  ms-if="dataList.length<=0">
+                      <td colspan="10">
+                          没有查询到任何数据~~
+                      </td>
+                  </tr>
+                  <tr ms-repeat="dataList" ms-if="dataList.length>0"> 
+                      <td ms-text="el.sn"></td> 
+                      <td ms-text="el.name"></td> 
+                      <td ms-text="el.mobile"></td> 
+                      <td ms-text="el.createTime"></td>
+                      <td ms-text="el.typeDesc"></td> 
+                      <td ms-text="el.requireStatusDesc"></td> 
+                      <td ms-text="el.progress"></td> 
+                      <td ms-text="el.remarks"></td>
+                      <td>
+                        <span>
+                            <a ms-href="'/index/details.html?id='+el.id">查看详情</a>
+                        </span>
+                      </td>
+                  </tr> 
+
+                </tbody>
+            </table>
+
+            <div class="paper">
+              <div ms-widget="pager, pp"></div>
+            </div>
+
+       </div>
+
+       
+        
+    </div>
+
+
+
+    @@include('../include/common/footer.html')
+</body>
+
+</html>

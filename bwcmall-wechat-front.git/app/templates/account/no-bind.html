@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <title>未绑定账户</title>
+    <meta name="description" content=""> @@include('../common/meta.html')
+    <style>
+    .button_sp_area {
+        padding: 10px 0;
+        width: 60%;
+        margin: 0 auto;
+        text-align: justify;
+        text-justify: distribute-all-lines;
+        font-size: 0;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="content-body">
+        <img style="display: block; margin: 50% auto 0; width: 78px;" src="images/order/no_bind_icon.png" alt="" />
+        <div class="bd spacing" style="margin-top: 20px;">
+            <p style="text-align: center">您还没有绑定</p>
+            <div class="button_sp_area">
+                <button id="goBtn" onclick="goTarget()" class="weui_btn weui_btn_warn">进入绑定页面</button>
+            </div>
+        </div>
+    </div>
+     @@include('../common/footer.html')
+</body>
+
+</html>
+<script>
+function goTarget() {
+    var url = Util.getUrlParam('target_url');
+    location.href = url;
+}
+</script>

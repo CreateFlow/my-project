@@ -1,0 +1,54 @@
+<!-- 走马灯模块 -->
+<div class="banner">
+    <ul>
+    	<li style="background-color:#fbd103"><a href="/activity/activity-04.html"><img src="images/index/banner05.jpg" alt=""></a></li>
+    	<li style="background-color:#ff6611"><a href="/activity/activity-05.html"><img src="images/index/banner06.jpg" alt=""></a></li>
+        <li style="background-color:#ffcc21"><a href="/activity/recommand.html"><img src="images/index/recommand.jpg" alt=""></a></li>
+    	<li style="background-color:#f61f49"><a href="/supplier.html"><img src="images/index/banner03.png" alt=""></a></li>
+    	<li style="background-color:#30a1f7"><a href="/activity/findgoods.html"><img src="images/index/banner02.jpg" alt=""></a></li>
+    </ul>
+    <div class="banner-point"></div>
+</div>
+
+<script>
+	$(function(){
+		function banner(){
+			var oli=$('.banner li');
+			var lis=oli.length;
+			var num=0;
+			for(var i=0;i<lis;i++){
+				$('.banner-point').append('<span></span>')
+			}
+			$('.banner-point span').eq(0).addClass('cur-banner');
+			oli.eq(0).css('display','block');
+			function change(){
+				oli.eq(num).siblings().fadeOut().end().stop().fadeIn();
+				$('.banner-point span').eq(num).addClass('cur-banner').siblings().removeClass('cur-banner');
+			}
+			timer=setInterval(function(){
+				if(num==lis-1){
+					num=0;
+				}else{
+					num++;
+				}
+				change();
+			},4000)
+			$('.banner-point span').click(function(){
+				var index=$(this).index();
+				num=index;
+				change();
+				clearInterval(timer);
+				timer=setInterval(function(){
+					if(num==lis-1){
+						num=0;
+					}else{
+						num++;
+					}
+					change();
+				},4000)
+			})
+
+		}
+		banner();
+	})
+</script>

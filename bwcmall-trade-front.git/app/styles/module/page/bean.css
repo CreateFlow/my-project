@@ -1,0 +1,242 @@
+i {
+    font-style: normal;
+}
+
+.txt-warn {
+    color: #ff8300;
+}
+.icon-flag-3-4 {
+    background: url("/images/activity/discount-3-4.png") no-repeat;
+}
+.icon-flag-3-7 {
+    background: url("/images/activity/discount-3-7.png") no-repeat;
+}
+.icon-flag-5-1 {
+    background: url("/images/activity/discount-5-1.png") no-repeat;
+}
+
+.icon-flag-1 {
+    background: url("/images/activity/flag01.png") no-repeat;
+}
+
+.icon-flag-2 {
+    background: url("/images/activity/flag02.png") no-repeat;
+}
+
+.icon-flag-3 {
+    background: url("/images/activity/flag03.png") no-repeat;
+}
+
+
+.icon-clock {
+    background: url("/images/activity/clock.png") no-repeat;
+}
+
+/*mod-bean*/
+.main {
+    background-color: #e9e9e9;
+    padding-bottom: 40px;
+}
+
+.banner img {
+    max-width: 100%;
+}
+
+.content {
+    width: 1200px;
+    margin: 0 auto;
+}
+
+.rule {
+    margin: 30px 0 20px 0;
+    /*width: 1200px;*/
+}
+
+.rule h1 {
+    font-size: 18px;
+    color: #4869e3;
+}
+
+.rule .icon {
+    position: absolute;
+    width: 46px;
+    height: 46px;
+    top: 13px;
+    left: 0;
+}
+
+.rule .text {
+    font-size: 16px;
+    color: #2d2927;
+}
+
+.rule-panel {
+    width: 1200px;
+    height: 159px;
+    background: url("/images/activity/rule-bg.png") no-repeat;
+}
+
+.rule .list {
+    padding-top: 38px;
+}
+
+.rule .list-item {
+    position: relative;
+    float: left;
+    width: 400px;
+}
+
+.rule .section {
+    position: relative;
+    margin: 0 auto;
+    width: 215px;
+    height: 80px;
+    line-height: 1.5;
+    padding: 10px 0 0 65px;
+}
+
+.rule .separate {
+    border-right: 1px solid #e9e9e9;
+}
+
+.goods {
+}
+
+.goods .list .img {
+    float: left;
+    position: relative;
+    border-right: 1px solid #e9e9e9;
+    cursor: pointer;
+    width: 340px;
+    height: 340px;
+    line-height: 340px;
+    text-align: center;
+}
+
+.goods .list .img:hover {
+    opacity: .75;
+}
+
+.goods .list-item {
+    background-color: #fff;
+    overflow: hidden;
+    margin: 20px 0;
+}
+
+.goods .last.list-item {
+    margin-bottom: 0;
+}
+
+.goods .list-item img  {
+    max-width: 264px;
+    max-height: 264px;
+    vertical-align: middle;
+    display: inline-block;
+}
+
+.goods .desc {
+    margin-left: 340px;
+    height: 340px;
+    padding: 0 60px;
+}
+
+.goods .flag {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 62px;
+    height: 62px;
+}
+
+.goods .flag i {
+    color: #fff;
+}
+
+.desc .icon {
+    position: absolute;
+    left: 3px;
+    width: 16px;
+    height: 16px;
+}
+
+.floor {
+    border-bottom: 1px dashed #ebebeb;
+}
+
+.desc .time {
+    color: #929292;
+}
+
+.desc-f1 {
+    position: relative;
+    font-size: 16px;
+    padding: 20px 0 15px 28px;
+}
+
+.desc-f2 {
+    cursor: pointer;
+    line-height: 1.85;
+    padding: 15px 0 20px 3px;
+}
+
+.desc-f2:hover {
+    background: #fcfcfc;
+    /*opacity: .85;*/
+}
+
+.desc-f2 h1 {
+    font-size: 22px;
+    font-weight: normal;
+    color: #2d2927;
+}
+
+.desc-f2 h6 {
+    font-size: 14px;
+    font-weight: normal;
+    color: #949494;
+}
+
+.desc-f3 {
+    font-size: 14px;
+    color: #2d2927;
+    padding: 22px 0;
+    padding-left: 3px;
+}
+
+.desc-f4 {
+    position: relative;
+    padding-top: 30px;
+}
+
+.desc-f4 .btn {
+    position: absolute;
+    right: 0;
+    top: 30px;
+    font-size: 24px;
+    color: #fff;
+    padding: 15px 30px;
+    background-color: #4869e3;
+}
+
+.desc-f4 .btn:hover {
+    opacity: .8;
+}
+
+.desc-f4 .price-active {
+    display: block;
+    font-size: 30px;
+    color: #e83637;
+}
+
+.desc-f4 .price-active .caret {
+    font-size: 20px;
+}
+
+.desc-f4 .price-disabled {
+    margin-top: 18px;
+    margin-left: 5px;
+    color: #949494;
+    font-size: 14px;
+    text-decoration: line-through;
+    display: block;
+}

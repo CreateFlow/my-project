@@ -1,0 +1,49 @@
+@charset "UTF-8";
+
+@import "register";
+
+.layout-center {
+    position: relative;
+    left: 50%;
+    float: left;
+    @at-root {
+        &_reset {
+            @extend .layout-center;
+            left: -50%;
+            text-align: center;
+        }
+    }
+}
+
+.mod-regintro {
+    .center {
+        overflow: hidden;
+    }
+    .user {
+        color: #ff7300;
+        margin-right: 0.5em;
+    }
+    .tips {
+        margin: 170px 0 90px 0;
+        width: 380px;
+        height: 64px;
+        text-align: center;
+        img {
+            margin-left: -10px;
+            float: left;
+            width: 64px;
+            height: 64px;
+        }
+        p {
+            text-align: left;
+            margin-left: 60px;
+            height: 32px;
+            line-height: 32px;
+            font-size: 14px;
+            color: #666;
+        }
+    }
+    .btn-group {
+        margin-bottom: 290px;
+    }
+}

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>买家账期管理</title>
+    @@include('../../include/common/intro.html')
+    <!-- build:css css/module/payment/list.css -->
+    <link rel="stylesheet" href="/css/module/aftersale/aftersale.css" />
+    <link rel="stylesheet" href="/css/module/payment/payment.css" />
+    <!-- endbuild -->
+</head>
+
+<body>
+    @@include('../../include/common/header.html') @@include('../../include/common/nav.html')
+    <div class="main mod-demo aftersale">
+        <div class="sidebar">
+            @@include('../../include/common/menu.html')
+        </div>
+        <div class="content ms-controller" ms-controller="paymentList">
+            <div class="panel">
+                <div class="hd">
+                    <span class="title">买家账期管理</span>
+                </div>
+                <div class="bd">
+                    <div class="search">
+                        <div class="row">
+                            <div class="col col-1 title">客户名称</div>
+                            <div class="col col-3">
+                                <input type="text" class="inputbox" ms-duplex="searchInfo.customerName" />
+                            </div>
+                            <div class="col col-1 title">账期类型</div>
+                            <div class="col col-3">
+                                <select class="inputbox" ms-duplex="searchInfo.creditPeriodType">
+                                    <option ms-repeat-el="creditPeriodType" ms-attr-value='{{el.value}}' ms-text="el.name"></option>
+                                </select>
+                            </div>
+                            <div class="col col-1 title">状态</div>
+                            <div class="col col-3">
+                                <select class="inputbox" ms-duplex="searchInfo.accountCreditStatus">
+                                    <option ms-repeat-el="accountCreditStatus" ms-attr-value='{{el.value}}' ms-text="el.name"></option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col col-3 offset-1">
+                                <!-- <input type="button" class="search-btn" value="搜索" ms-click="ckSearchList"> -->
+                                <span class="btn btn-large btn-primary" ms-click="ckSearchList">搜索</span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col col-3 offset-1">
+                                <!-- <input type="button" class="search-btn" value="搜索" ms-click="ckSearchList"> -->
+                                <a class="btn btn-large btn-primary" href="/payment/add.html" style="padding-left: 0;padding-right: 0">添加账期客户</a>
+                            </div>
+                        </div>
+                    </div>
+                    <table class="ctable">
+                        <thead>
+                            <tr width="100%" class="thb ctr">
+                                <th width="12%">企业名称</th>
+                                <th width="10%">当前账期类型</th>
+                                <th width="10%">授信额度</th>
+                                <th width="10%">剩余额度</th>
+                                <th width="10%">账期还款日</th>
+                                <th width="10%">状态</th>
+                                <th width="15%">生效截止日期</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ms-if="paymentList.length>0" ms-repeat-el="paymentList" class="ctr" ms-class="tr-bg:($index%2==0)">
+                                <td>{{el.corpName}}</td>
+                                <td>{{el.creditPeriodType}}</td>
+                                <td>{{el.creditAmount}}</td>
+                                <td>{{el.remainingBalance}}</td>
+                                <td>{{el.delayDays}}</td>
+                                <td>{{el.accountCreditStatus}}</td>
+                                <td>{{el.expiredDate}}</td>
+                                <td>
+                                    <span ms-html="getLink(el)"></span>
+                                </td>
+                            </tr>
+                            <tr ms-if="paymentList.length==0">
+                                <td colspan="7" class="cell-empty" ms-text="afterSaleOrderEmptyText"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div ms-widget="pager,pp" ms-if="paymentList.length>0"></div>
+                </div>
+            </div>
+            <div ms-widget="dialog,dlgConfirmEnable,opts1">
+                <div class="col offerset-2">
+                    {{confirmReceivedMsg}}
+                </div>
+            </div>
+            <div ms-widget="dialog,dlgConfirmAmount,opts2">
+                <div class="col offerset-2">
+                    <div class="row es-body">
+                        <div class="col col-3">买家姓名：</div>
+                        <div class="col col-9">
+                            <span>{{dlgInfo.el.customerName}}</span>
+                        </div>
+                    </div>
+                    <div class="row es-body">
+                        <div class="col col-3">账期：</div>
+                        <div class="col col-9">
+                            <span>{{dlgInfo.el.creditPeriodType}}</span>
+                        </div>
+                    </div>
+                    <div class="row ">
+                        <div class="col col-3">当前额度：</div>
+                        <div class="col col-9 ">
+                            <span>{{dlgInfo.el.creditAmount}}</span>
+                        </div>
+                    </div>
+                    <div class="row ">
+                        <div class="col col-3">调整额度：</div>
+                        <div class="col col-9 ">
+                            <input type="number" name="amount" class="form-input" placeholder="请输入调整额度" ms-duplex="dlgInfo.amount.amount">
+                        </div>
+                    </div>
+                    <div class="row"><span>提示：调整额度立即生效！</span></div>
+                </div>
+            </div>
+            <div ms-widget="dialog,dlgConfirmPeriod,opts3">
+                <div class="col offerset-2">
+                    <div class="row es-body">
+                        <div class="col col-3">买家姓名：</div>
+                        <div class="col col-9">
+                            <span>{{dlgInfo.period.customerName}}</span>
+                        </div>
+                    </div>
+                    <div class="row es-body">
+                        <div class="col col-3">申请账期：</div>
+                        <div class="col col-9">
+                            <select class="form-input" ms-duplex="period.creditPeriodNum">
+                                <option ms-repeat-el="creditPeriodTypeShort" ms-attr-value='{{el.value}}' ms-text="el.name"></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row ">
+                        <div class="col col-3">账期还款日设置：</div>
+                        <div class="col col-9 ">
+                            <span class="form-text-gap">顺延 </span>
+                            <select class="form-input" ms-duplex="period.delayDays" style="width: 132px;">
+                                <option ms-repeat-el="delayDays" ms-attr-value='{{el}}' ms-text="el"></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row"><span>提示：更改账期类型将会在下一期生效！</span></div>
+                </div>
+            </div>
+            <div ms-widget="dialog,dlgAlert,opts4">
+                <div class="col offerset-2">
+                    {{confirmReceivedMsg}}
+                </div>
+            </div>
+        </div>
+    </div>
+    @@include('../../include/common/outro.html')
+    <script>
+    require(['conf/payment/list']);
+    </script>
+</body>
+
+</html>

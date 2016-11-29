@@ -1,0 +1,18 @@
+<link rel="stylesheet" href="/styles/common/top_header.css"/>
+<div class="g-header">
+    <div class="g-header-inner">
+        <div class="header-left">
+            <a href="/index.html">佰万仓首页</a>
+            <span class="welcome">Hi~欢迎来到佰万仓商城</span>
+            <span ms-if="!isLogin">
+                @@include('header/logout.html')
+            </span>
+        </div>
+        <div class="header-right">
+            <span ms-if="isLogin">
+                @@include('header/login.html')
+            </span>
+            @@include('purchase.html')
+        </div>
+    </div>
+</div>

@@ -1,0 +1,2 @@
+module.exports = {
+    "success":true,"message":"操作成功！","result":{"userId":"3746175657336635392","username":"18521305181","password":"","userRealname":"随机用户[81]","authToken":"63b98a8b098e09cd16f6b3e3eca6b7da","authorities":[{"authority":"ROLE_MEMBER"}],"accountNonExpired":true,"accountNonLocked":true,"credentialsNonExpired":true,"enabled":true}};

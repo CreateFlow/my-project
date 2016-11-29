@@ -1,0 +1,23 @@
+{
+
+    "path": {
+        "shopBase": "http://gmv-shop.bwcmall.com",
+        "bwcmallBase": "http://gmv.bwcmall.com",
+        "bwcmallApi": "https://gmv.bwcmall.com/api",
+        "domain": ".bwcmall.com"
+    },
+
+    "grunt": {
+        "path": "path",
+        "task": [
+            "clean",
+            "path:dev",
+            "includereplace",
+            "compass",
+            "imagemin",
+            "requirejs",
+            "copy:dist"
+        ]
+    }
+
+}

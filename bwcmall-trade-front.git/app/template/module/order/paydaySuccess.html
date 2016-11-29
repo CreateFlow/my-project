@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>支付成功</title>
+    @@include('../../include/common/meta.html') @@include('../../include/common/common-include.html')
+    <link rel="stylesheet" href="/styles/module/order/paydaySuccess.css" />
+    <script src="/scripts/module/order/paydaySuccess.js"></script>
+</head>
+
+<body ms-controller="orderThreeCtrl">
+    @@include('../../include/common/header.html')
+    <div class="gs-header">
+        @@include('../../include/common/account-head.html')
+    </div>
+    <div class="g-content">
+
+        <div class="order-block">
+            <div class="order-success">
+                <div class="order-success-top">支付成功</div>
+                <div class="order-success-bottom">您的订单已经支付成功，我们将尽快为您发货，请您耐心等待~</div>
+                <div class="order-success-btn">
+                    <a href="/order/list.html" class="trans_link_3 order-success-go">返回订单中心</a>
+                    <a href="/wholesale.html" class="trans_link_3 order-success-my">去商城逛逛</a>
+                </div>
+            </div> 
+        </div>
+    </div>
+    @@include('../../include/common/footer.html')
+    </script>
+</body>
+
+</html>

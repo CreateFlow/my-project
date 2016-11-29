@@ -1,0 +1,238 @@
+@charset "UTF-8";
+
+@import "../common/scaffolding";
+
+.mod-index {
+    .content {
+        .pane {
+            @include border-radius(2px);
+            position: relative;
+            margin-left: 32px;
+            margin-top: 32px;
+            width: 212px;
+            height: 116px;
+            background-color: #a571c6;
+
+            .icon {
+                top: 30px;
+                left: 30px;
+                font-size: 40px;
+                position: absolute;
+                color: #fff;
+            }
+            &_bd {
+                padding-right: 30px;
+                color: #fff;
+                text-align: right;
+                > .number {
+                    height: 58px;
+                    line-height: 88px;
+                    font-size: 36px;
+                }
+                > .title {
+                    height: 58px;
+                    line-height: 50px;
+                }
+            }
+        }
+        .account{
+            height: 159px;
+            .account-table{
+                height: 91px;
+                margin-top: 33px;
+                td{
+                    vertical-align:top;
+                }
+            }   
+            .account-photo {
+                display: inline;
+                float: left;
+                width: 78px;
+                margin-left: 30px;
+            }
+
+            .account-photo  a, .account-photo img {
+                width: 76px;
+                height: 76px;
+
+            }
+            .account-photo  a {
+                -webkit-border-radius: 50%;
+                -webkit-background-clip: padding-box;
+                -moz-border-radius: 50%;
+                -moz-background-clip: padding;
+                border-radius: 50%;
+                background-clip: padding-box;
+                overflow: hidden;
+                border: 1px solid #e1e1e1;
+                display: block;
+            }
+
+            .account-userinfo{
+               margin-left:20px;float:left;line-height:2em; 
+            }
+            .account-userifo-title{
+                margin-top:15px;font-weight:bold
+            }
+            .account-userifo-p{
+                
+            }
+
+            .account-tip{
+                margin:0px 150px 0px 150px;line-height:2em;position:relative;
+            }
+            .account-border-right{
+                width:362px;border-right:1px solid #DAD6D4
+            }
+        }
+
+        // .item-icon {
+        //     position: relative;
+        //     left: 35px;
+        //     top: 35px;
+        //     float: left;
+        // }
+
+        // .item-number {
+        //     color:white;
+        //     position: relative;
+        //     left: 130px;
+        //     top: 30px;
+        //     font-size: 36px;
+        // }
+        // .item-title {
+        //     color:white;
+        //     position: relative;
+        //     left: 80px;
+        //     top: 45px;
+        //     font-size: 12px;
+        // }
+    }
+
+
+}
+
+.tab{
+   .tab-box{
+        width: 96%;
+        margin: 40px auto 0px;
+        p{
+            line-height:40px;
+        }
+
+        .icon {
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            background-repeat: no-repeat;
+            background-position: left center;
+            position:relative;
+            top:-6px;
+            &-correct {
+                background-image: url("/images/common_duihao_icon.png");
+            }
+            &-false {
+                background-image: url("/images/common_cuowu_icon.png");
+            }
+        }
+    }
+    .currentData{
+        line-height:40px;
+        height:40px;
+        border-bottom:2px solid #eee;
+        font-size:14px;
+    }
+    .spanTab{
+        width: 80px;
+        text-align: center;
+        line-height: 40px;
+        height: 40px;
+        margin-left: 80px;
+        display: block;
+        float: left;
+        cursor:pointer;
+    }
+    .currentTab{
+        border-bottom:2px solid #E33333;
+        color:#E33333;
+        
+    }
+}
+
+// .content {
+//     width: 1200px;
+//     margin: 0 auto;
+//     margin-top: 20px;
+//     .left-box {
+//     	margin-left: 20px;
+//     	float:left;
+//     	width:980px;
+//     	height:454px;
+//     	border: 1px solid #e0e0e0;
+//     	.title {
+//     		width: 100%;
+//     		height: 44px;
+//     		background-color: #f5f5f5;
+//     		border-bottom: 1px solid #e0e0e0;
+//     	}
+
+//     	.item {
+//             position: relative;
+//     		margin-left: 32px;
+//     		margin-top: 32px;
+//     		width: 212px;
+//     		height: 116px;
+//     		background-color: #a571c6;
+//             .icon {
+//                 top: 30px;
+//                 left: 30px;
+//                 font-size: 40px;
+//                 position: absolute;
+//                 color: #fff;
+//             }
+//     	}
+
+//     	.item-icon {
+//     		position: relative;
+// 		    left: 35px;
+// 		    top: 35px;
+// 		    float: left;
+//     	}
+
+//     	.item-number {
+//     	   	color:white;
+//     		position: relative;
+// 		    left: 130px;
+// 		    top: 30px;
+// 		    font-size: 36px;
+//     	}
+//     	.item-title {
+//     		color:white;
+// 			position: relative;
+//     		left: 80px;
+//     		top: 45px;
+//     		font-size: 12px;
+//     	}
+//     }
+// }
+
+#dialogFreight {
+    .inputbox {
+        border: 1px solid #e0e0e0;
+        width: 200px;
+        height: 30px;
+    }
+
+    .line-item{
+        line-height:36px;
+    }
+
+    .step-last {
+        text-align: center;
+        padding: 20px 0;
+    }
+
+    .oni-dialog-footer {
+        display: none;
+    }
+}

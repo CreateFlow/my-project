@@ -1,0 +1,23 @@
+{
+
+    "path": {
+        "shopBase": "http://localhost:9000",
+        "bwcmallBase": "http://localhost:9001",
+        "bwcmallApi": "https://api.earth.dev.bwcmall.cn/api",
+        "domain": "localhost"
+    },
+
+    "grunt": {
+        "path": "path",
+        "task": [
+            "clean:dist",
+            "path:production",
+            "includereplace",
+            "compass",
+            "imagemin",
+            "requirejs",
+            "copy:dist"
+        ]
+    }
+
+}

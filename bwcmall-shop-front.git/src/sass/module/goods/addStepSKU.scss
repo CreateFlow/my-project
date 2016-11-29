@@ -1,0 +1,271 @@
+@charset "UTF-8";
+@import "../../common/scaffolding";
+.goods-step-sku {
+	.btn-large {
+		height: 40px;
+        line-height: 40px;
+        padding: 0 15px;
+        font-size: 14px;
+        font-weight: bold;
+        text-align: center;
+        color: #fff;
+        background-color: #e33333;
+        margin-left: 80px;
+	}
+	.radio-inline {
+		display:inline-block;
+		width: 120px;
+	}
+	.item {
+		position: relative;
+		line-height: 36px;
+		.item_label {
+			position: absolute;
+			left: 10px;
+			top: 0;
+		}
+		.item_value {
+			margin-left: 150px;
+		}
+	}
+	.imgs-wrap {
+		overflow: hidden;
+		.img-item {
+			float: left;
+			margin-left: 10px;
+			img {
+				width: 160px;
+				height: 140px;
+				display: block;
+				border: none;
+			}			
+		}
+		.img-item:first-of-type {
+			margin-left: 0;
+		}
+		.btn {
+			width: 50%;
+			float: left;
+			height: 26px;
+		}
+	}
+	.goods-detail-info {
+		padding: 10px;
+	}
+}
+.box {
+	.box-title {
+		.title {
+			background: #fafafa;
+			padding: 0 10px;
+			border: 1px solid #ddd;
+			display: inline-block;
+			height:40px;
+			line-height: 40px;
+			vertical-align: top;
+		}
+		font-size: 14px;
+		margin-top: 10px;		
+	}
+	.box-cont {
+		border: 1px solid #ddd;
+	}
+}
+.table-wrap {
+    overflow: auto;
+    width: 100%;
+    .ctable {
+    	.checked-tr {
+			background-color: rgba(232, 54, 55, 0.1);
+		}
+    }
+}
+.ctable {
+    margin-top: 10px;
+    margin-bottom: 30px;
+    position: relative;
+    color: #666;
+    table-layout: fixed;
+    .ctr {
+        height: 44px;
+        line-height: 44px;
+        border-bottom: 1px solid #e0e0e0;
+    }    
+    .th-price {
+    	min-width: 160px;
+    }
+    td {
+        text-align: center;
+    }
+    .cell-empty {
+        padding: 5em;
+        text-align: center;
+        border-bottom: 1px solid #eee;
+    }
+    .thb {
+        border-bottom: 2px solid #e0e0e0;
+    }
+    .tr-bg {
+        background-color: #f3f3f3;
+    }
+    .link {
+        color: lightskyblue;
+    }
+    .loading-wrapper {
+        position: absolute;
+        top: 0;
+        right: 0;
+        left: 0;
+        bottom: 0;
+        background-color: rgba(204, 204, 204, 0.35);
+    }
+}
+.goods-step-two {
+	.table-related {
+		.btn {
+			float: right;
+		}
+	}	
+	th {
+    	min-width: 110px;
+    }
+    .th-attr {
+    	min-width: 250px;
+    }
+}
+.empty-tip {
+    line-height: 115px;
+    padding-left: 50px;
+}
+.dialog-add-sku {
+	.attr-line {
+		position: relative;
+		padding-left: 150px;
+		line-height: 36px;
+	}
+	.attr-label {
+		position: absolute;
+		width: 150px;
+		left: 0;
+	}
+	.attr-item-inline {
+		display: inline-block;
+		width: 100px;
+	}
+}
+.upload-pic-wrap {
+	margin-top: 10px;
+}
+.inputbox {
+	border: 1px solid #e0e0e0;
+	width: 90px;
+}
+.operation {
+	text-align: center;
+}
+.mainattr-img {
+	.attr-item-inline {
+		margin: 10px;
+	}
+	.mainattr-radio-wrap {
+		margin: 10px;
+		position: relative;
+		padding-left: 150px;
+		.mainattr-label {
+			position: absolute;
+			left: 0;
+		}
+	}
+}
+.dialog-add-sku {
+	.attr-check {
+		max-height: 150px;
+		overflow-y: auto;
+	}
+	.table-wrap {
+		max-height: 250px;
+	}
+	.ctable {
+		width: 100%;
+		th:first-of-type {
+			width: 100px;
+		}
+		th {
+			text-align: center;
+			min-width: auto;
+			width: auto;
+		}
+		.th-attr {
+			width: auto;
+			min-width: auto;
+		}
+	}
+}
+.step-last {
+	text-align: center;
+	padding: 20px 0;
+	.btn {
+		width: 100px;
+		margin: 0 30px;
+	}
+}
+.goods-step-thrid {
+	.box-title {
+		.btn {
+			float: right;
+		}
+	}
+}
+.error {
+	border: 1px solid red;
+}
+.dialog-add-attr {
+	.item {
+		padding: 10px 0;
+		.label {
+			width: 100px;
+			line-height: 40px;
+			display:inline-block;
+		}
+		input {
+			height: 34px;
+			line-height: 34px;
+			border: 1px solid #ccc;
+			width: 180px;
+			padding: 0 10px;
+		}
+	}
+
+}
+.editor-wrap {
+	textarea {
+		border: 1px solid #ccc;
+		min-width: 500px;
+		min-height: 100px;
+	}
+}
+
+#dialogAlert, #dialogSubmitTip, #dialogConfigPrices{
+	.step-last {
+		text-align: center;
+		padding: 20px 0;
+	}
+
+	.oni-dialog-footer {
+	    display: none;
+	}
+
+	.item {
+		height: 32px;
+	}
+
+	th {
+		text-align:center;
+	}
+}
+
+#dialogConfigPrices{
+    height:600px;
+    overflow:auto;
+    margin-top:15px;
+}

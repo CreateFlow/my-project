@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>定价策略管理</title>
+    @@include('../../include/common/intro.html')
+    <link rel="stylesheet" href="/css/module/price/tack.css" />
+</head>
+
+<body>
+    @@include('../../include/common/header.html') @@include('../../include/common/nav.html')
+    <div class="main tack">
+        <div class="sidebar">
+            @@include('../../include/common/menu.html')
+        </div>
+        <div class="content ms-controller" ms-controller="tack">
+            <div class="panel">
+                <div class="hd">
+                    <span class="title">定价策略管理</span>
+                </div>
+                <div class="bd">
+                    <button class="btn btn-primary" ms-click="showAddTackDlg">新增定价策略</button>
+                    <table class="ctable">
+                        <thead>
+                            <tr width="100%" class="thb ctr">
+                                <th>序号</th>
+                                <th width='30%'>名称</th>
+                                <th>排序</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ms-if="tackList.length>0" ms-repeat-el="tackList" class="ctr" ms-class="tr-bg:($index%2==0)">
+                                <td>{{$index+1}}</td>
+                                <td>{{el.name}}</td>
+                                <td>{{el.sort}}</td>
+                                <td>
+                                    <a href="javascript:void(0)" ms-click="editTackDlg(el)">修改</a>
+                                    <span>|</span>
+                                    <a href="javascript:void(0)" ms-click="delTack(el.id)">删除</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div ms-widget="dialog,dlgAddTackId,dlgAddTackOption">
+                <div class="col offerset-2">
+                    <div class="row">
+                        <div class="col col-3 input-label">名称：</div>
+                        <div class="col col-9">
+                            <input type="text" placeholder="请填写策略名称" class="inputbox inputbox-main" ms-duplex="tackData.name" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col col-3 input-label">排序：</div>
+                        <div class="col col-9">
+                            <input type="number" placeholder="请填写策略排序" class="inputbox inputbox-main" ms-duplex="tackData.sort" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div ms-widget="dialog,dlgConfirmEnable,opts1">
+                <div class="col offerset-2">
+                    {{confirmReceivedMsg}}
+                </div>
+            </div>
+        </div>
+    </div>
+    @@include('../../include/common/outro.html')
+    <script>require(['conf/price/tack']);</script>
+</body>
+
+</html>

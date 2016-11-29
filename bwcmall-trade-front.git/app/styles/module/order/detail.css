@@ -1,0 +1,469 @@
+body{
+    font-family: "Microsoft YaHei";
+}
+.g-content {
+    margin: 0 auto;
+    width: 1200px;
+    min-height: 500px;
+    border: 1px solid #dad6d4;
+}
+
+.g-ctop{
+    width: 1202px;
+    height: 40px;
+    line-height: 40px;
+    font-size: 14px;
+    margin: 0 auto;
+    text-align: left;
+    clear: both;
+}
+
+.g-cbottom{
+    width: 1000px;
+    height: 56px;
+    background-color: #e0dcda;
+    margin: 1px auto 30px;
+    position: relative;
+    padding-right: 202px;
+    text-align: right;
+}
+
+/*order-detail-header start++++++++++*/
+.order-detail-header{
+    width: 1180px;
+    padding-left: 20px;
+    height: 40px;
+    line-height: 40px;
+    background-color: #e0dcda;
+}
+
+.odh-num{
+    color: #2d2927;
+}
+
+.odh-time{
+    margin-left: 20px;
+    color: #8d8783;
+}
+
+.odh-cancel{
+   float: right;
+    color: #333;
+    margin-right: 20px;
+}
+
+.odh-cancel:hover{
+    text-decoration: underline;
+}
+/*order-detail-header end----------*/
+
+
+
+/*gcb start++++++++++*/
+.gcb-gopay{
+    width:156px;
+    height:56px;
+    line-height:56px;
+    background-image: url(/images/order/goPay1.png);
+    background-repeat: no-repeat;
+    text-align: center;
+    color: #fff;
+    font-size: 18px;
+    font-weight: bold;
+    margin-top:0;
+    position: absolute;
+    right: 0;
+    top:0;
+}
+
+.gcb-num{
+    width:150px;
+    height:28px;
+    padding-top: 12px;
+    text-align: center;
+    font-size:14px;
+}
+
+.gcb-money-1{
+    width:150px;
+    height:28px;
+    padding-top: 28px;
+    text-align: center;
+    font-size:14px;
+}
+
+.gcb-freight{
+    width:150px;
+    height:28px;
+    padding-top: 28px;
+    text-align: center;
+    font-size:14px;
+    position: absolute;
+    top:0;
+    right: 330px;
+}
+
+.gcb-money{
+    width:190px;
+    height:38px;
+    padding-top: 12px;
+    text-align: center;
+    font-size:14px;
+    margin-top:0;
+}
+/*gcb end----------*/
+
+
+
+/*order-detail-status start++++++++++*/
+.order-detail-status{
+    width: 1005px;
+    padding-left: 195px;
+
+    height: 190px;
+    border-bottom: 1px solid #dad6d4;
+    position: relative;
+}
+
+.ods-one{
+    width: 130px;
+    height: 155px;
+    padding-top: 35px;
+    float: left;
+    text-align: center;
+    position: relative;
+    margin-right: 42px;
+}
+
+.ods-one-img{
+    height: 76px;
+    line-height: 76px;
+}
+
+.ods-one-status{
+    height: 35px;
+    line-height: 35px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.ones-color0{
+    color: #8d8783;
+}
+
+.ones-color1
+{
+    color: #382223;
+}
+
+.ods-one-time{
+    color: #8d8783;
+}
+
+.ods-one-line{
+    width: 100px;
+    height: 0;
+    position: absolute;
+    top: 72px;
+    left: 99px;
+}
+
+.ods-lineyes{
+    border-top: 1px solid #87c38d;
+}
+
+.ods-lineno{
+    border-top: 1px solid #dad6d4;
+}
+
+.ods-one-line-left{
+    width: 200px;
+    height: 0;
+
+    position: absolute;
+    top: 72px;
+    left: 22px;
+}
+
+.ods-one-line-right{
+    width: 200px;
+    height: 0;
+    position: absolute;
+    top: 72px;
+    right: 18px;
+}
+/*order-detail-status end----------*/
+
+
+
+/*order-detail-goods start++++++++++*/
+.order-detail-goods{
+    width: 559px;
+    padding: 20px;
+    min-height: 404px;
+    float: left;
+    border-right: 1px solid #dad6d4;
+}
+
+.odg-one{
+    height: 64px;
+    width: 560px;
+    padding: 20px 0 10px;
+    position: relative;
+    border-bottom: 1px solid #dad6d4;
+    font-family: "microsoft yahei";
+    font-size: 14px;
+    color: #5b534e;
+    line-height: 20px;
+}
+
+.odgo-img{
+    height: 64px;
+    width: 64px;
+    position: absolute;
+    border: 1px solid #fff; 
+}
+
+.odgo-name{
+    margin-left: 70px;
+    width: 190px;
+    vertical-align: top;
+    cursor:pointer;
+    color: #5b534e;
+    line-height:15px;
+    height:75px;
+    overflow: hidden;
+}
+
+.odgo-name:hover{
+    text-decoration: underline;
+}
+
+.odgo-price{
+    margin-left: 20px;
+    width:100px;
+}
+
+.odgo-num{
+    margin-left: 20px;
+    width:80px;
+}
+
+
+.oogo-num-pos{
+    position:relative;
+}
+
+.oogo-num-tips{
+    display: inline-block;
+    height:20px;
+    /*width:20px;*/
+    cursor:pointer;
+
+}
+
+.oogo-num-tips-info{
+    height:30px;
+    line-height:30px;
+    width:120px;
+    background-color: #e0dcda;
+    position:absolute;
+    right: -110px;
+    top: -8px;
+    text-indent: 10px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    display: none;
+}
+
+.oogo-num-tips-info .arrow{
+    width: 0;
+    height: 0;
+    border-top: 7px solid transparent;
+    border-right: 7px solid #e0dcda;
+    border-bottom: 7px solid transparent;
+    position: absolute;
+    left: -7px;
+    top: 7px;
+}
+
+
+
+.odgo-change {
+    margin-left: 10px;
+    color: #333;
+    width:50px;
+}
+
+.odgo-changetips{
+    width: 168px;
+    height: 78px;
+    padding: 12px 0 5px 28px; 
+    line-height: 25px;
+    font-size: 12px;
+    font-family: "microsoft yahei";
+    position: relative;
+    z-index: 1;
+    left: 205px;
+    top: -45px;
+    background: url("/images/common/shop-tips.png") no-repeat;
+    display: none;
+}
+
+.odgo-changetips .arrow{
+    width: 0;
+    height: 0;
+    border-top: 10px solid transparent;
+    border-right: 10px solid #bc9c7c;
+    border-bottom: 10px solid transparent;
+    position: absolute;
+    left: -10px;
+    top: 17px;
+}
+/*order-detail-goods end----------*/
+
+
+
+/*order-detail-receiver start++++++++++*/
+.order-detail-receiver{
+    width: 560px;
+    min-height: 300px;
+
+    float: left;
+    padding: 20px 20px;
+}
+
+.odr-title{
+    height: 40px;
+    line-height: 40px;
+}
+
+.odr-table{
+    width: 559px;
+}
+
+.odr-table td{
+    border: 1px solid #dad6d4;
+    padding-left: 15px;
+    height: 30px;
+    line-height: 30px;
+}
+
+.odr-bg{
+    background-color: #f4f1ee;
+}
+/*order-detail-receiver end----------*/
+
+/* detail peas */
+.order-detail-peas{
+    padding: 20px 0 10px 0;
+    text-align: right;
+    border-top: 1px solid #dad6d4;
+}
+.order-detail-peas-inner{
+    margin-right: 20px;
+    text-align: right;
+}
+.order-detail-peas span{
+    display: block;
+    margin-bottom: 15px;
+    font-size: 14px;
+    color: #333;
+}
+/* detail peas */
+
+/*快捷支付弹窗样式 start*/
+
+.order-shop-panel{
+    height: 70px;
+    border-bottom: 1px solid #ddd;
+    font-size: 14px;
+}
+.order-shop-title{
+    margin-top: 20px;
+    margin-left: 20px;
+}
+.order-shop-title span{
+    font-size: 14px;
+    font-weight: bold;
+}
+.link {
+       border: 1px solid #ddd;
+    margin: -5px 970px 0px 10px;
+    padding: 7px;
+    text-align: center;
+    cursor: pointer;
+    width: 100px;
+    float: right;
+    height: 10px;
+    /* margin-left: -500px; */
+    line-height: 10px;
+}
+.link-icon {
+        background: url('/images/afs/ic_contact.png') no-repeat 1px 13px;
+    padding: 10px;
+    margin-right: 10px;
+}
+.order-shop-content{
+    clear: both; 
+    margin-left: 20px;
+    margin-top: 20px;
+}
+.order-shop-span{
+    width: 33%;
+    float: left;
+}
+.order-shop-span label{
+
+}
+.order-shop-span span{
+   margin-left: 10px;
+}
+.order-shop-address{
+    margin-left: -200px;
+ }
+ .comment {
+    border-top: 1px solid #dad6d4;
+    padding: 20px;
+}
+.comment-title {
+    color: #2b2a28;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+.comment-content {
+    font-size: 12px;
+    line-height: 1.5;
+    text-indent: 2em;
+    color: #585858;
+}
+
+.sub-order-bottom-total {
+    font-size: 14px;
+    color: #585858;
+    margin-right: 20px;
+    line-height: 60px;
+}
+
+.sub-order-bottom-total em {
+    color: #e83637;
+}
+
+.sub-order-bottom-money {
+    font-size: 14px;
+    color: #585858;
+    margin-right: 15px;
+}
+
+.sub-order-bottom-money em {
+    color: #e83637;
+}
+
+.sub-order-bottom-money span {
+    font-size: 24px;
+    font-weight: normal;
+}
+.sub-order-bottom-money em {
+    background-color:none;
+}

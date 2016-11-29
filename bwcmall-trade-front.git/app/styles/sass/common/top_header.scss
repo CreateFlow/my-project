@@ -1,0 +1,241 @@
+.g-header {
+  width: 100%;
+  min-width: 1200px;
+  background-color: #f7f7f7;
+  height: 36px;
+  font-family:'Microsoft YaHei';
+}
+.g-header-inner {
+  width: 1200px;
+  margin: 0 auto;
+  font-size:12px;
+  color:#585858;
+}
+.g-header-inner a{
+  color:#585858;
+}
+.g-header-inner a:hover{
+  color:#e83637;
+}
+.header-left {
+  float:left;
+  height: 36px;
+  line-height:36px;
+}
+.welcome{
+  margin-right:20px;
+}
+.header-left a{
+    margin-right: 10px;
+}
+.header-right {
+  float: right;
+  height: 36px;
+  line-height:36px;
+}
+.header-right>span>a{
+  margin:0 5px;
+}
+.header-right .perfect-info{
+  color:#e33333;
+  text-decoration:underline;
+}
+.header-right .perfect-text{
+    color:#e33333;
+}
+.purchase-order{
+  float:right;
+  position:relative;
+}
+.purchase-order:hover .purchase-order-inner{
+  display:block;
+}
+.purchase-order-title{
+  display:block;
+  text-align:center;
+  padding:0 16px; 
+  height:36px;
+}
+.purchase-order:hover .purchase-order-title{
+  padding:0 15px;
+  border:1px solid #e6e6e6;
+  border-bottom:none;
+  border-top:none;
+  background-color:#fff;
+  color:#e33333;
+}
+.white-line{
+  display:none;
+  position:absolute;
+  bottom:-1px;
+  left:0;
+  width:100%;
+  height:1px;
+  background-color:#fff;
+  z-index:1001;
+}
+.purchase-order:hover .white-line{
+  display:block;
+}
+.purchase-icon1{
+  display:inline-block;
+  width:14px;
+  height:17px;
+  background-image:url(/images/common/purchase-icon1.png);
+  background-position:top center;
+  margin-right:5px;
+  vertical-align:-3px;
+}
+.purchase-num{
+  color:#e83637;
+}
+.purchase-icon2{
+  display:inline-block;
+  width:6px;
+  height:4px;
+  background-image:url(/images/common/purchase-icon2.png);
+  background-position:top center;
+  vertical-align:2px;
+  margin-left:5px;
+}
+.purchase-order-inner{
+  display:none;
+  position:absolute;
+  top:36px;
+  right:0;
+  background-color:#fff;
+  width:340px;
+  min-height:114px;
+  padding:0 15px;
+  border:1px solid #e6e6e6;
+  z-index:1000;
+}
+.recently-add{
+  font-size:12px;
+  color:#666;
+  font-weight:bold;
+  height:36px;
+  line-height:36px;
+  padding-top:10px;
+  border-bottom:1px solid #f6f6f6;
+}
+.purchase-p1{
+  font-size:12px;
+  line-height:20px;
+  color:#666666;
+  text-align:center;
+  margin-top:25px;
+}
+a.login-now{
+  display:block;
+  width:100px;
+  height:26px;
+  line-height:26px;
+  font-size:12px;
+  color:#fff !important;
+  background-color:#e33333;
+  text-align:center;
+  margin:15px auto 0;
+}
+a.login-now:hover{
+  color:#fff;
+}
+.purchase-p2{
+  font-size:12px;
+  line-height:20px;
+  color:#666;
+  text-align:center;
+  margin-top:45px;
+}
+.purchase-list{
+  max-height:305px;
+  overflow:auto;
+}
+.purchase-list li{
+  height:40px;
+  line-height:40px;
+  font-size:12px;
+  color:#666666;
+  padding:10px;
+  border-bottom:1px solid #f6f6f6;
+}
+.purchase-pic{
+  float:left;
+  display:block;
+  width:40px;
+  height:40px;
+  text-align:center;
+  vertical-align:middle;
+  overflow:hidden;
+}
+.purchase-pic img{
+  width:100%;
+}
+.purchase-text{
+  float:left;
+  width:120px;
+  margin-left:15px;
+  white-space:nowrap;
+  text-overflow:ellipsis;
+  overflow:hidden;
+}
+.purchase-text a{
+  color:#666;
+}
+.purchase-text a:hover{
+  color:#e83637;
+}
+.purchase-num-wrap{
+  float:left;
+  margin:9px 0 0 20px;
+}
+.num-add,.num-min{
+  float:left;
+  display:block;
+  width:16px;
+  height:20px;
+  line-height:20px;
+  font-size:16px;
+  color:#d1d1d1;
+  text-align:center;
+  border:1px solid #e7e7e7;
+  cursor:pointer;
+}
+.purchase-input{
+  float:left;
+  width:20px;
+  height:12px;
+  line-height:12px;
+  padding:4px 5px;
+  border:none;
+  outline:0;
+  border-top:1px solid #e7e7e7;
+  border-bottom:1px solid #e7e7e7;
+  text-align:center;
+}
+.purchase-del{
+  float:right;
+  cursor:pointer;
+}
+.view-purchase{
+  float:right;
+  display:inline-block;
+  height:26px;
+  line-height:26px;
+  padding:0 10px;
+  font-size:12px;
+  color:#fff !important;
+  background-color:#e33333;
+  margin:10px 0;
+}
+@-webkit-keyframes rotate{
+  0%{
+    transform:rotate(0deg);
+  }
+  100%{
+    transform:rotate(360deg);
+  }
+}
+.fly{
+  animation:rotate .1s linear infinite;
+}

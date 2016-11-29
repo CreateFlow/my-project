@@ -1,0 +1,224 @@
+<script type="text/javascript" src="/scripts/module/top-search/top-search.js"></script>
+<link rel="stylesheet" href="/styles/common/mid_header.css"/>
+<div class="g-head">
+  <div class="head-top">
+      <div class="head-top-logo">
+          <a href="/" title="佰万仓">
+            <img src="//www.bwcmall.com/images/index/logo.png" alt="">
+          </a>
+      </div>
+      <div class="head-code"></div>
+      <div class="head-top-consult f-fr"></div>
+      <div class="f-fr u-sh head-top-sh" ms-controller="topSearchCtrl">
+          <span class="u-sh-span"> 
+              <input type="text" value="" class="u-sh-input" placeholder="请输入商品名称或型号" ms-keyup="onSearchKeyup()"/>
+          </span>
+          <span class="u-sh-span">
+              <a href="javascript:void(0);" class="u-sh-link" ms-click="onSearchBtnClick()">搜索</a>
+          </span>
+          <div class="search_result" >
+              <div class="search_result_list">
+                  <dl>
+                      <dt>
+                          <h4 class="classification on_hover_a" data-class="category"
+                               ms-mouseout="onShopTitleMouseout()"
+                               ms-mouseover="onShopTitleMouseover()">店铺</h4>
+                              <div class="search_popupmenu">
+                              <h3>店铺<a ms-click="doSearch()" href="javascript:void(0)">更多</a></h3>
+                              <ul class="more_list">
+                                  <li ms-repeat-item="suggestShopList" ms-if="suggestShopList.length>0"  >
+                                      <a ms-click="doSearch(item.id,'','','')" href="javascript:void(0)">{{item.name|subStr25}}</a>
+                                  </li>
+                              </ul>
+                          </div>
+                      </dt>
+                      <dd>
+                          <ul class="goods_list">
+                              <li class="goods_list_item" ms-repeat="suggestResult.shopList" ms-if="suggestResult.shopList.length>0">
+                                  <div data-class="category" ms-attr-data-id="{{el.id}}" class="on_hover"  ms-mouseout="onShopMouseout(el.id)"  ms-mouseover="onShopMouseover(el.id)"  ms-click="doSearch(el.id,'','','')"  >
+                                      <p>{{el.name|subStr25}}</p>
+                                      <span ms-text="'约'+el.total+'个商品'"></span>
+                                  </div>
+                                  <div class="search_popupmenu">
+                                      <h3><span style="float: left;" ms-text="el.name"></span><a  ms-click="doSearch(el.id,'','','')" href="javascript:void(0)">更多</a></h3>
+                                      <ul class="more_goods_list">
+                                          <li class="goodshover_item" ms-repeat="suggestShopProductList" ms-if="suggestShopProductList.length>0" >
+                                              <div class="goods_list_detail"  ms-click="viewDetail(el.id)">
+                                                  <img ms-attr-src="{{el.images[0]}}">
+                                              </div> 
+                                              <div class="top_serach_row">
+                                                  <h5 ms-text="subStr(el.brandName+el.name,10)"  ms-click="viewDetail(el.id)"></h5> 
+                                                  <div class="price">
+                                                      <p>{{ el.price | number(2)}}</p> 
+                                                  </div>
+                                              </div>  
+                                              <div class="num">
+                                                  <span class="tb-stock" id="J_Stock">
+                                                     <a href="javascript:void(0);" title="减1" ms-click="numMinus()" class="num_btn product-minus">-</a>
+                                                     <input id="J_IptAmount" type="text" class="num_text product-num" value="1" maxlength="8" title="请输入购买量" name="sNumber">
+                                                     <span class="sGoodsId" hidden style="display:none">{{el.id}}</span>
+                                                     <a href="javascript:void(0);"class="num_btn product-add" ms-click="numAdd()" title="加1" >+</a>
+                                                 </span>
+                                             </div> 
+                                              <div class="xinghao" ms-text="'型号:'+subStr(el.sn,25)"></div>
+                                              <div class="huoqi-wrap">
+                                                  <div class="huoqi">货期<span ms-text="el.minDeliveryTime+'-'+el.maxDeliveryTime"></span>天</div>
+                                                  <div class="top_search_shop_info">{{el.shopName|subStr25}}</div>
+                                             </div>
+                                             <a href="javascript:;" class="search_btn"  ms-if="isShoppingListModel != true" ms-click="addToCart()">加入进货单</a>
+                                             <a href="javascript:;" class="search_btn" ms-if="isShoppingListModel == true" ms-click="addshoplist()">加入购物清单</a>
+                                         </li>
+                                     </ul>
+                                    
+                                     
+                                 </div>
+                             </li>
+                         </ul>
+                     </dd>   
+                      <dt>
+                          <h4 class="classification on_hover_a" data-class="category"
+                               ms-mouseout="onCategoryTitleMouseout()"
+                               ms-mouseover="onCategoryTitleMouseover()">品名</h4>
+                              <div class="search_popupmenu">
+                              <h3>品名<a ms-click="doSearch()" href="javascript:void(0)">更多</a></h3>
+                              <ul class="more_list">
+                                  <li ms-repeat-item="suggestCatList" ms-if="suggestCatList.length>0"  >
+                                      <a ms-click="doSearch('','',item.id,'')" href="javascript:void(0)">{{item.name}}</a>
+                                  </li>
+                              </ul>
+                          </div>
+                      </dt>
+                      <dd>
+                          <ul class="goods_list">
+                              <li class="goods_list_item" ms-repeat="suggestResult.categoryList" ms-if="suggestResult.categoryList.length>0">
+                                  <div data-class="category" ms-attr-data-id="{{el.id}}" class="on_hover"  ms-mouseout="onCategoryMouseout(el.id)"  ms-mouseover="onCategoryMouseover(el.id)"  ms-click="doSearch('','',el.id,'')"  >
+                                      <p>{{el.name}}</p>
+                                      <span ms-text="'约'+el.count+'个商品'"></span>
+                                  </div>
+                                  <div class="search_popupmenu">
+                                      <h3><span style="float: left;" ms-text="el.name"></span><a  ms-click="doSearch('','',el.id,'')" href="javascript:void(0)">更多</a></h3>
+                                      <ul class="more_goods_list">
+                                          <li class="goodshover_item" ms-repeat="suggestCatProductList" ms-if="suggestCatProductList.length>0" >
+                                              <div class="goods_list_detail"  ms-click="viewDetail(el.id)">
+                                                  <img ms-attr-src="{{el.images[0]}}">
+                                              </div> 
+                                              <div class="top_serach_row">
+                                                  <h5 ms-text="subStr(el.brandName+el.name,10)"  ms-click="viewDetail(el.id)"></h5>  
+                                                  <div class="price">
+                                                      <p>{{ el.price | number(2)}}</p> 
+                                                  </div>
+                                              </div>  
+                                              <div class="num">
+                                                  <span class="tb-stock" id="J_Stock">
+                                                     <a href="javascript:void(0);" title="减1" ms-click="numMinus()" class="num_btn product-minus">-</a>
+                                                     <input id="J_IptAmount" type="text" class="num_text product-num" value="1" maxlength="8" title="请输入购买量" name="sNumber">
+                                                     <span class="sGoodsId" hidden style="display:none">{{el.id}}</span>
+                                                     <a href="javascript:void(0);"class="num_btn product-add" ms-click="numAdd()" title="加1" >+</a>
+                                                 </span>
+                                             </div> 
+                                              <div class="xinghao" ms-text="'型号:'+subStr(el.sn,25)"></div>
+                                              <div class="huoqi-wrap">
+                                                  <div class="huoqi">货期<span ms-text="el.minDeliveryTime+'-'+el.maxDeliveryTime"></span>天</div>
+                                                  <div class="top_search_shop_info">{{el.shopName|subStr25}}</div>
+                                             </div>
+                                             <a href="javascript:;" class="search_btn"  ms-if="isShoppingListModel != true" ms-click="addToCart()">加入进货单</a>
+                                             <a href="javascript:;" class="search_btn" ms-if="isShoppingListModel == true" ms-click="addshoplist()">加入购物清单</a>
+                                         </li>
+                                     </ul>
+                                    
+                                     
+                                 </div>
+                             </li>
+                         </ul>
+                     </dd>   
+                     <dt>
+                          <h4 class="brandname on_hover_a"  data-class="brand"
+                            ms-mouseout="onBrandTitleMouseout()"
+                               ms-mouseover="onBrandTitleMouseover()" >品牌</h4>
+                          <div class="search_popupmenu">
+                              <h3>品牌<a  ms-click="doSearch()" href="javascript:void(0)">更多</a></h3>
+                              <ul class="more_list">
+                                  <li class="goods_list_item" ms-repeat="suggestBrandList" ms-if="suggestBrandList.length>0"><a 
+                                       ms-click="doSearch('',el.id,'','')" href="javascript:void(0)">{{el.name}}</a></li>
+                              </ul>
+                          </div>
+                      </dt>
+                      <dd>
+                          <ul class="goods_list">
+                              <li class="goods_list_item" ms-repeat-brand="suggestResult.brandList" ms-if="suggestResult.brandList.length>0">
+                                   <div data-class="brand" ms-attr-data-id="{{brand.id}}" class="on_hover"    ms-mouseout="onBrandMouseout(brand.id)"  ms-mouseover="onBrandMouseover(brand.id)" ms-click="doSearch('',brand.id,'','')" >
+                                      <p>{{brand.name}}</p>
+                                      <span ms-text="'约'+brand.count+'个商品'"></span>
+                                  </div>
+                                  <div class="search_popupmenu">
+                                      <h3><span ms-text="brand.name"  style="float: left;" ></span><a  ms-click="doSearch('',el.id,'','')" href="javascript:void(0)">更多</a></h3>
+                                      <ul class="more_list">
+                                          <li ms-repeat="suggestBrandCatList">
+                                              <a  ms-click="doSearch('',brand.id,el.id,'')" href="javascript:void(0)">{{el.name}}</a> 
+                                         </li>
+                                     </ul> 
+                                 </div>
+                             </li>
+                         </ul>
+                     </dd>   
+                  <dt>
+                      <h4 class="model on_hover_a"  data-class="sn"
+                               ms-mouseout="onSNTitleMouseout()"
+                               ms-mouseover="onSNTitleMouseover()" >型号</h4>
+                      <div class="search_popupmenu">
+                          <h3>型号<a  ms-click="doSearch('','','','')"   href="javascript:void(0)">更多</a></h3>
+                          <ul class="more_list">
+                              <li ms-repeat="suggestSNList" ms-if="suggestSNList.length>0">
+                                  <a  ms-click="doSearch('','','',el)" href="javascript:void(0)">{{el}}</a>
+                              </li>
+                          </ul>
+                      </div>
+                  </dt>
+                  <dd style="border-bottom:none;">
+                      <ul class="goods_list">
+                          <li class="goods_list_item" ms-repeat="suggestResult.snList" ms-if="suggestResult.snList && suggestResult.snList.length>0">
+                              <div data-class="snList" class="on_hover" ms-mouseout="onSNMouseout(el)" ms-mouseover="onSNMouseover(el)"    ms-click="doSearch('','','',el)">
+                                  <p>{{el}}</p> 
+                              </div>
+                              <div class="search_popupmenu">
+                                  <h3><span ms-text="el"  style="float: left;" ></span><a ms-click="doSearch('','','',el)"   href="javascript:void(0)">更多</a></h3>
+                                  <ul class="more_goods_list">
+                                       <li class="goodshover_item" ms-repeat="suggestCatProductList" ms-if="suggestCatProductList.length>0" >
+                                              <div class="goods_list_detail"  ms-click="viewDetail(el.id)">
+                                                  <img ms-attr-src="{{el.images[0]}}">
+                                              </div> 
+                                              <div class="top_serach_row">
+                                                  <h5 ms-text="subStr(el.brandName+el.name,10)"  ms-click="viewDetail(el.id)"></h5> 
+                                                  <div class="price">
+                                                      <p>{{ el.price | number(2)}}</p> 
+                                                  </div>
+                                              </div>  
+                                              <div class="num">
+                                                  <span class="tb-stock" id="J_Stock">
+                                                     <a href="javascript:void(0);" title="减1" ms-click="numMinus()" class="num_btn product-minus">-</a>
+                                                     <input id="J_IptAmount" type="text" class="num_text product-num" value="1" maxlength="8" title="请输入购买量" name="sNumber">
+                                                     <span class="sGoodsId" hidden style="display:none">{{el.id}}</span>
+                                                     <a href="javascript:void(0);"class="num_btn product-add" ms-click="numAdd()" title="加1" >+</a>
+                                                 </span>
+                                             </div> 
+                                              <div class="xinghao" ms-text="'型号:'+subStr(el.sn,25)"></div>
+                                              <div class="huoqi-wrap">
+                                                  <div class="huoqi">货期<span ms-text="el.minDeliveryTime+'-'+el.maxDeliveryTime"></span>天</div>
+                                                  <div class="top_search_shop_info">{{el.shopName|subStr25}}</div>
+                                             </div>
+                                              
+                                             <a href="javascript:;" class="search_btn"  ms-if="isShoppingListModel != true" ms-click="addToCart()">加入进货单</a>
+                                             <a href="javascript:;" class="search_btn" ms-if="isShoppingListModel == true" ms-click="addshoplist()">加入购物清单</a>
+                                         </li>
+                                  </ul>
+                              </div>
+                          </li>
+                      </ul>
+                  </dd>   
+              </dl>
+          </div>
+      </div>
+  </div>
+  <div class="clear"></div>
+  </div>
+</div>

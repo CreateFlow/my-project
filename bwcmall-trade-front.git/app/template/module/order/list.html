@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <title>我的订单</title>
+    @@include('../../include/common/meta.html') @@include('../../include/common/common-include.html')
+    <link rel="stylesheet" type="text/css" href="/styles/module/order/orderList.css"> 
+    <script src="/scripts/module/order/orderList.js"></script>
+</head>
+
+<body ms-controller="orderListCtrl">
+    @@include('../../include/common/header.html')
+    <div class="my-header">
+        @@include('../../include/common/account-head.html')
+    </div>
+     @@include('../../../partials/order/list.html')
+    @@include('../../include/common/footer.html')
+</body>
+
+</html>

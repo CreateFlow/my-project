@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html> 
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <title>退货退款-申请</title>
+    @@include('../../include/common/meta.html')
+    @@include('../../include/common/common-include.html')
+    <link rel="stylesheet" type="text/css" href="/styles/module/afs/return-apply-01.css"> 
+    <script src="/scripts/plugin/uploadifive/jquery.uploadify.min.js"></script> 
+    <script src="/scripts/plugin/uploadifive/jquery.uploadifive.min.js"></script> 
+    <script src="/scripts/module/common/upload-button.js"></script> 
+    <link rel="stylesheet" type="text/css" href="/styles/common/upload_button.css"/>    
+    <script src="/scripts/module/afs/return-apply-01.js"></script>
+</head>
+
+<body>
+    @@include('../../include/common/header.html')
+    <div class="my-header">
+        @@include('../../include/common/account-head.html')
+    </div> 
+     <!--主要内容-->
+    <div class="g-content g-clearfix"  ms-controller="returnApplyCtrl01">
+        <div class="return-progress-panel">
+            <div class="progess-node progess-node-fist">
+                <div class="progress-image ">
+                    <div class="progress-round-enable"><div class="round-text">1</div></div>
+                    <div class="progress-line-enable-right process-line" ></div>
+                </div>
+                <div class="progress-text progress-text-enable">买家申请<br/>退货退款</div>
+            </div>
+           <div class="progess-node">
+                <div class="progress-image ">
+                     <div class="progress-line-disable-left process-line"></div>
+                    <div class="progress-round-disable"><div class="round-text">2</div></div>
+                    <div class="progress-line-disable-right process-line"></div>
+                </div>
+                <div class="progress-text progress-text-disable">申请达成<br/>等待买家发货</div>
+            </div>
+            <div class="progess-node">
+                <div class="progress-image ">
+                     <div class="progress-line-disable-left process-line"></div>
+                    <div class="progress-round-disable"><div class="round-text">3</div></div>
+                    <div class="progress-line-disable-right process-line"></div>
+                </div>
+                <div class="progress-text progress-text-disable">买家已寄回<br/>等待卖家确认收货</div>
+            </div>
+            <div class="progess-node">
+                <div class="progress-image ">
+                     <div class="progress-line-disable-left process-line"></div>
+                    <div class="progress-round-disable"><div class="round-text">4</div></div>
+                    <div class="progress-line-disable-right process-line"></div>
+                </div>
+                <div class="progress-text progress-text-disable">卖家已收货<br/>等待卖家实物审核</div>
+            </div>
+             <div class="progess-node">
+                <div class="progress-image ">
+                     <div class="progress-line-disable-left process-line"></div>
+                    <div class="progress-round-disable"><div class="round-text">5</div></div> 
+                </div>
+                <div class="progress-text progress-text-disable">已完成</div>
+            </div>
+        </div>
+      <!--header -->
+       <div class="return-detail-content"> 
+            <div class="return-detail-panel">
+                 <div class="return-base-panel">
+                    <div class="return-detail-row">
+                        <div class="lable-text"><label>售后类型</label></div>
+                        <select id="returnType" name="returnType" ms-change="goReturnApply()">
+                            <option ms-repeat="returnTypes" ms-attr-selected="currentType==el.type?true:false" ms-attr-value="el.type" ms-text="el.name"></option>
+                        </select>
+                     </div>
+                     <div class="return-detail-row">
+                         <div class="lable-text"><label>退款原因</label></div>
+                        <select id="reasonType" name="reasonType">
+                           <option  ms-repeat="reasonTypeList" ms-value="el.id" ms-text="el.afterSaleCause"></option> 
+                        </select>
+                         <div class="lable-tips"><label class="require-tips">*</label></div>
+                     </div>
+                    <div class="return-detail-row">
+                         <div class="lable-text"><label>退款金额</label></div>
+                          <input type="text" id="amount" name="amount" ms-keyup="amountCheck()" />
+                         <div class="lable-tips"><label>元<label class="require-tips">*</label><span ms-text="'(最多'+orderInfo.returnableAmount +'元'"></span><span ms-text="'，含发货运费'+
+                          orderInfo.shippingChange  +'元'" ms-if="orderInfo.shippingChange>0"></span><span>)</span></label></div>
+                     </div>
+                    <div class="return-detail-row">
+                        <div class="lable-textarea-text"> <label >说明</label></div>
+                        <textarea id="reason" name="reason" ></textarea>
+                     </div>
+                     <div class="return-detail-row">
+                         <div class="lable-text"><label>买家举证</label></div>
+                        <button  type="button" id="fileUploadBtn">选择凭证图片</button>
+                        <div id="fileQueue"></div>
+                        <div class="uploaded-image-panel">
+                            <div class="upload-image-col" ms-repeat="uploadImagesList">
+                                <div class="image-action-panel">
+                                  <div class="image-big-btn" ms-click="viewBigImage(el.resources)">放大</div>
+                                  <div class="image-delete-btn" ms-click="deleteImage(el.id)">删除</div>
+                                </div>
+                                <div class="image-div">
+                                    <img ms-attr-src="el.resources" />
+                                </div>
+                            </div>
+                        </div>
+                     </div>
+                </div> 
+            </div>
+            <div class="return-order-panel">
+                <div class="order-title">订单信息</div>
+                <div class="order-info"> 
+                    <div class="title" style="width:90px">订单编号:</div><div><a target="_blank"  ms-href="'/order/detail.html?orderSn='+sn" class="order-link" ms-text="sn" ></a></div>
+                    <div class="title" style="width:90px">订单金额(元):</div><div class="money" ms-html="formatPrice(orderInfo.amountPaid  )"></div>
+                    <div class="title" style="width:90px">卖家:</div><div ms-text="orderInfo.shopName  "></div>  
+                </div>
+                <div class="link" ms-mouseover="showShopInfo(this)" ms-mouseleave="hideShopInfo(this)"><i class="link-icon"></i>联系卖家</div>
+                <div class="odgo-changetips">
+                    <p ms-html="'联系人：'+orderInfo.sellerName+'<br/>联系电话：'+orderInfo.sellerPhone"> </p> 
+                </div>
+            </div> 
+             <!-- 线下支付--> 
+            <div class="module-header" ms-if="hasBank(orderInfo.accountTypes)">
+                    <span class="module-title">收款账号</span> 
+            </div> 
+             <div class="return-bank-panel" ms-if="hasBank(orderInfo.accountTypes)"> 
+                 <div class="return-detail-row">
+                     <div class="lable-text"><label>开户行名称</label></div>
+                      <input type="text" id="bankName" name="bankName"  /> 
+                       <div class="lable-tips"><label class="require-tips">*</label></div>
+                 </div>
+                 <div class="return-detail-row">
+                     <div class="lable-text"><label>银行账号</label></div>
+                      <input type="text"  id="bankAccount" name="bankAccount" /> 
+                       <div class="lable-tips"><label class="require-tips">*</label></div>
+                 </div>
+                 <div class="return-detail-row">
+                     <div class="lable-text"><label>账户姓名</label></div>
+                      <input type="text" id="accountName" name="accountName"   /> 
+                       <div class="lable-tips"><label class="require-tips">*</label></div>
+                 </div>
+             </div>
+            <div class="module-header" >
+                <span class="module-title">退货商品</span><button class="goods-pop-btn"  type="button" ms-click="popOrderItems()">选择退换货商品</button>
+            </div> 
+            <div class="return-goods-panel"> 
+                   <div class="return-table-panel">
+                        <table class="return-table" id="itemsTable">
+                            <tbody>
+                            <tr> 
+                                <th width="5%">品牌</th>
+                                <th width="10%">图片</th>
+                                <th width="10%">商品型号</th>
+                                <th width="10%">商品名称</th>
+                                <th width="10%">购买数量</th>
+                                <th width="5%">单位</th>
+                                <th width="5%">单价(元)</th>
+                                <th width="5%">小计(元)</th>
+                                <th width="10%">是否支持退换货</th>
+                                <th width="10%">退货数量</th>
+                                <th width="10%">操作</th>
+                            </tr>
+                                <tr ms-repeat="selectedOrderItems"> 
+                                    <td ms-text="el.brandSet">  </td>
+                                    <td><img ms-attr-src="el.mainImage" /></td>
+                                    <td ms-text="el.skuSnSet"></td>
+                                    <td ms-text="el.goodsName"></td>
+                                    <td ms-text="el.quantity"></td>
+                                    <td ms-text="el.unitName"></td>
+                                    <td ms-text="el.price "></td>
+                                    <td ms-text="el.totalPrice "></td> 
+                                    <td ms-text="el.returnType==1?'是':'否' "  ms-css-color="el.returnType==0?'red':''"></td> 
+                                    <td><input type="text" name="returnQuantity" value="0" ms-keyup="returnQuantityCheck(this,el.canReturnQuantity,el.orderItemId)"  ></td> 
+                                    <td ><a href="javascript:void(0)" ms-click="deleteOrderItem(el.orderItemId)">取消</a></td> 
+                                </tr>  
+                            </tbody>
+                        </table> 
+                </div>
+            </div>
+            <p class="all-total-price" ms-if="selectedOrderItems.length!=0">合计：<span ms-text="totalPriceNum"></span>元</p>
+            <div class="action-panel">
+                <button class="submit" type="button" ms-click="apply()">提交申请</button>
+                <button class="cancel" type="button" ms-click="cancelApply()">取消返回</button>
+            </div>
+       </div> 
+    </div>
+    <div ms-widget="dialog,confirmDialog,$confirmDialogOptions" class="confirmDialog" ms-controller="confirmDialogCtrl">
+        <div class="dialog-inner">
+             <div class="dialog-header">
+                <div class="dialog-title">
+                    <div><span>友情提示</span></div>
+                </div>    
+                <div class="pop-close"> 
+                     <div class="icon-close" ms-click="onCancel()"></div>
+                </div>
+            </div>
+            <div class="dialog-alter-info-content">
+                <div class="dialog-pay-info-err-str" >
+                    {{msg}}
+                </div> 
+            </div>
+            <div class="dialog-action-panel">
+                <button class="btn-ok" type="button" ms-click="onOK()">确定</button>
+                <button class="btn-cancel" type="button" ms-click="onCancel()">取消</button>
+            </div>
+        </div>
+    </div>
+    <div ms-widget="dialog,alertDialog,$alertDialogOptions" class="alertDialog" ms-controller="alertDialogCtrl">
+        <div class="dialog-inner">
+             <div class="dialog-header">
+                <div class="dialog-title">
+                    <div><span>友情提示</span></div>
+                </div>    
+                <div class="pop-close"> 
+                     <div class="icon-close" ms-click="closeDialog()"></div>
+                </div>
+            </div>
+            <div class="dialog-alter-info-content"> 
+                <div class="dialog-pay-info-err-str" >
+                    {{msg}}
+                </div> 
+            </div>
+              <div class="dialog-action-panel">
+                <button class="btn-ok" type="button" ms-click="closeDialog()">确定</button> 
+            </div>
+        </div>
+    </div>
+    <div ms-widget="dialog,imageDialog,$imageDialogOptions" class="imageDialog" ms-controller="imageDialogCtrl">
+        <div class="dialog-inner">
+             <div class="dialog-header">
+                <div class="dialog-title">
+                    <div><span>查看大图</span></div>
+                </div>    
+                <div class="pop-close" > 
+                     <div class="icon-close" ms-click="closeDialog()"></div>
+                </div>
+            </div>
+            <div class="dialog-alter-info-content"> 
+                <div class="dialog-pay-info-err-str" style="font-size:24px;overflow: auto;max-height:600px;  text-align: center;">
+                  <a ms-attr-href="url" target="_blank"> <img ms-attr-src="url" style="height:550px; "/></a>
+                </div> 
+            </div>  
+        </div>
+    </div>
+    <div ms-widget="dialog,orderItemsDialog,$orderItemsDialogOptions" class="orderItemsDialog" ms-controller="orderItemsDialogCtrl">
+        <div class="dialog-inner">
+            <div class="dialog-pay-info-err">
+                <div >
+                    <div class="return-table-panel">
+                        <div>   
+                            <div class="pop-btn-panel">
+                               <button type="button" ms-click="addItems()">添加退货商品</button>
+                            </div>
+                            <div class="pop-title">
+                                <span>选择退货商品</span>
+                            </div>
+                            <div ms-visible="showWarnging" class="waring-tips">您选择的商品中包含“不可退换货”商品,建议先与卖家联系</div>
+                            <div class="pop-close" style="margin-top: 10px;"> 
+                                 <div ms-click="closeOderItems()" class="icon-close"></div>
+                            </div>
+                        </div>
+                         <table class="return-table" id="popItemTable1">
+                            <tbody>
+                              <tr>
+                                 <th width="5%">
+                                    <span class="f-ib m-checkbox-all select-all" ms-click="checkAll" >
+                                      <input class="m-checkbox-all-check" type="checkbox"   ms-duplex-checked="select_all" />
+                                      <strong ms-attr-class="select_all?'m-checkbox-all-icon  m-checkbox-all-icon-checked':'m-checkbox-all-icon'"></strong> 
+                                  </span> 
+                                </th>
+                                <th width="10%">品牌</th>
+                                <th width="15%">图片</th>
+                                <th width="10%">商品型号</th>
+                                <th width="15%">商品名称</th>
+                                <th width="8%">购买数量</th>
+                                <th width="8%">可退数量</th>
+                                <th width="8%">单位</th>
+                                <th width="8%">单价(元)</th>
+                                <th width="8%">小计(元)</th>
+                                <th width="10%">是否支持退换货</th>
+                              </tr>
+                          </tbody>
+                        </table>
+                        <div style="width:100%;height:500px;overflow:auto;"> 
+                          <table class="return-table" id="popItemTable">
+                            <tbody>
+                                <tr ms-repeat="orderItems">
+                                    <td width="5%"> 
+                                      <span class="f-ib m-checkbox checkbox-fix"  ms-click="onCheckBoxSelected()" >
+                                        <input class="m-checkbox-check" type="checkbox" ms-duplex-checked="el.isSelected" ms-attr-value='el.id'  />
+                                        <strong ms-attr-class="el.isSelected?'m-checkbox-icon select-order-tr m-checkbox-icon-checked':'m-checkbox-icon select-order-tr'"></strong>
+                                    </span>
+                                    </td>
+                                    <td width="10%" ms-text="el.brandSet">  </td>
+                                    <td width="15%"><img ms-attr-src="el.mainImage" /></td>
+                                    <td width="10%" ms-text="el.skuSnSet"></td>
+                                    <td width="15%" ms-text="el.goodsName"></td>
+                                    <td width="8%" ms-text="el.quantity"></td>
+                                    <td width="8%" ms-text="el.canReturnQuantity"></td>
+                                    <td width="8%" ms-text="el.unitName"></td>
+                                    <td width="8%" ms-text="el.price "></td>
+                                    <td width="8%" -text="el.totalPrice "></td>
+                                    <td width="10%" ms-text="el.returnType==1?'是':'否' "  ms-css-color="el.returnType==0?'red':''"></td> 
+                                </tr>  
+                            </tbody>
+                          </table> 
+                        </div>
+                    </div>
+                </div> 
+            </div>
+        </div>
+    </div>
+    @@include('../../include/common/footer.html')
+</body>
+
+</html>

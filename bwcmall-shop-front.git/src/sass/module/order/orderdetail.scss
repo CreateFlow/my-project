@@ -1,0 +1,143 @@
+@charset "UTF-8";
+
+@import "../../common/scaffolding";
+@import "../../component/lightbox";
+
+.mod-orderdetail {
+    .panel {
+        font-size: 12px;
+        margin-top: 20px;
+        .pline{
+            margin-top:10px;
+            p{
+                padding:5px 10px;
+            }
+        }
+
+        .tab{
+            line-height:36px;
+            .box-table{
+                width: 100%;
+            }
+            .input{
+                border:1px solid #ccc;
+                width:120px;
+                padding:5px;
+            }
+            .textarea{
+                 width: 480px;
+                 height:60px;
+                 line-height:20px;
+                 border:1px solid #ccc;
+                 padding:5px;
+                 margin-top:5px;
+            }
+        }
+        .class-title{
+            font-size:14px;
+            color:#000;
+            font-weight:bold;
+            margin:30px 0px 10px 0px;
+            border-left: 5px solid #e13539;
+            padding-left: 3px;
+        }
+        .divider{
+          border-top: 1px dotted #dad6d4;
+          margin: 0 5px;
+        }
+        .sale-item-table{
+            width: 100%;
+            .item_total{
+              text-align: right;
+              font-weight: 600;
+            }
+        }
+        .row-buttons{
+            text-align: center;
+            .button-back{
+                font-weight: 600;
+                margin-left:30px;
+            }
+            .button-cancel{
+                margin-left: 20px;
+                cursor: pointer;
+                &:hover{
+                    color: #ccc;
+                    border-bottom: 1px dashed #ccc;
+                }
+            }
+        }
+        .sale-item-table th{
+            border-bottom: 2px solid #AAAAAA;
+            font-size: 13px;
+            color: #000;
+            line-height: 36px;
+            height: 40px;
+            text-align: center;
+            font-weight:normal
+        }
+        .sale-item-table td{
+            font-size: 12px;
+            height: 90px;
+            text-align: center;
+            color: #333;
+            border-bottom: 1px solid #EEEEEE;
+        }
+        .inputbox{
+            height: 34px;
+            line-height: 34px;
+            width: 178px;
+            text-indent: 5px;
+            //去除select圆角
+            border: 0px;
+            outline: 1px solid #e8e8e8;
+            &:focus{
+                outline: 1px solid #999999;
+            }
+        }
+        .item-required:after{
+            content: '*';
+            color: #cc0000;
+        }
+        .bd{
+            position: relative;
+        }
+        .loading-wrapper{
+            z-index: 8;
+            position: absolute;
+            top: 0;
+            bottom: 0%;
+            left: 0;
+            right: 0%;
+            background-color: rgba(6, 0, 0, 0.32);
+        }
+        .input-error,.error-tip{
+            color: #e33333;
+            &:before{
+                content: '*';
+            }
+        }
+    }
+}
+.es-body{
+    .inputbox{
+        height: 34px;
+        line-height: 34px;
+        width: 178px;
+        text-indent: 5px;
+        border: 0px;
+        outline: 1px solid rgb(204,204,204);
+    }
+    .input-error,.error-tip{
+        color: #e33333;
+        &:before{
+            content: '*';
+        }
+    }
+    .hl-price{
+        color: #e13335;
+    }
+    .hl-sn{
+        color: #6bc3f1;
+    }
+}

@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html> 
+<head lang="en">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta http-equiv="content-type" content="text/html;charset=utf-8">
+    <title>新建需求单</title>
+    @@include('../../include/common/meta.html')
+    @@include('../../include/common/common-include.html') 
+    <script src="/scripts/plugin/uploadifive/jquery.uploadifive.min.js"></script> 
+    <script src="/scripts/module/common/upload-button.js"></script> 
+    <link rel="stylesheet" type="text/css" href="/styles/common/upload_button.css"/>
+    <link rel="stylesheet" type="text/css" href="/styles/module/index/demand.css"> 
+    <script src="/scripts/module/index/demand.js"></script>
+</head>
+
+<body ms-controller="demandCtrl">
+    @@include('../../include/common/header.html')
+    @@include('../../include/common/account-head.html')
+    <!--主要内容-->
+    <div class="g-content g-clearfix" style="min-height:1200px;">
+        <div class="content-head">
+            <div class="module-title">
+                <div><span>新建需求单</span></div>
+            </div>
+        </div>
+        <div class="detail-table-panel">
+            <div class="order-table-wrap">
+                <div class="index-query-conditions">
+
+                    <div class="select-condition" style="width:300px;">
+                        <input ms-duplex="keyword" placeholder="客户手机号码/客户名称/公司名称" type="text" style="width:280px;">
+                    </div> 
+                    <div class="select-condition"> 
+                         <button style="height:34px;line-height:34px;width:80px;" type="button" id="queryBtn" name="queryBtn" class="query_btn" ms-click="search">查询</button> 
+                        
+                    </div>
+                    <div class="select-condition" style="width:400px;">
+                        <font color="red">*提示：必须先根据条件查询买家，选择买家后才能提交需求单</font>
+                    </div> 
+                    
+                </div>
+                <div class="info-border" ms-if="customerList.length>0">
+                    <h3 style="padding-bottom:10px;border-bottom: 1px dotted #e0e0e0;">符合搜索的买家</h3>
+                    <ul>
+                        <li class="info" ms-repeat-el="customerList">
+                            <input type="radio" name="customerId" ms-duplex-string="customerId" ms-attr-value="el.id"> {{el.mobile}}/{{el.name}}/{{el.corpName}}
+                        </li>
+                    </ul>
+                </div>
+                <div class="detail-query-conditions" style="clear:both">
+
+                    <div class="detail-condition" style="width:200px">
+                        <span>来源</span>
+                        <select style="width:150px;clear:both;display:block" id="typeList" name="typeList" ms-duplex="source">
+                            <option value="">全部</option>
+                            <option ms-repeat="sourceList" ms-attr-value="el.value" ms-text="el.name"></option> 
+                        </select> 
+                    </div>
+                    <div class="detail-condition" style="width:400px">
+                        <span>备注</span>
+                        <input style="width:350px;clear:both;display:block" type="text" ms-duplex="remarks"/>
+                    </div> 
+                    <div class="detail-condition" style="width:400px">
+                        <span>需求单类型</span>
+                        <div class="demandtype">
+                            <span ms-click="typeOn(el.value)" ms-class="active : typeCheck==el.value" ms-repeat="typeList" ms-text="el.name">找货</span> 
+                        </div>
+
+                    </div>
+                    
+                </div>
+
+                <div class="order-block" style="clear:both">
+                    <div class="return-detail-row">
+                        <button type="button" id="fileUploadBtn">上传附件</button>
+                        <div id="fileQueue"></div>
+                        <div class="uploaded-image-panel">
+                            <div class="upload-image-col" ms-repeat="uploadImagesList">
+                               <div class="image-action-panel">
+                                  
+                                    <div class="image-delete-btn" ms-click="deleteImage(el.id)">删除</div>
+                                </div>
+                                <div class="image-div">
+                                    <img ms-if="el.type != 1" ms-attr-src="el.resources" />
+                                    <a ms-if="el.type == 1" ms-href="el.resources"><img src="/images/common/download.png" /></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="order-block" style="clear:both">
+                    
+                    <div class="return-detail-row">
+                        <button ms-click="download" type="button" class="add_btn" style="height:30px;line-height:30px;position:relative;top:30px;left:150px;">下载需求单模板</button>
+                        <button type="button" id="allUploadBtn">批量上传需求单</button>
+                    </div>
+
+                </div>
+            <div class="detail-table">
+                <table cellpadding="0" width="100%">
+                    <!--表单头部-->
+                    <tr class="order-table-top">
+                       
+                        <th width="15%">
+                            品牌
+                        </th>
+                        <th width="15%">
+                            品名
+                        </th>
+                        <th width="20%">
+                            型号
+                        </th>
+                        <th width="10%">
+                            数量
+                        </th>
+                        <th width="10%">
+                            单位
+                        </th>
+                        <th width="10%">
+                            分类
+                        </th>
+
+                        <th width="10%">
+                            操作
+                        </th>
+                    </tr>
+                    <!--商品一行-->
+                    <tr ms-repeat="trArr" ms-if="trArr.length>0" class="order-trone">
+                        <!--品牌-->
+                        <td>
+                            <div class="table-condition">
+                                <input type="text" ms-duplex="el.brandName">
+                            </div>
+                        </td>
+                        <td>
+                            <div class="table-condition">
+                                <input type="text" ms-duplex="el.itemName">
+                            </div>
+                        </td>
+                        <!--型号-->
+                        <td>
+                            <div class="table-condition">
+                                <input type="text" ms-duplex="el.skuSnSet">
+                            </div>
+                        </td>
+                        <!--数量-->
+                        <td>
+                            <div class="table-condition">
+                                <input type="text" ms-duplex="el.requiredQuantity">
+                            </div>
+                        </td>
+                        <!--单位-->
+                        <td>
+                            <div class="table-condition">
+                                <input type="text" ms-duplex="el.unit">
+                            </div>
+                        </td>
+                        <!--销售价-->
+                        <td>
+                            <div class="table-condition">
+                                <select id="typeList" name="typeList" ms-duplex="el.spuCategoryId">
+                                    <option value="">全部</option>
+                                    <option ms-repeat="categoryList" ms-attr-value="el.id" ms-text="el.name"></option> 
+                                </select>
+                            </div> 
+                        </td>
+                        <!--操作-->
+                        <td>
+                            <span class="f-ib goods-del" ms-click="delProduct($index)">
+                                <!--<img style="width:32px;height:32px;" src="goods-del0.jpg"/>-->
+                            </span>
+                        </td>
+                    </tr>
+                </table>
+
+            </div>
+                <!--更多-->
+                <div class="order-trone-more">
+                    <div class="trone-more" ms-click="getMore">+ 增加</div>
+                    <div class="clear"></div>
+                </div>
+                <div class="detail-submit"> 
+                     <button type="button" id="queryBtn" name="queryBtn" class="query_btn" ms-click="submit">填写完成</button>
+                </div>
+            </div>
+            
+        </div>
+       </div>
+       
+    @@include('../../include/common/footer.html')
+</body>
+
+</html>

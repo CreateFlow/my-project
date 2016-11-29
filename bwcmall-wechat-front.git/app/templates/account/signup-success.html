@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <title>注册成功</title>
+    <meta name="description" content=""> @@include('../common/meta.html')
+</head>
+
+<body>
+    <div class="content-body success" id="sign-wrap">
+        <div class="bd spacing text-center" style="margin-top: 20px;">
+            <img class="success-img" src="/images/account/sign-up-success.svg" alt="" />
+            <h3 class="success-title">恭喜，您已经成功提交认证申请！</h3>
+            <p class="success-text">为了保障佰万仓用户的权益，我们将会对您提交的材料进行审核
+                <br>佰万仓专业顾问会在最短时间内与您联系
+                <br> 如果您急需审核请拨打400-021-9898
+            </p>
+        </div>
+        <div class="ui-footer">
+            <button id="btnBack" onclick="goBack()" class="weui_btn weui_btn_warn">返回</button>
+        </div>
+    </div>
+    @@include('../common/footer.html')
+    <script>
+    function goBack() {
+        wx.closeWindow();
+    }
+    </script>
+</body>
+
+</html>
+<script>

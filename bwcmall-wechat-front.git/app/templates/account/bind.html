@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <title>绑定百万仓账号</title>
+    <meta name="description" content=""> @@include('../common/meta.html')
+</head>
+
+<body id="app">
+    <div id="container">
+        <div class="weui_dialog_alert" id="dialogError" style="display: none;">
+            <div class="weui_mask"></div>
+            <div class="weui_dialog">
+                <div class="weui_dialog_hd"><strong class="weui_dialog_title">提示</strong></div>
+                <div class="weui_dialog_bd" id="errorText"></div>
+                <div class="weui_dialog_ft">
+                    <a href="javascript:;" class="weui_btn_dialog primary">确定</a>
+                </div>
+            </div>
+        </div>
+        <div id="dummyHeader"></div>
+        <div id="mainBody" class="table" style="width: 80%; margin: 8% auto; ">
+            <div class="tableRow">
+                <div class="tableCell">
+                    <div class="inputBoxContainer">
+                        <label>用户名：</label>
+                        <input type="text" v-model="username.val" placeholder="您在佰万仓商城的账号" />
+                    </div>
+                    <div class="inputBoxContainer">
+                        <label>密码：</label>
+                        <input type="password" v-model="password.val" placeholder="您在佰万仓商城的密码" />
+                    </div>
+                    <p class="error" id="result"></p>
+                    <button v-on:click="submit" type="button" class="weui_btn weui_btn_warn">确认</button>
+                </div>
+            </div>
+        </div>
+        <div id="regDescription">
+            <h1>绑定说明</h1> 将您的账号和佰万仓微信公众号绑定，当您的订单状态发生改变时，我们会立即通过微信提醒您。随时了解订单状态就是这么便捷！
+        </div>
+    </div>
+     @@include('common/footer.html')
+    <!-- build:js({.tmp,app}) /js/page/account/bind.js -->
+    <script src="/js/page/account/bind.js"></script>
+    <!-- endbuild -->
+</body>
+
+</html>

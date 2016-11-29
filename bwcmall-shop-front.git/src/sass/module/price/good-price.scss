@@ -1,0 +1,118 @@
+@charset "UTF-8";
+@import "../../common/scaffolding";
+.good-price {
+    .inputbox {
+        height: 34px;
+        line-height: 34px;
+        width: 200px;
+        text-indent: 5px;
+        //去除select圆角
+        border: 0px;
+        outline: 1px solid rgb(204, 204, 204);
+    }
+    .inputbox-main {
+        width: 90%;
+    }
+    .btn-large {
+        width: 150px;
+    }
+    .title {
+        padding-top: 7px;
+        margin-bottom: 0;
+    }
+    .export {
+        padding: 17px 20px;
+    }
+    .ctable {
+        width: 950px;
+        margin-bottom: 30px;
+        color: #666;
+        position: relative;
+        .ctr {
+            height: 44px;
+            line-height: 44px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        td {
+            text-align: center;
+        }
+        .cell-empty {
+            padding: 5em;
+            text-align: center;
+            border-bottom: 1px solid #eee;
+        }
+        .thb {
+            border-bottom: 2px solid #e0e0e0;
+        }
+        .tr-bg {
+            background-color: #f3f3f3;
+        }
+        .link {
+            color: lightskyblue;
+        }
+    }
+    .empty-tip {
+        line-height: 115px;
+        padding-left: 50px;
+    }
+    .loading-wrapper {
+        position: absolute;
+        top: 0;
+        right: 0;
+        left: 0;
+        bottom: 0;
+        background-color: rgba(204, 204, 204, 0.35);
+    }
+}
+
+.editPrice-main {
+    .inputbox {
+        height: 34px;
+        line-height: 34px;
+        width: 150px;
+        text-indent: 5px;
+        //去除select圆角
+        border: 0px;
+        outline: 1px solid rgb(204, 204, 204);
+    }
+    .inputbox-main {
+        width: 90%;
+    }
+    .ctable {
+        width: 550px;
+        margin-bottom: 30px;
+        color: #666;
+        .ctr {
+            height: 44px;
+            line-height: 44px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        td {
+            text-align: center;
+        }
+        th {
+            text-align: center;
+        }
+        .cell-empty {
+            padding: 5em;
+            text-align: center;
+            border-bottom: 1px solid #eee;
+        }
+        .thb {
+            border-bottom: 2px solid #e0e0e0;
+        }
+        .tr-bg {
+            background-color: #f3f3f3;
+        }
+        .link {
+            color: lightskyblue;
+        }
+    }
+    h3 {
+        span {
+            margin: 5px 20px 10px 0;
+            display: inline-block;
+            color: #3775c0;
+        }
+    }
+}

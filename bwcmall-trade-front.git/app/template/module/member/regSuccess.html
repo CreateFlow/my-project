@@ -1,0 +1,60 @@
+ <!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>注册</title>
+    @@include('../../include/common/common-include.html')
+    <link rel="stylesheet" href="../styles/module/member/regSuccess.css"/> 
+</head>
+<body ms-controller="registCtrl">
+    @@include('../../include/common/header.html')
+
+<div class="g-content">
+    <div class="content-head">
+        <div class="m-public-logo f-fl">
+            <a href="http://www.bwcmall.com"></a>
+        </div>
+        <div class="content-head-text f-fl">
+            注册
+        </div>
+        <div class="content-head-call f-fr"></div>
+        <div class="clear"></div>
+    </div>
+    <div class="content-body">
+        <div class="content-left f-fl">
+            <div class="content-step-line-top">
+            </div>
+            <div class="content-step-block a-fadein">
+                <span class="step-block-one f-ib"></span>
+                <span class="step-block-text f-ib">提交用户信息</span>
+            </div>
+            <div class="content-step-line"></div>
+            <div class="content-step-block a-fadein">
+                <span class="step-block-two step-block-two-active f-ib"></span>
+                <span class="step-block-text step-block-text-active f-ib">注册成功</span>
+            </div>
+
+        </div>
+        <div class="content-right f-fr">
+            <div class="regist-first">
+                <div class="content-body-success">
+                    <span class="content-body-success-span">注册成功！</span>
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <form id="hideForm" action="/j_spring_security_check" style="opacity: 0;filter:alpha(opacity=0);" method="post">
+        <input type="text" id="hideUsername" name="j_username"/>
+        <input type="password" id="hidePassword" name="j_password"/>
+        
+    </form>
+    <div class="content-bottom-line"></div>
+
+
+</div>
+
+    @@include('../../include/common/footer.html')
+   <script src="../scripts/module/member/regSuccess.js"></script> 
+</body>
+</html>

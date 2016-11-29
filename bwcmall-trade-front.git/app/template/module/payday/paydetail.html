@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <title>账单明细</title>
+    @@include('../../include/common/meta.html')
+    @@include('../../include/common/common-include.html')
+
+    <link rel="stylesheet" type="text/css" href="/styles/module/payday/paydetail.css">
+    <script src="/scripts/module/payday/paydetail.js"></script>
+</head>
+
+<body>
+    @@include('../../include/common/header.html')
+    <div class="my-header">
+        @@include('../../include/common/account-head.html')
+    </div>
+     <!--主要内容-->
+    <div class="g-content g-clearfix"  ms-controller="paydetailCtrl">
+      <!--header -->
+      <div class="module-header">
+          <span class="module-title">账单明细</span>
+      </div>
+      <div class="order-block">
+            <div class="order-block-body" style="padding:0px 20px 20px 20px;">
+                <span class="content-body-title">
+                  卖家 ： <span ms-text="dataList[0].corpName"></span>
+                </span>
+                <div class="link" style=""><i class="link-icon"></i>联系卖家</div>
+            </div>
+        </div>
+       <div class="invoice-table-panel">
+          <table class="invoice-table">
+              <tbody>
+                <tr>
+                    <th>账单编号</th>
+                    <th>应付金额（元）</th>
+                    <th>出账单日期</th>
+                    <th>操作</th>
+                </tr>
+                  <tr ms-if="dataList.length<=0">
+                      <td colspan="6">
+                          没有查询到任何数据~~
+                      </td>
+                  </tr>
+                  <tr ms-repeat="dataList" ms-if="dataList.length>0">
+
+                      <td ms-text="el.sn"></td>
+                      <td ms-text="el.payable"></td>
+                      <td ms-text="el.billingDate"></td>
+                      <td>
+                        <div ms-if="el.acctBillsType">
+                          <a ms-href="'/payday/payback.html?Sn='+el.id">
+                            <span>还款</span>
+                          </a>
+                        </div>
+                      </td>
+                  </tr>
+
+                </tbody>
+            </table>
+       </div>
+
+
+       <div class="invoice-table-panel"  ms-repeat="dataList" ms-if="dataList.length>0">
+          <p>账单明细：
+              <span style="font-weight:bold;line-height:2em;font-zie:14px;" ms-text="el.sn"></span>
+              <span style="display:inline-block;margin-left:800px;margin-bottom:10px;">
+                  <input type="button" value="导出账单详情" ms-click="exportBills(el)" class="export_btn"/>
+              </span>
+          </p>
+          <table class="invoice-table">
+              <tbody>
+                <tr>
+                    <th>交易时间</th>
+                    <th>交易摘要</th>
+                    <th>交易金额（元）</th>
+                </tr>
+                <tr ms-repeat-oel="el.transDetail" ms-if="el.transDetail.length>0">
+                    <td ms-text="oel.createTime"></td>
+
+                    <td>
+                        <span ms-text="oel.remark" style="width:60px;display:inline-block"></span>：
+                        <span ms-if="!oel.orderAfterSaleId">
+                            <a ms-href="'/order/detail.html?orderSn='+oel.orderSn">
+                              <span ms-text="oel.orderSn"></span>
+                            </a>
+                        </span>
+                        <span ms-if="oel.orderAfterSaleId">
+                          <span ms-if="oel.afterSaleType == 0">
+                            <a ms-href="'/afs/return-detail-01.html?id='+oel.orderAfterSaleId">
+                              <span ms-text="oel.orderAfterSaleSn"></span>
+                            </a>
+                          </span>
+                          <span ms-if="oel.afterSaleType == 1">
+                            <a ms-href="'/afs/return-detail-02.html?id='+oel.orderAfterSaleId">
+                              <span ms-text="oel.orderAfterSaleSn"></span>
+                            </a>
+                          </span>
+                        </span>
+
+                    </td>
+                    <td ms-text="oel.amount"></td>
+                </tr>
+
+                </tbody>
+            </table>
+       </div>
+      </div>
+    @@include('../../include/common/footer.html')
+</body>
+
+</html>

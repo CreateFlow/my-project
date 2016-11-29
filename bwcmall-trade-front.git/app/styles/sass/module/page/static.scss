@@ -1,0 +1,191 @@
+body{
+    background-color: #f3f4f8;
+    font-family: "Microsoft YaHei";
+}
+.g-wrap{
+    width: 1000px;
+    margin: 30px auto 30px;
+}
+.g-content{
+    width: 1000px;
+    margin: 0 auto 60px;
+    background-color: #fff;
+    -webkit-box-shadow: 1px 1px 5px #ccc;
+    -moz-box-shadow: 1px 1px 5px #ccc;
+    box-shadow: 1px 1px 5px #ccc;
+    padding-bottom: 40px;
+    min-height: 550px;
+}
+.content-head{
+    font-size: 24px;
+    font-weight: bold;
+    color: #504d4c;
+    margin-bottom: 12px;
+}
+.content-head-text{
+    height: 62px;
+    line-height: 90px;
+    font-size: 24px;
+    font-weight: bold;
+    color: #555;
+    border-left: 1px solid #ccc;
+    padding-left: 15px;
+}
+.content-head-call{
+    width: 314px;
+    height: 62px;
+    background-image: url(/images/account/login_kefu.png);
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+.content-body-head{
+    height: 60px;
+    width: 100%;
+    text-indent: 20px;
+    font-size: 20px;
+    color: #333;
+    line-height: 60px;
+    border-bottom: 1px solid #F0F0F0;
+}
+.content-body-block{
+    padding: 20px;
+}
+.content-body-table{
+    width: 600px;
+    margin: 20px auto 20px;
+}
+.content-body-table tr:nth-child(even){
+    background-color: #f4f1ee;
+}
+.content-body-table td{
+    text-indent: 22px;
+    border: 1px solid #dad6d4;
+    height: 36px;
+    font-size: 12px;
+    color: #333;
+}
+.content-body-block a{
+    color: #e83637;
+}
+.content-body-block a:hover{
+    text-decoration: underline;
+}
+.content-body-block p{
+    line-height: 1.72222;
+    font-size: 14px;
+    color: #434343;
+}
+.content-body-block .content-p1{
+    color:#222;
+    font-weight:bold;
+}
+.content-body-block .content-p2{
+    color:#222;
+    margin-top:15px;
+}
+.content-body-block .content-p3{
+    font-size:14px;
+    color:#333;
+    margin-top:15px;
+    padding-left:12px;
+}
+.content-body-block img{
+    max-width: 960px;
+    display: block;
+    margin: 20px auto 30px;
+}
+.content-body-title{
+    color: #141d26;
+    display: block;
+    margin: 20px 0;
+    font-size: 16px;
+    font-weight: bold;
+}
+.sale-left-block{
+    height: 170px;
+    width: 160px;
+    text-align: center;
+    line-height: 170px;
+}
+.sale-left-block img{
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0 auto;
+}
+.sale-right-block{
+    width: 720px;
+}
+.sale-right-block-inner{
+    float: left;
+    width: 340px;
+    margin-right: 20px;
+    height: 40px;
+    margin-bottom: 20px;
+}
+.sale-span-right{
+    width: 250px;
+    vertical-align: middle;
+    line-height: 1.5;
+    margin-left: 8px;
+    color: #333;
+    font-size: 14px;
+    margin-top: -8px;
+}
+
+.bank-list{
+    border:1px solid #dad6d4;
+}
+
+.bank-list td{
+    height:55px;
+    width:240px;
+
+    background-repeat: no-repeat;
+    background-position: center;
+    position:relative;
+    border:1px solid #dad6d4;
+    cursor:pointer;
+}
+
+.bank-get{
+    display: inline-block;
+    height:16px;
+    width:16px;
+    position:absolute;
+    right:0;
+    bottom:0;
+    background-image: url('/images/payment/bank-get.png');
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.bank-help{
+    padding: 50px 20px;
+}
+
+.info-title1{
+    height:50px;
+    line-height: 50px !important;
+    font-weight: bold;
+    font-size:16px !important;
+}
+
+.info-title2{
+    height:50px;
+    line-height: 50px !important;
+    font-weight: bold;
+    font-size:14px !important;
+}
+
+.info-text{
+    line-height: 25px !important;
+    font-size:14px !important;
+}
+
+.info-mtop{
+    margin-top:30px;
+}
+
+.bank-one{
+    display: none;
+}

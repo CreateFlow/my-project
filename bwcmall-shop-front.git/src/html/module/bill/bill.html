@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>资金流水</title>
+    @@include('../../include/common/intro.html')
+    <link rel="stylesheet" href="/css/module/bill/bill.css"/>
+</head>
+<body>
+@@include('../../include/common/header.html')
+@@include('../../include/common/nav.html')
+<div class="main mod-bill">
+    <div class="sidebar">
+        @@include('../../include/common/menu.html')
+    </div>
+    <div class="content ms-controller" ms-controller="billList">
+        <div class="panel">
+            <div class="hd">
+                <span class="title">资金流水</span>
+            </div>
+            <div class="bd">
+                <table class="bill-table">
+                    <tr>
+                        <td class="bill-border-right">
+                            <div class="bill-account">
+                                <p>流入资金（元）</p>
+                                <span style="color:#3CCD9A;font-size:20px;line-height:2em;">
+                                    <span ms-text="income| currency"></span>
+                                </span>
+                            </div>
+                        </td>
+                        <td>
+                            <div style="text-align:left; padding-left:50px;">
+                                <p>提现说明：</p>
+                                <p>1，如需查看流出资金明细，请登录：
+                                <p>&nbsp&nbsp&nbsp&nbsp&nbsp<a href="http://o2o.yeepay.com/zgt/login/to_login" class="hint" target="_blank">http://o2o.yeepay.com/zgt/login/to_login</a>，查看明细</p>
+                                <p>&nbsp&nbsp&nbsp&nbsp&nbsp注：如需协助请联系佰万仓</p>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+                
+                <div class="search">
+                    <div class="row">
+                        <div class="col col-1 title">按时间查询</div>
+                        <div class="col col-3">
+                            <input ms-widget="datepicker" ms-duplex="searchInfo.createTime__gte"/>
+                            <span class="titp">到</span>
+                        </div>
+                        <div class="col col-3">
+                            <input ms-widget="datepicker" ms-duplex="searchInfo.createTime__lte"/>
+                        </div>
+                        <div class="col col-5">
+                            <div class="row timing">
+                                <div class="col col-2"><a href="javascript:;" ms-click="todaySearch">今天</a></div>
+                                <div class="col col-2"><a href="javascript:;" ms-click="weekSearch">一周</a></div>
+                                <div class="col col-2"><a href="javascript:;" ms-click="monthSearch">1个月</a></div>
+                                <div class="col col-2"><a href="javascript:;" ms-click="threeSearch">3个月</a></div>
+                                <div class="col col-2"><a href="javascript:;" ms-click="yearSearch">半年</a></div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="row">
+                        <div class="col col-1 title">交易类型</div>
+                        <div class="col col-3">
+                            <select class="inputbox" ms-duplex="searchInfo.orderStatus">
+                                <option ms-repeat-el="orderStatus" ms-attr-value='{{el.value}}' ms-text="el.name"></option>
+                            </select>
+                        </div>
+                    </div> -->
+                    <div class="row">
+                        <div class="col col-3">
+                            <input type="button" class="search-btn" value="查询" ms-click="ckSearchList">
+                        </div>
+                    </div>
+                </div>
+                <table class="ctable">
+                    <thead>
+                        <tr width="100%" class="thb ctr">
+                            <th width="10%">交易日期</th>
+                            <th width="12%">流水号</th>
+                            <th width="14%">交易类型</th>
+                            <th width="15%">金额(元)</th>
+                            <th width="15%">手续费</th>
+                            <th width="10%">交易状态</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ms-if="afterSaleOrderList.length>0" ms-repeat-el="afterSaleOrderList" class="ctr" ms-class="tr-bg:($index%2==0)">
+                            <td>{{el.tradeDate}}</td>
+                            <td>{{el.paymentInterfaceSn}}</td>
+                            <td>{{el.typeShowName}}</td>
+                            <td>{{el.amount}}</td>
+                            <td>{{el.fee}}</td>
+                            <td><span>{{el.tradeStatusShowName}}</span></td>
+
+                        </tr>
+                        <tr ms-if="afterSaleOrderList.length==0">
+                            <td colspan="7" class="cell-empty" ms-text="orderListEmptyText"></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div ms-widget="pager,pp" ms-if="afterSaleOrderList.length>0"></div>
+            </div>
+        </div>
+    </div>
+</div>
+@@include('../../include/common/outro.html')
+<script>require(['conf/bill/bill']);</script>
+</body>
+</html>

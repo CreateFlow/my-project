@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>劳防年终大促</title>
+    @@include('../../include/common/scripts.html')
+    <link rel="stylesheet" href="/styles/module/activity/findgoods.css"/>
+    <style>
+        .buy-wrap{ background-color:#fbd103; padding-bottom:100px;}
+        .buy-main{ width:1200px; margin:0 auto;}
+        .buy-title{ height:70px; line-height:62px; text-align:center; font-size:20px; color:#1fb263; font-weight:bold;}
+        .buy-inner li{ float:left; width:330px; padding:15px; margin:0 20px 30px; background-color:#fff; border-bottom:5px solid #b0040a;}
+        .sort-title{ font-size:18px; font-weight:bold; color:#5f278f; text-align:center; padding:30px 0;}
+        .sort-title span:before{content:''; display:inline-block; width:20px; height:1px; background-color:#5f278f;vertical-align: 5px; margin-right: 10px;}
+        .sort-title span:after{content:''; display:inline-block; width:20px; height:1px; background-color:#5f278f;vertical-align: 5px; margin-left: 10px;}
+        .shop-img{ background: #fff; width:330px; height:240px;  text-align: center;}
+        .shop-img a{ display:table-cell; vertical-align:middle; width:228px; height:240px; text-align:center; overflow:hidden;}
+        .shop-img a img{ max-width:330px; max-height:240px;}
+        .shop-text{ font-size: 16px; font-weight:bold; color: #333; width:330px; margin:25px 0; overflow: hidden; text-overflow:ellipsis; white-space:nowrap;}
+        .goods-num{ display:inline-block; margin-top: 10px; padding:0 10px; height: 30px; line-height:30px; font-size:14px; color:#fff; background-color:#e33333;}
+        .buy-btn{
+             float: left;
+            width:120px;
+            height:50px;
+            background-color:#da151c;
+            font-size:16px;
+            color:#fff;
+            font-weight:bold;
+            text-align:center;
+            -webkit-transition: all .3s;
+            -moz-transition: all .3s;
+            -o-transition: all .3s;
+            transition: all .3s;
+        }
+        .buy-inner li:hover .buy-btn{ background-color: #cc060d; color: #fff;}
+        .buy-right{ float:right; width:120px;}
+        .buy-right li{ font-size:14px; font-weight:bold; color:#fff000; height:48px; line-height:48px; text-align:center; background-color:#a329f8; border-bottom:1px solid #b449fc; cursor:pointer;}
+        .buy-right .go-top{ color:#5e119f; border:none;}
+        .buy-right .cur-li{ background-color:#5f278f; color:#fff;}
+
+        .action-panel{
+            line-height: 50px;
+        }
+        .action-text{ 
+            float: left;
+            width:188px;
+            height:48px;
+            border:1px solid #da151c;
+            padding-left: 20px;
+            
+        }
+        .price-tips{
+            font-size:14px;
+            color:#da151c;
+        }
+        .price-now{
+            color: #da151c;
+            font-size: 22px;
+            font-weight:bold;
+        }
+        .price-old{
+            font-size:14px;
+            color:#999999;
+            text-decoration:line-through;
+            margin-left:15px;
+        }
+        .brand-img{
+            height: 45px;
+        }
+        .brand-img img{
+
+        }
+        a {
+            cursor:pointer;
+        }
+        .brand-list{
+            margin-top: 40px;
+            text-align: center;
+        }
+        .brand-li{
+          width: 220px;
+          height: 72px;
+          line-height: 72px;
+          background-color: #da151c;
+          float: left;
+          margin-left: 30px;
+        }
+        .brand-li a{
+          font-family: 'Microsoft YaHei';
+          font-size: 16px;
+          font-weight: 400; 
+          color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div ms-controller="headerCtrl">
+        @@include('../../include/common/header-top.html')
+        @@include('../../include/common/header-search.html')
+        @@include('../../include/common/header-nav.html')
+    </div>
+    <div class="buy-wrap" ms-controller="goods04Ctrl">
+        <div class="buy-main">
+            <img src="/images/activity/banner-top-05.jpg" alt="">
+            <div class="buy-box"> 
+                    <div class="buy-inner">
+                            <ul>
+                                <li ms-repeat-product="prodcutList">
+                                    <div class="brand-img">
+                                        <img ms-attr-src="{{product.logo}}">
+                                    </div>
+                                    <div class="shop-img">
+                                        <span ms-if="!isLogin">
+                                            <a href="javascript:void(0)" ms-click="goLogin()"><img  ms-attr-src="{{product.image}}!190"/></a>
+                                        </span>
+                                        <span ms-if="isLogin">
+                                            <a  ms-attr-href=" product.URL ? product.URL :'/goods/detail.html?id='+product.goodsId"   target="_blank"><img  ms-attr-src="{{product.image}}!190"/></a>
+                                        </span>
+                                    </div>
+                                    <span class="goods-num">限量：{{product.stock}}{{product.unit}}</span>  
+                                    <p class="shop-text">{{product.brandName|subStr10}} {{product.name|subStr25}}</p>
+                                    <div class="action-panel">
+                                        <div class="action-text">
+                                            <span class="price-tips">￥
+                                                <span class="price-now" ms-text="product.price"></span>
+                                            </span>
+                                            <span class="price-old" ms-text="product.marketPrice"></span>
+                                        </div>
+                                        <a href="javascript:void(0)" ms-if="!isLogin"  ms-click="goLogin" class="buy-btn">立即抢购</a>
+                                        <a ms-attr-href=" product.URL ? product.URL :'/goods/detail.html?id='+product.goodsId"  target="_blank" ms-if="isLogin" class="buy-btn">立即抢购</a>
+                                        <div class="clear"></div>
+                                    </div>  
+                                </li>
+                            </ul>
+                            <div class="clear"></div>
+                              <div class="brand-list">
+                                <div class="brand-li" style="margin-left:120px">
+                                    <a href="https://www.bwcmall.com/goods/search.html?brandId=15">更多3M产品...</a>
+                                </div>
+                                <div class="brand-li">
+                                    <a href="https://www.bwcmall.com/goods/search.html?brandId=14">更多霍尼韦尔产品...</a>
+                                </div>
+                                <div class="brand-li">
+                                    <a href="https://www.bwcmall.com/goods/search.html?brandId=10">更多Ansell产品...</a>
+                                </div>
+                                <div class="brand-li">
+                                    <a href="https://www.bwcmall.com/goods/search.html?brandId=42">更多赛纳产品...</a>
+                                </div>
+                                <div class="clear"></div>
+                            </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+
+    @@include('../../include/common/footer.html')
+
+    <script>
+        avalon.ready(function(){
+            var goods04Ctrl=avalon.define('goods04Ctrl',function(vm){ 
+                vm.prodcutList=[];
+                var user = storage.getUser();
+                vm.isLogin = typeof user !== 'undefined';
+                vm.goLogin = function() {
+                    urls.goLogin();
+                }
+            });
+
+            io.GET("/scripts/json/activity-04.json").done(function(data) {
+                if (data) {
+                    goods04Ctrl.prodcutList = data;
+                    avalon.scan();
+                }
+            });
+        })
+    </script>
+</body>
+</html>
+

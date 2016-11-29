@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>支付方式</title>
+    @@include('../../include/common/common-include.html')
+    <link rel="stylesheet" href="../styles/module/page/static.css"/>
+</head>
+<body>
+@@include('../../include/common/header.html')
+<div class="g-wrap">
+    <div class="content-head">
+        <div class="m-public-logo f-fl">
+            <a href="/"></a>
+        </div>
+        <div class="content-head-text f-fl">
+            支付帮助
+        </div>
+        <div class="content-head-call f-fr"></div>
+        <div class="clear"></div>
+    </div>
+</div>
+<div class="g-content">
+    <div class="content-body-head">企业网银</div>
+    <div class="content-body-block">
+        <table class="bank-list">
+            <tr>
+                <td style="background-image:url('/images/payment/bank/bank-ICBC.jpg')" data-bank="bank-icbc" onclick="bankClick(this)">
+                    <span class="bank-get"></span>
+                </td>
+                <td style="background-image:url('/images/payment/bank/bank-CCB.jpg')" data-bank="bank-ccb" onclick="bankClick(this)">
+                    <span class=""></span>
+                </td>
+                <td style="background-image:url('/images/payment/bank/bank-CMB.jpg')" data-bank="bank-cmb" onclick="bankClick(this)">
+                    <span class=""></span>
+                </td>
+                <td style="background-image:url('/images/payment/bank/bank-ABC.jpg')" data-bank="bank-abc" onclick="bankClick(this)">
+                    <span class=""></span>
+                </td>
+            </tr>
+            <tr>
+                <td style="background-image:url('/images/payment/bank/bank-CEB.jpg')" data-bank="bank-ceb" onclick="bankClick(this)">
+                    <span class=""></span>
+                </td>
+                <td style="background-image:url('/images/payment/bank/bank-SPDB.jpg')" data-bank="bank-spdb" onclick="bankClick(this)">
+                    <span class=""></span>
+                </td>
+                <td style="background-image:url('/images/payment/bank/bank-BOC.jpg')" data-bank="bank-boc" onclick="bankClick(this)">
+                    <span class=""></span>
+                </td>
+                <td style="background-image:url('/images/payment/bank/bank-PAB.jpg')" data-bank="bank-pab" onclick="bankClick(this)">
+                    <span class=""></span>
+                </td>
+            </tr>
+        </table>
+
+        <div class="bank-help">
+            <div class="bank-one" id="bank-icbc" style="display: block">
+                <p class="info-title1">工商银行</p>
+                <p class="info-title2">1. 工行B2B订单查询流程</p>
+                <p class="info-text">（1）登录到工商银行网上银行，点击“付款业务”目录下“电子商户”——选择“查询指令”——选择日期及交易信息——点击“确定”。</p>
+                <div><img src="/images/payment/bank-help/icbc/01.png" style="height:471px;width:920px;"/></div>
+                <p class="info-text">（2）界面如下，显示工商银行网上银行支付交易信息，点击“交易序号”，显示详细交易信息。</p>
+                <div>
+                    <img src="/images/payment/bank-help/icbc/02.png" style="height:201px;width:637px;"/>
+                    <img src="/images/payment/bank-help/icbc/03.png" style="height:420px;width:419px;"/>
+                </div>
+                <p class="info-title2">2. 工行B2B支付流程</p>
+                <p class="info-text">支付提交</p>
+                <p class="info-text">——插入工商银行网银盾，配置正确的浏览器设置</p>
+                <p class="info-text">——在商户网站选择商品或者服务，用工商银行企业网银进行支付</p>
+                <p class="info-text">——正确选择证书</p>
+                <img src="/images/payment/bank-help/icbc/04.png" style="height:310px;width:376px;"/>
+                <p class="info-text">——确认订单信息和金额，点击“下一步”</p>
+                <img src="/images/payment/bank-help/icbc/05.png" style="height:210px;width:563px;"/>
+                <p class="info-text">——再次确认支付信息，确认无误后点击“确认”</p>
+                <img src="/images/payment/bank-help/icbc/05.1.png" style="height:210px;width:563px;"/>
+                <p class="info-text">——核对U盾显现信息，点击“OK”进行交易</p>
+                <img src="/images/payment/bank-help/icbc/06.png" style="height:228px;width:395px;"/>
+                <p class="info-text">——交易数据提交成功</p>
+                <img src="/images/payment/bank-help/icbc/07.png" style="height:206px;width:547px;"/>
+                <p class="info-text">支付复核</p>
+                <p class="info-text">——插入复核员网银盾，登录到工商银行企业网银</p>
+                <img src="/images/payment/bank-help/icbc/08.png" style="height:206px;width:430px;"/>
+                <p class="info-text">——点击“付款业务”目录下“电子商务”，选择“批准指令”</p>
+                <img src="/images/payment/bank-help/icbc/09.png" style="height:272px;width:560px;"/>
+                <p class="info-text">——查询数据后选择待复核的支付订单，点击交易序号进入订单明细</p>
+                <img src="/images/payment/bank-help/icbc/10.png" style="height:129px;width:553px;"/>
+                <p class="info-text">——确认订单信息，无误后点击“批准”进行复核</p>
+                <img src="/images/payment/bank-help/icbc/11.png" style="height:377px;width:546px;"/>
+                <p class="info-text">——核对U盾显现信息，点击“OK”进行交易</p>
+                <img src="/images/payment/bank-help/icbc/12.png" style="height:205px;width:392px;"/>
+                <p class="info-text">——复核操作完成，交易完成</p>
+                <img src="/images/payment/bank-help/icbc/13.png" style="height:119px;width:323px;"/>
+            </div>
+
+            <div class="bank-one" id="bank-ccb">
+                <p class="info-title1">建设银行</p>
+                <p class="info-title2">1. 建行B2B订单查询流程</p>
+                <p class="info-text">（1）登录到建设银行网上银行</p>
+                <p class="info-text">（2）点击“缴费支付”目录下“网上支付”——选择“支付流水查询”——输入“凭证号”或者选择日期——选择已经支付成功的交易——点击“查询”，定单号码即为银行订单号。</p>
+
+
+                <img src="/images/payment/bank-help/ccb/01.png" style="height:119px;width:323px;"/>
+
+                <p class="info-text">（3）界面如下显示，建设银行网上银行支付交易电子回单</p>
+
+                <img src="/images/payment/bank-help/ccb/02.png" style="height:298px;width:624px;"/>
+
+                <p class="info-title2">2. 建行B2B支付流程</p>
+                <p class="info-title2">支付提交</p>
+                <p class="info-text">——插入建设银行网银盾，配置正确的浏览器设置</p>
+                <p class="info-text">——在商户网站选择商品或者服务，用建设银行企业网银进行支付</p>
+                <p class="info-text">——登录建设银行网站进行支付，并输入“客户识别号”（提示：订单号码为银行订单号）</p>
+
+                <img src="/images/payment/bank-help/ccb/03.png" style="height:202px;width:549px;"/>
+
+                <p class="info-text">——确认订单信息和金额，点击“立即支付”</p>
+
+                <img src="/images/payment/bank-help/ccb/04.png" style="height:203px;width:556px;"/>
+
+                <p class="info-text">——确认登录信息，输入密码，登录网银</p>
+
+                <img src="/images/payment/bank-help/ccb/05.png" style="height:213px;width:499px;"/>
+
+                <p class="info-text">——确认网上支付订单信息，选择账户，点击“确定”进行支付</p>
+
+                <img src="/images/payment/bank-help/ccb/06.png" style="height:322px;width:643px;"/>
+                <p class="info-text">——选择下级复核员，输入交易密码。确认支付，制单成功</p>
+
+                <!--图20-->
+                <img src="/images/payment/bank-help/ccb/07.png" style="height:338px;width:757px;"/>
+                <p class="info-title2">支付复核</p>
+                <p class="info-text">——插入复核员网银盾，登录到建设银行企业网银</p>
+
+                <!--图21-->
+                <img src="/images/payment/bank-help/ccb/08.png" style="height:363px;width:363px;"/>
+
+
+                <!--图22-->
+                <img src="/images/payment/bank-help/ccb/09.png" style="height:251px;width:543px;"/>
+
+                <p class="info-text">——点击“缴费支付”目录下“网上支付”，选择“网上支付复核”</p>
+
+                <!--图23-->
+                <img src="/images/payment/bank-help/ccb/10.png" style="height:180px;width:562px;"/>
+
+                <p class="info-text">——选择待复核的支付订单，输入交易密码，确认复核</p>
+
+                <!--图24-->
+                <img src="/images/payment/bank-help/ccb/11.png" style="height:188px;width:668px;"/>
+
+                <p class="info-text">——审核成功，支付完成，生成银行电子回单，支付流程完成</p>
+
+                <!--图25-->
+                <img src="/images/payment/bank-help/ccb/12.png" style="height:250px;width:668px;"/>
+
+            </div>
+
+            <div class="bank-one" id="bank-abc">
+                <p class="info-title1">农业银行</p>
+                <p class="info-title2">1. 农行B2B订单查询流程</p>
+                <p class="info-text">（1）登录到农业银行企业银行，点击“B2B交易管理”目录下的“交易查询”，进入交易查询页面。</p>
+
+                <!--图26-->
+                <img src="/images/payment/bank-help/abc/01.png" style="height:104px;width:411px;"/>
+
+                <p class="info-text">（2）选择日期及交易状态、交易类型后，点击“查询”。</p>
+
+                <!--图27-->
+                <img src="/images/payment/bank-help/abc/02.png" style="height:167px;width:920px;"/>
+                <p class="info-text">（3）进入交易查询结果显示列表，账单编号为银行订单号，点击账单编号可进行交易详细查询。</p>
+
+                <!--图28-->
+                <img src="/images/payment/bank-help/abc/03.png" style="height:114px;width:605px;"/>
+
+                <!--图29-->
+                <img src="/images/payment/bank-help/abc/04.png" style="height:200px;width:607px;"/>
+                <p class="info-title2">2. 农行B2B支付流程</p>
+                <p class="info-title2">支付提交</p>
+                <p class="info-text">——插入农业银行网银盾，配置正确的浏览器设置</p>
+                <p class="info-text">——在商户网站选择商品或者服务，用农业银行企业网银进行支付</p>
+                <p class="info-text">——登录农业银行网站进行支付，确定订单及金额后，点击出示证书</p>
+
+                <!--图30-->
+                <img src="/images/payment/bank-help/abc/05.png" style="height:196px;width:544px;"/>
+
+                <p class="info-text">——订单交易提交成功，点击“电子商户客户服务系统”进入”银行客服服务交易系统”，进行交易选择</p>
+
+                <!--图31-->
+                <img src="/images/payment/bank-help/abc/06.png" style="height:261px;width:556px;"/>
+                <p class="info-text">——在交易选择页面， 选择要处理的订单后，点击“确定”按钮</p>
+
+                <!--图32-->
+                <img src="/images/payment/bank-help/abc/07.png" style="height:211px;width:633px;"/>
+                <p class="info-text">——进入订单选择确认页面，无误后点击“同意”</p>
+
+                <!--图33-->
+                <img src="/images/payment/bank-help/abc/08.png" style="height:268px;width:555px;"/>
+                <p class="info-text">——订单录入成功，登录农业企业网银，对交易进行复核操作</p>
+
+                <!--图34-->
+                <img src="/images/payment/bank-help/abc/09.png" style="height:192px;width:468px;"/>
+                <p class="info-title2">支付复核</p>
+                <p class="info-text">——插入复核员网银盾，通过网上银行-电子商务登录-商户登录，登录到农行电子商户-客户服务系统</p>
+
+                <!--图35-->
+                <img src="/images/payment/bank-help/abc/10.png" style="height:329px;width:369px;"/>
+
+                <!--图36-->
+                <img src="/images/payment/bank-help/abc/11.png" style="height:466px;width:344px;"/>
+                <p class="info-text">——点击“B2B交易管理”下的交易复核目录，对要审核的B2B网上支付交易进行复核操作</p>
+
+
+                <!--图37-->
+                <img src="/images/payment/bank-help/abc/12.png" style="height:232px;width:551px;"/>
+                <p class="info-text">——返回完成，返回到“B2B交易管理”下的交易发送目录，对交易进行发送</p>
+
+                <!--图38-->
+                <img src="/images/payment/bank-help/abc/13.png" style="height:182px;width:457px;"/>
+                <p class="info-title2">交易发送</p>
+                <p class="info-text">——交易发送页面，对要发送的B2B网上支付交易，点击“确定”进行发送操作</p>
+
+                <!--图39-->
+                <img src="/images/payment/bank-help/abc/14.png" style="height:174px;width:612px;"/>
+                <p class="info-text">——交易发送确认页面，确认无误后点击“发送”，对交易进行支付</p>
+
+                <!--图40-->
+                <img src="/images/payment/bank-help/abc/15.png" style="height:285px;width:639px;"/>
+                <p class="info-text">——处理成功，交易完成</p>
+
+                <!--图41-->
+                <img src="/images/payment/bank-help/abc/16.png" style="height:185px;width:450px;"/>
+            </div>
+
+            <div class="bank-one" id="bank-boc">
+                <p class="info-title1">中国银行</p>
+                <p class="info-title2">1. 中行B2B订单查询流程</p>
+                <p class="info-text">（1）登录到中国银行网上银行，点击“电子商户”目录下“B2B支付服务”——选择“订单查询”——选择日期及交易信息，点击“确定”。</p>
+
+                <!--图42-->
+                <img src="/images/payment/bank-help/boc/01.png" style="height:383px;width:920px;"/>
+
+                <p class="info-text">（2）界面如下显示中国银行网上银行支付交易信息，点击订单号，显示详细交易信息。</p>
+
+                <!--图43-->
+                <img src="/images/payment/bank-help/boc/02.png" style="height:161px;width:601px;"/>
+
+
+                <!--图44-->
+                <img src="/images/payment/bank-help/boc/03.png" style="height:383px;width:537px;"/>
+                <p class="info-title2">2. 中行B2B支付流程</p>
+                <p class="info-title2">支付提交</p>
+                <p class="info-text">——在商户网站选择商品或者服务，用中国银行企业网银进行支付，输入用户名及密码点击“确定”</p>
+
+                <!--图45-->
+                <img src="/images/payment/bank-help/boc/04.png" style="height:278px;width:479px;"/>
+                <p class="info-text">——确认订单信息和金额，输入动态口令，点击“确定”</p>
+
+
+                <!--图46-->
+                <img src="/images/payment/bank-help/boc/05.png" style="height:471px;width:551px;"/>
+                <p class="info-text">——订单提交成功，登录网上银行对订单进行确认支付</p>
+
+
+                <!--图47-->
+                <img src="/images/payment/bank-help/boc/06.png" style="height:354px;width:552px;"/>
+                <p class="info-title2">支付复核</p>
+                <p class="info-text">——插入复核员网银盾，登录到中国银行企业网银</p>
+
+                <!--图48-->
+                <img src="/images/payment/bank-help/boc/07.png" style="height:250px;width:544px;"/>
+                <p class="info-text">——输入复核员的用户名、密码、动态口令，登录银行后台</p>
+
+                <!--图49-->
+                <img src="/images/payment/bank-help/boc/08.png" style="height:580px;width:431px;"/>
+                <p class="info-text">——点击电子商务录下“B2B支付服务”下的订单复核页面，查询到待复核的交易信息，点击订单号进入复核确认页面</p>
+
+                <!--图50-->
+                <img src="/images/payment/bank-help/boc/09.png" style="height:263px;width:652px;"/>
+                <p class="info-text">——在复核意见中选择复核通过后，点击“确认”</p>
+
+                <!--图51-->
+                <img src="/images/payment/bank-help/boc/10.png" style="height:300px;width:640px;"/>
+                <p class="info-text">——复核通过，进入订单授权页面</p>
+
+                <!--图52-->
+                <img src="/images/payment/bank-help/boc/11.png" style="height:172px;width:357px;"/>
+                <p class="info-title2">支付授权</p>
+                <p class="info-text">——进入订单授权页面，点击要授权的订单号进入订单授权确认页面</p>
+
+                <!--图53-->
+                <img src="/images/payment/bank-help/boc/12.png" style="height:157px;width:639px;"/>
+                <p class="info-text">——在授权意见中选择授权通过后，点击“确认”</p>
+
+                <!--图54-->
+                <img src="/images/payment/bank-help/boc/13.png" style="height:316px;width:556px;"/>
+                <p class="info-text">——确认授权页面，输入动态密码后，点击“确认”</p>
+
+                <!--图55-->
+                <img src="/images/payment/bank-help/boc/14.png" style="height:290px;width:552px;"/>
+                <p class="info-text">——授权成功，支付完成</p>
+
+                <!--图56-->
+                <img src="/images/payment/bank-help/boc/15.png" style="height:287px;width:554px;"/>
+            </div>
+
+            <div class="bank-one" id="bank-ceb">
+                <p class="info-title1">光大银行</p>
+                <p class="info-title2">1. 光大B2B订单查询流程</p>
+                <p class="info-text">（1）登录到光大银行企业银行——点击“电子支付”目录下“电子支付管理”——选择支付明细查询，进入查询页面。</p>
+
+                <!--图 57-->
+                <img src="/images/payment/bank-help/ceb/01.png" style="height:205px;width:556px;"/>
+                <p class="info-text">（2）选择日期及查询方式后，点击“查询”。</p>
+
+                <!--图 58-->
+                <img src="/images/payment/bank-help/ceb/02.png" style="height:255px;width:547px;"/>
+                <p class="info-text">（3）进入支付明细显示页面，订单号为银行订单号。</p>
+
+                <!--图59-->
+                <img src="/images/payment/bank-help/ceb/03.png" style="height:182px;width:557px;"/>
+                <p class="info-title2">2. 光大B2B支付流程</p>
+                <p class="info-title2">支付提交</p>
+                <p class="info-text">——插入光大银行网银盾，配置正确的浏览器设置</p>
+                <p class="info-text">——在商户网站选择商品或者服务，用光大银行企业网银进行支付</p>
+                <p class="info-text">——登录建设银行网站进行支付，并输入用户名及密码</p>
+
+                <!--图60-->
+                <img src="/images/payment/bank-help/ceb/04.png" style="height:310px;width:377px;"/>
+
+                <!--图 61-->
+                <img src="/images/payment/bank-help/ceb/05.png" style="height:408px;width:873px;"/>
+                <p class="info-text">——确认订单信息和金额，点击支付</p>
+
+                <!--图62-->
+                <img src="/images/payment/bank-help/ceb/06.png" style="height:205px;width:551px;"/>
+                <p class="info-text">——确认订单信息，选择支付账号后，点击“确定”提交</p>
+
+                <!--图63-->
+                <img src="/images/payment/bank-help/ceb/07.png" style="height:326px;width:551px;"/>
+                <p class="info-text">——订单提交成功，进入光大企业银行后台进行订单复核</p>
+
+                <!--图64-->
+                <img src="/images/payment/bank-help/ceb/08.png" style="height:397px;width:648px;"/>
+                <p class="info-title2">支付复核</p>
+                <p class="info-text">——插入复核员网银盾，登录到光大银行企业网银，输入用户名及密码登录银行后台</p>
+
+                <!--图65-->
+                <img src="/images/payment/bank-help/ceb/09.png" style="height:247px;width:617px;"/>
+                <!--图66-->
+                <img src="/images/payment/bank-help/ceb/10.png" style="height:255px;width:554px;"/>
+                <p class="info-text">——点击“交易审核”目录下“转账类交易审核”——进入待审核页面——对要审核的交易进行同意操作</p>
+
+                <!--图67-->
+                <img src="/images/payment/bank-help/ceb/11.png" style="height:270px;width:566px;"/>
+                <p class="info-text">——审核成功，支付完成</p>
+
+                <!--图68-->
+                <img src="/images/payment/bank-help/ceb/12.png" style="height:214px;width:551px;"/>
+            </div>
+
+            <div class="bank-one" id="bank-spdb">
+                <p class="info-title1">浦发银行</p>
+                <p class="info-title2">1. 浦发B2B订单查询流程</p>
+                <p class="info-text">（1）登录到浦发银行企业电子银行目录下的“公司网银登录”。</p>
+
+                <!--图86-->
+                <img src="/images/payment/bank-help/spdb/01.png" style="height:324px;width:251px;"/>
+                <p class="info-text">（2）点击“我的信息台”菜单下的“网银交易日志查询”——查询支付完成交易。</p>
+
+                <!-- 图87-->
+                <img src="/images/payment/bank-help/spdb/02.png" style="height:319px;width:578px;"/>
+                <p class="info-text">（3）点击订单号（订单号为银行订单号），进入支付明细显示页面。</p>
+
+                <!--图88-->
+                <img src="/images/payment/bank-help/spdb/03.png" style="height:95px;width:579px;"/>
+
+                <!--图89-->
+                <img src="/images/payment/bank-help/spdb/04.png" style="height:286px;width:417px;"/>
+                <p class="info-title2">2. 浦发B2B支付流程</p>
+                <p class="info-title2">支付提交</p>
+                <p class="info-text">——插入浦发银行网银盾，配置正确的浏览器设置</p>
+                <p class="info-text">——在商户网站选择商品或者服务，用浦发银行企业网银进行支付</p>
+                <p class="info-text">——登录浦发银行网站进行支付</p>
+
+                <!--图90-->
+                <img src="/images/payment/bank-help/spdb/05.png" style="height:347px;width:540px;"/>
+                <p class="info-text">——输入企业客户号、用户登录名、用户密码，进行支付</p>
+
+                <!--图91-->
+                <img src="/images/payment/bank-help/spdb/06.png" style="height:347px;width:263px;"/>
+                <p class="info-text">——确认订单信息，选择支付账号后，点击“确定”提交</p>
+
+                <!--图92-->
+                <img src="/images/payment/bank-help/spdb/07.png" style="height:220px;width:582px;"/>
+                <p class="info-text">——订单提交成功，进入浦发企业银行后台进行订单复核</p>
+
+                <!--图93-->
+                <img src="/images/payment/bank-help/spdb/08.png" style="height:73px;width:573px;"/>
+                <p class="info-title2">支付复核</p>
+                <p class="info-text">——插入复核员网银盾，登录到浦发银行企业网银，输入用户名及密码登录银行后台</p>
+
+
+                <!--图94-->
+                <img src="/images/payment/bank-help/spdb/09.png" style="height:239px;width:466px;"/>
+                <p class="info-text">——进入网上银行后，点击选择待授权的交易</p>
+
+                <!--图95-->
+                <img src="/images/payment/bank-help/spdb/10.png" style="height:347px;width:516px;"/>
+                <p class="info-text">——勾选待授权的交易，点击“授权”</p>
+
+
+                <!--图96-->
+                <img src="/images/payment/bank-help/spdb/11.png" style="height:121px;width:548px;"/>
+                <p class="info-text">——交易复核成功，支付完成</p>
+
+                <!--图97-->
+                <img src="/images/payment/bank-help/spdb/12.png" style="height:127px;width:573px;"/>
+            </div>
+
+            <div class="bank-one" id="bank-pab">
+                <p class="info-title1">平安银行</p>
+                <p class="info-title2">1. 平安B2B订单查询流程</p>
+                <p class="info-text">（1）登录到平安银行企业银行——点击“交易授权”目录下“交易进度查询”——进入交易进度查询页面。</p>
+
+                <!--图98-->
+                <img src="/images/payment/bank-help/pab/1.png" style="height:159px;width:920px;"/>
+                <p class="info-text">（2）选择日期及交易名称中的：付款业务-电子商户，B2B网上支付后，点击模糊查询。</p>
+
+                <!--图99-->
+                <img src="/images/payment/bank-help/pab/2.png" style="height:305px;width:891px;"/>
+                <p class="info-text">（3）进入支付明细显示页面 。</p>
+
+                <!--图100-->
+                <img src="/images/payment/bank-help/pab/3.png" style="height:153px;width:549px;"/>
+                <p class="info-title2">2. 平安B2B支付流程</p>
+                <p class="info-title2">支付提交</p>
+                <p class="info-text">——插入平安银行网银盾，配置正确的浏览器设置</p>
+                <p class="info-text">——在商户网站选择商品或者服务，用平安银行企业网银进行支付</p>
+                <p class="info-text">——登录平安银行网站进行支付，并输入用户名及密码</p>
+
+                <!--图101-->
+                <img src="/images/payment/bank-help/pab/4.png" style="height:255px;width:558px;"/>
+                <p class="info-text">——确认订单信息和金额，选择支付账号后点击确定</p>
+
+                <!--图102-->
+                <img src="/images/payment/bank-help/pab/5.png" style="height:362px;width:548px;"/>
+                <p class="info-text">——订单提交成功，进入平安企业银行后台进行订单复核</p>
+
+                <!--图103-->
+                <img src="/images/payment/bank-help/pab/6.png" style="height:249px;width:547px;"/>
+                <p class="info-title2">支付复核</p>
+                <p class="info-text">——插入复核员网银盾，登录到平安银行企业网银，输入用户名及密码登录银行后台</p>
+
+                <!--图104-->
+                <img src="/images/payment/bank-help/pab/7.png" style="height:265px;width:317px;"/>
+
+                <!--图105-->
+                <img src="/images/payment/bank-help/pab/8.png" style="height:296px;width:578px;"/>
+                <p class="info-text">——点击“交易授权”目录下的“授权人员复核授权”，进入待审核页面，对要审核的B2B网上支付交易进行查询</p>
+
+                <!--图106-->
+                <img src="/images/payment/bank-help/pab/9.png" style="height:334px;width:879px;"/>
+                <p class="info-text">——查询数据完成后，点击“复核”进入复核数据页面</p>
+
+                <!--图107-->
+                <img src="/images/payment/bank-help/pab/10.png" style="height:283px;width:920px;"/>
+                <p class="info-text">——复核确认页面，对要复核的数据进行“复核通过”操作</p>
+
+                <!--图108-->
+                <img src="/images/payment/bank-help/pab/11.png" style="height:185px;width:491px;"/>
+                <p class="info-text">——复核完成，交易成功</p>
+
+                <!--图109-->
+                <img src="/images/payment/bank-help/pab/12.png" style="height:170px;width:547px;"/>
+            </div>
+
+            <div class="bank-one" id="bank-cmb">
+                <p class="info-title1">招商银行</p>
+                <p class="info-title2">招行 B2B 异常问题处理</p>
+                <p class="info-text">刚刚申请的功能需要设置业务模式后才能使用的。您在登陆之后,请先点“系统 管理”“业务管理”,再点中需要增加的功能,点击“增加模式”,“模式名称” 可以随意输入(可为汉字,数字,字母等形式),然后在“没有经办限制前”打 勾,再点“确定”,会出现“经办”字样,点中,再点右下角的“增加经办人”, 选择其中一个用户,点“确定”,再点“终极审批”,选择右下角的“增加审批 人”,选择另一个用户,然后点“确定”,再点“发送”,等到业务模式发送完 毕,请退出企业网银系统,换另一管理员的 uk 登陆,在“系统管理”——“业 务管理”中选择“等待审批”的业务模式,点击审批模式,同意,最后再重新登 陆一次即可</p>
+                <p style="line-height:20px;">&nbsp;</p>
+                <p class="info-text">功能开通后,登陆网银可直接在横栏菜单中看到“商务支付”,请点击“商务支 付”——“商户定制”,仅有该界面显示的公司才可通过网站链接的形式转至我 行公司账户付款,请将您所需商户选到定制商户范围内。例如:1、通过淘宝网 购买商品,请选择“支付宝公司”;2、北京客户交纳地税,请选择“BJ”;3、 通过腾讯 QQ 商城选购,请选择“财付通公司”;4、京东或亚马逊等网站,支持 多种付款方式,可选择快钱公司或其他在网站支付界面上支持的支付平台。其次, 您需设置商务支付功能的用户操作权限。</p>
+                <img src="/images/payment/bank-help/cmb/01.png" style="height:490px;width:647px;"/>
+                <img src="/images/payment/bank-help/cmb/02.png" style="height:232px;width:375px;"/>
+            </div>
+        </div>
+
+    </div>
+</div>
+@@include('../../include/common/footer.html')
+</body>
+
+<script type="text/javascript">
+    function bankClick(thisObj){
+        $(thisObj).parents('.bank-list').find('td').children().removeClass('bank-get');
+        $(thisObj).children().addClass('bank-get');
+
+        $('.bank-help').find('.bank-one').hide();
+        var b = '#' + $(thisObj).attr('data-bank');
+        $('#' + $(thisObj).attr('data-bank')).show();
+    }
+</script>
+</html>
+
+<style type="text/css">
+
+</style>

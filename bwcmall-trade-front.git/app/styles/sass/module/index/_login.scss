@@ -1,0 +1,38 @@
+@charset "UTF-8";
+
+%clearfix {
+    zoom: 1;
+    &:after {
+        content:".";
+        display:block;
+        height:0;
+        clear:both;
+        visibility:hidden;
+    }
+}
+
+.mod-index-login {
+    .btn {
+        height: 38px;
+        width: 100px;
+        text-align: center;
+        font-size: 14px;
+        line-height: 38px;
+        margin-top: 20px;
+        &-group {
+            @extend %clearfix;
+        }
+        &-login {
+            float: right;
+            color: #fff;
+            border: 1px solid #666563;
+            background-color: #271818;
+        }
+        &-register {
+            float: left;
+            color: #887f7d;
+            border: 1px solid #d1d1d1;
+            background-color: #ededed;
+        }
+    }
+}

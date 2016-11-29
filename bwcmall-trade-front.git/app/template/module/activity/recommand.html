@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>卖家入驻</title>
+    @@include('../../include/common/scripts.html')
+    <link rel="stylesheet" href="/styles/module/activity/findgoods.css"/>
+</head>
+<body>
+    <div ms-controller="headerCtrl">
+        @@include('../../include/common/header-top.html')
+        @@include('../../include/common/header-search.html')
+        @@include('../../include/common/header-nav.html')
+    </div>
+    <div style="position:relative; text-align:center; min-width:1200px; height:2222px; overflow:hidden;" ms-controller="recommandCtrl">
+        <img src="/images/activity/recommand.png" alt="" style="position:absolute; top:0; left:50%; margin-left:-600px;">
+        <div style="position:absolute; top:0; z-index:-1; width:100%; height:421px; background-color:#ffcc21;"></div>
+        <div style="position:absolute; top:421px; z-index:-1; width:100%; height:98px; background-color:#f63e3e;"></div>
+        <div style="position:absolute; top:700px; left:50%; margin-left:-600px; width:1200px;">
+            <input style="width: 840px; height: 30px; line-height:30px; padding:20px 30px; font-size:30px; margin:0 auto;" type="text" ms-duplex="mobile" class="input"/>
+            <div style="height:30px; line-height:30px; margin:25px 0;">
+                <p style="font-size:20px; color:#e53e3e; text-align:center;" ms-if="mobileErrorInfo!==''"><img src="/images/activity/warning.png" alt="" style="margin-right:10px; vertical-align:-3px;">{{mobileErrorInfo}}</p>
+            </div>
+            <button style="width: 654px; height: 118px; outline:none; border:0; background:url(../images/activity/btn_recommand.png) no-repeat;" ms-click="checkPhone()"></button>
+        </div>
+    </div>
+
+    @@include('../../include/common/footer.html')
+
+    <script>
+        avalon.ready(function(){
+            var recommandCtrl=avalon.define('recommandCtrl',function(vm){
+                vm.mobile = '';
+                vm.mobileErrorInfo = '';
+                vm.goMikeCrm = function() {
+                    urls.goRef('http://form.mikecrm.com/GbOqlE');
+                }
+
+                vm.checkPhone = function() {
+                    var mobilePattern = /^1[3|4|5|7|8][0-9]\d{8}$/;
+
+                    if ( vm.mobile.replace(/\s+/g, '') === '' ) {
+                        vm.mobileErrorInfo = '请输入手机号';
+                        return;
+                    }
+
+                    if ( !mobilePattern.test(vm.mobile) ) {
+                        vm.mobileErrorInfo = '请输入正确的手机号';
+                        return;
+                    }
+
+                    //验证手机号是否存在
+                    io.GET(apiConfig.checkRecommend + vm.mobile, function(data) {
+                        if (data.result.canRecommend) {
+                            vm.goMikeCrm();
+                        } else {
+                            vm.mobileErrorInfo = '该手机号已为佰万仓注册会员，无法进行推荐';
+                        }
+                    });
+                }            
+            });
+        })
+    </script>
+</body>
+</html>

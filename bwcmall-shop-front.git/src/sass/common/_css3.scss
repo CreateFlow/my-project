@@ -1,0 +1,21 @@
+@charset "UTF-8";
+
+@mixin font-face($font-family) {
+    @font-face {
+        font-family: $font-family;
+        src: font-url('#{$font-family}.eot'); // 1
+        src: font-url('#{$font-family}.eot?#iefix')               format('eot'), // 2
+             font-url('#{$font-family}.svg##{$font-family}')      format('svg'), // 3
+             font-url('#{$font-family}.woff')                     format('woff'), // 4
+             font-url('#{$font-family}.ttf')                      format('truetype'); //5
+    }
+}
+
+@mixin icon-glyph($font-family) {
+    font-family: $font-family;
+    font-size: 16px;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-stroke-width: 0.2px;
+    -moz-osx-font-smoothing: grayscale;
+}

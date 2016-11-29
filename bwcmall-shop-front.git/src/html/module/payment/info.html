@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>买家信息</title>
+    @@include('../../include/common/intro.html')
+    <!-- build:css css/module/payment/info.css -->
+    <link rel="stylesheet" href="/css/module/seller-invoice/info.css" />
+    <link rel="stylesheet" href="/css/module/payment/payment.css" />
+    <!-- endbuild -->
+</head>
+
+<body>
+    @@include('../../include/common/header.html') @@include('../../include/common/nav.html')
+    <div class="main mod-demo aftersale">
+        <div class="sidebar">
+            @@include('../../include/common/menu.html')
+        </div>
+        <div class="content" ms-controller="accountCreditInfo">
+            <!-- <div class="nav-bar">卖家中心 > 开票管理 > 开票操作</div> -->
+            <div class="title">买家信息</div>
+            <div class="box">
+                <div class="info-border">
+                    <div class="row">
+                        <div class="col col-2 text-title">买家名称：</div>
+                        <div class="col col-4">
+                            <span>{{accountCreditInfo.customerName}}</span>
+                        </div>
+                        <div class="col col-2 text-title">添加时间：</div>
+                        <div class="col col-4">
+                            <span>{{accountCreditInfo.passTime}}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="info-border">
+                    <div class="row">
+                        <div class="col col-6">
+                            <h3>当前账期信息</h3>
+                            <table class="table table-payment">
+                                <tr>
+                                    <td style="width: 30%">账期</td>
+                                    <td>{{accountCreditInfo.creditPeriodType}}</td>
+                                </tr>
+                                <tr>
+                                    <td>授信额度</td>
+                                    <td>{{accountCreditInfo.creditAmount}} 元</td>
+                                </tr>
+                                <tr>
+                                    <td>账期还款日</td>
+                                    <td>顺延 {{accountCreditInfo.delayDays}} 天</td>
+                                </tr>
+                                <tr>
+                                    <td>剩余授信额度</td>
+                                    <td>{{accountCreditInfo.remainingBalance}} 元</td>
+                                </tr>
+                                <tr>
+                                    <td>生效开始时间</td>
+                                    <td>{{accountCreditInfo.effectiveDate}}</td>
+                                </tr>
+                                <tr>
+                                    <td>生效截止时间</td>
+                                    <td><span ms-text="getEffectiveDate(accountCreditInfo)"></span></td>
+                                </tr>
+                                <tr>
+                                    <td>状态</td>
+                                    <td>{{accountCreditInfo.accountCreditStatus}}</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="col col-6" ms-if="accountCreditInfo.nextCreditPeriodType">
+                            <h3>下期账期信息</h3>
+                            <table class="table table-payment">
+                                <tr>
+                                    <td style="width: 30%">账期</td>
+                                    <td>{{accountCreditInfo.nextCreditPeriodType}}</td>
+                                </tr>
+                                <tr>
+                                    <td>授信额度</td>
+                                    <td>{{accountCreditInfo.nextCreditAmount}} 元</td>
+                                </tr>
+                                <tr>
+                                    <td>账期还款日</td>
+                                    <td>顺延 {{accountCreditInfo.nextDelayDays}} 天</td>
+                                </tr>
+                                <tr>
+                                    <td>生效开始时间</td>
+                                    <td>{{accountCreditInfo.updateEffectiveDate}}</td>
+                                </tr>
+                                <tr>
+                                    <td>生效截止时间</td>
+                                    <td>{{accountCreditInfo.expiredDate}}</td>
+                                </tr>
+                                <tr>
+                                    <td>状态</td>
+                                    <td>{{accountCreditInfo.accountCreditStatus}}</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @@include('../../include/common/outro.html')
+    <script>
+    require(['conf/payment/info']);
+    </script>
+</body>
+
+</html>

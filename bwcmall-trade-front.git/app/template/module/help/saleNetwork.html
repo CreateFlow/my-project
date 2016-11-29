@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>取消订单</title>
+    @@include('../../include/common/common-include.html')
+    <link rel="stylesheet" href="../styles/module/page/static.css"/>   
+</head>
+<body>  
+      @@include('../../include/common/header.html')
+<div class="g-wrap">
+    <div class="content-head">
+        <div class="m-public-logo f-fl">
+            <a href="/"></a>
+        </div>
+        <div class="content-head-text f-fl">
+            取消订单
+        </div>
+        <div class="content-head-call f-fr"></div>
+        <div class="clear"></div>
+    </div>
+</div>
+<div class="g-content">
+    <div class="content-body-head">取消订单</div>
+    <div class="content-body-block">
+        <span class="content-body-title">取消订单</span>
+        <p>
+            如果您需要取消订单，在我们还没有确认发货前，您可以登录账号，在订单中心手动取消订单；<br>
+            当我们还未发货时，并且订单状态为：“待发货”时，您可以联系我们取消订单；<br>
+            当订单状态变为：“待收货”时则不能再取消订单了，如您需要则在收货后发起退货。
+        </p><br><br>
+        <span class="content-body-title">订单取消后如何退款？</span>
+
+        <table class="content-body-table" style="width:100%">
+            <thead>
+                <tr style="background:#fafafa;">
+                    <td colspan="2">支付方式</td>
+                    <td>退款方式</td>
+                    <td>佰万仓退款处理周期</td>
+                    <td>第三方支付处理周期</td>
+                 </tr>
+            </thead>
+            <tbody>
+            
+            <tr>
+                <td rowspan="2">在线支付-平台支付</td>
+                <td>微信支付</td>
+
+                <td>退回到原支付卡</td>
+                <td>2个工作日</td>
+                <td>1-3个工作日</td>
+
+            </tr>
+            <tr style="background:#none;">
+                <td>支付宝支付</td>
+                <td>退回到原支付卡</td>
+
+                <td>2个工作日</td>
+                <td>1-3个工作日</td>
+
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+    @@include('../../include/common/footer.html')
+</body>
+</html>

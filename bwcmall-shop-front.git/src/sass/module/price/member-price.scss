@@ -1,0 +1,148 @@
+@charset "UTF-8";
+@import "../../common/scaffolding";
+.member-price {
+    .inputbox {
+        height: 34px;
+        line-height: 34px;
+        width: 200px;
+        text-indent: 5px;
+        //去除select圆角
+        border: 0px;
+        outline: 1px solid rgb(204, 204, 204);
+    }
+    .inputbox-main {
+        width: 90%;
+    }
+    .btn-large {
+        width: 150px;
+    }
+    .title {
+        padding-top: 7px;
+        margin-bottom: 0;
+    }
+    .ctable {
+        width: 950px;
+        margin-bottom: 30px;
+        color: #666;
+        .ctr {
+            height: 44px;
+            line-height: 44px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        td {
+            text-align: center;
+        }
+        .cell-empty {
+            padding: 5em;
+            text-align: center;
+            border-bottom: 1px solid #eee;
+        }
+        .thb {
+            border-bottom: 2px solid #e0e0e0;
+        }
+        .tr-bg {
+            background-color: #f3f3f3;
+        }
+        .link {
+            color: lightskyblue;
+        }
+        .tr-lastrow {
+            border-bottom: 20px solid #b5b5b5;
+        }
+    }
+    .empty-tip {
+        line-height: 115px;
+        padding-left: 50px;
+    }
+}
+
+.doubleList-main {
+    .doubleList {
+        height: 330px;
+        overflow: hidden;
+        .doubleList-list {
+            overflow-y: scroll;
+            height: 248px;
+            width: 310px;
+            border: 1px solid #aaa;
+            ul {
+                li {
+                    list-style: none;
+                    padding: 8px 10px;
+                    cursor: pointer;
+                    border-bottom: 1px solid #ddd;
+                }
+                li.active {
+                    background-color: #3775c0;
+                    color: white;
+                }
+            }
+        }
+        .inputbox {
+            height: 34px;
+            line-height: 34px;
+            width: 310px;
+            text-indent: 5px;
+            //去除select圆角
+            border: 0px;
+            outline: 1px solid rgb(204, 204, 204);
+            margin: 10px 0 10px 1px;
+        }
+        .inputbox-main {
+            width: 90%;
+        }
+        p {
+            font-size: 15px;
+            text-align: center;
+        }
+    }
+    .addOrDelete {
+        margin-top: 145px;
+        button {
+            margin: 8px 31px;
+        }
+    }
+    h2 {
+        text-align: center;
+        margin-bottom: 15px;
+        color: #3775c0;
+    }
+}
+
+.showcustomers-main {
+    .ctable {
+        width: 650px;
+        margin-bottom: 30px;
+        color: #666;
+        .ctr {
+            height: 44px;
+            line-height: 44px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        td,
+        th {
+            text-align: center;
+        }
+        .cell-empty {
+            padding: 5em;
+            text-align: center;
+            border-bottom: 1px solid #eee;
+        }
+        .thb {
+            border-bottom: 2px solid #e0e0e0;
+        }
+        .tr-bg {
+            background-color: #f3f3f3;
+        }
+        .link {
+            color: lightskyblue;
+        }
+    }
+    h3 {
+        span {
+            margin: 5px 20px 10px 0;
+            display: inline-block;
+            color: #3775c0;
+        }
+    }
+}

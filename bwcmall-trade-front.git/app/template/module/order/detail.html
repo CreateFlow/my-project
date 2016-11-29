@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>订单详情</title>
+    @@include('../../include/common/meta.html') @@include('../../include/common/common-include.html')
+    <link rel="stylesheet" type="text/css" href="/styles/module/order/detail.css"> 
+    <script src="/scripts/module/order/detail.js"></script>
+</head>
+
+<body ms-controller="orderDetailCtrl">
+    @@include('../../include/common/header.html')
+    <div class="gs-header">
+        @@include('../../include/common/account-head.html')
+    </div>
+    <!--内容的header-->
+    <div class="g-ctop gf-yahei">
+        <a class="ga-382" href="/order/list.html">我的订单</a>
+        <span> > </span>
+        <a class="ga-382" href="#">订单详情</a>
+    </div>
+     <div ms-include-src="'../../../partials/order/order-detail.html'"  data-include-rendered='render'></div> 
+    @@include('../../include/common/footer.html')
+</body>
+
+</html>

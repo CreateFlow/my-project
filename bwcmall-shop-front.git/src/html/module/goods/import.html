@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>商品管理</title>
+    @@include('../../include/common/intro.html')
+    <!-- build:css css/module/goods/goods.css -->
+    <link rel="stylesheet" href="/css/module/goods/import.css" />
+    <!-- endbuild -->
+</head>
+
+<body>
+    @@include('../../include/common/header.html') @@include('../../include/common/nav.html')
+    <div class="main mod-demo goods-list">
+        <div class="sidebar">
+            @@include('../../include/common/menu.html')
+        </div>
+        <div class="content ms-controller"  ms-controller="importGoods">
+            <div class="panel">
+                <div class="hd">
+                    <span class="title">批量上传商品</span>
+                </div>
+                <div class="bd">
+                    <div class="item-line">
+                        <span>上架设定：</span>
+                        <div class="radio-inline">
+                            <label><input ms-duplex-string="onShelfType" type="radio" value="1">&nbsp&nbsp立即上架</label>
+                        </div>
+                        <div class="radio-inline">
+                            <label><input ms-duplex-string="onShelfType" type="radio" value="3">&nbsp&nbsp暂不上架</label>
+                        </div>
+                    </div>
+                    <div class="item-line">
+                        <div style="float:left;">
+                            <input id="selectGoodsExcel" name="selectGoodsExcel" type="file" multiple="false"/>
+                        </div>
+                        <div>
+                            <a href="javascript:void(0);" ms-click="showExprotSkusDlg()" class="action-text">导出商品模板数据</a>
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                    <div class="item-line">
+                        <button class="btn btn-confirm btn-primary" ms-click="uploadGoods()">确认上传</button>
+                    </div>
+                    <div class="result-wrap" ms-if="result.state==1">
+                        <div class="result-title">
+                            上传结果：
+                        </div>
+                        <div class="result-content" ms-if="result.successRow>0">
+                            <span>成功导入： </span><span>{{result.successRow}}</span><span>条</span>
+                        </div>
+                        <div class="result-content" ms-if="(result.totalRow-result.successRow)>0">
+                            <span>错误数据： </span><span ms-text="(result.totalRow-result.successRow)"></span><span>条</span><span><a href="javascript:void(0);" ms-click="exportResult()" class="action-text">点击即可下载</a></span><span>导入失败数据，修正后继续上传即可</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div ms-widget="dialog,dlgExportSKUsId,dlgExportSKUsOption">
+                    <div class="col offerset-2">
+                        <form ms-widget="validation">
+                            <div class="row es-body">
+                                <div style="margin-bottom:10px;">品牌：<span style="color:#808080;">(如果您找不到要上传的商品，请联系陈晓楠 021-51132844 09:30-19:00)</span></div>
+                                <select ms-widget="dropdownlist,brandListId" ms-duplex="selectBrandId">
+                                    <!--<option value="brand.id" ms-repeat-brand="brandList">{{brand.name}}</option>-->
+                                </select>
+                            </div>
+
+                            <div class="row">
+                                <div>
+                                    <label>分类：</label>
+                                    <a href="javascript:void(0);" ms-click="checkAll()" class="action-text-sm">全选</a>
+                                    <a href="javascript:void(0);" ms-click="toggleSelect()" class="action-text-sm">反向选择</a>
+                                </div>
+                                <div id="spuCategoryId">
+                                    <div class="cate-item-inline" ms-repeat-cate="categoryList" ms-attr-data-id="cate.id" ms-attr-data-name="cate.name">
+                                        <label><input type="checkbox">&nbsp&nbsp<span>{{cate.name}}</span></label>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div ms-widget="dialog,dlgAlertId,dlgAlertOption">
+                    <div class="col offerset-2">
+                        {{alertMsg}}
+                    </div>
+                </div>
+                <div ms-widget="dialog,dlgWaitingId,dlgWaitingOption" class="waitingDlg">
+                </div>
+            </div>
+        </div>
+    </div>
+    @@include('../../include/common/outro.html')
+    <script>
+    require(['conf/goods/FileSaver']);
+    require(['conf/goods/import']);
+    </script>
+</body>
+
+</html>

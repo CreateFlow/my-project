@@ -1,0 +1,35 @@
+http://www.bwcmall.com/
+http://www.bwcmall.com/index.html
+http://www.bwcmall.com/about/aboutUs.html
+http://www.bwcmall.com/about/contactUs.html
+http://www.bwcmall.com/activity/findgoods.html
+http://www.bwcmall.com/address/address.html
+http://www.bwcmall.com/afs/return-list.html
+http://www.bwcmall.com/brand/brand-nav.html
+http://www.bwcmall.com/cart/list.html
+http://www.bwcmall.com/classify/classify.html
+http://www.bwcmall.com/goods/detail.html?id=(\d+)
+ http://www.bwcmall.com/goods/search.html?categoryId=(\d+) 
+ http://www.bwcmall.com/goods/search.html?brandId=(\d+)
+http://www.bwcmall.com/help/distributPolicy.html
+http://www.bwcmall.com/help/fangjia.html
+http://www.bwcmall.com/help/hint.html
+http://www.bwcmall.com/help/notice-one.html
+http://www.bwcmall.com/help/oderRules.html
+http://www.bwcmall.com/help/paymentQuestion.html
+http://www.bwcmall.com/help/payMethod.html
+http://www.bwcmall.com/help/pointRule.html
+http://www.bwcmall.com/help/registAudit.html
+http://www.bwcmall.com/help/returnPolicy.html
+http://www.bwcmall.com/help/saleNetwork.html
+http://www.bwcmall.com/invoice/invoice.html
+http://www.bwcmall.com/invoice/invoice-list.html
+http://www.bwcmall.com/member/corp-info.html
+http://www.bwcmall.com/member/login.html
+http://www.bwcmall.com/member/register.html
+http://www.bwcmall.com/member/registInstruction.html
+http://www.bwcmall.com/order/fast-order.html
+http://www.bwcmall.com/order/list.html
+http://www.bwcmall.com/payday/payday.html
+http://www.bwcmall.com/payday/payrule.html
+http://www.bwcmall.com/protocol/registProtocol.html

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>登陆</title>
+    @@include('../../include/common/member-include.html')
+    <link rel="stylesheet" href="/styles/module/member/login.css"/>
+</head>
+<body>
+    <div class="main main-login" ms-controller="loginCtrl">
+        <div class="main_content">
+            <div class="layout-center">
+                <div class="layout-center_reset">
+<!--                
+                    <div class="hd">
+                        <div class="section pull-left">
+                            <a href="/index.html">回到佰万仓首页</a>
+                        </div>
+                        <div class="section pull-right">
+                            <span class="text">还没有账号？</span><a class="btn" href="/member/register.html">加入</a>
+                        </div>
+                    </div>
+-->
+                    <div class="bd">
+                        <div class="login">
+                            <div class="title"><img class="logo" src="/images/member/logo.png"></img></div>
+                            <form>
+                                <div class="input input-group">
+                                    <i class="icon icon-phone"></i>
+                                    <input class="input_inner" type="text" ms-change="checkValid()" ms-blur="checkPhone"  ms-duplex="user.userName" name="username" placeholder="帐号" />
+                                </div>
+                                <div class="tips"><span ms-text="errorInfo"></span></div>
+                                <div class="input input-group">
+                                    <i class="icon icon-lock"></i>
+                                    <input class="input_inner" ms-attr-type="inputType"  type="password" ms-change="checkValid()"  ms-keyup="checkPassword" ms-duplex="user.password" name="password" placeholder="密码" />
+                                    <span class="btn" ms-class="checked:passwordVisible" ms-click="showPassword"><i class="icon"></i></span>
+                                </div>
+                                <div class="section">
+                                    <div class="pull-left">
+                                        <label class="label">
+                                            <span class="checkbox checked" ms-class="checked:autoChecked" ms-click="check">
+                                                <i class="icon"></i>
+                                            </span>
+                                            记住密码
+                                        </label>
+                                    </div>
+                                    <!--<a class="pull-right btn-link" href="/member/findPassword.html">忘记密码？</a>-->
+                                </div>
+                            </form>
+                            <a class="btn btn-large jSubmit" ms-class="btn-disabled:!valid" ms-click="submit">立即登录</a>
+                        </div>
+                    </div>
+                    <div class="ft">
+                        版权所有@2015 佰万仓网络科技有限公司&nbsp;&nbsp;
+                        <a class="link" target="_blank" href="/images/member/zhizhao.jpg">沪ICP备15032859号-1
+                            <img class="f-ib" src="/images/common/icp_icon.png" alt="ICP"/>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+   <script src="/scripts/module/member/login.js"></script>
+</body>
+</html>

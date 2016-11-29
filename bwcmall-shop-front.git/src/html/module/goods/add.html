@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>新增商品</title>
+    @@include('../../include/common/intro.html')
+    <!-- build:css css/module/goods/goods.css -->
+    <link rel="stylesheet" href="/css/module/goods/goods.css" />
+    <!-- endbuild -->
+</head>
+
+<body>
+    @@include('../../include/common/header.html') @@include('../../include/common/nav.html')
+    <div class="main mod-demo goods-add">
+        <div class="sidebar">
+            @@include('../../include/common/menu.html')
+        </div>
+        <div class="content ms-controller" ms-controller="addGoods">
+            <div class="panel" ms-visible="step1">
+                <div class="hd">
+                    <span class="title">新增商品</span>
+                </div>
+                <div class="bd">
+                    <!-- spu start -->
+                    <div>
+                        <div class="box" ms-if="spuNo">
+                            <div class="spu-title">SPU编号: {{spuNo}}</div>
+                        </div>
+                        <div class="search dropdown">
+                            <div class="row">
+                                <div class="col col-1 spu-title">快捷查询</div>
+                                <div class="col col-5">
+                                    <input type="text" placeholder="支持搜索品牌、SPU名称、查询相应的SPU" class="inputbox inputbox-main" ms-focus="searchSpu()" ms-keyup="searchSpu()" ms-duplex="newData.spuKeyword" />
+                                    <div id="spu-list" class="dropdown-content" style="width:360px;">
+                                        <div class="dropdown-list" ms-each="spuResult">
+                                            <a ms-attr-value="el.id" ms-click="getSpuItem(el.id)">{{$index +1}}: {{el.brandName}} - {{el.name}}</a>
+                                        </div>
+                                        <div class="dropdown-nav" ms-visible="spuResultNav.page">
+                                            <a href="javascript:void(0)" ms-click="searchSpu(spuResultNav.page -1)" ms-visible="spuResultNav.page != 1">上一页</a>
+                                            <a href="javascript:void(0)" ms-click="searchSpu(spuResultNav.page + 1)" ms-visible="spuResultNav.page != spuResultNav.page_count">下一页</a>
+                                            <span>{{spuResultNav.page}} / 共{{spuResultNav.page_count}}页</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- <div class="col col-1 title">
+                                    <span class="btn btn-large btn-primary" ms-click="searchSpu">通过品类层级搜索SPU</span>
+                                </div> -->
+                            </div>
+                        </div>
+                        <div class="box" ms-visible="!isSelectSpu">
+                            <div class="spu-title">选择分类</div>
+                            <div class="panel-body" style="height:auto;overflow:hidden">
+                                <div id="category" class="position">
+                                    <div id="primary" class="categoryLevel" level="1">
+                                        <div class="option" ms-click="ckLiCategory1(el, $index)" ms-repeat=" categoryAry[1]" ms-class="{{selectedRow[1] == $index? 'selected':''}}">
+                                            <span class="cn">{{el.name}}</span><i></i>
+                                        </div>
+                                        <div class="bottom"></div>
+                                    </div>
+                                    <div id="second" class="categoryLevel" ms-visible="showLevel2">
+                                        <div class="option" ms-click="ckLiCategory2(el, $index)" ms-repeat="categoryAry[2]" ms-class="{{selectedRow[2] == $index? 'selected':''}}">
+                                            <span class="cn">{{el.name}}</span><i></i>
+                                        </div>
+                                    </div>
+                                    <div id="third" class="categoryLevel" ms-visible="showLevel3">
+                                        <div class="option" ms-click="ckLiCategory3(el, $index)" ms-repeat="categoryAry[3]" ms-class="{{selectedRow[3] == $index? 'selected':''}}">
+                                            <span class="cn">{{el.name}}</span><i></i>
+                                        </div>
+                                    </div>
+                                    <div id="forth" class="categoryLevel" ms-visible="showLevel4">
+                                        <div class="option" ms-click="ckLiCategory4(el, $index)" ms-repeat="categoryAry[4]" ms-class="{{selectedRow[4] == $index? 'selected':''}}">
+                                            <span class="cn">{{el.name}}</span><i></i>
+                                        </div>
+                                    </div>
+                                    <div id="five" class="categoryLevel">
+                                        <h3 style="background:#ddd;padding:5px;">SPU选择结果</h3>
+                                        <div class="option" ms-repeat="categoryNameX">
+                                            <span class="cn">{{el.pathName}} > {{el.name}}</span>
+                                            <font class="del" ms-click="delCategory($index)">X</font>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="box search">
+                            <div class="spu-title">SPU信息</div>
+                            <div class="panel-body">
+                                <div class="spu-title-border">SPU基本信息</div>
+                                <form name="form" class="mod-form" style="border:1px solid #ddd">
+                                    <table class="table-layout" style="margin:20px;">
+                                        <tr ms-visible="isSelectSpu">
+                                            <td style="width: 80px">
+                                                <label>分类：</label>
+                                            </td>
+                                            <td style="width: 300px">
+                                                {{newData.categorys}}
+                                            </td>
+                                            <td>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 80px">
+                                                <label>品牌：</label>
+                                            </td>
+                                            <td style="width: 400px">
+                                            <!--
+                                                <div class="dropdown">
+                                                    <input ms-duplex="newData.brandName" ms-focus="searchBrand()" ms-keyup="searchBrand()" class="inputbox" type="text" value="" placeholder="请输入并选择品牌名" ms-attr-readonly="isSelectSpu" />
+                                                    <div id="brand-list" class="dropdown-content" ms-each="searchBrandList">
+                                                        <a ms-attr-value="el.id" ms-click="getBrandItem(el)">{{el.name}}</a>
+                                                    </div>
+                                                    <!--  <button style="margin-left:20px;" type="button" class="btn btn-primary" ms-click="addbrand()">新增品牌</button> -->
+                                            <!--    </div>
+                                            -->
+                                                <select ms-widget="dropdownlist,brandListId,$brandListOption" ms-duplex="selectBrandId" ms-attr-disabled="isSelectSpu">
+                                                </select>
+                                            </td>
+                                            <td>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 80px">
+                                                <label>SPU名称：</label>
+                                            </td>
+                                            <td style="width: 300px">
+                                                <input ms-duplex="newData.name" name="name" class="inputbox" type="text" value="" placeholder="请输入SPU名称(选填)" ms-attr-readonly="isSelectSpu" />
+                                            </td>
+                                            <td>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </form>
+                                <div class="spu-title-border">SPU属性范围（选填）</div>
+                                <div class="spu-container">
+                                    <table class="table-layout" style="padding:20px;">
+                                        <tr ms-visible="!isSelectSpu">
+                                            <td style="width: 300px">
+                                                <div class="dropdown">
+                                                    <input ms-duplex="newData.spuAttrKeyword" ms-focus="searchSpuAttr()" ms-keyup="searchSpuAttr()" class="inputbox" type="text" value="" placeholder="请输入属性名" />
+                                                    <div id="spuAttr-list" class="dropdown-content" ms-each="spuAttrList">
+                                                        <a ms-attr-value="el.id" ms-click="getSpuAttrItem(el)">{{el.name}}</a>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td style="width: 500px">
+                                                <label class="radio-inline">
+                                                    <input type="radio" ms-duplex-string="optionsAttr" value="1"> 普通属性
+                                                </label>
+                                                <label class="radio-inline">
+                                                    <input type="radio" ms-duplex-string="optionsAttr" value="2"> 关键属性
+                                                </label>
+                                                <label class="radio-inline">
+                                                    <input type="radio" ms-duplex-string="optionsAttr" value="3"> 主属性
+                                                </label>
+                                                <button style="margin-left:20px;" type="button" class="btn btn-primary" ms-class="{{isSelectSpu? 'disabled':''}}" ms-click="addAttr()">添加</button>
+                                            </td>
+                                            <td>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="3">
+                                                <div class="row">
+                                                    <table class="table" style="margin: 0px auto;width:98%">
+                                                        <thead>
+                                                            <tr>
+                                                                <th style="text-align:center">属性类型</th>
+                                                                <th style="text-align:center">属性名称</th>
+                                                                <th style="text-align:center">属性值</th>
+                                                                <th style="text-align:center">操作</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr ms-repeat="spuDetail">
+                                                                <td style="text-align:center">
+                                                                    {{el.typeShowName}}
+                                                                </td>
+                                                                <td style="text-align:center">
+                                                                    {{el.attribute.name}}
+                                                                </td>
+                                                                <td style="text-align:center">
+                                                                    <!-- <input ms-duplex="el.attribute.values" class="inputbox" type="text" value="" placeholder="请输入属性值，以[ , ]区分" ms-attr-readonly="isSelectSpu" />-->
+                                                                    {{el.attribute.values}}
+                                                                </td>
+                                                                <td style="text-align:center">
+                                                                    <a ms-click="delAttr($index)" class="link" ms-if="!isSelectSpu">删除</a>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="box" style="text-align:center;margin-top:40px;">
+                            <button type="button" class="btn btn-large btn-primary" ms-click="step1OK()">下一步</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- 第二步 -->
+                <div div class="panel" ms-visible="step2"></div>
+            </div>
+        </div>
+        <div ms-widget="dialog,dlgAfterAlert,opts2">
+            <div class="col offerset-2">
+                {{confirmReceivedMsg}}
+            </div>
+        </div>
+        <div ms-if="showLoading">
+            <div class="oni-loading" ms-widget="loading" data-loading-type="spinning-spin"></div>
+        </div>
+    </div>
+    @@include('../../include/common/outro.html')
+    <script>
+    require(['conf/goods/add']);
+    </script>
+</body>
+
+</html>

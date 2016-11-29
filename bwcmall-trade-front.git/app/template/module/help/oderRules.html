@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>订单状态</title>
+    @@include('../../include/common/common-include.html')
+    <link rel="stylesheet" href="../styles/module/page/static.css"/>   
+</head>
+<body>  
+      @@include('../../include/common/header.html')
+<div class="g-wrap">
+    <div class="content-head">
+        <div class="m-public-logo f-fl">
+            <a href="/"></a>
+        </div>
+        <div class="content-head-text f-fl">
+            订单状态
+        </div>
+        <div class="content-head-call f-fr"></div>
+        <div class="clear"></div>
+    </div>
+</div>
+<div class="g-content">
+    <div class="content-body-head">订单状态</div>
+    <div class="content-body-block">
+        <!-- <span class="content-body-title">1.付款通知规则</span> -->
+
+        <!-- <p>
+    	客户线下付款后，须及时将付款凭证上传至平台。平台在未得到付款通知的情况下，不会启动下一步订单操作。由此造成的发货延迟或者库存变化由客户自行承担。
+        </p>
+        <span class="content-body-title">2.库存确认规则</span>
+
+        <p>
+    	库存确认后，客户应及时安排付款，以免库存发生变化。由于客户延迟付款导致的库存变化，佰万仓不承担任何责任。
+        </p>
+        <span class="content-body-title">3.订单取消规则</span> -->
+
+        <!-- 
+        <p>当日14:00前经确认库存的订单到18:00未付款的，14:00之后确认库存的订单到第二天中午12:00仍未付款的，将被视为过期订单，将被取消。由此产生的一切后果由客户自行承担。账期客户除外。</p> -->
+        
+
+        <span class="content-body-title">订单状态分为五种：“待付款”、“待发货”、“待收货”、“已完成”、“已取消”。各自的含义如下：
+        </span>
+        <span class="content-body-title">待付款</span>
+
+        <p>订单已提交成功，等待客户付款。</p><br>
+
+        <span class="content-body-title">待发货</span>
+
+        <p>订单正在处理中，等待发货。</p><br>
+
+        <span class="content-body-title">待收货</span>
+
+        <p>货物已经安排发出，等待客户确认收货。</p><br>
+
+        <span class="content-body-title">已完成</span>
+
+        <p>订单已圆满完成。</p><br>
+
+        <span class="content-body-title">已取消</span>
+
+        <p>订单已取消，交易已关闭。</p>
+      
+    </div>
+</div>
+    @@include('../../include/common/footer.html')
+</body>
+</html>

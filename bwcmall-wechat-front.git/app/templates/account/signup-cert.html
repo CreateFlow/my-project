@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <title>买家注册</title>
+    <meta name="description" content=""> @@include('../common/meta.html')
+</head>
+
+<body v-cloak id="app">
+    <div style="display: none;">
+        <img id="idImg" src="">
+        <img id="idImgCom" src="">
+        <canvas id="canvas"></canvas>
+    </div>
+    <div class="container" id="sign-wrap">
+        <div class="cell">
+            <div class="sign-header">
+                <span class="active">填写注册信息</span><i class="iconfont icon-right active"></i><span class="active">确认用户信息</span><i class="iconfont icon-right active"></i><span class="active">上传三证</span><i class="iconfont icon-right active"></i><span>注册成功</span>
+            </div>
+            <div>
+                <div class="weui_cells weui_cells_radio">
+                    <label class="weui_cell weui_check_label" for="x11">
+                        <div class="weui_cell_bd weui_cell_primary">
+                            <p>独立三证</p>
+                        </div>
+                        <div class="weui_cell_ft">
+                            <input type="radio" class="weui_check" value="0" name="radio1" id="x11" checked="checked" v-model="licenseType">
+                            <span class="weui_icon_checked"></span>
+                        </div>
+                    </label>
+                    <label class="weui_cell weui_check_label" for="x12">
+                        <div class="weui_cell_bd weui_cell_primary">
+                            <p>营业执照（三证合一）</p>
+                        </div>
+                        <div class="weui_cell_ft">
+                            <input type="radio" name="radio1" class="weui_check" value="1" id="x12" v-model="licenseType">
+                            <span class="weui_icon_checked"></span>
+                        </div>
+                    </label>
+                </div>
+            </div>
+            <div class="weui_cell" v-show:sync="licenseType == 0">
+                <div class="weui_cell_bd weui_cell_primary">
+                    <div class="weui_uploader upload">
+                        <div class="weui_uploader_hd weui_cell">
+                            <!-- <div class="weui_cell_bd weui_cell_primary">图片上传</div> -->
+                            <!-- <div class="weui_cell_ft">0/2</div> -->
+                        </div>
+                        <div class="weui_uploader_bd">
+                            <div class="weui_uploader_input_wrp">
+                                <div class="weui_uploader_file">
+                                    <img class="upload-icon" src="/images/account/upload@2x.png">
+                                    <div class="weui_uploader_status_content">上传营业执照</div>
+                                    <img class="upload-img" v-bind:src="licenseUrl" v-show="licenseUrl">
+                                    <input class="weui_uploader_input" type="file" name="license" accept="image/*" v-on:change="onFileChange">
+                                </div>
+                            </div>
+                            <div class="weui_uploader_input_wrp">
+                                <div class="weui_uploader_file">
+                                    <img class="upload-icon" src="/images/account/upload@2x.png">
+                                    <div class="weui_uploader_status_content">上传税务登记证书</div>
+                                    <img class="upload-img" v-bind:src="taxRegCertUrl" v-show="taxRegCertUrl">
+                                    <input class="weui_uploader_input" type="file" name="taxRegCert" accept="image/*" v-on:change="onFileChange">
+                                </div>
+                            </div>
+                            <div class="weui_uploader_input_wrp">
+                                <div class="weui_uploader_file">
+                                    <img class="upload-icon" src="/images/account/upload@2x.png">
+                                    <div class="weui_uploader_status_content">上传组织机构代码</div>
+                                    <img class="upload-img" v-bind:src="orgnizationCodeUrl" v-show="orgnizationCodeUrl">
+                                    <input class="weui_uploader_input" type="file" name="orgnizationCode" accept="image/*" v-on:change="onFileChange">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="weui_cell" v-show:sync="licenseType == 1">
+                <div class="weui_cell_bd weui_cell_primary">
+                    <div class="weui_uploader upload">
+                        <div class="weui_uploader_hd weui_cell">
+                            <!-- <div class="weui_cell_bd weui_cell_primary">图片上传</div> -->
+                            <!-- <div class="weui_cell_ft">0/2</div> -->
+                        </div>
+                        <div class="weui_uploader_bd">
+                            <div class="weui_uploader_input_wrp">
+                                <div class="weui_uploader_file">
+                                    <img class="upload-icon" src="/images/account/upload@2x.png">
+                                    <div class="weui_uploader_status_content">上传营业执照</div>
+                                    <img class="upload-img" v-bind:src="licenseAllUrl" v-show="licenseAllUrl">
+                                    <input class="weui_uploader_input" type="file" name="licenseAll" accept="image/*" v-on:change="onFileChange">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="ui-footer">
+            <button class="weui_btn weui_btn_warn" @click="setBuyer()">提交</button>
+        </div>
+        <loading :show="uploadBusy" :text="uploadText"></loading>
+    </div>
+    @@include('common/footer.html')
+    <!-- build:js(.) /js/page/account/signup-cert-modules.js -->
+    <script src="/bower_components/vux/dist/components/loading/index.js"></script>
+    <!-- endbuild -->
+    <!-- build:js({.tmp,app}) /js/page/account/signup-cert.js -->
+    <script src="/js/lib/zepto.js"></script>
+    <script src="/js/page/account/signup-cert.js"></script>
+    <!-- endbuild -->
+</body>
+
+</html>

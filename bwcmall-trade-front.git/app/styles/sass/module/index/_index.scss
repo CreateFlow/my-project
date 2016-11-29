@@ -1,0 +1,811 @@
+@charset "UTF-8";
+
+@import "login";
+/* head start */
+
+.my-order{
+    position: absolute;
+    right: 0;
+    top: -32px;
+    width: 118px;
+    height: 18px;
+    background-image: image-url("index/my_order_bg.png");
+    background-position: top left;
+    background-repeat: no-repeat;
+}
+.my-order a{
+    font-family: "Microsoft YaHei";
+    display: block;
+    width: 118px;
+    height: 18px;
+    color: #5b534e;
+    font-size: 14px;
+    text-indent: 28px;
+    line-height: 18px;
+}
+#carousel{
+    width: 100%;
+    height: 326px;
+    border: 1px solid #ccc;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.rolling-wrap{
+    position: relative;
+    width: 692px;
+    height: 180px;
+    border: 4px solid #f6f3f3;
+    border-top: 0;
+}
+.rolling-btn{
+    display: block;
+    position: absolute;
+    width: 34px;
+    height: 180px;
+}
+#leftBtn{
+    left: 0;
+    top: 0;
+    background-image: image-url("index/rolling_left.png");
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+#rightBtn{
+    right: 0;
+    top: 0;
+    background-image: image-url("index/rolling_right.png");
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+.rolling-inner{
+    margin: 0 34px;
+    width: 624px;
+}
+.rolling{
+    position: relative;
+    left: 0;
+    top: 0;
+}
+.rolling li{
+    width: 156px;
+    height: 180px;
+}
+.rolling-item{
+    height: 180px;
+    text-align: center;
+    display: block;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    border: 4px solid #fff;
+}
+.rolling-item:hover{
+    border-color: #c7c4c2;
+}
+.rolling-item-top{
+    width: 148px;
+    height: 120px;
+    line-height: 120px;
+    text-align: center;
+    overflow: hidden;
+}
+.rolling-item-top img{
+    max-width: 120px;
+    max-height: 120px;
+    overflow: hidden;
+    display: inline-block;
+    margin: 0 auto;
+    vertical-align: middle;
+}
+.rolling-product-name{
+    line-height: 1.78;
+    height: 21px;
+    overflow: hidden;
+}
+.rolling-product-name em{
+    color: #b3aeab;
+}
+.rolling-product-price{
+    line-height: 1.43;
+}
+.rolling-product-price em{
+    color: #e83637;
+}
+.head-login-title{
+    width: 100%;
+    height: 48px;
+    background-image: image-url("index/input_title_bg.png");
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+.login-title-span{
+    width: 102px;
+    text-align: center;
+    font-size: 14px;
+    color: #5b534e;
+    height: 40px;
+    line-height: 40px;
+}
+.login-title-span-active{
+    text-align: left;
+    text-indent: 34px;
+    background-image: image-url("index/index_icon_account.png");
+    background-position: 14px center;
+    background-repeat: no-repeat;
+}
+.head-login-block{
+    position: relative;
+    margin-top: 10px;
+}
+.head-login-block input{
+    width: 208px;
+    height: 38px;
+    line-height: 38px;
+    border: 1px solid #c7c4c2;
+    text-indent: 40px;
+    outline: none;
+}
+.input-bg{
+    position: absolute;
+    display: block;
+    width: 38px;
+    height: 38px;
+    left: 0;
+    top: 0;
+}
+.phone-bg-icon{
+    background-image: image-url("index/input_phone.png");
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+.password-bg-icon{
+    background-image: image-url("index/input_password.png");
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+.head-login-btn-brown{
+    background-color: #382223;
+}
+.head-login-btn-brown:hover{
+    background-color: #271818;
+}
+.head-login-reset{
+    width: 100%;
+    border-bottom: 1px dashed #d9d7d5;
+    height: 38px;
+    line-height: 38px;
+    color: #b1b1b1;
+    font-size: 12px;
+    text-align: center;
+}
+.head-login-reset-link{
+    color: #ef7373;
+}
+.head-login-reset-link:hover{
+    color: #dc1b1b;
+    text-decoration: underline;
+}
+
+.head-login-pnum{
+    height: 66px;
+    line-height: 66px;
+    font-size: 14px;
+    color: #1c1111;
+    text-align: center;
+    border-bottom: 1px solid #d9d7d5;
+}
+.head-login-pnum em{
+    color: #e83637;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.head-login-back-hLine{
+    height: 0;
+    border-top: 1px solid #d9d7d5;
+    margin-top: -10px;
+}
+.head-login-back-span{
+    position: relative;
+    width: 102px;
+    height: 112px;
+    text-align: center;
+}
+.shouhuo{
+    background-image: image-url("index/shouhuo.png");
+    background-repeat: no-repeat;
+    background-position: center 20px;
+}
+.fukuan{
+    background-image: image-url("index/fukuan.png");
+    background-repeat: no-repeat;
+    background-position: center 20px;
+}
+.daishouhuo{
+    background-image: image-url("index/daishouhuo.png");
+    background-repeat: no-repeat;
+    background-position: center 20px;
+}
+.head-login-back-span span{
+    display: block;
+    position: absolute;
+    bottom: 20px;
+    font-size: 14px;
+    text-align: center;
+    width: 100%;
+}
+.head-login-back-span a{
+    display: inline-block;
+    width: 102px;
+    height: 112px;
+    color: #333;
+}
+.head-login-back-line{
+    width: 0;
+    height: 94px;
+    margin-bottom: 10px;
+    border-right: 1px solid #d9d7d5;
+}
+/* head end */
+
+/* content start */
+.g-content{
+    width: 1200px;
+    margin: 30px auto 0;
+}
+.product-wrap{
+    position: relative;
+    margin-bottom: 0px;
+    font-family: "Microsoft YaHei";
+}
+
+.product-title{
+    width: 100%;
+    border-bottom: 2px solid #5b534e;
+    margin-bottom: 8px;
+    height: 34px;
+    line-height: 34px;
+    font-size: 18px;
+    color: #000;
+}
+.product-title-more{
+    position: absolute;
+    font-size: 14px;
+    color: #272636;
+    height: 16px;
+    line-height: 16px;
+    right: 0;
+    top: 14px;
+    background-image: image-url("common/arrow_right.png");
+    background-position: right center;
+    background-repeat: no-repeat;
+    padding-right: 16px;
+    border-bottom: 1px solid #fff;
+}
+.product-title-more:hover{
+    border-color: #272636;
+}
+.product-title a{
+    color: #000;
+}
+.product-title span{
+    color: #8d8783;
+}
+.product-left{
+    position: relative;
+    width: 237px;
+    height: 445px;
+    /*border: 1px solid #eceae9;*/
+}
+.product-left-img{
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -2;
+    width: 237px;
+    height: 455px;
+}
+.product-title-wrap{
+    display: block;
+    height: 292px;
+    width: 237px;
+    position: absolute;
+}
+.product-name{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 50px;
+    line-height: 50px;
+    color: #fff;
+    font-size: 14px;
+    text-align: center;
+}
+.product-name-0{
+    background-image: image-url("index/product_left_name_bg.jpg");
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+.product-name-1{
+    background-image: image-url("index/product_left_name_bg2.jpg");
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+.product-name-2{
+    background-image: image-url("index/product_left_name_bg4.jpg");
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+.product-name-3{
+    background-image: image-url("index/product_left_name_bg4.jpg");
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+.product-name-4{
+    background-image: image-url("index/product_left_name_bg5.jpg");
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+.product-name-5{
+    background-image: image-url("index/product_left_name_bg6.jpg");
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+.product-name-6{
+    background-image: image-url("index/product_left_name_bg7.jpg");
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+.product-name-7{
+    background-image: image-url("index/product_left_name_bg8.jpg");
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+.product-name-8{
+    background-image: image-url("index/product_left_name_bg9.jpg");
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+.product-name-9{
+    background-image: image-url("index/product_left_name_bg10.jpg");
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+.product-name-10{
+    background-image: image-url("index/product_left_name_bg11.jpg");
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+.product-name-11{
+    background-image: image-url("index/product_left_name_bg12.jpg");
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+.product-name-12{
+    background-image: image-url("index/product_left_name_bg13.jpg");
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+.product-name-13{
+    background-image: image-url("index/product_left_name_bg14.jpg");
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+.product-name-14{
+    background-image: image-url("index/product_left_name_bg15.jpg");
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+.product-left-0{
+    background-image: image-url("index/product_1.jpg");
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+.product-left-1{
+    background-image: image-url("index/product_3.jpg");
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+.product-left-2{
+    background-image: image-url("index/product_2.jpg");
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+.product-left-3{
+    background-image: image-url("index/product_4.jpg");
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+.product-left-4{
+    background-image: image-url("index/product_5.jpg");
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+.product-left-5{
+    background-image: image-url("index/product_6.jpg");
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+.product-left-6{
+    background-image: image-url("index/product_7.jpg");
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+.product-left-7{
+    background-image: image-url("index/product_8.jpg");
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+.product-left-8{
+    background-image: image-url("index/product_9.jpg");
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+.product-left-9{
+    background-image: image-url("index/product_10.jpg");
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+.product-left-10{
+    background-image: image-url("index/product_11.jpg");
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+.product-left-11{
+    background-image: image-url("index/product_12.jpg");
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+.product-left-12{
+    background-image: image-url("index/product_13.jpg");
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+.product-left-13{
+    background-image: image-url("index/product_14.jpg");
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+.product-left-14{
+    background-image: url("index/product_15.jpg");
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+.product-category-wrap{
+    width: 238px;
+    height: 132px;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+.product-category-wrap-0{
+    background-image: url("index/product_left_list_bg.jpg");
+    background-repeat: no-repeat;
+    background-position: 2px center;
+}
+.product-category-wrap-1{
+    background-image: url("index/product_left_list_bg2.png");
+    background-repeat: no-repeat;
+    background-position: 2px center;
+}
+.product-category-wrap-2{
+    background-image: url("index/product_left_list_bg3.png");
+    background-repeat: no-repeat;
+    background-position: 2px center;
+}
+.product-category-wrap-3{
+    background-image: url("index/product_left_list_bg.jpg");
+    background-repeat: no-repeat;
+    background-position: 2px center;
+}
+.product-category-wrap-4{
+    background-image: url("index/product_left_list_bg5.png");
+    background-repeat: no-repeat;
+    background-position: 2px center;
+}
+.product-category-wrap-5{
+    background-image: url("index/product_left_list_bg6.png");
+    background-repeat: no-repeat;
+    background-position: 2px center;
+}
+.product-category-wrap-6{
+    background-image: url("index/product_left_list_bg7.png");
+    background-repeat: no-repeat;
+    background-position: 2px center;
+}
+.product-category-wrap-7{
+    background-image: url("index/product_left_list_bg8.png");
+    background-repeat: no-repeat;
+    background-position: 2px center;
+}
+.product-category-wrap-8{
+    background-image: url("index/product_left_list_bg9.png");
+    background-repeat: no-repeat;
+    background-position: 2px center;
+}
+.product-category-wrap-9{
+    background-image: url("index/product_left_list_bg10.png");
+    background-repeat: no-repeat;
+    background-position: 2px center;
+}
+.product-category-wrap-10{
+    background-image: url("index/product_left_list_bg11.png");
+    background-repeat: no-repeat;
+    background-position: 2px center;
+}
+.product-category-wrap-11{
+    background-image: url("index/product_left_list_bg12.png");
+    background-repeat: no-repeat;
+    background-position: 2px center;
+}
+.product-category-wrap-12{
+    background-image: url("index/product_left_list_bg13.png");
+    background-repeat: no-repeat;
+    background-position: 2px center;
+}
+.product-category-wrap-13{
+    background-image: url("index/product_left_list_bg14.png");
+    background-repeat: no-repeat;
+    background-position: 2px center;
+}
+.product-category-wrap-14{
+    background-image: url("index/product_left_list_bg15.png");
+    background-repeat: no-repeat;
+    background-position: 2px center;
+}
+.product-category-wrap-inner{
+    position: relative;
+    top: 0;
+    left: 0;
+}
+.product-category{
+    width: 238px;
+    height: auto;
+}
+.product-category-list{
+    width: 49.5%;
+    text-align: center;
+    margin-top: 30px;
+}
+.product-category-item{
+    display: block;
+    font-size: 12px;
+    margin-bottom: 10px;
+    color: #000;
+    line-height: 1.34;
+}
+.product-category-line{
+    height: 85px;
+    width: 0;
+    margin-top: 22px;
+    border-right: 1px solid #d6d8d9;
+}
+.product-tab{
+    width: 100%;
+    text-align: center;
+    position: absolute;
+    bottom: 4px;
+    left: 0;
+}
+.product-tab-link{
+    width: 28px;
+    height: 4px;
+    background-color: #c7c4c2;
+}
+.product-tab-active{
+    background-color: #5b534e;
+}
+.product-item{
+    position: relative;
+    width: 220px;
+    border: 4px solid #fff;
+    height: 450px;
+    padding: 6px;
+}
+.product-item:hover{
+    border-color: #ef7373;
+}
+.product-item:hover .product-right-btn{
+    background-color: #e83637;
+    color: #fff;
+    border-color:#e83637;
+}
+.product-img{
+    border: 1px solid #eceae9;
+    width: 218px;
+    height: 258px;
+    line-height: 258px;
+    text-align: center;
+}
+.product-img a{
+    display: block;
+    width: 218px;
+    height: 258px;
+}
+.product-img img{
+    display: inline-block;
+    vertical-align: middle;
+    max-width: 190px;
+    max-height: 190px;
+}
+
+.product-right-text{
+    margin: 7px 0 7px 0;
+    font-size: 14px;
+    color: #333;
+    height: 36px;
+    line-height: 18px;
+    overflow: hidden;
+}
+.product-item .stock-img{
+    display: none;
+    position: absolute;
+    bottom: 40px;
+    left: 8px;
+    width: 208px;
+    height: 88px;
+    background-image: image-url("common/tan_chuang.png");
+    background-repeat: no-repeat;
+}
+.product-right-no{
+    margin: 12px 0;
+    white-space:nowrap;
+    text-overflow:ellipsis;
+    overflow:hidden;
+}
+.wait-text{
+    margin: 10px 0;
+    height: 24px;
+    line-height: 24px;
+    font-size: 14px;
+    color: #333;
+    font-weight: normal;
+}
+.product-right-num{
+    margin: 10px 0;
+    height: 12px;
+    line-height: 12px;
+}
+.product-right-num-bg{
+    display:block;
+    margin: 10px 0;
+    width:118px;
+    height: 18px;
+    line-height: 18px;
+    background-image: url('/images/common/dljxyh.png');
+    background-repeat: no-repeat;
+    background-position: center left;
+}
+.product-right-num em{
+    color: #e83637;
+}
+.product-right-num b{
+    font-size: 24px;
+    font-weight: 400;
+}
+.product-right-btn{
+    width: 220px;
+    height: 38px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    text-align: center;
+    line-height: 38px;
+    color: #868686;
+    font-size: 14px;
+    border:1px solid #d2cfcd;
+    position:absolute;
+    bottom:5px;
+}
+/* content end */
+
+
+
+
+
+/* banner start */
+
+.carouselUI_li {
+    position: relative;
+    display: none;
+}
+
+.carouselUI_li_a {
+    display: block;
+    width: 100%;
+}
+.carouselUI {
+    position: relative;
+}
+
+.carouselUI a {
+    transition: none;
+    -webkit-transition: none;
+    -moz-transition: none;
+    -o-transition: none;
+    -ms-transition: none;
+}
+
+.spinners {
+    width: 100%;
+    position: absolute;
+    bottom: 10px;
+}
+
+.spinner {
+    float: left;
+    background-color: #8d8783;
+    border-radius: 50%;
+    height: 14px;
+    width: 14px;
+    margin: 0 10px;
+    cursor: pointer;
+}
+
+#dot {
+    position: absolute;
+    left: 50%;
+}
+
+.spinner.light {
+    background-color: #fff;
+}
+/* banner end */
+
+.bottom-hover {
+    background: image-url("index/xinchungonggao.png") no-repeat;
+    bottom: 0;
+    margin: 0 auto;
+    margin-left: -5px;
+    position: fixed;
+    height: 111px;
+    width: 100%;
+    z-index: 999;
+ }
+
+.bottom-background {
+    background: #555555;
+    bottom: 0;
+    margin: 0 auto;
+    position: fixed;
+    height: 108px;
+    opacity: .50;
+    filter: alpha(opacity=50);
+    width: 100%;
+    z-index: 998;
+}
+
+.login-error-info{
+    display: block;
+    font-size: 12px;
+    color: #e83637;
+    margin: 6px;
+}
+
+.bottom-hover {
+    background: image-url("index/xinchungonggao.png") no-repeat;
+    bottom: 0;
+    margin: 0 auto;
+    margin-left: -5px;
+    position: fixed;
+    height: 111px;
+    width: 100%;
+    z-index: 999;
+}
+
+.bottom-background {
+    background: #555;
+    bottom: 0;
+    margin: 0 auto;
+    position: fixed;
+    height: 108px;
+    opacity: .5;
+    width: 100%;
+    z-index: 998;
+}
+

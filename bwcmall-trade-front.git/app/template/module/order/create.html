@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>填写订单信息</title>
+    @@include('../../include/common/meta.html') @@include('../../include/common/common-include.html')
+    <link rel="stylesheet" type="text/css" href="/styles/module/order/order-two.css"> 
+    <script src="/scripts/module/order/order-two.js"></script>
+</head>
+
+<body ms-controller="orderTwoCtrl">
+    @@include('../../include/common/header.html')
+    <div class="gs-header">
+        @@include('../../include/common/account-head.html')
+    </div> 
+ <div ms-include-src="'../../../partials/order/create.html'"  data-include-rendered='render'></div> 
+     @@include('../../include/common/footer.html')
+</body>
+
+</html>

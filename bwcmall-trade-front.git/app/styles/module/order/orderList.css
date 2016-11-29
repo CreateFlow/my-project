@@ -1,0 +1,516 @@
+/**
+ * Created by jason_wzl on 2015/11/5 005.
+ */
+.g-content {
+    margin: 30px auto;
+    width: 1200px;
+    border: 1px solid #dad6d4;
+    font-family: "Microsoft YaHei";
+    /*padding: 20px;*/
+    min-height: 580px;
+}
+
+/*tab页的样式 ++++++++++*/
+.content-head {
+    height: 42px;
+    border-bottom: 1px solid #dad6d4;
+}
+.content-nav{
+    width: 160px;
+    height: 39px;
+    line-height: 36px;
+    text-align: center;
+    font-size: 16px;
+    color: #333;
+    border-top: 4px solid #fff;
+    border-right: 1px solid #dad6d4;
+}
+.content-nav-next{
+    border-right-color: #fff;
+}
+.content-nav-active{
+    border-top: 4px solid #746565;
+    border-right-color: #dad6d4;
+    background-color: #fff;
+}
+.hint{
+    font-size:14px;
+    color:#ff0000;
+    margin-left:20px;
+    line-height:42px;
+}
+
+/*tab页的样式 ----------*/
+
+
+/*tab1样式 ++++++++*/
+.tab1{
+    padding: 20px;
+    padding-top: 40px;
+}
+
+.tab2{
+    padding: 20px;
+    padding-top: 40px;
+}
+
+.tab3{
+    padding: 20px;
+    padding-top: 40px;
+}
+
+/*order-one start++++++++++*/
+.order-one{
+    width: 1000px;
+    min-height: 260px;
+    border: 1px solid #dad6d4;
+    border-top:0;
+    margin-left: 158px;
+    position: relative;
+    margin-bottom: 40px;
+    font-family: "microsoft yahei";
+    font-size: 14px;
+    padding-top:40px;
+}
+
+
+/*order-one-header start++++++++++*/
+.order-one-header{
+    width: 1000px;
+    padding-left: 20px;
+    height: 40px;
+    line-height: 40px;
+    background-color: #e0dcda;
+    position: absolute;
+    right: 0;
+    top:0;
+    z-index: 1;
+}
+
+.order-one-header .arrow{
+    width: 0;
+    height: 0;
+    border-top: 20px solid transparent;
+    border-right: 10px solid #e0dcda;
+    border-bottom: 20px solid transparent;
+    position: absolute;
+    left:-10px;
+    top:0;
+}
+
+.order-one-header .noarrow{
+    height: 40px !important;
+    width: 29px !important;
+    border: 0 !important;
+    background-color: #fff !important;
+}
+
+.ooh-dot{
+    height: 14px;
+    width:14px;
+    background-image: url(/images/order/order_one_dot1.png);
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 13px;
+    left: -46px;
+}
+.ooh-dot0{
+    height: 14px;
+    width:14px;
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 13px;
+    left: -46px;
+    background-image: url(/images/order/order_one_dot0.png);
+}
+
+.ooh-line{
+    width: 0;
+    min-height: 341px;
+    border-left: 1px solid #dad6d4;
+    position: absolute;
+    top: -20px;
+    left: -39px;
+}
+
+.ooh-num{
+
+}
+
+.oohn-cancel{
+    padding-left: 20px;
+}
+
+.ooh-time1{
+    width: 90px;
+    height: 20px;
+    line-height: 20px;
+    color: #5b534e;
+    text-align: right;
+    top: 0;
+    left: -155px;
+    position:absolute;
+}
+
+.ooh-time2{
+    width: 90px;
+    height: 20px;
+    line-height: 20px;
+    color: #afaaa7;
+    text-align: right;
+    top: 20px;
+    left: -155px;
+    position:absolute;
+}
+
+.ooh-cancel{
+    position: absolute;
+    right: 100px;
+}
+
+.ooh-totalmoney{
+    position: absolute;
+    right:0;
+    width:250px;
+    z-index: -1;
+}
+/*order-one-header end----------*/
+
+
+
+/*.suborder start++++++++++*/
+.suborder-one{
+
+}
+
+.suborder-one-header {
+    position: relative;
+    height: 40px;
+    line-height: 40px;
+    width: 975px;
+    padding-left:25px;
+    border-top:1px solid #dad6d4;
+    border-bottom:1px solid  #000000;
+    font-family: "microsoft yahei";
+    font-size: 14px;
+    color: #333;
+}
+
+.sooh-money {
+    /*margin-left:580px;*/ 
+    float: right;
+    margin-right: 20px;
+}
+
+
+.sooh-num{
+    height: 40px;
+    line-height: 40px;
+    cursor:pointer;
+}
+
+.suborder-one-goods{
+    min-height: 140px;
+    width: 560px;
+    border-right: 1px solid #dad6d4;
+    padding: 10px 20px 10px;
+    float:left;
+    position:relative;
+}
+
+.suborder-one-info{
+    min-height: 120px;
+    width: 360px;
+    padding: 20px 19px 20px 20px;
+    float:left;
+    text-align: center;
+    /*position: relative;*/
+}
+/*suborder end----------*/
+
+
+/*.suborder-header2 start++++++++++*/
+.suborder-header2{
+
+}
+/*suborder-header2 end----------*/
+
+
+/*order-one-goods start++++++++++*/
+.order-one-goods{
+    min-height: 240px;
+    width: 560px;
+    border-right: 1px solid #dad6d4;
+    padding: 10px 20px 10px;
+    float:left;
+    position:relative;
+}
+
+.oog-cancel{
+    width:178px;
+    height:113px;
+    background-image: url(/images/order/order_one_cancel.png);
+    background-repeat: no-repeat;
+    position:absolute;
+    bottom: 40px;
+    right: 20px;
+}
+
+/*oog-one start++++++++++*/
+.oog-one{
+    height: 64px;
+    width: 560px;
+    padding: 10px 0;
+    position: relative;
+    border-bottom: 1px solid #dad6d4;
+    font-family: "microsoft yahei";
+    font-size: 14px;
+    color: #5b534e;
+    line-height: 15px;
+}
+
+.oogo-img{
+    height: 64px;
+    width: 64px;
+    position: absolute;
+    border: 1px solid #fff;
+}
+
+.oogo-name{
+    margin-left: 70px;
+    width: 190px;
+    vertical-align: top;
+    cursor:pointer;
+    color: #5b534e;
+}
+
+.oogo-name:hover{
+    text-decoration: underline;
+}
+
+.oogo-price{
+    margin-left: 20px;
+    width:100px;
+}
+
+.oogo-num{
+    margin-left: 20px;
+    width:80px;
+}
+
+.oogo-num-pos{
+    position:relative;
+}
+
+.oogo-num-tips{
+    display: inline-block;
+    height:20px;
+    /*width:20px;*/
+    cursor:pointer;
+
+}
+
+.oogo-num-tips-info{
+    height:30px;
+    line-height:30px;
+    min-width:120px;
+    background-color: #e0dcda;
+    position:absolute;
+    right: -110px;
+    top: -8px;
+    text-indent: 10px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    display: none;
+}
+
+.oogo-num-tips-info .arrow{
+    width: 0;
+    height: 0;
+    border-top: 7px solid transparent;
+    border-right: 7px solid #e0dcda;
+    border-bottom: 7px solid transparent;
+    position: absolute;
+    left: -7px;
+    top: 7px;
+}
+
+
+.oogo-change {
+    margin-left: 10px;
+    color: #333;
+    width:50px;
+}
+
+.oogo-changetips{
+    width: 168px;
+    height: 78px;
+    padding: 12px 0 5px 28px;
+    line-height: 25px;
+    font-size: 12px;
+    font-family: "microsoft yahei";
+    position: absolute;
+    z-index: 1;
+    right: 275px;
+    top: -19px;
+    background: url("/images/common/shop-tips.png") no-repeat;
+    display: none;
+}
+
+.oogo-changetips .arrow{
+    width: 0;
+    height: 0;
+    border-top: 10px solid transparent;
+    border-right: 10px solid #bc9c7c;
+    border-bottom: 10px solid transparent;
+    position: absolute;
+    left: -10px;
+    top: 17px;
+}
+/*oog-one end----------*/
+
+/*oog-one-more start++++++++++*/
+.oog-one-more{
+    height: 30px;
+    line-height: 40px;
+    width:560px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.oogom-img{
+    height:13px;
+    width:16px;
+    background-image: url(/images/order/order_one_more.png);
+    background-repeat: no-repeat;
+}
+
+.oogom-all{
+    color: #afaaa7;
+    padding-left: 10px;
+}
+/*oog-one-more end----------*/
+/*order-one-goods end----------*/
+
+
+
+/*order-one-info start++++++++++*/
+.order-one-info{
+    min-height: 220px;
+    width: 360px;
+    padding: 20px 19px 20px 20px;
+    float:left;
+    text-align: center;
+    /*position: relative;*/
+}
+
+.ooi-status{
+    height: 120px;
+    width:100px;
+    margin-left:12px;
+}
+
+.oois-img{
+    width:72px;
+    height:72px;
+    /*background-image: url(/images/order/order_one_confirm.png);*/
+}
+
+.oois-info{
+    width:100px;
+    margin-top: 20px;
+    color:#afaaa7;
+}
+
+.oois-info .active{
+    color: #382223;
+    font-weight: bold;
+}
+
+.ooi-pay{
+    /*height: 90px;*/
+    width:240px;
+    position: absolute;
+    bottom:10px;
+    right:80px;
+    text-align: center;
+}
+
+.ooip-money{
+    height:45px;
+    line-height:45px;
+
+}
+
+.ooip-money-tips{
+    height:20px;
+    line-height:20px;
+    font-size: 12px;
+    color:#afaaa7;
+    white-space:nowrap;
+}
+
+.ooip-paynow{
+    height:45px;
+    line-height:45px;
+    width: 240px;
+    color: #fff;
+    font-size: 16px;
+    font-family: "microsoft yahei";
+    text-align: center;
+    cursor:pointer;
+    border-radius:3px;            /* W3C syntax */
+    -webkit-border-radius: 3px;   /* Webkit browsers */
+    background-color: #e83637;
+}
+
+.ooip-paynow:hover{
+    background-color: #ff393b;
+}
+
+.ooip-payed{
+    height:45px;
+    line-height:45px;
+    width: 240px;
+    color: #fff;
+    font-size: 16px;
+    font-family: "microsoft yahei";
+    text-align: center;
+    cursor:pointer;
+    border-radius:3px;            /* W3C syntax */
+    -webkit-border-radius: 3px;   /* Webkit browsers */
+    background-color: #e0dcda;
+}
+/*order-one-info end----------*/
+
+/*order-one end++++++++++*/
+
+ .order-shop-info{
+
+ }
+ .link {
+     border: 1px solid #898380;
+    padding: 3px;
+    text-align: center;
+    cursor: pointer;
+    width: 100px;
+    /* float: right; */
+    height: 10px;
+    margin-left: 10px;
+    line-height: 10px;
+    display: inline;
+    background-color: #efefef;
+}
+.link-icon {
+    background: url('/images/afs/ic_contact.png') no-repeat 1px 13px;
+    padding: 10px;
+}
+
+.order-list-pager{
+    height: 50px;
+    line-height: 50px;
+    padding-left: 120px;
+    margin-top: -20px;
+    margin-bottom: 20px;
+}

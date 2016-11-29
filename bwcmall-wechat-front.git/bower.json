@@ -1,0 +1,12 @@
+{
+  "name": "weixin",
+  "dependencies": {
+    "vue": "^1.0.26",
+    "vue-resource": "^0.7.4",
+    "weui": "weui/weui#^0.4.3",
+    "js-cookie": "^2.1.2",
+    "vux": "0.1.2"
+  },
+  "devDependencies": {},
+  "appPath": "app"
+}

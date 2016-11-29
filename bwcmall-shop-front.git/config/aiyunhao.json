@@ -1,0 +1,23 @@
+{
+
+    "path": {
+        "shopBase": "http://aiyunhao-shop.bwcmall.com",
+        "bwcmallBase": "http://aiyunhao.bwcmall.com",
+        "bwcmallApi": "https://aiyunhao.bwcmall.com/api",
+        "domain": ".bwcmall.com"
+    },
+
+    "grunt": {
+        "path": "path",
+        "task": [
+            "clean",
+            "path:dev",
+            "includereplace",
+            "compass",
+            "imagemin",
+            "requirejs",
+            "copy:dist"
+        ]
+    }
+
+}

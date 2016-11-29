@@ -1,0 +1,102 @@
+@charset "UTF-8";
+
+@import "../../common/scaffolding";
+@import "../../component/lightbox";
+
+.mod-auditgood {
+    .panel {
+        font-size: 12px;
+        margin-top: 20px;
+        .pline{
+            margin-top:10px;
+            p{
+                padding:5px 10px;
+            }
+        }
+        .goodimg{
+
+            width:80px;
+            height:80px;
+            display:table-cell;
+            text-align:center;
+            vertical-align:middle;
+            margin-right:20px;
+            img{
+                max-width:60px;
+                max-height:60px;
+                margin:10px;
+            }
+        }
+        .tab{
+            line-height:36px;
+            .box-table{
+                width: 100%;
+            }
+            .input{
+                border:1px solid #ccc;
+                width:120px;
+                padding:5px;
+            }
+            .textarea{
+                 width: 480px;
+                 height:60px;
+                 line-height:20px;
+                 border:1px solid #ccc;
+                 padding:5px;
+                 margin-top:5px;
+            }
+        }
+        .class-title{
+            font-size:14px;
+            color:#000;
+            font-weight:bold;
+            margin:30px 0px 10px 0px;
+        }
+        .return-table{
+            width: 100%;
+        }
+        .return-table th{
+            border-bottom: 2px solid #AAAAAA;
+            font-size: 13px;
+            color: #000;
+            line-height: 36px;
+            height: 40px;
+            text-align: center;
+            font-weight:normal
+        }
+        .return-table td{
+            font-size: 12px;
+            height: 90px;
+            text-align: center;
+            color: #333;
+            border-bottom: 1px solid #EEEEEE;
+        }
+        .return-talk{
+            font-size:12px;
+            line-height:36px;
+            color:#666666;
+            .box-table{
+                width: 100%;
+            }
+            .talk-title{
+                font-size:12px;
+                color:#000;
+                font-weight:bold;
+                margin:10px 30px 10px 0px;
+            }
+            .input{
+                border:1px solid #ccc;
+                width:120px;
+            }
+            .textarea{
+                 width: 480px;
+                 height:60px;
+                 border:1px solid #ccc;
+            }
+            .bottom-line{
+                border-bottom: 1px dashed #e0e0e0;
+            }
+
+        }
+    }
+}

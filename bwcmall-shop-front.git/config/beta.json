@@ -1,0 +1,23 @@
+{
+
+    "path": {
+        "shopBase": "http://shop.bwcmall.com",
+        "bwcmallBase": "http://www.bwcmall.com",
+        "bwcmallApi": "https://www.bwcmall.com/api",
+        "domain": ".bwcmall.com"
+    },
+
+    "grunt": {
+        "path": "path",
+        "task": [
+            "clean:dist",
+            "path:beta",
+            "includereplace",
+            "compass",
+            "imagemin",
+            "requirejs",
+            "copy:dist"
+        ]
+    }
+
+}

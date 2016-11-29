@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>发票管理</title>
+    @@include('../../include/common/intro.html')
+    <!-- build:css css/module/sellerInvoice/invoice.css -->
+    <link rel="stylesheet" href="/css/module/seller-manager/update-pwd.css"/>
+    <!-- endbuild -->
+</head>
+<body>
+@@include('../../include/common/header.html')
+@@include('../../include/common/nav.html')
+<div class="main">
+    <div class="sidebar">
+        @@include('../../include/common/menu.html')
+    </div>
+    <div class="content seller-manager ms-controller" ms-controller="sellerManagerPwdCtrl">
+        <div class="section">
+            <ul class="breadcrumb">
+                <li>
+                    <a href="">会员管理</a>
+                </li>
+                <li>
+                    <a href="">修改密码</a>
+                </li>
+            </ul>
+        </div>
+        <div class="panel">
+            <div class="hd">
+                <span class="title">修改密码</span>
+            </div>
+            <div class="bd">
+                <div ms-if="!isShowResult">
+                    <div class="row">
+                        <div class="col col-3">&nbsp;</div>
+                        <div class="col col-2 title">旧密码</div>
+                        <div class="col col-3">
+                            <input type="text" class="inputbox" ms-duplex="pwdInfo.old"/>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col col-3">&nbsp;</div>
+                        <div class="col col-2 title">新密码</div>
+                        <div class="col col-3">
+                            <input type="text" class="inputbox" ms-duplex="pwdInfo.new1"/>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col col-3">&nbsp;</div>
+                        <div class="col col-2 title">再次输入新密码</div>
+                        <div class="col col-3">
+                            <input type="text" class="inputbox" ms-duplex="pwdInfo.new2"/>
+                        </div>
+                    </div>
+                    <div class="row" ms-if="isShowPwdCheckInfo">
+                        <div class="col col-5">&nbsp;</div>
+                        <div class="col col-2">
+                            <span ms-text="updatePwdCheckInfo" style="color:red;"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col col-5">&nbsp;</div>
+                        <div class="col col-2">
+                            <input type="button" value="修改密码" class="default-btn btn-red btn-top" ms-click="updatePwd"/>
+                        </div>
+                    </div>
+                </div>
+                <div ms-if="isShowResult">
+                    <div class="row result-top" >
+                        <div class="col col-5">&nbsp;</div>
+                        <div class="col col-2" style="text-align:center;">
+                            <span ms-text="updatePwdResult"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col col-5">&nbsp;</div>
+                        <div class="col col-2">
+                            <input type="button" value="确定" class="default-btn btn-top" onclick="window.location='/'" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@@include('../../include/common/outro.html')
+<script>require(['conf/seller-manager/update-pwd']);</script>
+</body>
+</html>

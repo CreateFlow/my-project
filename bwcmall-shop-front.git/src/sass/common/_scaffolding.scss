@@ -1,0 +1,40 @@
+@charset "UTF-8";
+
+@import "common";
+@import "header";
+@import "topbar";
+@import "nav";
+@import "menu";
+// component
+@import "../component/container";
+@import "../component/breadcrumb";
+@import "../component/button";
+@import "../component/forms";
+@import "../component/table";
+@import "../component/uploadify";
+@import "../component/select2";
+
+body {
+    font-family: "Microsoft YaHei", "SimSun", Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    font-weight: normal;
+}
+
+@include align;
+
+.main {
+    position: relative;
+    margin-top: 20px;
+    @extend %layout;
+}
+
+.sidebar {
+    position: absolute;
+    left: 0;
+    width: 192px;
+    // float: left;
+}
+
+.content {
+    margin-left: 212px;
+}

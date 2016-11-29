@@ -1,0 +1,60 @@
+@charset "UTF-8";
+
+.topbar {
+    background-color: #f5f5f5;
+}
+
+.topbar_content {
+    @extend %clearfix;
+    @extend %layout;
+    > .left {
+        float: left;
+    }
+    > .right {
+        float: right;
+    }
+    > .list {
+        padding: 9px 0.25em;
+        > .item {
+            display: inline-block;
+            margin-left: 1.5em;
+            .caret {
+                position: absolute;
+                left: -4px;
+                top: 5px;
+                @include triangle(left, 4px, #ff7300);
+            }
+            .badge {
+                margin-left: 0.25em;
+                color: #fff;
+                padding: 1px 5px;
+                position: relative;
+                @include border-radius(2px);
+                display: inline-block;
+                background-color: #fe7300;
+                .text {
+                    line-height: 1;
+                }
+            }
+            &-border {
+                border-right: 1px solid #e2e2e2;
+                padding: 0 1.5em;
+                margin-left: 0;
+            }
+        }
+        .btn-group {
+            display: block;
+        }
+        .btn-link {
+            cursor: pointer;
+            color: #666;
+            text-decoration: none;
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+        .hightlight {
+            color: #ff7300;
+        }
+    }
+}

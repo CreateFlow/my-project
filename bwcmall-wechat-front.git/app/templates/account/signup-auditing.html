@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <title>资料审核中</title>
+    <meta name="description" content=""> @@include('../common/meta.html')
+</head>
+
+<body>
+    <div class="content-body success" id="sign-wrap">
+        <div class="bd spacing text-center" style="margin-top: 20px;">
+            <img class="success-img" src="/images/order/no_bind_icon.png" alt="" />
+            <h3 class="success-title">您好，我们正在审核您的资料！</h3>
+            <p class="success-text">如有疑问，请拨打400-021-9898
+            </p>
+        </div>
+        <div class="ui-footer">
+            <button id="goBtn" onclick="goBack()" class="weui_btn weui_btn_warn">关闭</button>
+        </div>
+    </div>
+    @@include('../common/footer.html')
+    <script>
+    function goBack() {
+        wx.closeWindow();
+    }
+    </script>
+</body>
+
+</html>
+<script>

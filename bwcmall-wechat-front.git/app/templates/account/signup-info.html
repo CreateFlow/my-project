@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <title>买家注册</title>
+    <meta name="description" content=""> @@include('../common/meta.html')
+</head>
+
+<body v-cloak id="app" class="account-info">
+    <div class="container" id="sign-wrap">
+        <div class="cell" v-show="!popShow1">
+            <div class="sign-header">
+                <span class="active">填写注册信息</span><i class="iconfont icon-right active"></i><span class="active">确认用户信息</span><i class="iconfont icon-right active"></i><span>上传三证</span><i class="iconfont icon-right"></i><span>注册成功</span>
+            </div>
+            <div class="spacing">
+                <div class="weui_cells weui_cells_access">
+                    <div class="weui_cell">
+                        <div class="weui_cell_hd">
+                            <label class="weui_label">公司名称</label>
+                        </div>
+                        <div class="weui_cell_bd weui_cell_primary">
+                            <input class="weui_input" type="text" placeholder="请输入公司名称" v-model="signup.corpName.val">
+                        </div>
+                    </div>
+                    <div class="weui_cell">
+                        <div class="weui_cell_hd">
+                            <label class="weui_label">联系人姓名</label>
+                        </div>
+                        <div class="weui_cell_bd weui_cell_primary">
+                            <input class="weui_input" type="text" placeholder="请输入联系人姓名" v-model="signup.contacts.val">
+                        </div>
+                    </div>
+                    <div class="weui_cell">
+                        <div class="weui_cell_hd">
+                            <label class="weui_label">电子邮箱</label>
+                        </div>
+                        <div class="weui_cell_bd weui_cell_primary">
+                            <input class="weui_input" type="email" placeholder="请输入电子邮箱" v-model="signup.email.val">
+                        </div>
+                    </div>
+                    <div class="weui_cell" >
+                        <div class="weui_cell_hd">
+                            <label class="weui_label">主营品类</label>
+                        </div>
+                        <div class="weui_cell_bd weui_cell_primary">
+                            <input class="weui_input" type="text" placeholder="点击选择主营品类" @click="popShow1 = true" v-model="serviceItemsText" readonly>
+                        </div>
+                        <div class="weui_cell_ft">
+                        </div>
+                    </div>
+                    <div class="weui_cell weui_cell_select weui_select_after">
+                        <div class="weui_cell_hd">
+                            <label for="" class="weui_label">业务类型</label>
+                        </div>
+                        <div class="weui_cell_bd weui_cell_primary">
+                            <select class="weui_select" name="businessCategory" v-model="signup.businessCategory.val">
+                                <option value="">点击选择业务类型</option>
+                                <option value="{{b.id}}" v-for="b in businessCategory">{{b.name}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="weui_cell" @click="addressModal = true">
+                        <div class="weui_cell_hd">
+                            <label class="weui_label">区域</label>
+                        </div>
+                        <div class="weui_cell_bd weui_cell_primary">
+                            <input id="noBardInput" class="weui_input" type="text" placeholder="点击选择所在区域"  v-model="selectedArea" disabled="true" readonly="true">
+                        </div>
+                        <div class="weui_cell_ft">
+                        </div>
+                    </div>
+                    <div class="weui_cell">
+                        <div class="weui_cell_hd">
+                            <label class="weui_label">详细地址</label>
+                        </div>
+                        <div class="weui_cell_bd weui_cell_primary">
+                            <textarea class="weui_textarea" placeholder="请输入详细地址" rows="3" v-model="signup.address.val"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="ui-footer">
+                <button class="weui_btn weui_btn_warn" :class.sync="!allowSub ? 'disabled' : ''" @click="submit()">下一步</button>
+            </div>
+        </div>
+        <div class="cell" v-show="popShow1">
+            <div class="popup-full">
+                <div class="weui_cells weui_cells_access sign-select">
+                    <div v-for="s in serviceCategory">
+                        <div class="weui_cell" @click="s.isSelected ? s.isSelected = false : s.isSelected = true">
+                            <div class="weui_cell_bd weui_cell_primary">
+                                <p>{{s.name}}</p>
+                            </div>
+                            <div class="weui_cell_ft" :class.sync="s.isSelected ? 'active' : ''">
+                            </div>
+                        </div>
+                        <div class="weui_cell sign-select-list" v-show:sync="s.isSelected">
+                            <ul>
+                                <li v-for="l in s.categoryList"><span @click="setService(l)" :class.sync="l.isSelected ? 'select' : ''">{{l.name}}</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="ui-footer">
+                    <button class="weui_btn weui_btn_warn" @click="popShow1 = false">完成</button>
+                </div>
+            </div>
+        </div>
+        <modal :show.sync="addressModal">
+            <div slot="header" class="weui_dialog_hd"><strong class="weui_dialog_title">请选择所在区域</strong></div>
+            <div slot="body" class="weui_dialog_hd text-left">
+                <div class="region-picker">
+                    <label class="province">
+                        <select class="province-select" v-model="selecteProvince" @change="changeProvince(selecteProvince)">
+                            <option value="">请选择</option>
+                            <option value="{{p.value}}" v-for="p in addressData">{{p.name}}</option>
+                        </select>
+                    </label>
+                    <label class="city">
+                        <select class="city-select" v-model="selectedCity" @change="changeCity(selectedCity)">
+                            <option value="">请选择</option>
+                            <option value="{{c.value}}" v-for="c in cityData">{{c.name}}</option>
+                        </select>
+                    </label>
+                    <label class="district">
+                        <select class="district-select" v-model="selectedCounty" @change="changeCounty(selectedCounty)">
+                            <option value="">请选择</option>
+                            <option value="{{c.value}}" v-for="c in countyData">{{c.name}}</option>
+                        </select>
+                    </label>
+                </div>
+            </div>
+            <div slot="footer" class="weui_dialog_ft">
+                <a class="weui_btn_dialog primary" @click="setAreaId()">
+                确定
+                </a>
+            </div>
+        </modal>
+        <!-- template for the modal component -->
+        <script type="x/template" id="modal">
+            <div class="weui_dialog_confirm" v-show="show" transition="modal">
+                <div class="weui_mask"></div>
+                <div class="weui_dialog">
+                    <slot name="header"></slot>
+                    <slot name="body"></slot>
+                    <slot name="footer">
+                    </slot>
+                </div>
+            </div>
+        </script>
+    </div>
+    @@include('common/footer.html')
+    <!-- build:js(.) /js/page/account/signup-info-modules.js -->
+    <script src="/bower_components/vux/dist/components/address/index.js"></script>
+    <script src="/bower_components/vux/dist/components/popup/index.js"></script>
+    <!-- endbuild -->
+    <!-- build:js({.tmp,app}) /js/page/account/signup-info.js -->
+    <script src="/js/components/region.js"></script>
+    <script src="/js/page/account/signup-info.js"></script>
+    <!-- endbuild -->
+</body>
+
+</html>

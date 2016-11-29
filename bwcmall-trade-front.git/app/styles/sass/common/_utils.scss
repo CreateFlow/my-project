@@ -1,0 +1,22 @@
+@charset "UTF-8";
+
+.layout-center {
+    position: relative;
+    left: 50%;
+    float: left;
+    @at-root {
+        &_reset {
+            @extend .layout-center;
+            left: -50%;
+            text-align: center;
+        }
+    }
+}
+
+.pull-left {
+    float: left;
+}
+
+.pull-right {
+    float: right;
+}

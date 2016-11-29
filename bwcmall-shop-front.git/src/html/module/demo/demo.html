@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Demo</title>
+        @@include('../../include/common/intro.html')
+        <!-- build:css css/module/demo/demo.css -->
+        <link rel="stylesheet" href="/css/module/demo/demo.css"/>
+        <!-- endbuild -->
+    </head>
+    <body>
+        @@include('../../include/common/header.html')
+        @@include('../../include/common/nav.html')
+        <div class="main mod-demo">
+            <div class="sidebar">
+                @@include('../../include/common/menu.html')
+            </div>
+            <div class="content" ms-controller="demo" class="ms-controller">
+                <ul class="breadcrumb">
+                    <li>
+                        <a href="###">卖家中心</a>
+                    </li>
+                    <li>
+                        <a href="###">客户服务</a>
+                    </li>
+                    <li>
+                        <a href="###">退换货订单</a>
+                    </li>
+                    <li>
+                        退换货编号: S88888888
+                    </li>
+                </ul>
+                <div class="panel">
+                    <div class="hd">
+                        <span class="title">退换货初审</span>
+                        <div style="float:right; margin-right: 10px;">
+                            <span class="btn btn-default">联系卖家</span>
+                        </div>
+                    </div>
+                    <div class="bd">
+                        <div class="row">
+                            <div class="col col-1"><label class="label">订单编号：</label></div>
+                            <div class="col col-3"><span class="text">D887766555</span></div>
+                            <div class="col col-1"><label class="label">退换货类型：</label></div>
+                            <div class="col col-3"><span class="text">要求换货</span></div>
+                            <div class="col col-1"><label class="label">要求换货：</label></div>
+                            <div class="col col-3"><span class="text">昆航五金机电</span></div>
+                        </div>
+                        <div class="row">
+                            <div class="col col-1"><label class="label">申请时间：</label></div>
+                            <div class="col col-3"><span class="text">2016-05-26 12：00</span></div>
+                            <div class="col col-1"><label class="label">退换货状态：</label></div>
+                            <div class="col col-3"><span class="text">申请达成，等待买家发货</span></div>
+                            <div class="col col-1"><label class="label">支付方式：</label></div>
+                            <div class="col col-3"><span class="text">线下支付</span></div>
+                        </div>
+                        <div class="row">
+                            <table class="table">
+                                <tr>
+                                    <th>商品名称</th>
+                                    <th>商品小图</th>
+                                    <th>品牌</th>
+                                    <th>型号</th>
+                                    <th>SKU NO.</th>
+                                    <th>换货数量</th>
+                                    <th>单位</th>
+                                    <th>成交单价</th>
+                                </tr>
+                                <tr class="odd">
+                                    <td>商品名称</td>
+                                    <td>商品小图</td>
+                                    <td>品牌</td>
+                                    <td>型号</td>
+                                    <td>SKU NO.</td>
+                                    <td>换货数量</td>
+                                    <td>单位</td>
+                                    <td>成交单价</td>
+                                </tr>
+                                <tr>
+                                    <td>商品名称</td>
+                                    <td>商品小图</td>
+                                    <td>品牌</td>
+                                    <td>型号</td>
+                                    <td>SKU NO.</td>
+                                    <td>换货数量</td>
+                                    <td>单位</td>
+                                    <td>成交单价</td>
+                                </tr>
+                                <tr class="empty">
+                                    <td colspan="8">没有数据</td>
+                                </tr>
+                                <tr class="empty">
+                                    <td colspan="8"><div class="oni-loading" ms-widget="loading" data-loading-type="spinning-spin"></div></td>
+                                </tr>
+                            </table>
+                        </div>
+                        <form>
+                            <div class="row">
+                                <div class="col col-1"><label class="label">上传图片：</label></div>
+                                <div class="col col-3"><input id="licensePic" name="licensePic" type="file" multiple="true" /></div>
+                            </div>
+                            <div class="row">
+                                <div class="col col-1"><label class="label">省：</label></div>
+                                <div class="col col-3">
+                                    <select style="width: 100%" id="province"></select>
+                                    <!-- <select style="width: 100%" id="province">
+                                        <option value="1" selected="selected">全选</option>
+                                    </select> -->
+                                </div>
+                                <div class="col col-1"><label class="label">市：</label></div>
+                                <div class="col col-3">
+                                    <select style="width: 100%" id="city"></select>
+                                </div>
+                                <div class="col col-1"><label class="label">区：</label></div>
+                                <div class="col col-3">
+                                    <select style="width: 100%" id="region"></select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col col-1"><label class="label">订单编号：</label></div>
+                                <div class="col col-3">
+                                    <div class="input">
+                                        <input class="input_inner" name="licensePic" type="text" />
+                                    </div>
+                                </div>
+                                <div class="col col-1"><label class="label">订单编号：</label></div>
+                                <div class="col col-3">
+                                    <div class="input">
+                                        <input class="input_inner" name="licensePic" type="text" />
+                                    </div>
+                                </div>
+                                <div class="col col-1"><label class="label">退换货状态：</label></div>
+                                <div class="col col-3">
+                                    <select style="width: 100%" ms-widget="dropdown"
+                                            ms-duplex="value">
+                                        <option ms-repeat="data" ms-attr-value="el.value" ms-attr-label="el.label"></option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col col-1"><label class="label">订单编号：</label></div>
+                                <div class="col col-5">
+                                    <label class="radio">
+                                        <input type="radio" name="audit"> 驳回申请
+                                    </label>
+                                    <label class="radio">
+                                        <input type="radio" name="audit"> 同意买家发货
+                                    </label>
+                                    <label class="radio">
+                                        <input type="radio" name="audit"> 协商重新修改退换货请求
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col col-1"><label class="label">订单编号：</label></div>
+                                <div class="col col-5">
+                                    <label class="checkbox">
+                                        <input type="checkbox" name="audit"> 驳回申请
+                                    </label>
+                                    <label class="checkbox">
+                                        <input type="checkbox" name="audit"> 同意买家发货
+                                    </label>
+                                    <label class="checkbox disabled">
+                                        <input disabled type="checkbox" name="audit"> 协商重新修改退换货请求
+                                    </label>
+                                </div>
+                            </div>
+                        </form>
+                        <!-- <div ms-widget="smartgrid, sg1, saleOrder" ></div> -->
+                        <div ms-widget="dialog,aa,$aaOpts">
+                            <div class="textarea"><textarea class="textarea_inner" rows="15"></textarea></div>
+                        </div>
+                        <div>
+                            <span class="btn btn-large btn-primary" ms-click="show('aa')">打开弹窗</span>
+                            <span class="btn btn-large disabled btn-default">无法打开弹窗</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @@include('../../include/common/outro.html')
+        <script>require(['conf/demo/demo']);</script>
+    </body>
+</html>

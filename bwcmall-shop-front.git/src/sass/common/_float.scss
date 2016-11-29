@@ -1,0 +1,38 @@
+@charset "UTF-8";
+
+@mixin float($side: left) {
+    float: $side;
+    @if $lte7 {
+        display: inline;
+    }
+}
+
+@mixin float-left($extend: true) {
+    @if $extend {
+        @extend %float-left;
+    } @else {
+        @include float(left);
+    }
+}
+
+%float-left {
+  @include float-left(false);
+}
+
+@mixin float-right($extend: true) {
+    @if $extend {
+        @extend %float-right;
+    } @else {
+        @include float(right);
+    }
+}
+%float-right {
+    @include float-right(false);
+}
+
+@mixin reset-float($display: block) {
+    float: none !important;
+    @if $lte7 {
+        display: $display;
+    }
+}

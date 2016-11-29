@@ -1,0 +1,32 @@
+<div id="topbar" class="topbar" ms-controller="topCtrl">
+    <div class="topbar_content">
+        <ul class="list left">
+            <li class="item">
+                <a class="btn-link jNode" href="" data-href="{{bwcmallBase}}/index.html">佰万仓首页</a>
+            </li>
+        </ul>
+        <ul class="list right">
+            <li class="item item-border">
+                <a class="btn-link jNode" href="" data-href="{{bwcmallBase}}/order/list.html">买家中心</a>
+            </li>
+            <li class="item item-border">
+                <a class="btn-link jNode" href="" data-href="{{shopBase}}/index.html">卖家中心</a>
+            </li>
+            <li class="item">
+                <a class="btn-link btn-group jNode" href="" data-href="{{bwcmallBase}}/cart/list.html">
+                    <span class="label">进货单</span>
+                    <span class="badge">
+                        <i class="caret"></i>
+                        <span class="text" ms-text="totalQuantity">0</span>
+                    </span>
+                </a>
+            </li>
+            <li class="item">
+                <a class="btn-link hightlight jNode" ms-if="username" ms-text="username" href="" data-href="{{bwcmallBase}}/order/list.html"></a>
+            </li>
+            <li class="item">
+                <a class="btn-link" ms-click="logout()" href="javascript:void(0);">退出</a>
+            </li>
+        </ul>
+    </div>
+</div>

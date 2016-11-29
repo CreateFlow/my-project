@@ -1,0 +1,16 @@
+<link rel="stylesheet" href="/styles/common/top_header.css"/>
+<div class="g-header">
+    <div class="g-header-inner">
+        <div class="header-left">
+            <a href="/index.html"></a>
+            <span ms-if="!isLogin">
+                @@include('header/logout.html')
+            </span>
+        </div>
+        <div class="header-right">
+            <span ms-if="isLogin">
+                @@include('header/login.html')
+            </span>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>订单列表</title>
+    @@include('../../include/common/intro.html')
+    <!-- build:css css/module/order/order.css -->
+    <link rel="stylesheet" href="/css/module/order/order.css"/>
+    <!-- endbuild -->
+</head>
+<body>
+@@include('../../include/common/header.html')
+@@include('../../include/common/nav.html')
+<div class="main mod-demo order-list">
+    <div class="sidebar">
+        @@include('../../include/common/menu.html')
+    </div>
+    <div class="content ms-controller" ms-controller="orderList">
+        <div class="panel">
+            <div class="hd">
+                <span class="title">订单管理首页</span>
+            </div>
+            <div class="bd">
+                <div class="search">
+                    <div class="row">
+                        <div class="col col-1 title"></div>
+                        <div class="col col-5">
+                            <input type="text" placeholder="订单号／手机号" class="inputbox inputbox-main" ms-duplex="searchInfo.snOrPhone"/>
+                        </div>
+                        <div class="col col-1 title">
+                            <span class="btn btn-large btn-primary" ms-click="ckSearchList">查询</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col col-1 title">订单状态</div>
+                        <div class="col col-3">
+                            <select class="inputbox" ms-duplex="searchInfo.orderStatus">
+                                <option ms-repeat-el="orderStatus" ms-attr-value='{{el.value}}' ms-text="el.name"></option>
+                            </select>
+                        </div>
+                        <div class="col col-1 title">支付状态</div>
+                        <div class="col col-3">
+                            <select class="inputbox" ms-duplex="searchInfo.paymentStatus">
+                                <option ms-repeat-el="paymentStatus" ms-attr-value='{{el.value}}' ms-text="el.name"></option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <table class="ctable">
+                    <thead>
+                        <tr width="100%" class="thb ctr">
+                            <th width="10%">下单日期</th>
+                            <th width="12%">订单号</th>
+                            <th width="14%">客户名称</th>
+                            <th width="15%">订单金额(元)</th>
+                            <th width="10%">订单状态</th>
+                            <th width="12%">支付状态</th>
+                            <th width="11%">操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ms-if="afterSaleOrderList.length>0" ms-repeat-el="afterSaleOrderList" class="ctr" ms-class="tr-bg:($index%2==0)">
+                            <td>{{el.createTime}}</td>
+                            <td><a href="javascript:void(0)" ms-click="goOrderDetail(el)">{{el.orderSn}}</a></td>
+                            <td>{{el.customerName}}</td>
+                            <td>{{el.amount}}</td>
+                            <td>{{el.orderStatusName}}</td>
+                            <td>{{el.paymentStatusName}}</td>
+                            <td>
+                                <span ms-html="getLink(el)"></span>
+                            </td>
+                        </tr>
+                        <tr ms-if="afterSaleOrderList.length==0">
+                            <td colspan="7" class="cell-empty" >
+                                <div class="row">
+                                    <div class="col col-5" style="text-align: right">
+                                        <img src="/images/empty-list.png">
+                                    </div>
+                                    <div class="col col-5" style="text-align: left">
+                                        <span class="empty-tip" ms-text="orderListEmptyText"></span></div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class="loading-wrapper" ms-if="showLoading">
+                            <td colspan="8"><div class="oni-loading" ms-widget="loading" data-loading-type="spinning-spin"></div></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div ms-widget="pager,pp" ms-if="afterSaleOrderList.length>0"></div>
+            </div>
+        </div>
+        <div ms-widget="dialog,dlgConfirmCancelOrder,opts1">
+            <div class="col offerset-2">
+                <form ms-widget="validation">
+                <div class="row es-body">
+                    <div class="col col-3">取消原因：</div>
+                    <div class="col col-9">
+                        <select class="inputbox inputbox-main" ms-duplex-required="cancelReason.option">
+                            <option ms-repeat-el="cancelReasonType" ms-attr-value='{{el.value}}' ms-text="el.name"></option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row ">
+                    <div class="col col-3">取消原因：</div>
+                    <div class="col col-9 ">
+                        <textarea class="textarea textarea_inner" rows="15" ms-duplex="cancelReason.reason"></textarea>
+                    </div>
+                </div>
+                    <div class="row">
+                        <div class="col col-3"> &nbsp;</div>
+                        <div class="col col-9">
+                            <span>*确定取消后，系统自动退款给买家，请谨慎操作</span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div ms-widget="dialog,dlgAfterAlert,opts2">
+            <div class="col offerset-2">
+                {{confirmReceivedMsg}}
+            </div>
+        </div>
+    </div>
+</div>
+@@include('../../include/common/outro.html')
+<script>require(['conf/order/order']);</script>
+</body>
+</html>

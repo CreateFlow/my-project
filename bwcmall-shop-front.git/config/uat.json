@@ -1,0 +1,23 @@
+{
+
+    "path": {
+        "shopBase": "http://shop.earth.uat.bwcmall.cn",
+        "bwcmallBase": "http://earth.uat.bwcmall.cn",
+        "bwcmallApi": "http://api.earth.uat.bwcmall.cn/api",
+        "domain": ".earth.uat.bwcmall.cn"
+    },
+
+    "grunt": {
+        "path": "path",
+        "task": [
+            "clean",
+            "path:uat",
+            "includereplace",
+            "compass",
+            "imagemin",
+            "requirejs",
+            "copy:dist"
+        ]
+    }
+
+}

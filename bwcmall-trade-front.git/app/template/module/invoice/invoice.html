@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html> 
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <title>发票设置</title>
+    @@include('../../include/common/meta.html')
+    @@include('../../include/common/common-include.html')
+    <link rel="stylesheet" type="text/css" href="/styles/module/invoice/invoice.css"> 
+    <script src="/scripts/plugin/uploadifive/jquery.uploadify.min.js"></script> 
+    <script src="/scripts/plugin/uploadifive/jquery.uploadifive.min.js"></script> 
+    <script src="/scripts/module/common/upload-button.js"></script> 
+    <link rel="stylesheet" type="text/css" href="/styles/common/upload_button.css"/>  
+    <script src="/scripts/module/invoice/invoice.js"></script>
+</head>
+
+<body>
+    @@include('../../include/common/header.html')
+    <div class="my-header">
+        @@include('../../include/common/account-head.html')
+    </div> 
+     <!--主要内容-->
+    <div class="g-content g-clearfix"  ms-controller="invoiceCtrl">
+         <div class="content-title">
+            发票设置
+        </div>
+         <div class="content-head">
+            <a href="javascript: void(0)" ms-repeat="invoiceTypeTabs" ms-if="invoiceTypeTabs.length>0" ms-click="changeTab(el.value)" ms-class="content-nav-active:currentTab==el.value" ms-class="content-nav-next:$index==1" class="trans_link_3 f-ib content-nav" ms-text="el.text"></a>
+        </div>
+        <div class="tab1" ms-visible="currentTab=='tab1'">
+            <div class="invoice-desc-panel">
+               （1）首先需要您提交增票相关资质，我们会在2个工作日内反馈审核结果。<br/>
+               （2）审核通过后，我们会按照您提交申请开票的时间以及订单执行的结果尽快 为您开票，并通过销售顾问或快递的方式将发票送到您手上。<br/>
+               （3）1个账户最多可以申请3个增票资质。
+            </div>
+            <div class="invoice-content-panel">
+                  <div class="invoice-one" ms-repeat="valueAddedList">
+                    <div class="invoice-title"  ms-mouseover="myMouseover(this)" ms-mouseleave="myMouseleave(this)">
+                        <label ms-text="el.corpTitle"></label>
+                        <span ms-if="el.custInvoiceStatus  == 0" ms-text="el.custInvoiceStatusName"></span>
+                         <span ms-if="el.custInvoiceStatus  == 1 || el.custInvoiceStatus  == 2" ms-click="delInvoice(el)" class="del-btn" style="display:none;" >删除</span>
+                        <span ms-if="el.custInvoiceStatus  == 1" ms-text="el.custInvoiceStatusName"></span>
+                        <span ms-if="el.custInvoiceStatus  == 2" ms-text="el.custInvoiceStatusName" class="del-btn2" ms-click="showErrorMsg(el)"></span>
+                    </div>
+                    <div class="invoice-detail-content">
+                        <div class="invoice-detail-row"> 
+                            <div class="invoice-detail-label">纳税人识别码</div>
+                            <div class="invoice-detail-value" ms-text="el.taxNumber "></div>
+                        </div>
+                        <div class="invoice-detail-row height-line">
+                              <div class="invoice-detail-label">注册电话</div>
+                            <div class="invoice-detail-value"  ms-text="el.phone  "> </div>
+                        </div>
+                        <div class="invoice-detail-row">
+                             <div class="invoice-detail-label">开户银行</div>
+                             <div class="invoice-detail-value"  ms-text="el.bankName  "> </div>
+                        </div>
+                          <div class="invoice-detail-row height-line">
+                              <div class="invoice-detail-label">银行账户</div>
+                            <div class="invoice-detail-value"  ms-text="el.bankAccount  "> </div>
+                        </div>
+                        <div class="invoice-detail-row">
+                              <div class="invoice-detail-label">注册地址</div>
+                            <div class="invoice-detail-value"  ms-text="el.area.provinceName+el.area.cityName+el.area.districtName +el.areaAddress  "> </div>
+                        </div>
+                         <div class="invoice-detail-row">
+                             <div class="invoice-res-one">
+                                <div class="invoice-img"><img ms-src="el.certificateRes.url" /></div>
+                                <div class="invoice-desc" ms-text="getServResType(el.certificateRes.servResType)"></div>
+                            </div>
+                            <div class="invoice-res-one">
+                                <div class="invoice-img"><img ms-src="el.attorneyRes.url" /></div>
+                                <div class="invoice-desc">增票授权委托书</div>
+                            </div>
+                        </div>
+                    </div>
+                </div> 
+                <div class="invoice-one" ms-if="valueAddedAddable" ms-click="editOrAddInvoice()" style="cursor: pointer;">
+                    <div class="add-invoice" >
+                        <div class="add-icon">+</div>
+                        <div class="add-msg">新增增票</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tab2" ms-visible="currentTab=='tab2'">
+             <div class="invoice-desc-panel">
+                 您最多可以创建5个普票抬头
+            </div>
+            <div class="invoice-content-panel"> 
+                <div class="invoice-simple-one" ms-repeat="plainList" ms-mouseover="simpleOneMouseover(this,el)" ms-mouseleave="simpleOneMouseleave(this,el)">
+                    <div class="invoice-simple-title" ms-text="el.corpTitle" ms-visible="el.inEdit != true " ms-attr-id="'invoice_'+el.id">
+                       
+                    </div>
+                     <div class="invoice-simple-title" ms-visible="el.inEdit == true " >
+                        <input ms-attr-id="'corpTitle'+el.id" ms-attr-name="'corpTitle'+el.id"  ms-attr-value="el.corpTitle" />
+                    </div>
+                    <div class="invoice-simple-actioin-panel"  >
+                        <span ms-click="editPlainInvoice(el)" ms-visible="el.inEdit != true ">编辑</span>
+                         <span class="red del-btn" ms-click="delInvoice(el)" ms-visible="el.inEdit != true " >删除</span>
+                         <span ms-click="updatePainInvoice(el)" ms-visible="el.inEdit == true ">保存</span>
+                        <span ms-click="cancelUpdate(el)" class="red" ms-visible="el.inEdit == true ">取消</span>
+                    </div> 
+                </div>
+                 <div class="invoice-simple-one" ms-if="addPlaint">
+                    <div class="invoice-simple-title">
+                        <input id="corpTitle" name="corpTitle" />
+                    </div>
+                    <div class="invoice-simple-actioin-panel2">
+                        <span ms-click="addPainInvoice()">保存</span>
+                        <span ms-click="cancelAdd()" class="red">取消</span>
+                    </div> 
+                </div>
+                <div class="invoice-simple-one" ms-if="plaintAddable" ms-click="addPlainInvoice()" style="cursor: pointer;">
+                     <div class="invioce-simple-add">
+                      <div class="invoice-add-icon" >+</div><div class="invoice-add-text">新增普通发票</div>
+                     </div>
+                </div>
+            
+
+                <div style="clear:both">
+
+                </div>
+            </div>
+        </div>  
+    </div> 
+     <div ms-widget="dialog,confirmDialog,$confirmDialogOptions" class="confirmDialog" ms-controller="confirmDialogCtrl">
+        <div class="dialog-inner">
+             <div class="dialog-header">
+                <div class="dialog-title">
+                    <div><span>未通过原因</span></div>
+                </div>    
+                <div class="pop-close"> 
+                     <div class="icon-close" ms-click="onCancel()"></div>
+                </div>
+            </div>
+            <div class="dialog-alter-info-content">
+                <div class="dialog-pay-info-err-str" >
+                    {{msg}}
+                </div> 
+            </div>
+            <div class="dialog-action-panel">
+                <button class="btn-cancel" type="button" ms-click="onCancel()" style="margin-right: 130px;margin-left: 20px;">取消</button>
+                <button class="btn-ok" type="button" ms-click="onOK()">修改</button>
+            </div>
+        </div>
+    </div>
+      <div ms-widget="dialog,deleteDialog,$deleteDialogOptions" class="deleteDialog" ms-controller="deleteDialogCtrl">
+        <div class="dialog-inner">
+             <div class="dialog-header">
+                <div class="dialog-title">
+                    <div><span>友情提示</span></div>
+                </div>    
+                <div class="pop-close"> 
+                     <div class="icon-close" ms-click="onCancel()"></div>
+                </div>
+            </div>
+            <div class="dialog-alter-info-content">
+                <div class="dialog-pay-info-err-str" >
+                    {{msg}}
+                </div> 
+            </div>
+            <div class="dialog-action-panel">
+                <button class="btn-ok" type="button" ms-click="onOK()">确定</button>
+                <button class="btn-cancel" type="button" ms-click="onCancel()">取消</button>
+            </div>
+        </div>
+    </div>
+    <div ms-widget="dialog,alertDialog,$alertDialogOptions" class="alertDialog" ms-controller="alertDialogCtrl">
+        <div class="dialog-inner">
+             <div class="dialog-header">
+                <div class="dialog-title">
+                    <div><span>友情提示</span></div>
+                </div>    
+                <div class="pop-close"> 
+                     <div class="icon-close" ms-click="closeDialog()"></div>
+                </div>
+            </div>
+            <div class="dialog-alter-info-content"> 
+                <div class="dialog-pay-info-err-str" >
+                    {{msg}}
+                </div> 
+            </div>
+              <div class="dialog-action-panel">
+                <button class="btn-ok" type="button" ms-click="closeDialog()">确定</button> 
+            </div>
+        </div>
+    </div>
+    <div ms-widget="dialog,imageDialog,$imageDialogOptions" class="imageDialog" ms-controller="imageDialogCtrl">
+        <div class="dialog-inner">
+             <div class="dialog-header">
+                <div class="dialog-title">
+                    <div><span>查看大图</span></div>
+                </div>    
+                <div class="pop-close"> 
+                     <div class="icon-close" ms-click="closeDialog()"></div>
+                </div>
+            </div>
+            <div class="dialog-alter-info-content"> 
+                <div class="dialog-pay-info-err-str" style="font-size:24px;overflow: auto;max-height:600px;  text-align: center;">
+                  <a ms-attr-href="url" target="_blank"> <img ms-attr-src="url" style="height:550px; "/></a>
+                </div> 
+            </div>  
+        </div>
+    </div> 
+    <div ms-widget="dialog,invoiceEditDialog,$invoiceEditDialogOptions" class="invoiceEditDialog" ms-controller="invoiceEditDialogCtrl">
+        <div class="dialog-inner">
+            <div class="dialog-header">
+                <div class="dialog-title">
+                    <div><span ms-text="dialogTitle"></span></div>
+                </div>    
+                <div class="pop-close"> 
+                     <div class="icon-close" ms-click="closeDialog()"></div>
+                </div>
+            </div>
+            <div class="invoice-dialog-panel">  
+               <div class="invoice-progress-panel">
+                 <div class="progess-node progess-node-fist">
+                    <div class="progress-image ">
+                        <div ms-attr-class="step>=1?'progress-round-enable':'progress-round-disable'"><div class="round-text">1</div></div> 
+                    <div ms-attr-class="step>=1?'progress-text progress-text-enable' :'progress-text progress-text-disable'">填写增票资质信息</div>
+                    </div>
+                </div> 
+                 <div class="progess-node">
+                    <div class="progress-image "> 
+                        <div  ms-attr-class="step>=2?'progress-round-enable':'progress-round-disable'"><div class="round-text">2</div></div>
+                        <div ms-attr-class="step>=2?'progress-text progress-text-enable' :'progress-text progress-text-disable'">提交增票资质文件</div>
+                    </div> 
+                </div>  
+                 <div class="progess-node">
+                    <div class="progress-image "> 
+                        <div  ms-attr-class="step>=3?'progress-round-enable':'progress-round-disable'"><div class="round-text">3</div></div>
+                         <div ms-attr-class="step>=3?'progress-text progress-text-enable' :'progress-text progress-text-disable'">提交增票资质授权委托书</div>
+                    </div> 
+                </div>
+            </div>
+            <div style="clear:both"></div>
+              <div class="invoice-table-content">
+                <div class="invoice-step-1"  ms-visible="step==1">
+                  <div class="invoice-step-title">
+                     <div>
+                         填写增票资质信息
+                     </div>
+                  </div>
+                  <div class="invoice-step-content">
+                      <div class="invoice-step-row">
+                        <div class="invoice-step-label"><label class="require">*</label>单位名称:</div>
+                        <div class="invoice-step-input"><input id="corpTitle" name="corpTitle" /> </div>
+                      </div>
+                      <div class="invoice-step-row">
+                        <div  class="invoice-step-label"><label class="require">*</label>纳税人识别码:</div>
+                        <div class="invoice-step-input"><input id="taxNumber" name="taxNumber" /> </div>
+                      </div>
+                      <div class="invoice-step-row">
+                        <div  class="invoice-step-label"><label class="require">*</label>注册地址:</div>
+                        <div class="invoice-step-input">
+                           <div class="m-tabselect m-tabselect-half  f-fl">
+                                <div class="m-tabselect-block" ms-text="province" ms-click="areaclick()"></div>
+                                <div class="m-tabselect-arrow"></div>
+                                <div class="m-tabselect-body">
+                                    <div class="m-tabselect-item-none" ms-click="selectProvince(el.name)"
+                                         ms-repeat="provinceData" ms-if="provinceData.length>0">{{el.name}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="margin-left: 12px;" class="m-tabselect m-tabselect-half f-fl">
+                                <div class="m-tabselect-block" ms-text="city" ms-click="areaclick()"></div>
+                                <div class="m-tabselect-arrow"></div>
+                                <div  class="m-tabselect-body">
+                                    <div class="m-tabselect-item-none" ms-click="selectCity(el.name)"
+                                         ms-repeat="cityData" ms-if="cityData.length>0">{{el.name}}
+                                    </div>
+                                </div>
+                            </div>
+                             <div class="m-tabselect">
+                                <div class="m-tabselect-block" ms-text="county" ms-click="areaclick()"></div>
+                                <div class="m-tabselect-arrow"></div>
+                                <div class="m-tabselect-body">
+                                    <div class="m-tabselect-item-none" ms-click="selectCounty(el.name,el.value)"
+                                         ms-repeat="countyData" ms-if="countyData.length>0">{{el.name}}
+                                    </div>
+                                </div>
+                            </div> 
+                            <input name="areaAddress" id="areaAddress"   />
+                        </div>
+                      </div>
+                      <div class="invoice-step-row">
+                        <div  class="invoice-step-label"><label class="require">*</label>注册电话:</div>
+                        <div class="invoice-step-input"><input id="phone" name="phone" /> </div>
+                      </div>
+                      <div class="invoice-step-row">
+                        <div  class="invoice-step-label"><label class="require">*</label>开户银行:</div>
+                        <div class="invoice-step-input"><input id="bankName" name="bankName" /> </div>
+                      </div>
+                      <div class="invoice-step-row">
+                        <div  class="invoice-step-label"><label class="require">*</label>银行账户:</div>
+                        <div class="invoice-step-input"><input id="bankAccount" name="bankAccount" /> </div>
+                      </div>
+                  </div>
+                </div>
+                 <div class="invoice-step-2"  ms-visible="step==2">
+                     <div class="invoice-step-title">
+                     <div>
+                         提交增票资质文件
+                     </div>
+                  </div>
+                  <div class="invoice-step-content">
+                      <div class="invoice-step-row" style="text-align:center"> 
+                        一般纳税人资质证明<span class="red">（3选1上传）</span> <br/>
+                         <select id="servResType" name="servResType"> 
+                           <option value="0">曾开具过的增值税专用发票</option>
+                           <option value="1">一般纳税人资格认定通知书</option>
+                           <option value="2">税务局一般纳税人资格查询截图</option> 
+                         </select>  
+                         <div class="invoice-upload-panel">
+                           <div class="invoice-upload-content" ms-visible="!certificateRes.url" >
+                                <div class="upload-icon">
+                                  <button type="button" id="certificateRes_upload_btn"></button>
+                                  <div id="fileQueue"></div>
+                                </div>
+                                 <div class="upload-msg">点击上传</div>
+                            </div>
+                             <div class="invoice-upload-content" ms-visible="certificateRes.url">
+                               <img ms-attr-src="certificateRes.url">
+                               <div class="invoice-re-upload "   id="recertificateRes_upload_btn">
+                                  重新上传
+                               </div>
+                               <div id="fileQueue"></div>
+                            </div>
+                            
+                        </div>
+                        <div class="invoice-upload-demo">
+                             <img src="/images/invoice/demo1.png">
+                        </div> 
+                       <div class="invoice-step-desc">
+                        支持图片格式为jpg/jpeg/png/gif/bmp,请务必上传清晰图片，单个图片需小于10M
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                 <div class="invoice-step-3" ms-visible="step==3">
+                   <div class="invoice-step-title">
+                     <div>
+                         提交增票资质授权委托书
+                     </div>
+                  </div>
+                  <div class="invoice-step-content">
+                       <div class="invoice-step-row" style="text-align:center">
+                          <div class="invoice-upload-panel">
+                             <div class="invoice-upload-content" ms-visible="!attorneyRes.url  ">
+                                  <div class="upload-icon ">
+                                     <button   type="button"  id="attorneyRes_upload_btn"></button>
+                                     <div id="fileQueue"></div>
+                                  </div>
+                                   <div class="upload-msg">点击上传</div>
+                              </div>
+                               <div class="invoice-upload-content" ms-visible="attorneyRes.url  ">
+                                 <img ms-attr-src="attorneyRes.url">
+                                 <div class="invoice-re-upload " id="reattorneyRes_upload_btn"  >
+                                    重新上传
+                                 </div>
+                                 <div id="fileQueue"></div>
+                              </div> 
+                          </div>
+                          <div class="invoice-upload-demo">
+                              <img src="/images/invoice/demo2.png">
+                          </div> 
+                        <div class="invoice-template-down">
+                            <span>点击下载:</span><a href="http://img.bwcmall.com/img/PublicFile/2016/060/d21/委托书.doc">模板下载</a><br/> 
+                        </div>
+                        <div class="invoice-step-desc">
+                        请先下载模板，按要求填写好后以图片格式上传。支持的图片格式为jpg/jpeg/png/<br/>gif/bmp/pdf，务必上传清晰图片，单个图片需小于10M。
+                        </div>
+                      </div>
+                  </div>
+                </div>
+              </div>
+              <div class="invoice-step-action-panel">
+                  <button  type="button" ms-visible="step==1 || step == 2" ms-click="onGoNext()">下一步</button>
+                  <button   type="button" ms-visible="step==2"  ms-click="onGoPre()">上一步</button>
+                  <button   type="button" ms-visible="step==3" class="btn-confirm" ms-click="onConfirm">确认提交</button>
+                  <button  type="button"  ms-visible="step==3 || step == 1" ms-click="onCancel()">取消</button>
+                  <a href="javascript:void(0)"  ms-visible="step==3" ms-click="onGoPre()">返回上一步</a>
+              </div>
+            </div> 
+        </div>
+    </div>
+    @@include('../../include/common/footer.html')
+</body>
+
+</html>

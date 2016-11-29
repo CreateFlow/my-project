@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <title>买家注册</title>
+    <meta name="description" content=""> @@include('../common/meta.html')
+</head>
+
+<body id="app">
+    <div class="container" id="sign-wrap">
+        <div class="cell">
+            <img class="img-responsive" src="../images/account/banner@2x.png" alt="">
+            <div class="sign-header">
+                <span class="active">填写注册信息</span><i class="iconfont icon-right active"></i><span>确认用户信息</span><i class="iconfont icon-right"></i><span>上传三证</span><i class="iconfont icon-right"></i><span>注册成功</span>
+            </div>
+            <div class="spacing">
+                <div class="weui_cells weui_cells_form weui_cells_border">
+                    <div class="weui_cell">
+                        <div class="weui_cell_bd weui_cell_primary">
+                            <input class="weui_input" type="number" placeholder="手机号" v-model="signup.phone.val">
+                        </div>
+                    </div>
+                    <div class="weui_cell">
+                        <div class="weui_cell_bd weui_cell_primary">
+                            <input class="weui_input" type="number" placeholder="验证码" v-model="signup.captcha.val">
+                        </div>
+                        <div class="weui_cell_ft text-primary" :class.sync="countBusy ? disabledClass : ''"  @click="sendCaptcha(signup.phone.val)">
+                            {{countText}}
+                        </div>
+                    </div>
+                    <div class="weui_cell">
+                        <div class="weui_cell_bd weui_cell_primary">
+                            <input class="weui_input" type="text" placeholder="姓名" v-model="signup.username.val">
+                        </div>
+                    </div>
+                    <div class="weui_cell">
+                        <div class="weui_cell_bd weui_cell_primary">
+                            <input class="weui_input" type="password" placeholder="登录密码" v-model="signup.password.val">
+                        </div>
+                    </div>
+                    <div class="weui_cell">
+                        <div class="weui_cell_bd weui_cell_primary">
+                            <input class="weui_input" type="password" placeholder="确认登录密码" v-model="signup.cofirmPassword.val">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="ui-footer">
+                <button class="weui_btn weui_btn_warn" @click="submit()" :class.sync="!allowSub ? 'disabled' : ''">下一步</button>
+            </div>
+        </div>
+    </div>
+    @@include('common/footer.html')
+    <!-- build:js({.tmp,app}) /js/page/account/signup.js -->
+    <script src="/js/page/account/signup.js"></script>
+    <!-- endbuild -->
+</body>
+
+</html>

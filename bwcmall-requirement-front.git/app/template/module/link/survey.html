@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html> 
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <title>询价单</title>
+    @@include('../../include/common/meta.html')
+    @@include('../../include/common/member-include.html') 
+
+    <link rel="stylesheet" type="text/css" href="/styles/module/link/survey.css"> 
+    <script src="/scripts/module/link/survey.js"></script>
+</head>
+
+<body ms-controller="surveyCtrl">
+    <div class="g-content g-clearfix" ms-if="dataList.invalid">
+        <div style="font-size: 20px; text-align: center; margin: 50px;">该询价信息已失效，无法查看相关信息，谢谢！</div>
+    </div>
+    <!--主要内容-->
+    <div class="g-content g-clearfix" ms-if="!dataList.invalid">
+        <div class="content-head">
+            <div class="module-title">
+                <div><span>询价单</span><span style="font-size:12px;font-weight: normal;" ms-text="expireInfo"></span></div>
+            </div>
+        </div>
+        <div class="detail-table-panel">
+            <div class="order-table-wrap">
+                <div class="detail-table">
+                    <table cellpadding="0" width="100%">
+                        <!--表单头部-->
+                        <tr class="order-table-top">
+                            <th width="8%">
+                                品牌
+                            </th>
+                            <th width="20%">
+                                品名
+                            </th>
+                            <th width="10%">
+                                型号
+                            </th>
+
+                            <th width="6%">
+                                单位
+                            </th>
+                            <th width="6%">
+                                数量
+                            </th>
+                            <th width="10%">
+                                采购价
+                            </th>
+                            <th width="10%">
+                                货期
+                            </th>
+                            <th width="20%">
+                                备注
+                            </th>
+                            <th width="10%">
+                                无法报价原因
+                            </th>
+                        </tr>
+                        <!--商品一行-->
+                        <tr ms-repeat="dataList.offerList">
+                            <!--品牌-->
+                            <td>
+                                <span ms-text="el.brandName"></span>
+                            </td>
+                            <td>
+                                <span ms-text="el.itemName"></span>
+                            </td>
+                            <!--型号-->
+                            <td>
+                                <span type="text" ms-text="el.skuSnSet"></span>
+                            </td>
+
+                            <td>
+                                <span type="text" ms-text="el.unit"></span>
+                            </td>
+                            <td>
+                                <span ms-if="el.requiredQuantity<=0">-</span><span ms-if="el.requiredQuantity>0" ms-text="el.requiredQuantity"></span>
+                            </td>
+                            <td>
+                                <div class="table-condition">
+                                    ￥<input type="text" ms-duplex="el.purchasePrice">
+                                </div>
+                            </td>
+                            <td>
+                                <div class="table-condition">
+                                    <input type="text" ms-duplex="el.shipMin" style="width:3em">-<input type="text" ms-duplex="el.shipMax" style="width:3em">天
+                                </div>
+                            </td>
+                            <!--销售价-->
+                            <td>
+                                <div class="table-condition">
+                                    <input type="text" ms-duplex="el.remarks">
+                                </div>
+                            </td>
+                            <td>
+                                <div class="table-condition">
+                                    <select name="categoryList" ms-duplex="el.sellerFeedback">
+                                        <option value="">-请选择原因-</option>
+                                        <option value="1">不供应此产品</option>
+                                        <option value="2">不方便报价</option>
+                                        <option value="3">其他原因</option>
+                                    </select>
+                                </div>
+                            </td>
+
+                        </tr>
+                    </table>
+
+                </div>
+                <div class="detail-submit" style="margin-top:30px;"> 
+                     <button ms-click="query" type="button" id="queryBtn" name="queryBtn" class="query_btn">提交报价</button>
+                </div>
+                
+                
+            </div>
+            
+        </div>
+    </div>
+
+    <div id="alertDialogCtrlId" ms-widget="dialog,alertDialogCtrlId,$alertDialogOption">
+        <p>{{message}}</p>
+        <button type="button" id="closeAlertBtn" name="closeAlertBtn" ms-click="onCloseAlert" style="margin-top: 30px;margin-left: 70px;margin-bottom: 20px;width: 120px;height: 30px;">确定</button>
+    </div>
+       
+</body>
+
+</html>

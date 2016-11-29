@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    @@include('../../include/common/meta.html') 
+    @@include('../../include/common/common-include.html')
+    <link rel="stylesheet" type="text/css" href="/styles/module/order/fast-order.css">
+    <script type="text/javascript" src="/scripts/module/order/fast-order.js"></script>
+</head>
+
+<body ms-controller="FastOrderCtrl">
+    @@include('../../include/common/header.html')
+    <div class="gs-header">
+        @@include('../../include/common/account-head.html')
+    </div>
+    <div class="g-content">
+        <!-- 没审核信息 -->
+    <!--     <div class="tip-info">
+            待顾问审核通过后此功能方可使用
+        </div> -->
+        <!--商品列表-->
+        <div class="order-table-wrap">
+            <table class="order-table" cellpadding="0">
+                <!--表单头部-->
+                <tr class="order-table-top">
+                   
+                    <th width="15%">
+                        所有品牌
+                    </th>
+                    <th width="15%">
+                        型号
+                    </th>
+                    <th width="21%">
+                        商品详情
+                    </th>
+                    <th width="15%">
+                        数量
+                    </th>
+                    <th width="4%">
+                        单位
+                    </th>
+                    <!-- <th width="8%">
+                        销售单价
+                    </th> -->
+                    <th width="8%">
+                        销售价
+                    </th>
+                    <th width="8%">
+                        小计
+                    </th>
+                    <th width="5%">
+                        操作
+                    </th>
+                </tr>
+                <!--商品一行-->
+                <tr ms-repeat="trArr" ms-if="trArr.length>0" class="order-trone">
+                    <!--选中-->
+                   <!--  <td class="table-left">
+                        <span class="f-ib m-checkbox checkbox-fix">
+            <input class="m-checkbox-check" type="checkbox">
+            <strong class="m-checkbox-icon select-order-tr"></strong>
+            </span>
+                    </td> -->
+                    <!--品牌-->
+                    <td class="table-left">
+                        <div class="m-tabselect m-tabselect-half  f-fl">
+                            <input class="m-tabselect-inp-brand m-tabselect-block" ms-click="tabselectblockClick()" ms-keyup="brandInpChange(el.brandName, $event)" ms-duplex="el.brandName" ms-attr-bId="el.brandId" placeholder="所有品牌" autocomplete="off"/>
+                            <div class="m-tabselect-arrow"></div>
+                            <div class="tabselect-error-info"></div>
+                            <div class="m-tabselect-body" style="width: 140px;">
+                                <div class="m-tabselect-item" ms-click="changeBrand($outer.$index,ell.id,ell.name)" ms-repeat-ell="brandList" ms-attr-index="$outer.$index" ms-attr-bId="ell.id" ms-text="ell.name">
+                                </div>
+                                <div class="m-tabselect-item-span" ms-visible="brandList.length<=0">
+                                    查无此品牌...
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                    <!--型号-->
+                    <td class="table-left">
+                        <div class="goods-left">
+                            <div class="m-tabselect m-tabselect-half  f-fl">
+                                <input ms-blur="inpBlur($index)" ms-change="inpChange($index)" ms-keyup="tabselectInpBlockKeyUp()" class="m-tabselect-inp-block" ms-duplex="el.sn" ms-attr-bId="el.brandId" ms-attr-pId="el.id" ms-attr-disabled="el.disabled" autocomplete="off"/>
+                                <div class="m-tabselect-arrow"></div>
+                                <div class="m-tabselect-body tabselect-body-noscroll">
+                                    <div ms-attr-titleName="all.name" ms-click="changeModel($outer.$index,all.id,all.sn,all.unit,all.images[0],all.name,all.price,all.total,all.quantity,all.brandName,all.disabled)" ms-repeat-all="productNumList" ms-attr-data-bimg="{{all.images[0]}}!190" class="m-tabselect-item" ms-attr-data-oindex="$outer.$index" ms-attr-data-id="all.id" ms-attr-data-sn="all.sn" ms-attr-data-unit="all.unit" ms-attr-data-img="all.image" ms-attr-data-name="all.price" ms-attr-data-price="all.price" ms-attr-data-total="all.total" ms-attr-data-quantity="all.quantity" ms-attr-data-brandName="all.brandName" ms-attr-data-dis="all.disabled"
+                                      ms-mouseleave="onSNListMouseleave()" ms-mouseenter="onSNListMouseenter()" >{{all.sn}}
+                                    </div>
+                                    <div class="m-tabselect-item-span" ms-visible="productNumList.length<=0">
+                                        查无此型号...
+                                    </div>
+                                </div>
+                                <div class="item-hover">
+                                    <img src="" alt="" class="goods-details-bimg" />
+                                    <span class="item-hover-title" ms-text="hoverName"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                    <!--商品详情-->
+                    <td>
+                        <span class="f-ib goods-details">
+                        <span class="f-ib goods-details-hidden">
+                            <img class="goods-details-img f-ib" ms-src="{{el.image}}!48"/>
+                            <span class="goods-details-inner f-ib" ms-attr-title="el.name" >{{el.name|subGoodsNames}}</span>
+                        <div class="detail-hover">
+                            <img class="goods-details-bimg" ms-src="{{el.image}}!190" ms-attr-alt="el.name" />
+                        </div>
+                        </span>
+                        </span>
+                    </td>
+                    <!--数量-->
+                    <td>
+                        <div class="inorder-wrap">
+                            <span class="inorder-big m-inorder-minus f-ib" ms-click="numMinus($index,el.id)">-</span>
+                            <span class=" f-ib m-inorder-middle">
+                        <input type="text" ms-change="numChange($index,el.id)" ms-attr-value="el.quantity"
+                               class="inorder-big-mid m-inorder-num"/>
+                        </span>
+                            <span class="inorder-big m-inorder-add f-ib" ms-click="numAdd($index,el.id)">+</span>
+                            <div class="clear"></div>
+                        </div>
+                    </td>
+                    <!--单位-->
+                    <td>
+                        <span class="f-ib goods-words goods-unit" ms-text="el.unit"></span>
+                    </td>
+                    <!--销售价-->
+                    <td>
+                        <span class="f-ib goods-words goods-money " ms-html="formatPrice(el.price)"></span>
+                    </td>
+                    <!--补贴金额-->
+                    <!-- <td>
+                        <span class="f-ib goods-words goods-money" ms-text="el.price">{{el.price|number(2,'.',',')}}</span>
+                    </td> -->
+                    <!--小计-->
+                    <td>
+                        <span class="f-ib goods-words goods-subtotal goods-money " ms-html="formatPrice(el.total)"></span>
+                    </td>
+                    <!--操作-->
+                    <td>
+                        <span class="f-ib goods-del" ms-click="delProduct($index)">
+                        <!--<img style="width:32px;height:32px;" src="goods-del0.jpg"/>-->
+                    </span>
+                    </td>
+                </tr>
+            </table>
+            <!--更多-->
+            <div class="order-trone-more">
+                <div class="trone-more" ms-click="getMore"></div>
+                <div class="clear"></div>
+            </div>
+        </div>
+        <!-- 报错 -->
+        <div ms-visible="errorInfo!=''" ms-text="errorInfo"></div>
+        <!--下一步-->
+        <div class="m-order-table-bottom">
+            <!-- <span class="f-ib m-checkbox-all select-all">
+    <input class="m-checkbox-all-check" type="checkbox" value="true"/>
+    <strong class="m-checkbox-all-icon"></strong>
+   
+    </span>
+            <a class="sub-order-del" href="javascript: void(0)" class="f-ib">删除选中商品</a> -->
+            <div class="f-fr">
+                <a href="javascript: void(0)" ms-click="subOrder" class="sub-order-btn f-fr">下一步</a>
+                <span class="sub-order-bottom-total f-fr f-ib">总计<em
+                        id="total-quantity" ms-text="totalNum"></em>件商品</span>
+                <span class="sub-order-bottom-money f-fr f-ib">总金额：<span
+                        id="total-price" ms-html="formatPrice(totalMoney)"></span>
+                </span>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+    @@include('../../include/common/footer.html')
+</body>
+
+</html>

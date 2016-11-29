@@ -1,0 +1,67 @@
+@charset "UTF-8";
+
+.required {
+    color: #f00;
+    margin-right: 3px;
+}
+
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 1000px #f9f9f9 inset;
+}
+
+form {
+    .label {
+        height: 36px;
+        line-height: 36px;
+        display: inline-block;
+    }
+}
+
+%checkbox {
+    margin-right: 1em;
+    height: 36px;
+    line-height: 36px;
+    input[type="checkbox"],
+    input[type="radio"] {
+        margin-right: 3px;
+    }
+    &.disabled {
+        @include opacity(60);
+    }
+    &:last-child {
+        margin-right: 0;
+    }
+}
+
+%form-control {
+    width: 100%;
+    border: none;
+    background-color: transparent;
+    font-size: 12px;
+    line-height: 1;
+    outline: none;
+}
+
+.checkbox {
+    @extend %checkbox;
+}
+
+.radio {
+    @extend %checkbox;
+}
+
+.input {
+    border: 1px solid #e0e0e0;
+    padding: 9px 0.5em;
+    &_inner {
+        @extend %form-control;
+    }
+}
+
+.textarea {
+    border: 1px solid #e0e0e0;
+    &_inner {
+        resize: none;
+        @extend %form-control;
+    }
+}

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>解冻</title>
+    @@include('../../include/common/intro.html')
+    <!-- build:css css/module/cash/thaw.css -->
+    <link rel="stylesheet" href="/css/module/cash/thaw.css"/>
+    <!-- endbuild -->
+</head>
+<style>
+    .ms-controller{
+        visibility: hidden
+    }
+</style>
+<body>
+@@include('../../include/common/header.html')
+@@include('../../include/common/nav.html')
+<div class="main mod-thaw">
+    <div class="sidebar">
+        @@include('../../include/common/menu.html')
+    </div>
+    <div class="content ms-controller" ms-controller="thawCtrl">
+        <div class="panel">
+            <div class="hd">
+                
+                <span class="title">解冻</span>
+                <span style="margin-left:10px;">
+                1.您需要提交营业执照等五证信息开通资金账户，如贵司已办理三证合一，请选择三证合一提交；
+                2.上传的图片格式为jpg/jpeg/png/gif/bmp，单个图片需小于512kb
+                </span>
+                
+            </div>
+            <div class="bd">
+                <div class="tab">
+                    <div class="row currentData">
+                        <span ms-repeat-el="currentData"  ms-attr-class="currentTab == el.value ?'spanTab currentTab' :'spanTab' "  ms-click="changeTab(el.value)"><font ms-text="el.text"></font></span>
+                    </div>
+
+                    <table class="tab-box">
+                        <tr>
+                            <td class="vertical-top" width="30%"><p>营业执照：</p></td>
+                            <td width="45%">
+                                <div class="row">
+                                    <input id="refusePic" name="refusePic" type="file" multiple="true" />
+                                </div>
+                            </td>
+                            <td>
+                                <p ms-if="refuseUrl">
+                                    <a href="javascript:void(0)" ms-attr-href="{{refuseUrl}}" data-lightbox="res-image">
+                                        <img class="image" ms-src="refuseUrl" width="36" height="36" style="border:0px;">
+                                    </a>
+                                    <i ms-if="refusePicx" class="icon icon-false" style="display:none"></i>
+                                </p>
+                            </td>
+                        </tr>
+                        <tr ms-if="currentTab == 'tab1'">
+                            <td class="vertical-top"><p>组织机构代码：</p></td>
+                            <td>
+                                <div class="row">
+                                    <input id="refusePic2" name="refusePic2" type="file" multiple="true" />
+                                </div>
+                            </td>
+                            <td>
+                                <p ms-if="refuseUrl2">
+                                    <a href="javascript:void(0)" ms-attr-href="{{refuseUrl2}}" data-lightbox="res-image">
+                                        <img class="image" ms-src="refuseUrl2" width="36" height="36" style="border:0px;">
+                                    </a>
+                                </p>
+                            </td>
+                        </tr>
+                        <tr ms-if="currentTab == 'tab1'">
+                            <td class="vertical-top"><p>税务登记证：</p></td>
+                            <td>
+                                <div class="row">
+                                    <input id="refusePic3" name="refusePic3" type="file" multiple="true" />
+                                </div>
+                            </td>
+                            <td>
+                                <p ms-if="refuseUrl3">
+                                    <a href="javascript:void(0)" ms-attr-href="{{refuseUrl3}}" data-lightbox="res-image">
+                                        <img class="image" ms-src="refuseUrl3" width="36" height="36" style="border:0px;">
+                                    </a>
+                                    
+                                </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="vertical-top"><p>银行开户许可证：</p></td>
+                            <td>
+                                <div class="row">
+                                    <input id="refusePic4" name="refusePic4" type="file" multiple="true" />
+                                </div>
+                            </td>
+                            <td>
+                                <p ms-if="refuseUrl4">
+                                    <a href="javascript:void(0)" ms-attr-href="{{refuseUrl4}}" data-lightbox="res-image">
+                                        <img class="image" ms-src="refuseUrl4" width="36" height="36" style="border:0px;">
+                                    </a>
+                                </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="vertical-top"><p>法人身份证正面：</p></td>
+                            <td>
+                                <div class="row">
+                                    <input id="refusePic5" name="refusePic5" type="file" multiple="true" />
+                                </div>
+                            </td>
+                            <td>
+                                <p ms-if="refuseUrl5">
+                                    <a href="javascript:void(0)" ms-attr-href="{{refuseUrl5}}" data-lightbox="res-image">
+                                        <img class="image" ms-src="refuseUrl5" width="36" height="36" style="border:0px;">
+                                    </a>
+                                </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="vertical-top"><p>法人身份证反面：</p></td>
+                            <td>
+                                <div class="row">
+                                    <input id="refusePic6" name="refusePic6" type="file" multiple="true" />
+                                </div>
+                            </td>
+                            <td>
+                                <p ms-if="refuseUrl6">
+                                    <a href="javascript:void(0)" ms-attr-href="{{refuseUrl6}}" data-lightbox="res-image">
+                                        <img class="image" ms-src="refuseUrl6" width="36" height="36" style="border:0px;">
+                                    </a>
+                                </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><span style="color:#f00" ms-text="refusePicInfo"></span></td>
+                            <td></td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div style="text-align:center;margin-top:20px;">
+                    <spann ms-click="submit" class="btn btn-large btn-primary" style="margin:0px auto;">提交申请</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@@include('../../include/common/outro.html')
+<script>require(['conf/cash/thaw']);</script>
+</body>
+</html>

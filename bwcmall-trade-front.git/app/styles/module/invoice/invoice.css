@@ -1,0 +1,566 @@
+/**
+ * 基础框架
+ */
+
+
+/**
+ * Created by jason_wzl on 2015/11/5 005.
+ */
+.g-content {
+    margin: 30px auto;
+    width: 1200px;
+    border: 1px solid #dad6d4;
+    font-family: "Microsoft YaHei";
+    /*padding: 20px;*/
+    min-height: 580px;
+}
+
+/**
+ * 文件上传组件
+ */
+.swfupload{
+    height: 200px;
+    width: 200px;
+    margin-top: -70px;
+    margin-left: -100px;
+    cursor: pointer;
+}
+#recertificateRes_upload_btn .swfupload{
+        height: 40px;
+    width: 200px;
+    margin-top: 0px;
+    margin-left: -100px;
+    cursor: pointer;
+}
+#reattorneyRes_upload_btn .swfupload{
+        height: 40px;
+    width: 200px;
+    margin-top: 0px;
+    margin-left: -100px;
+    cursor: pointer;
+}
+.uploadify {
+    
+} 
+.uploadify-button.disabled {
+    background-color: #D0D0D0;
+    color: #808080;
+}
+.uploadify-queue {
+   
+}
+.uploadify-queue-item {
+    background-color: #F5F5F5;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    font: 11px Verdana, Geneva, sans-serif;
+    margin-top: 5px;
+    max-width: 350px;
+    padding: 10px;
+}
+.uploadify-error {
+    background-color: #FDE5DD !important;
+}
+.uploadify-queue-item .cancel a {
+    background: url('/scripts/plugin/uploadifive/uploadifive-cancel.png') 0 0 no-repeat;
+    display: block;
+    float: right;
+    height: 16px;
+    text-indent: -9999px;
+    width: 16px;
+}
+.uploadify-queue-item.completed {
+    background-color: #E5E5E5;
+}
+.uploadify-progress {
+    background-color: #E5E5E5;
+    margin-top: 10px;
+    width: 100%;
+}
+.uploadify-progress-bar {
+    background-color: #0099FF;
+    height: 3px;
+    width: 1px;
+}
+ 
+/**
+ * 标题
+ */
+.content-title{
+    font-size: 15px;
+    font-weight: bold;
+    padding: 10px 0px 10px 20px;
+    background-color: #E0DCDA;
+    margin-bottom: 40px;    
+}
+/**
+ * tabs 组件
+ */ 
+
+/*tab页的样式 ++++++++++*/
+.content-head {
+    height: 42px;
+    border: 1px solid #dad6d4;
+    padding-left: 20px; 
+}
+.content-nav{
+    width: 160px;
+    height: 39px;
+    line-height: 36px;
+    text-align: center;
+    font-size: 16px;
+    color: #333;
+    border-top: 4px solid #fff;
+    border-right: 1px solid #dad6d4;
+    border-left: 1px solid #dad6d4;
+}
+.content-nav-next{
+    border-right-color: #fff;
+}
+.content-nav-active{
+    border-top: 4px solid #746565;
+    border-right-color: #dad6d4;
+    background-color: #fff;
+}
+/*tab页的样式 ----------*/
+
+
+/*tab1样式 ++++++++*/
+.tab1{ 
+    padding-top: 20px;
+}
+
+.tab2{
+    padding-top: 20px;
+}
+ 
+.invoice-desc-panel{
+    margin: 20px;
+    border: 1px solid #E2CDC3;
+    font-size: 14px;
+    line-height: 30px;
+    padding: 5px;
+    background-color: #FCF5EB; 
+    padding-left: 20px;
+}
+
+/**
+ * 增值发票
+ */
+.invoice-content-panel{
+
+}
+.invoice-one{
+    float: left;
+    margin-left: 20px;
+    border: 1px solid #E0DCDA;
+    width: 372px;
+    margin-bottom: 20px;
+    font-size: 14px;
+    height: 350px;
+}
+.invoice-title{
+  line-height: 40px;
+}
+.invoice-title label{
+    font-weight: bold;
+    margin-left: 10px;
+}
+.invoice-title span{
+    float: right;
+    margin-right: 10px;
+}
+.invoice-detail-content{
+
+}
+.invoice-detail-row{
+    line-height: 40px;
+    border-top: 1px solid #E0DCDA;
+}
+.invoice-detail-label{
+    margin-left: 10px;
+    border-right: 1px solid #E0DCDA;
+    width: 100px;
+    float: left;
+    margin-right: 10px;
+}
+.invoice-detail-value{
+    
+}
+.invoice-res-one{
+    width: 186px;
+    height: 100px;
+    float: left;
+    text-align: center;
+    line-height: normal;
+}
+.invoice-img{
+
+}
+.invoice-img img{
+    height: 70px;
+    width: 70px;
+}
+.invoice-desc{
+
+}
+.add-invoice{
+    text-align: center;
+    margin-top: 140px;
+}
+.add-icon{
+    font-size: 50pt;
+    cursor: pointer;
+}
+ 
+.red{
+    color: red;
+}
+/**
+ * 普通发票
+ */
+.invoice-simple-one{
+    float: left;
+    width: 500px;
+    line-height: 40px;
+    height: 40px;
+    margin-bottom: 20px;
+    margin-left: 20px;
+   border: 2px solid white; 
+}
+.invoice-simple-one input{
+    padding-left: 10px;
+}
+.invoice-simple-title{
+     float: left;
+    width: 300px;
+    font-size: 14px; 
+    border: none;
+    padding-left: 20px;
+    margin-right: 40px;
+    cursor: pointer;
+} 
+.selected{ 
+   border: 2px solid #5c393b;
+   background: url("/images/invoice/san.png") no-repeat 482px 22px;
+}
+.invoice-simple-actioin-panel{
+    display: none;
+    float: right;
+    margin-right: 20px;
+}
+ 
+.invoice-simple-title input{
+    height: 41px;
+    width: 319px; 
+    font-size: 14px;
+    border: 1px solid #E0DCDA; 
+}
+.invoice-simple-actioin-panel{
+        font-size: 14px;
+}
+.invoice-simple-actioin-panel span{
+    cursor: pointer;
+}
+.invoice-simple-actioin-panel2{
+        font-size: 14px;
+        float: right;
+        margin-right: 20px;
+}
+.invoice-simple-actioin-panel2 span{
+    cursor: pointer;
+}
+.invioce-simple-add{
+    text-align: center; 
+    border: 1px dotted #E0DCDA;
+    width: 320px;
+    height: 40px;
+    margin-left: 20px;
+}
+.invoice-add-icon{
+    font-size: 20px;
+    font-weight: bold;
+    float: left;
+    margin-left: 100px;
+    cursor: pointer;
+}
+.invoice-add-text{  
+    float: left;
+    margin-top: 1px;
+    margin-left: 5px;
+}
+.height-line{
+    background-color: #F4F1EE;
+}
+ 
+
+/**
+ * 增票 编辑
+ */
+ .invoice-progress-panel{
+    border-bottom: 1px dotted #dad6d4; 
+    height: 90px;
+} 
+.progess-node{
+   width: 180px;
+    float: left;
+    height: 80px;
+    margin-top: 30px;
+    text-align: center;
+} 
+.progress-image{
+    width: 200px;
+    float: left;
+}
+.progress-round-enable{
+    background: url("/images/afs/round_h.png") no-repeat center;
+    height: 36px;
+    width: 36px;
+    float: left;
+} 
+.progress-text{
+    padding-top: 10px;
+    float: left;
+    margin-left: 10px;
+}
+.progress-text-enable{
+    color: #54C887;
+}
+ 
+.progress-round-disable{
+    background: url("/images/afs/roud.png") no-repeat center;
+    height: 36px;
+    width: 36px;
+    float: left;
+} 
+.progress-text-disable{
+
+}
+.round-text{
+    font-size: 17pt;
+    color: white;
+    margin-top: 6px;
+}
+.progess-node-fist{
+    margin-left: 20px;
+}
+
+
+.invoice-step-title{
+    text-align: center;
+    font-size: 15px;
+    font-weight: bold;
+}
+.invoice-step-content{
+    margin-top: 30px;
+}
+.invoice-step-row{
+    min-height: 50px;
+}
+.invoice-step-label{
+     width: 150px;
+    float: left;
+    min-height: 50px;
+    padding-left: 30px;
+    line-height: 30px;
+}
+.invoice-step-input{
+
+}
+.invoice-step-input input{
+    height: 30px;
+    line-height: 30px;
+    width: 350px;
+    border: 1px solid #E0DCDA;
+}
+/**
+ * 区域
+ */
+.m-tabselect{
+    float: left;
+    margin-right:30px;
+    margin-top: -15px; 
+}
+#areaAddress{
+    height: 30px;
+    margin-bottom: 20px;
+    width: 350px;
+}
+.m-tabselect-block{
+    height: 30px !important;
+    line-height: 30px !important;
+}
+.m-tabselect { 
+    margin-top: -1px !important;
+    width: 109px !important;
+    margin-right: 10px !important;
+} 
+.m-tabselect-half .m-tabselect-body{
+    width: 100px !important;
+}
+.m-tabselect .m-tabselect-body{
+    width: 100px !important;
+}
+.m-tabselect .m-tabselect-block{
+    width: 100px !important;
+}
+.invoice-step-action-panel{
+    height: 80px;
+    text-align: center;
+    margin-top: 20px;
+}
+.invoice-step-action-panel button{
+    height: 40px;
+    width: 150px;
+    border: 1px solid #E0DCDA;
+    /* color: white; */
+    background-color: white;
+    font-weight: bold;
+}
+
+.invoice-step-action-panel a{
+    font-weight: bold;
+    font-size: 15px;
+    margin-left: 20px;
+    color: #2869CB;
+}
+.invoice-template-down a {
+    margin-left: 10px;
+}
+.invoice-template-down a:hover{
+    color: #2869CB;
+}
+.invoice-step-action-panel a:hover{
+    color: #2869CB;
+}
+.btn-confirm{
+    color: white !important;
+    background-color: #e83637 !important;
+}
+button{
+    cursor: pointer;
+}
+.invoice-step-row select {
+    width: 430px;
+    height: 30px;
+    border: 1px solid #E0DCDA;
+    margin: 10px;
+    margin-left: 35px;
+}
+.invoice-upload-panel{
+     width: 200px;
+    float: left;
+    height: 200px;
+    border: 1px solid #E0DCDA;
+    margin-left: 90px;
+}
+.invoice-upload-panel img{
+
+}
+.invoice-upload-content {
+
+}
+.upload-icon{
+    font-size: 50px;
+    font-weight: bold;
+    margin-top: 60px;
+    cursor: pointer;
+}
+.upload-msg{
+
+}
+.invoice-upload-demo{
+    width: 200px;
+    /* float: left; */
+    height: 200px;
+    border: 1px solid #E0DCDA;
+    margin-left: 315px;
+}
+.invoice-upload-demo img{
+
+}
+.invoice-step-desc{
+    margin-top: 30px;
+    width: 510px;
+    margin-left: 85px;
+    text-align: left;
+    color:red;
+}
+.invoice-step-desc span{
+      float: left;
+    margin-left: 35px;
+}
+.invoice-step-desc a{
+       margin-top: 20px;
+    /* width: 510px; */
+    margin-left: 134px;
+    margin-right: 70px;
+}
+.invoice-template-down{
+    margin-top: 20px;
+    margin-bottom: -10px;
+    text-align: left;
+    margin-left: 85px;
+    color: gray;
+}
+#certificateRes_upload_btn {
+    text-align: center;
+    font-size: 30pt;
+    margin-left: 50px;
+    margin-top: 70px;
+}
+#recertificateRes_upload_btn{
+    position: absolute;
+    z-index: 9;
+    margin-top: -30px;
+    width: 200px !important;
+    background-color: #f4e7d5;
+}
+#recertificateRes_upload_btn-button{
+    width: 200px !important;
+}
+#recertificateRes_upload_btn span{
+    
+}
+.invoice-upload-content img{
+    height: 200px;
+    width: 200px;
+}
+
+#attorneyRes_upload_btn {
+    text-align: center;
+    font-size: 30pt;
+    margin-left: 50px;
+    margin-top: 70px;
+}
+#reattorneyRes_upload_btn{
+    position: absolute;
+    z-index: 9;
+    margin-top: -30px;
+    width: 200px !important;
+    background-color: #f4e7d5;
+}
+#reattorneyRes_upload_btn-button{
+    width: 200px !important;
+} 
+.invoice-upload-demo img{
+    margin-top: 40px;
+}
+.invoice-img{
+    padding: 5px;   
+}
+ 
+.del-btn{
+    color: red;
+    cursor:pointer;
+    text-decoration: underline;
+}
+.del-btn2{
+    color: red;
+    cursor:pointer;
+    text-decoration: underline;
+}
+.require{
+    color: red;
+}

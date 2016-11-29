@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>订单详细</title>
+        @@include('../../include/common/intro.html')
+        <!-- build:css css/module/order/orderdetail.css -->
+        <link rel="stylesheet" href="/css/module/order/orderdetail.css"/>
+        <!-- endbuild -->
+    </head>
+    <body>
+        @@include('../../include/common/header.html')
+        @@include('../../include/common/nav.html')
+        <div class="main mod-orderdetail"  ms-controller="orderDetail">
+            <div class="sidebar">
+                @@include('../../include/common/menu.html')
+            </div>
+            <div class="content">
+                <ul class="breadcrumb">
+                    <li>
+                        <a href="javascript:void(0);">卖家中心</a>
+                    </li>
+                    <li>
+                        <a href="/order/list.html">订单管理</a>
+                    </li>
+                    <li>
+                        <a href="/order/list.html">订单管理首页</a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);">订单详细</a>
+                    </li>
+                </ul>
+                <div class="panel">
+                    <div class="hd">
+                        <span class="title">订单详细</span>
+                    </div>
+                    <div class="bd">
+                        <div class="loading-wrapper" ms-if="showLoading">
+                            <div class="oni-loading" ms-widget="loading,$,loadingOpt" data-loading-type="spinning-spin"></div>
+                        </div>
+                        <div class="row pline">
+                            <div class="class-title">订单信息</div>
+                            <div class="col col-4"><p>订单号：<span ms-text="orderInfo.orderSn"></span></p></div>
+                            <div class="col col-4"><p>订单金额：<span ms-text="orderInfo.totalAmount"></span></p></div>
+                            <div class="col col-4"><p>订单状态：<span ms-text="orderInfo.orderStatusName"></span></p></div>
+                        </div>
+                        <div class="row pline">
+                            <div class="col col-4"><p>支付状态：<span ms-text="orderInfo.paymentStatusName"></span></p></div>
+                            <div class="col col-4"><p>支付方式：<span ms-text="orderInfo.payMethod"></span></p></div>
+                        </div>
+                        <div class="divider"></div>
+                        <div class="row pline">
+                            <div class="class-title">账户信息</div>
+                            <div class="col col-4"><p>用户名：<span ms-text="orderInfo.customerName"></span></p></div>
+                            <div class="col col-4"><p>公司名称：<span ms-text="orderInfo.serviceBuyerName"></span></p></div>
+                            <div class="col col-4"><p>联系电话：<span ms-text="orderInfo.phone"></span></p></div>
+                        </div>
+                        <div class="divider"></div>
+                        <div class="row">
+                            <div class="class-title">订单列表</div>
+                
+                            <table class="sale-item-table">
+                                <thead>
+                                    <tr>
+                                        <th width="10%">佰万仓编号</th>
+                                        <th width="10%">品牌</th>
+                                        <th width="10%">型号</th>
+                                        <th width="15%">商品名称</th>
+                                        <th width="10%">参数</th>
+                                        <th width="10%">订购数量</th>
+                                        <th width="5%">单位</th>
+                                        <th width="10%">成交单价(元)</th>
+                                        <th width="10%"><span>优惠单价(元)
+                                            <i class="icon icon-glyph icon-edit"
+                                               ms-if="authorise.canEditPrice" ms-click="editNewPrice"></i>
+                                        </span>
+                                        </th>
+                                        <th width="10%">小计</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="item" ms-repeat-item="orderInfo.shopOrderItemDetailVOList"
+                                        ms-if="orderInfo.shopOrderItemDetailVOList.length>0">
+                                        <td><span ms-text="item.orderItemId"></span></td>
+                                        <td><span ms-text="item.brandSet||'无'"></span></td>
+                                        <td><span ms-text="item.skuSnSet||'无'"></span></td>
+                                        <td><span ms-text="item.goodsName||'无'"></span></td>
+                                        <td><span ms-text="item.attributeSet||'无'"></span></td>
+                                        <td><span ms-text="item.quantity"></span></td>
+                                        <td><span ms-text="item.unitName||'无'"></span></td>
+                                        <td><span ms-text="item.salePrice"></span></td>
+                                        <td>
+                                            <span ms-if="editingPrice">
+                                                <input type="number" class="inputbox" ms-duplex="item.price"/>
+                                            </span>
+                                            <span ms-if="!editingPrice" ms-text="item.price"></span>
+                                        </td>
+                                        <td><span ms-text="getItemTotal(item)"></span></td>
+                                    </tr>
+                                    <tr class="item">
+                                        <td colspan="12" class="item_total">
+                                            <div ms-if="authorise.canEditPrice||(orderInfo.freight>=0.01)" style="line-height:30px">
+                                                <span>
+                                                    商品共计：
+                                                    <span ms-text="getShopTotal(false)"></span>
+                                                    <!--
+                                                    <span ms-if="!editingPrice" ms-text="getShopTotal(false)"></span>
+                                                    <span ms-if="editingPrice">
+                                                        <input type="number" class="inputbox" ms-duplex="discount" placeholder="请输入折扣比例（1～99）" />
+                                                    </span>
+                                                    -->
+                                                    元&nbsp&nbsp运费共计：
+                                                    <span ms-if="!editingPrice" ms-text="isNaN(parseFloat(orderInfo.freight))?'0':parseFloat(orderInfo.freight).toFixed(2)"></span>
+                                                    <span ms-if="editingPrice">
+                                                        <input type="number" class="inputbox" ms-duplex="orderInfo.freight"/>
+                                                    </span>
+                                                    元&nbsp&nbsp
+                                                </span>
+                                                <span class="icon icon-glyph icon-edit" ms-if="authorise.canEditPrice" ms-click="editNewPrice"></span>
+                                            </div>
+                                            <div style="line-height:30px">
+                                                <span class="btn btn-primary" ms-if="editingPrice" ms-click="confirmUpdatePrice">确认修改</span>
+                                                总金额：<span ms-text="getShopTotal(true)"></span>元
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr ms-if="orderInfo.shopOrderItemDetailVOList.length==0">
+                                        <td colspan="9" class="cell-empty">没有商品数据</td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="divider"></div>
+                        <div class="row pline">
+                            <div class="class-title">收货人信息</div>
+                            <div class="col col-12"><p>用户名：<span ms-text="orderInfo.consignee"></span></p></div>
+                            <div class="col col-12"><p>收货地址：<span ms-text="orderInfo.address"></span></p></div>
+                            <div class="col col-12"><p>联系电话：<span ms-text="orderInfo.phone"></span></p></div>
+                            <div class="col col-12"><p>备注：<span ms-text="orderInfo.remarks"></span></p></div>
+                        </div>
+                        <div class="divider"></div>
+                        <div class="row pline">
+                            <div class="col col-12">
+                                <p><span class="item-required"></span>物流公司：
+                                    <span ms-html="getCorpName(orderInfo.shippingCorpName)"></span>
+                                    <span class="pull-right" ms-click="editShippingInfo" ms-if="authorise.canEditShip">
+                                        <i class="icon icon-glyph icon-edit"></i>
+                                    </span>
+                                </p></div>
+                            <div class="col col-12">
+                                <p><span class="item-required"></span>运单号：
+                                    <span ms-text="orderInfo.trackingNo||'无'"></span>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row row-buttons">
+                            <span ms-click="goBack" class="btn btn-large btn-default button-back">返回</span>
+                            <a  ms-click="confirmCancel" ms-if="authorise.canCancelOrder" class="button-cancel">取消订单</a>
+                        </div>
+                    </div>
+                    <div ms-widget="dialog,dlgConfirmCancelOrder,opts1">
+                        <div class="col offerset-2 es-body">
+                            <form ms-widget="validation">
+                            <div class="row ">
+                                <div class="col col-3">取消原因：</div>
+                                <div class="col col-9">
+                                    <select class="inputbox inputbox-main" ms-duplex-required="cancelReason.option">
+                                        <option ms-repeat-el="cancelReasonType" ms-attr-value='{{el.value}}' ms-text="el.name"></option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row ">
+                                <div class="col col-3">取消原因：</div>
+                                <div class="col col-9 ">
+                                    <textarea class="textarea textarea_inner" rows="15" ms-duplex="cancelReason.reason"></textarea>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col col-3"> &nbsp;</div>
+                                <div class="col col-9">
+                                    <span>*确定取消后，系统自动退款给买家，请谨慎操作</span>
+                                </div>
+                            </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div ms-widget="dialog,dlgEditShipping,opts2">
+                        <div class="col offerset-2 es-body">
+                            <form ms-widget="validation">
+                            <div class="row">
+                                <div class="col col-2">
+                                    <p><span class="item-required"></span>物流公司：</p>
+                                </div>
+                                <div class="col col-5">
+                                    <select class="inputbox" ms-duplex-required="shippingCorpName">
+                                        <option ms-repeat-el="logisticCorpList" ms-attr-value='{{el.name}}' ms-text="el.name"></option>
+                                    </select>
+                                    <div ms-if="isUserDefined">
+                                        <input placeholder="请输入物流公司名称"
+                                               ms-duplex="defineCorpName" type="text" class="inputbox"/>
+                                        <span ms-if="validateNameError" class="input-error">请输入物流公司名称</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col col-2">
+                                    <p><span class="item-required"></span>运单号：</p>
+                                </div>
+                                <div class="col col-5">
+                                    <input ms-duplex-required="orderInfo.trackingNo" type="text" class="inputbox"/>
+                                    <span ms-if="validateTNoError" class="input-error">请输入物流的运单号</span>
+                                </div>
+                            </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div ms-widget="dialog,dlgConfirmUpdatePrice,opts3">
+                        <div class="col offerset-2 es-body">
+                            <div class="row" style="text-align: center;">
+                                <div style="text-align: left;padding-left: 90px">
+                                    <p>由于你修改了 <span  ms-text="getUpdateItemName()"></span> 的价格</p>
+                                    <p>订单总金额由 <span class="hl-price" ><span ms-text="originTotal"></span>元</span>
+                                        改了为 <span class="hl-price"><span  ms-text="getShopTotal(true)"></span>元</span>  </p>
+                                    <p>确认后，客户的该订单<span class="hl-sn" ms-text="orderInfo.orderSn"></span></p>
+                                    <p>中将看到更新后的单价和总金额</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div ms-widget="dialog,dlgOrderAlert,alertOpts">
+                        <div class="col offerset-2">
+                            {{confirmReceivedMsg}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @@include('../../include/common/outro.html')
+        <script>require(['conf/order/orderdetail']);</script>
+    </body>
+</html>

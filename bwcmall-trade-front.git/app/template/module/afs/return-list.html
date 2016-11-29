@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html> 
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <title>售后中心</title>
+    @@include('../../include/common/meta.html')
+    @@include('../../include/common/common-include.html') 
+
+    <link rel="stylesheet" type="text/css" href="/styles/module/afs/return-list.css"> 
+    <script src="/scripts/module/afs/return-list.js"></script>
+</head>
+
+<body>
+    @@include('../../include/common/header.html')
+    <div class="my-header">
+        @@include('../../include/common/account-head.html')
+    </div>
+     <!--主要内容-->
+    <div class="g-content g-clearfix"  ms-controller="returnListCtrl">
+      <!--header -->
+       <div>
+            <div class="module-header">
+                <span class="module-title">售后管理</span>
+            </div>
+            <div class="return-query-conditions">
+                <div class="return-condition">
+                    <span>订单编号:</span>
+                    <div><input type="text" id="orderSn" name="orderSn" placeholder="" /></div>
+                </div>
+                <div class="return-condition">
+                    <span>售后编号:</span>
+                    <div><input type="text" id="sn" name="sn" placeholder="" /></div>
+                </div>
+                <div class="return-condition">
+                    <span>状态:</span>
+                    <div>
+                        <select id="afterSaleStatus" name="afterSaleStatus">
+                            <option value="">请选择</option>
+                            <option  ms-repeat="afterSaleStatus" ms-value="el.type" ms-text="el.name"></option> 
+                        </select>
+                    </div>
+                </div>  
+                <div class="return-condition">
+                    <span>申请时间:</span>
+                    <div>
+                        <select id="dateSelect" name="dateSelect" ms-change="chanageDateSelect">
+                            <option value="1">最近一周</option>
+                            <option value="2">最近一个月</option>
+                            <option value="3">最近三个月</option>
+                            <option value="4">自定义</option> 
+                        </select>
+                    </div>
+                    
+                </div>  
+                <div id="selfDateSelect" ms-visible="dateSelectType==4" >
+                     <!--oniui 日期选择框--> 
+                        <div ms-widget="coupledatepicker" data-coupledatepicker-duplex="from, to">
+                            <div class="oni-coupledatepicker-item"></div>
+                            <span class="label">-</span>
+                            <div class="oni-coupledatepicker-item"></div>
+                        </div> 
+                 </div>
+                
+            </div>
+            <div class="return-actions"> 
+                 <button type="button" id="queryBtn" name="queryBtn" class="query_btn" value="" ms-click="doQuery()">查询</button> 
+            </div>
+       </div>
+       <div class="return-table-panel">
+                 <table class="return-table">
+                    <tbody>
+                    <tr>
+                        <th width="12%">售后编号</th>
+                        <th width="12%">订单编号</th>
+                        <th width="13%">卖家</th>
+                        <th width="8%">交易金额(元)</th>
+                        <th width="10%">售后类型</th>
+                        <th width="10%">申请时间</th> 
+                        <th width="10%">状态</th>
+                    </tr>
+                        <tr  ms-if="dataList.length<=0">
+                            <td colspan="7">
+                                没有查询到任何数据~~
+                            </td>
+                        </tr>
+                        <tr ms-repeat="dataList" ms-if="dataList.length>0">
+                            <td class="tab-date">
+                              <a href="javascript:void(0)" ms-text="el.sn" ms-click="goDetail(el.id ,el.afterSaleType )"></a>
+                            </td>
+                            <td> 
+                                  <a ms-href="'/order/detail.html?orderSn='+el.orderSn" ms-text="el.orderSn"></a> 
+                            </td>
+                            <td ms-text="el.shopName ">
+                                 
+                            </td>
+                            <td class="tab-sub" ms-text="el.afterSaleType==2 ?'-':el.amount ">
+                                
+                            </td>
+                            <td ms-text="getAfsTypeName(el.afterSaleType)">
+                               
+                            </td>
+                            <td class="tab-date" ms-text="el.createTime "> 
+                            </td>
+                            <td ms-text="getAfsStatusName(el.afterSaleStatus)">
+                                完成
+                            </td>
+                        </tr> 
+
+                </tbody>
+            </table> 
+       </div>
+        <div class="f-fr" style="padding: 20px 0;">
+                <a href="javascript:void(0)" class="trans_link_3 f-ib pager-switch" ms-click="goFirst(1)">第一页</a>
+                <a href="javascript:void(0)" class="trans_link_3 f-ib pager-switch" ms-click="goBefore(1)">上一页</a>
+                    <a name="pageNumber" ms-click="goSubmit(1)" href="javascript:void(0)" class="trans_link_3 f-ib pager-item pager-item-active" ms-text="currentPage"></a>
+                <a href="javascript:void(0)" class="trans_link_3 f-ib pager-switch" ms-click="getAfter(2)">下一页</a>
+                <a href="javascript:void(0)" class="trans_link_3 f-ib pager-switch" ms-click="goLast(1)">最后一页</a>
+                <span class="f-ib pager-num" ms-text="'(共'+maxPageCount+'页)'"></span>
+            </div>
+    </div>
+    @@include('../../include/common/footer.html')
+</body>
+
+</html>

@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html> 
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <title>我要开票</title>
+    @@include('../../include/common/meta.html')
+    @@include('../../include/common/common-include.html') 
+
+    <link rel="stylesheet" type="text/css" href="/styles/module/invoice/invoice-list.css"> 
+    <script src="/scripts/module/invoice/invoice-list.js"></script>
+</head>
+
+<body>
+    @@include('../../include/common/header.html')
+    <div class="my-header">
+        @@include('../../include/common/account-head.html')
+    </div>
+     <!--主要内容-->
+    <div class="g-content g-clearfix"  ms-controller="invoiceListCtrl">
+      <!--header -->
+       <div>
+            <div class="module-header">
+                <span class="module-title">我要开票</span>
+            </div>
+            <div class="invoice-query-conditions">
+                <div class="invoice-condition">
+                    <span>销售单号:</span>
+                    <input type="text" id="sn" name="sn" placeholder="" />
+                </div> 
+                <div class="invoice-condition" style="width:500px;">
+                    <span>下单时间:</span>
+                      <div id="orderTime" >
+                       <!--oniui 日期选择框--> 
+                          <div ms-widget="coupledatepicker"  data-coupledatepicker-duplex="from, to">
+                              <div class="oni-coupledatepicker-item"></div>
+                              <span class="label">至</span>
+                              <div class="oni-coupledatepicker-item"></div>
+                          </div> 
+                   </div> 
+                </div>  
+
+                 <div class="invoice-condition">
+                    <span>卖家:</span>
+                     <input type="text" id="serviceBuyerName" name="serviceBuyerName" placeholder="" />
+                </div>  
+                <div class="invoice-condition">
+                    <span>开票类型:</span> 
+                    <select id="InvoiceTypeDisplay" name="InvoiceTypeDisplay">
+                        <option value="">请选择</option>
+                        <option  ms-repeat="invoiceTypeList" ms-value="el.type" ms-text="el.name"></option> 
+                    </select> 
+                </div>  
+                 <div class="invoice-condition">
+                    <span>发票状态:</span>  
+                      <select id="orderInvoiceStatus" name="orderInvoiceStatus">
+                          <option value="">请选择</option>
+                          <option  ms-repeat="invoiceStatusList" ms-value="el.type" ms-text="el.name"></option> 
+                      </select> 
+                </div>  
+<!--                
+                <div class="invoice-condition">
+                    <span>订单状态:</span> 
+                      <select id="orderStatusDisplay" name="orderStatusDisplay">
+                          <option value="">请选择</option>
+                          <option  ms-repeat="orderStatusList" ms-value="el.type" ms-text="el.name"></option> 
+                      </select> 
+                </div>  
+-->
+            </div> 
+            <div class="invoice-actions"> 
+                 <button type="button" id="queryBtn" name="queryBtn" class="query_btn" value="" ms-click="doQuery()">查询</button> 
+            </div>
+       </div>
+       <div class="invoice-table-panel">
+                 <table class="invoice-table">
+                    <tbody>
+                      <tr>
+                          <td colspan="14" >
+                             <div class="table-header"> 
+                                <div>
+                                   <span class="f-ib m-checkbox-all select-all" ms-click="checkALL()">
+                                      <input class="m-checkbox-all-check" type="checkbox" value="true"/>
+                                      <strong class="m-checkbox-all-icon"></strong>
+                                      全选
+                                  </span>
+                                </div>
+                                <div > <a href="javascript:void(0)" ms-click="batchApplyInvoice()">批量开票</a> </div>
+                                <div  style="display:none;"> 可开票金额:<span ms-text="total.totleInvoiceAmount"></span>元</div>
+                                <div  style="display:none;">  已开票金额:<span ms-text="total.totleDeliveredInvoiceAmount "></span>元  </div>
+                                <div  style="display:none;">未开票金额:<a href="javascript:void(0)" ms-text="total.totleInvoieBalance+'元'" class="money"></a></div>
+                            </div>
+                          </td>
+                      </tr>
+                      <tr>
+                          <th></th>
+                          <th >销售单号</th>
+                          <th >卖家</th>
+                          <th>下单时间</th>
+                          <th >订单金额(元)</th>  
+                          <!-- <th >订单状态</th> -->
+                          <th >开票类型</th> 
+                          <th >发票状态</th>
+                          <th >操作</th>
+                      </tr>
+                        <tr  ms-if="dataList.length<=0">
+                            <td colspan="14">
+                                没有查询到任何数据~~
+                            </td>
+                        </tr>
+                        <tr ms-repeat="dataList" ms-if="dataList.length>0">
+                            <td> 
+                                <span ms-if="el.orderInvoiceStatus==0 && el.canInvoice" class="f-ib m-checkbox checkbox-fix" ms-click="checkOne()">
+                                  <input class="m-checkbox-check"  ms-attr-value="el.id"  ms-attr-orderInvoiceStatus="el.orderInvoiceStatus==0 && el.canInvoice" 
+                                    ms-attr-sn="el.sn"  type="checkbox" value="true"  />
+                                  <strong class="m-checkbox-icon select-order-tr "></strong>
+                                </span>
+                            </td>
+                            <td>
+                              <a ms-attr-href="'/order/detail.html?orderSn='+el.sn" target="_blank" ms-text="el.sn"></a>
+                            </td>
+                            <td ms-text="el.serviceBuyerName">
+                             
+                            </td>
+                              <td ms-text="el.createdTime ">
+                             
+                            </td>
+                              <td ms-text="el.amount">
+                             
+                            </td>  
+<!--                             
+                              <td  ms-text="el.orderStatusDisplay ">
+                             
+                            </td> 
+-->                            
+                              <td ms-text="el.invoiceTypeDisplay  ">
+                             
+                            </td> 
+                              <td ms-text="el.orderInvoiceStatusDisplay" >
+                             
+                            </td>
+                            <td>
+                                <a ms-if="el.orderInvoiceStatus==0 && el.canInvoice" href="javascript:void(0)" ms-click="applyInvoice(el.id)">开票</a> 
+                                <a ms-if="el.orderInvoiceStatus==0 && !el.canInvoice" href="javascript:void(0)" ms-click="showReason">暂不可开票</a> 
+                            </td>  
+                        </tr> 
+
+                </tbody>
+            </table> 
+       </div>
+        <div class="f-fr" style="padding: 20px 0;">
+                <a href="javascript:void(0)" class="trans_link_3 f-ib pager-switch" ms-click="goFirst(1)">第一页</a>
+                <a href="javascript:void(0)" class="trans_link_3 f-ib pager-switch" ms-click="goBefore(1)">上一页</a>
+                    <a name="pageNumber" ms-click="goSubmit(1)" href="javascript:void(0)" class="trans_link_3 f-ib pager-item pager-item-active" ms-text="currentPage"></a>
+                <a href="javascript:void(0)" class="trans_link_3 f-ib pager-switch" ms-click="getAfter(2)">下一页</a>
+                <a href="javascript:void(0)" class="trans_link_3 f-ib pager-switch" ms-click="goLast(1)">最后一页</a>
+                <span class="f-ib pager-num" ms-text="'(共'+maxPageCount+'页)'"></span>
+            </div>
+    </div>
+     <div ms-widget="dialog,applyDialog,$applyDialogOptions" class="applyDialog" ms-controller="applyDialogCtrl">
+        <div class="dialog-inner">
+             <div class="dialog-header">
+                <div class="dialog-title">
+                    <div><span>申请发票</span></div>
+                </div>    
+                <div class="pop-close"> 
+                     <div class="icon-close" ms-click="closeDialog()"></div>
+                </div>
+            </div>
+            <div class="dialog-apply-content"> 
+                 <div class="content-head">
+                      <a href="javascript: void(0)" ms-repeat="invoiceTypeTabs" ms-if="invoiceTypeTabs.length>0" ms-click="changeTab(el.value)" ms-class="content-nav-active:currentTab==el.value" ms-class="content-nav-next:$index==1" class="trans_link_3 f-ib content-nav" ms-text="el.text"></a>
+                  </div>
+                  <div class="tab1" ms-visible="currentTab=='tab1'">
+                      <div class="empty-invoice-alter" ms-if="valueAddedList.length == 0"> 
+                          <div><img src="/images/invoice/empty.png"></div>
+                          <div>您还没有通过审核的增票资质</div>
+                          <div>请到<a href="/invoice/invoice.html">发票设置</a>中申请增票资质</div>
+                      </div>
+                      <div class="invoice-content" ms-if="valueAddedList.length > 0">
+                        <div class="progress">
+                            <div ms-attr-class=" step == 1 ?'progress-selected':'' ">1.选择发票抬头&nbsp;&nbsp;>&nbsp;&nbsp;</div>
+                            <div ms-attr-class=" step == 2 ?'progress-selected':'' ">2.选择增票收票地址</div>
+                        </div>
+                        <div ms-visible="step==1" class="step-content">
+                          <div class="invoice-list-content">
+                              <div class="invoice-title-label">
+                                发票抬头:
+                              </div>
+                              <div   class="invoice-title">
+                                <div ms-repeat="valueAddedList"  ms-text="el.corpTitle" ms-click="selectInvoice(el.id)" 
+                                ms-attr-class="selectedInoiceId == el.id ? ' selected':'' "></div>
+                              </div>
+                          </div>
+                        </div>
+                         <div ms-visible="step==2" class="step-content">
+                          <div class="address-panel">  
+                                <div ms-repeat="addressList" ms-click="selectAddress(el.id)"    ms-attr-class="selectedAddressId == el.id ? 'address-one selected':'address-one' " >
+                                  <div class="address-consignee" ms-text="el.consignee"></div>
+                                  <div class="address-detail"  ms-text="subAddress(el.areaVO.provinceName+el.areaVO.cityName+el.areaVO.districtName+el.address)"></div>
+                                </div> 
+                          </div>
+                        </div>
+                      </div> 
+                      <div class="action-panel">
+                         <button  type="button" ms-visible="step==1  && valueAddedList.length > 0 " ms-click="onGoNext()">下一步</button>
+                          <button  type="button"  ms-visible="step == 1  && valueAddedList.length> 0" ms-click="onCancel()">取消</button>
+                          <button   type="button" ms-visible="step==2  && valueAddedList.length > 0 " class="btn-confirm" ms-click="onConfirm">确认</button>
+                          <button   type="button" ms-visible="step==2  && valueAddedList.length > 0  "  ms-click="onGoPre()">上一步</button>
+                      </div>
+                  </div>
+                    <div class="tab2" ms-visible="currentTab=='tab2'"> 
+                      <div class="invoice-content">
+                        <div class="progress">
+                            <div ms-attr-class=" step == 1 ?'progress-selected':'' ">1.选择发票抬头&nbsp;&nbsp;>&nbsp;&nbsp;</div>
+                            <div ms-attr-class=" step == 2 ?'progress-selected':'' ">2.选择普票收票地址</div>
+                        </div>
+                        <div ms-visible="step==1" class="step-content">
+                            <div class="invoice-list-content">
+                              <div class="invoice-title-label">
+                                发票抬头:
+                                  <div class="invoice-type-select" >
+                                    <span ms-click="selectInvoiceTitleType(0)" ms-attr-class=" invoiceTitleType== '0' ? 'selected':'' ">个人</span> <span ms-click="selectInvoiceTitleType(1)" ms-attr-class=" invoiceTitleType== '1' ? 'selected':'' ">公司</span>
+                                  </div>
+                              </div>
+                               <div class="invoice-content-panel" ms-visible="invoiceTitleType == 1"> 
+                                      <div  ms-repeat="plainList"  class="invoice-simple-one"  ms-mouseover="simpleOneMouseover(this,el)" ms-mouseleave="simpleOneMouseleave(this,el)">
+                                          <div ms-attr-class="selectedInoiceId == el.id ? 'invoice-simple-title selected':'invoice-simple-title' " ms-click="selectSimpleInvoice(el.id)" ms-text="el.corpTitle" ms-visible="el.inEdit != true " ms-attr-id="'invoice_'+el.id">
+                                             
+                                          </div>
+                                           <div   class="invoice-simple-title"   ms-visible="el.inEdit == true ">
+                                              <input ms-attr-id="'corpTitle'+el.id" ms-attr-name="'corpTitle'+el.id"  ms-attr-value="el.corpTitle" />
+                                          </div>
+                                          <div class="invoice-simple-actioin-panel" ms-visible="el.inEdit == true " >
+                                              <span ms-click="editPlainInvoice(el)" ms-visible="el.inEdit != true ">编辑</span>
+                                               <span class="red del-btn" ms-click="delInvoice(el)" ms-visible="el.inEdit != true " >删除</span>
+                                               <span ms-click="updatePainInvoice(el)" ms-visible="el.inEdit == true ">保存</span>
+                                              <span ms-click="cancelUpdate(el)" class="red" ms-visible="el.inEdit == true ">取消</span>
+                                          </div> 
+                                      </div>
+                                       <div class="invoice-simple-one" ms-if="addPlaint">
+                                          <div class="invoice-simple-title">
+                                              <input id="corpTitle" name="corpTitle" />
+                                          </div>
+                                          <div class="invoice-simple-actioin-panel">
+                                              <span ms-click="addPainInvoice()">保存</span>
+                                              <span ms-click="cancelAdd()" class="red">取消</span>
+                                          </div> 
+                                      </div>
+                                      <div class="invoice-simple-one" ms-if="plaintAddable" ms-click="addPlainInvoice()" style="cursor: pointer;">
+                                           <div class="invioce-simple-add">
+                                            <div class="invoice-add-icon" >+</div><div class="invoice-add-text">新增普通发票</div>
+                                           </div>
+                                      </div>
+                                     
+
+                                      <div style="clear:both">
+
+                                      </div>
+                                  </div>
+                              
+                              <div class="invoice-title-label" style="margin-top:20px; margin-bottom: 20px;">
+                                发票内容:
+                                        <div class="invoice-context-type-select" >
+                                          <span ms-click="selectInvoiceContextType(0)"
+                                            ms-attr-class=" invoiceContextType== '0' ? 'selected':'' ">大类</span>
+                                       <span ms-click="selectInvoiceContextType(1)"
+                                             ms-attr-class=" invoiceContextType== '1' ? 'selected':'' ">明细</span>
+                                        </div>
+                              </div>
+                              
+                          </div>
+                        </div>
+                         <div ms-visible="step==2" class="step-content">
+                             <div class="address-panel">  
+                                <div ms-repeat="addressList" ms-click="selectAddress(el.id)"  ms-attr-class="selectedAddressId == el.id ? 'address-one selected':'address-one' " >
+                                  <div class="address-consignee" ms-text="el.consignee"></div>
+                                  <div class="address-detail"  ms-text="subAddress(el.areaVO.provinceName+el.areaVO.cityName+el.areaVO.districtName+el.address)"></div>
+                                </div> 
+                          </div>
+                        </div>
+                      </div> 
+                      <div class="action-panel">
+                         <button  type="button" ms-visible="step==1   " ms-click="onGoNext()">下一步</button>
+                          <button  type="button"  ms-visible="step == 1" ms-click="onCancel()">取消</button>
+                          <button   type="button" ms-visible="step==2" class="btn-confirm" ms-click="onConfirm">确认</button>
+                          <button   type="button" ms-visible="step==2"  ms-click="onGoPre()">上一步</button>
+                          <div class="tips">
+                            提示：发票的开票金额仅包括订单实际支付的部分！
+                          </div>
+                      </div>
+                  </div>
+            </div> 
+        </div>
+    </div>
+       <div ms-widget="dialog,deleteDialog,$deleteDialogOptions" class="deleteDialog" ms-controller="deleteDialogCtrl">
+        <div class="dialog-inner">
+             <div class="dialog-header">
+                <div class="dialog-title">
+                    <div><span>友情提示</span></div>
+                </div>    
+                <div class="pop-close"> 
+                     <div class="icon-close" ms-click="onCancel()"></div>
+                </div>
+            </div>
+            <div class="dialog-alter-info-content">
+                <div class="dialog-pay-info-err-str" >
+                    {{msg}}
+                </div> 
+            </div>
+            <div class="dialog-action-panel">
+                <button class="btn-ok" type="button" ms-click="onOK()">确定</button>
+                <button class="btn-cancel" type="button" ms-click="onCancel()">取消</button>
+            </div>
+        </div>
+    </div>
+       <div ms-widget="dialog,successDialog,$successDialogOptions" class="successDialog" ms-controller="successDialogCtrl">
+        <div class="dialog-inner">
+             <div class="dialog-header">
+                <div class="dialog-title">
+                    <div><span>友情提示</span></div>
+                </div>    
+                <div class="pop-close"> 
+                     <div class="icon-close" ms-click="onCancel()"></div>
+                </div>
+            </div>
+            <div class="dialog-alter-info-content">
+                <div class="dialog-pay-info-err-str" >
+                    开票申请成功！
+                </div> 
+            </div>
+            <div class="dialog-action-panel">
+                <button class="btn-ok" type="button" ms-click="onOK()">确定</button> 
+            </div>
+        </div>
+    </div>
+    <div ms-widget="dialog,alertDialog,$alertDialogOptions" class="alertDialog" ms-controller="alertDialogCtrl">
+        <div class="dialog-inner">
+             <div class="dialog-header">
+                <div class="dialog-title">
+                    <div><span>友情提示</span></div>
+                </div>    
+                <div class="pop-close"> 
+                     <div class="icon-close" ms-click="closeDialog()"></div>
+                </div>
+            </div>
+            <div class="dialog-alter-info-content"> 
+                <div class="dialog-pay-info-err-str" >
+                    {{msg}}
+                </div> 
+            </div>
+              <div class="dialog-action-panel">
+                <button class="btn-ok" type="button" ms-click="closeDialog()">确定</button> 
+            </div>
+        </div>
+    </div>
+    @@include('../../include/common/footer.html')
+</body>
+
+</html>

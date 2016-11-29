@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>添加账期客户</title>
+    @@include('../../include/common/intro.html')
+    <!-- build:css css/module/payment/add.css -->
+    <link rel="stylesheet" href="/css/module/seller-invoice/info.css" />
+    <link rel="stylesheet" href="/css/module/payment/payment.css" />
+    <!-- endbuild -->
+</head>
+
+<body>
+    @@include('../../include/common/header.html') @@include('../../include/common/nav.html')
+    <div class="main mod-demo aftersale">
+        <div class="sidebar">
+            @@include('../../include/common/menu.html')
+        </div>
+        <div class="content" ms-controller="accountCreditAdd">
+            <!-- <div class="nav-bar">卖家中心 > 开票管理 > 开票操作</div> -->
+            <div class="title">添加账期客户</div>
+            <div class="box">
+                <div class="status">
+                    <span class="yuan yuan-pos1 yuan-img2"></span>
+                    <span class="line line-pos1 line-img1" ms-class="line-img2:isShowLine1"></span>
+                    <span class="yuan yuan-pos2 yuan-img1" ms-class="yuan-img2:isShowYuan2"></span>
+                    <span class="line line-pos2 line-img1" ms-class="line-img2:isShowLine2"></span>
+                    <span class="yuan yuan-pos3 yuan-img1" ms-class="yuan-img2:isShowYuan3"></span>
+                    <span class="text text-pos1 c-red">选择授信买家</span>
+                    <span class="text text-pos2" ms-class="c-red:isShowYuan2">选择账期和额度</span>
+                    <span class="text text-pos3" ms-class="c-red:isShowYuan3">授信成功</span>
+                </div>
+                <div ms-if="step == 1">
+                    <div class="info-border">
+                        <div class="row">
+                            <div class="col col-3 offset-1">
+                                <input type="text" class="input" ms-duplex="keyword" placeholder="客户手机号码/客户名称/公司名称" style="width: 90%" />
+                            </div>
+                            <div class="col col-2">
+                                <button class="default-btn btn-red" ms-click="search">搜索</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="info-border" ms-if="customerList.length>0">
+                        <div class="row">
+                            <div class="col offset-1">
+                                <h3 style="padding-bottom:10px;border-bottom: 1px dotted #e0e0e0;">符合搜索的买家</h3>
+                                <ul>
+                                    <li class="info" ms-repeat-el="customerList">
+                                        <input type="radio" name="customerId" ms-duplex-string="customerInfo" ms-attr-value="{{el.id}}|{{el.mobile}}/{{el.name}}/{{el.corpName}}"> {{el.mobile}}/{{el.name}}/{{el.corpName}}
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="info-border">
+                        <div class="row">
+                            <div class="col col-1 text-title">&nbsp;</div>
+                            <button class="default-btn btn-red" ms-click="confirmStep1()">下一步</button>
+                        </div>
+                    </div>
+                </div>
+                <div ms-if="step == 2">
+                    <div class="info-border form-center">
+                        <div class="row">
+                            <label>客户名称：</label>
+                            <span>{{customerInfoShort}}</span>
+                        </div>
+                        <div class="row">
+                            <label>授信额度：</label>
+                            <input type="text" class="form-input" ms-duplex="customer.creditAmount" />
+                        </div>
+                        <div class="row">
+                            <label>选择账期：</label>
+                            <select class="form-input" ms-duplex="customer.creditPeriodType">
+                                <option ms-repeat-el="creditPeriodType" ms-attr-value='{{el.value}}' ms-text="el.name"></option>
+                            </select>
+                        </div>
+                        <div class="row">
+                            <label>设置最后还款日：</label>
+                            <span class="form-text-gap">顺延 </span>
+                            <select class="form-input" ms-duplex="customer.delayDays" style="width: 132px;">
+                                <option ms-repeat-el="delayDays" ms-attr-value='{{el}}' ms-text="el"></option>
+                            </select>
+                        </div>
+                        <div class="row">
+                            <label>生效截止日期：</label>
+                            {{expiredDate}}
+                        </div>
+                    </div>
+                    <div class="row btn-top">
+                        <button class="default-btn btn-red" ms-click="confirmStep0">上一步</button>
+                        <button class="default-btn btn-red" ms-click="confirmStep2">下一步</button>
+                    </div>
+                </div>
+                <div ms-if="step == 3">
+                    <div class="info-border form-center">
+                        <div class="row">
+                            <label>客户名称：</label>
+                            <span>{{newCustomer.customerName}}</span>
+                        </div>
+                        <div class="row">
+                            <label>授信额度：</label>
+                            <span>{{newCustomer.creditAmount}}</span>
+                        </div>
+                        <div class="row">
+                            <label>选择账期：</label>
+                            <span>{{newCustomer.creditPeriodType}}</span>
+                        </div>
+                        <div class="row">
+                            <label>设置最后还款日：</label>
+                            <span>顺延{{newCustomer.delayDays}}天</span>
+                        </div>
+                    </div>
+                    <div class="row btn-top">
+                        <button class="default-btn btn-red" ms-click="goBack()">返回账期客户管理</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div ms-widget="dialog,dlgAlert,opts4">
+            <div class="col offerset-2">
+                {{confirmReceivedMsg}}
+            </div>
+        </div>
+    </div>
+    @@include('../../include/common/outro.html')
+    <script>
+    require(['conf/payment/add']);
+    </script>
+</body>
+
+</html>

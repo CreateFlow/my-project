@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>账单管理</title>
+    @@include('../../include/common/intro.html')
+    <!-- build:css css/module/acctbill/bill-list.css -->
+    <link rel="stylesheet" href="/css/module/acctbill/bill-list.css"/>
+    <!-- endbuild -->
+</head>
+<body>
+@@include('../../include/common/header.html')
+@@include('../../include/common/nav.html')
+<div class="main mod-demo bill-list">
+    <div class="sidebar">
+        @@include('../../include/common/menu.html')
+    </div>
+    <div class="content ms-controller" ms-controller="acctBillList">
+        <ul class="breadcrumb">
+            <li>
+                <a href="javascript:void(0);">卖家中心</a>
+            </li>
+            <li>
+                <a href="/acctbill/bill-list.html">交易管理</a>
+            </li>
+            <li>
+                <a href="/acctbill/bill-list.html">账单管理</a>
+            </li>
+        </ul>
+        <div class="panel">
+            <div class="hd">
+                <span class="title">账单管理</span>
+            </div>
+            <div class="bd">
+                <div class="summary row">
+                    <div class="row col col-9">
+                        <div class="col col-3">
+                            <div class="sitem">
+                                <div class="sub sub-large">借出账期总金额(元)</div>
+                                <div class="amount" ms-text="billSummary.totalAmount |currency || '0.00'"></div>
+                                <div class="hl-blue" >共<span ms-text="billSummary.totalCount ||'0' "></span>笔账单</div>
+                            </div>
+                        </div>
+                        <div class="col col-1">
+                            <div class="sub">=</div>
+                        </div>
+                        <div class="col col-3">
+                            <div class="sitem">
+                                <div class="sub">已出账单总金额(元)</div>
+                                <div class="amount" ms-text="billSummary.alreadyGenerateBillAmount | currency|| '0.00'"></div>
+                                <div class="hl-blue">共<span ms-text="billSummary.alreadyGenerateBillCount || '0'"></span>笔账单</div>
+                            </div>
+                        </div>
+                        <div class="col col-1">
+                            <div class="sub">+</div>
+                        </div>
+                        <div class="col col-3">
+                            <div class="sitem">
+                                <div class="sub">未出账单总金额(元)</div>
+                                <div class="amount" ms-text="billSummary.notGenerateBillAmount | currency|| '0.00'"></div>
+                                <div class="hl-blue">共<span ms-text="billSummary.notGenerateBillCount || '0'"></span>笔账单</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col col-3">
+                        <div class="sitem-ex">
+                            <div class="sub sub-large">超时未还款总金额(元)</div>
+                            <div class="overtime amount" ms-text="billSummary.overtimeBillAmount |currency ||'0.00'"></div>
+                            <div class="overtime">共<span ms-text="billSummary.overtimeBillCount ||'0'"></span>笔账单</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="divider"></div>
+                <div class="search">
+                    <div class="row">
+                        <div class="col col-1 title">买家</div>
+                        <div class="col col-3">
+                            <input type="text" placeholder="手机号／公司名称" class="inputbox inputbox-main"
+                                   ms-duplex="searchInfo.customerName_contains"/>
+                        </div>
+                        <div class="col col-1 title">出账单时间</div>
+                        <div class="col col-6">
+                            <input ms-widget="datepicker" ms-duplex="searchInfo.billingDate__gte"/>
+                            <span> - </span>
+                            <input ms-widget="datepicker" ms-duplex="searchInfo.billingDate__lte"/>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col col-1 title">账单状态</div>
+                        <div class="col col-3">
+                            <select class="inputbox" ms-duplex="searchInfo.acctBillType_eq">
+                                <option ms-repeat-el="billTypes" ms-attr-value='{{el.value}}' ms-text="el.name"></option>
+                            </select>
+                        </div>
+                        <div class="col col-1 title">支付状态</div>
+                        <div class="col col-3">
+                            <select class="inputbox" ms-duplex="searchInfo.paymentStatus_eq">
+                                <option ms-repeat-el="paymentStatus" ms-attr-value='{{el.value}}' ms-text="el.name"></option>
+                            </select>
+                        </div>
+                        <div class="col col-1 title">核销状态</div>
+                        <div class="col col-3">
+                            <select class="inputbox" ms-duplex="searchInfo.verificationStatus_eq">
+                                <option ms-repeat-el="verificationStatus" ms-attr-value='{{el.value}}' ms-text="el.name"></option>
+                            </select>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col col-1">&nbsp;</div>
+                        <div class="col col-3">
+                            <span class="btn btn-large btn-primary" ms-click="ckSearchList">查询</span>
+                        </div>
+                        <div class="col col-3">
+                            <span class="btn btn-large btn-primary" ms-click="exportBills">导出</span>
+                            <form accept="application/vnd.ms-excel" style="display: none" action="POST" target="_blank" id="exportForm"></form>
+                        </div>
+                    </div>
+                    <div class="divider"></div>
+                    <div class="row count">
+                        <div class="col col-4">查询结果汇总</div>
+                        <div class="pull-right">总计:
+                            <span class="total_amount" ms-text="billTotalAmount|currency"></span></div>
+                    </div>
+                </div>
+                <table class="ctable">
+                    <thead>
+                        <tr width="100%" class="thb ctr">
+                            <th width="10%">账单编号</th>
+                            <th width="10%">出账单日期</th>
+                            <th width="10%">买家付款日期</th>
+                            <th width="10%">买家</th>
+                            <th width="10%">凭证</th>
+                            <th width="10%">应付金额(元)</th>
+                            <th width="10%">账单状态</th>
+                            <th width="10%">支付状态</th>
+                            <th width="10%">核销状态</th>
+                            <th width="10%">操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ms-if="billList.length>0" ms-repeat-el="billList" class="ctr" ms-class="tr-bg:($index%2==0)">
+                            <td>{{el.sn}}</td>
+                            <td>{{el.billingDate | date("yyyy-MM-dd")}}</td>
+                            <td>{{el.paymentDate | date("yyyy-MM-dd")}}</td>
+                            <td>{{el.corpName}}</td>
+                            <td>{{el.evidenceStatus}}</td>
+                            <td>{{el.payableAmount|currency}}</td>
+                            <td>{{el.acctBillsType}}</td>
+                            <td>{{el.paymentStatus}}</td>
+                            <td>{{el.verificationStatus}}</td>
+                            <td>
+                                <span ms-html="getLink(el)"></span>
+                            </td>
+                        </tr>
+                        <tr ms-if="billList.length==0">
+                            <td colspan="9" class="cell-empty" >
+                                <div class="row">
+                                    <div class="col col-5" style="text-align: right">
+                                        <img src="/images/empty-list.png">
+                                    </div>
+                                    <div class="col col-5" style="text-align: left">
+                                        <span class="empty-tip" ms-text="billListEmptyText"></span></div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class="loading-wrapper" ms-if="showLoading">
+                            <td colspan="8"><div class="oni-loading" ms-widget="loading" data-loading-type="spinning-spin"></div></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div ms-widget="pager,pp" ms-if="billList.length>0"></div>
+            </div>
+        </div>
+        <div ms-widget="dialog,dlgAfterAlert,opts2">
+            <div class="col offerset-2">
+                {{confirmReceivedMsg}}
+            </div>
+        </div>
+    </div>
+</div>
+@@include('../../include/common/outro.html')
+<script>require(['conf/acctbill/bill-list']);</script>
+</body>
+</html>

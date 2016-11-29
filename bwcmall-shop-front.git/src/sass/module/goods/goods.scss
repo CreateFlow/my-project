@@ -1,0 +1,299 @@
+@charset "UTF-8";
+@import "../../common/scaffolding";
+.btn.disabled {
+    border: none;
+    color: #000;
+    background: #f5f5f5
+}
+
+.btn.disabled:hover {
+    background: #f5f5f5
+}
+
+.search {
+    margin-top: 20px;
+    .no-margin-b {
+        margin-bottom: 0
+    }
+    .radio-inline {
+        position: relative;
+        display: inline-block;
+        padding-left: 20px;
+        margin-bottom: 0;
+        font-weight: 400;
+        width: 80px;
+        line-height: 36px;
+        vertical-align: middle;
+        cursor: pointer;
+    }
+    .title {
+        height: 36px;
+        line-height: 36px;
+        font-size: 12px;
+        color: #333333;
+        text-align: center;
+    }
+    .btn-large {
+        width: 150px;
+    }
+    .inputbox {
+        height: 34px;
+        line-height: 34px;
+        width: 200px;
+        text-indent: 5px;
+        //去除select圆角
+        border: 0px;
+        outline: 1px solid rgb(204, 204, 204);
+    }
+    .inputbox-main {
+        width: 90%;
+    }
+    .cbox {
+        height: 36px;
+        line-height: 36px;
+        text-align: right;
+    }
+    .search-btn {
+        height: 40px;
+        line-height: 40px;
+        width: 178px;
+        font-size: 14px;
+        font-weight: bold;
+        text-align: center;
+        color: #fff;
+        background-color: #e33333;
+        margin-left: 80px;
+    }
+}
+
+.table-wrap {
+    overflow: auto;
+    width: 100%;
+}
+
+.ctable {
+    width: 1500px;
+    margin-top: 50px;
+    margin-bottom: 30px;
+    position: relative;
+    color: #666;
+    .ctr {
+        height: 44px;
+        line-height: 44px;
+        border-bottom: 1px solid #e0e0e0;
+    }
+    td {
+        text-align: center;
+    }
+    .cell-empty {
+        padding: 5em;
+        text-align: center;
+        border-bottom: 1px solid #eee;
+    }
+    .thb {
+        border-bottom: 2px solid #e0e0e0;
+    }
+    .tr-bg {
+        background-color: #f3f3f3;
+    }
+    .link {
+        color: lightskyblue;
+    }
+    .loading-wrapper {
+        position: absolute;
+        top: 0;
+        right: 0;
+        left: 0;
+        bottom: 0;
+        background-color: rgba(204, 204, 204, 0.35);
+    }
+}
+
+.empty-tip {
+    line-height: 115px;
+    padding-left: 50px;
+}
+
+.es-body {
+    .inputbox {
+        height: 34px;
+        line-height: 34px;
+        width: 178px;
+        text-indent: 5px;
+        border: 0px;
+        outline: 1px solid rgb(204, 204, 204);
+    }
+    .input-error,
+    .error-tip {
+        color: #e33333;
+        &:before {
+            content: '*';
+        }
+    }
+}
+
+.goods-list {
+    .search {
+        .radio-inline {
+            width: 120px;
+        }
+        .radio-inline-sm {
+            width: 60px;
+        }
+    }
+}
+
+.goods-add {
+    .dropdown {
+        position: relative;
+    }
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f6f6f6;
+        min-width: 178px;
+        max-height: 440px;
+        overflow: auto;
+        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+        z-index: 5;
+    }
+    .dropdown-content a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+        cursor: pointer;
+    }
+    .dropdown-nav a {
+        color: blue;
+        display: inline-block;
+    }
+    .dropdown-nav span {
+        padding: 12px 16px;
+        text-decoration: none;
+        display: inline-block;
+    }
+    .dropdown a:hover {
+        background-color: #ddd
+    }
+    .show {
+        display: block;
+    }
+    .search {
+        .btn-large {
+            width: 170px;
+            padding: 10px;
+        }
+    }
+    .spu-box {
+        margin: 20px;
+    }
+    .spu-title {
+        font-size: 16px;
+        line-height: 32px;
+    }
+    .spu-title-border {
+        font-size: 14px;
+        padding: 10px;
+        background: #fafafa;
+        border: 1px solid #ddd;
+        width: 150px;
+        margin-top: 10px;
+    }
+    .spu-container {
+        border: 1px solid #e8e8e8;
+        min-height: 100px;
+        width: 940px;
+        padding: 10px;
+    }
+    .categoryLevel {
+        width: 280px;
+        height: 280px;
+        margin-right: 10px;
+        overflow-y: scroll;
+        border: 1px solid #999;
+        background-color: #fff;
+        padding: 3px 5px;
+        float: left;
+    }
+    .categoryLevel .bottom {
+        height: 3px;
+        display: block;
+    }
+    .categoryLevel .option {
+        padding: 3px 3px 3px 10px;
+        position: relative;
+        cursor: default;
+        border-bottom: 1px dotted #efefef;
+        overflow: hidden;
+    }
+    .categoryLevel .option:hover {
+        background-color: #99FFFF
+    }
+    .categoryLevel .option span.cn {
+        float: left;
+        max-width: 84%
+    }
+    .categoryLevel .option span.inval {
+        text-decoration: line-through!important;
+        color: #b70000;
+    }
+    .categoryLevel .option i {
+        background: url("/images/arrow_right.png") no-repeat center center;
+        display: none;
+        width: 16px;
+        height: 16px;
+        float: right;
+    }
+    .categoryLevel .option span.inval i {
+        display: inline;
+    }
+    .categoryLevel .option a {
+        display: none;
+        float: left;
+        color: #6b98c3;
+        margin: 0px 3px;
+    }
+    .categoryLevel .option:hover a {
+        display: block;
+    }
+    .categoryLevel .option:hover a:hover {
+        color: #ef9b11;
+        cursor: pointer;
+    }
+    .categoryLevel .option.selected {
+        background-color: #6fa2f7;
+        color: #fff;
+    }
+    .categoryLevel .option.selected a {
+        display: block;
+    }
+    .categoryLevel .option b {
+        float: left;
+        padding: 3px;
+        margin-left: 20px;
+        cursor: default;
+        display: none;
+    }
+    .categoryLevel .option:hover b {
+        display: block;
+    }
+    .categoryLevel .option.selected b {
+        display: block;
+    }
+    .categoryLevel .option.selected i {
+        display: block;
+    }
+    .categoryLevel .option font.del {
+        display: block;
+        width: 16px;
+        height: 16px;
+        float: right;
+        text-align: center;
+        line-height: 16px;
+        font-size: 10px;
+        color: #fff;
+        cursor: pointer;
+        background: #c00
+    }
+}

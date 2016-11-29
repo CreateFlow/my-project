@@ -1,0 +1,35 @@
+@import "../../common/common";
+ul.xuanze li p {
+    position:relative;
+    font-size:12px;
+    top:100px;
+    text-align:center
+}
+ul.xuanze li{
+    float: left;
+    width: 120px;
+    height: 120px;
+    cursor: pointer;
+    
+}
+ul.xuanze li.zhaohuo{
+    background: url("/images/common/zhaohuo.png") no-repeat center center;
+    margin-right: 20px;
+}
+ul.xuanze li.xunjia{
+    background: url("/images/common/xunjia.png") no-repeat center center;
+}
+ul.xuanze li.xunxing{
+    background: url("/images/common/xunxing.png") no-repeat center center;
+    float: right;
+    margin-right: 0px;
+}
+ul.xuanze li.zhaohuo:hover{
+    background: url("/images/common/zhaohuoOn.png") no-repeat center center;
+}
+ul.xuanze li.xunjia:hover{
+    background: url("/images/common/xunjiaOn.png") no-repeat center center;
+}
+ul.xuanze li.xunxing:hover{
+    background: url("/images/common/xunxingOn.png") no-repeat center center;
+}

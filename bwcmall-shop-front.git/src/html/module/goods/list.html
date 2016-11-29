@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>商品列表</title>
+    @@include('../../include/common/intro.html')
+    <!-- build:css css/module/goods/goods.css -->
+    <link rel="stylesheet" href="/css/module/goods/goods.css" />
+    <!-- endbuild -->
+</head>
+
+<body>
+    @@include('../../include/common/header.html') @@include('../../include/common/nav.html')
+    <div class="main mod-demo goods-list">
+        <div class="sidebar">
+            @@include('../../include/common/menu.html')
+        </div>
+        <div class="content ms-controller" ms-controller="goodsList">
+            <div class="panel">
+                <div class="hd">
+                    <span class="title">商品管理首页</span>
+                </div>
+                <div class="bd">
+                    <div class="search">
+                        <div class="row no-margin-b">
+                            <div class="col col-1 title">上架状态</div>
+                            <div class="col col-10">
+                                <div class="radio-inline radio-inline-sm">
+                                    <label>
+                                        <input type="radio" ms-duplex-string="searchInfo.marketStatus" value="-1" ms-click="ckSearchList()"> 全部
+                                    </label>
+                                </div>
+                                <div class="radio-inline">
+                                    <label>
+                                        <input type="radio" ms-duplex-string="searchInfo.marketStatus" value="1" ms-click="ckSearchList()"> 在售({{goodsStatistics.marketSalableCount}})
+                                    </label>
+                                </div>
+                                <div class="radio-inline">
+                                    <label>
+                                        <input type="radio" ms-duplex-string="searchInfo.marketStatus" value="3" ms-click="ckSearchList()"> 待上架({{goodsStatistics.marketToBeSaleCount}})
+                                    </label>
+                                </div>
+                                <div class="radio-inline">
+                                    <label>
+                                        <input type="radio" ms-duplex-string="searchInfo.marketStatus" value="2" ms-click="ckSearchList()"> 设定上架时间({{goodsStatistics.marketDateCount}})
+                                    </label>
+                                </div>
+                                <div class="radio-inline">
+                                    <label>
+                                        <input type="radio" ms-duplex-string="searchInfo.marketStatus" value="0" ms-click="ckSearchList()"> 下架({{goodsStatistics.marketSuspendedSalesCount }})
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col col-1 title">售罄状态</div>
+                            <div class="col col-10">
+                                <div class="radio-inline radio-inline-sm">
+                                    <label>
+                                        <input type="radio" ms-duplex-string="searchInfo.soldOutStatus" value="-1" ms-click="ckSearchList()"> 全部
+                                    </label>
+                                </div>
+                                <div class="radio-inline">
+                                    <label>
+                                        <input type="radio" ms-duplex-string="searchInfo.soldOutStatus" value="0" ms-click="ckSearchList()"> 正常({{goodsStatistics.soldOutNormalCount}})
+                                    </label>
+                                </div>
+                                <div class="radio-inline">
+                                    <label>
+                                        <input type="radio" ms-duplex-string="searchInfo.soldOutStatus" value="1" ms-click="ckSearchList()"> 售罄({{goodsStatistics.soldOutSoldOutCount}})
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <div class="row">
+                            <div class="col col-1 title">审核状态</div>
+                            <div class="col col-10">
+                                <div class="radio-inline radio-inline-sm">
+                                    <label>
+                                        <input type="radio" ms-duplex-string="searchInfo.goodsStatus" value="-1" ms-click="ckSearchList()"> 全部
+                                    </label>
+                                </div>
+                                <div class="radio-inline">
+                                    <label>
+                                        <input type="radio" ms-duplex-string="searchInfo.goodsStatus" value="1" ms-click="ckSearchList()"> 待审核({{goodsStatistics.tempGoodsCount}})
+                                    </label>
+                                </div>
+                                <div class="radio-inline">
+                                    <label>
+                                        <input type="radio" ms-duplex-string="searchInfo.goodsStatus" value="0" ms-click="ckSearchList()"> 已通过({{goodsStatistics.onlineGoodsCount}})
+                                    </label>
+                                </div>
+                                <div class="radio-inline">
+                                    <label>
+                                        <input type="radio" ms-duplex-string="searchInfo.goodsStatus" value="2" ms-click="ckSearchList()"> 已拒绝({{goodsStatistics.pendingOnlineGoodsCount}})
+                                    </label>
+                                </div>
+                            </div> 
+                        </div>-->
+                        <div class="row">
+                            <div class="col col-1 title">品牌</div>
+                            <div class="col col-3">
+                                <select ms-widget="dropdownlist,brandListId,$brandListOption" ms-duplex="selectBrandId">
+                                </select>
+                            </div>
+                            <div class="col col-1 title">商品名称</div>
+                            <div class="col col-3">
+                                <input type="text" placeholder="商品名称" class="inputbox" ms-duplex="searchInfo.keyword__contains" ms-keyup="onKeyup($event)" />
+                            </div>
+                            <div class="col col-1 title">
+                                <span class="btn btn-large btn-primary" ms-click="ckSearchList">查询</span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col col-12">
+                                <a href="add.html" class="btn btn-primary">新增商品</a>
+                                <button class="btn btn-primary" ms-click="batchOnShelf">批量上架</button>
+                                <button class="btn btn-primary" ms-click="batchOffShelf">批量下架</button>
+                                <button class="btn btn-primary" ms-click="batchPendingPrice">批量改为待询价</button>
+                                <button class="btn btn-primary" ms-click="batchSoldIn">批量有货</button>
+                                <button class="btn btn-primary" ms-click="batchSoldOut">批量售罄</button>
+                                <button class="btn btn-primary" ms-click="exportExcel()">导出数据</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="table-wrap">
+                        <table class="ctable">
+                            <thead>
+                                <tr width="100%" class="thb ctr">
+                                    <th>
+                                        <input type='checkbox' data-duplex-changed="select_all_cb" ms-duplex-checked='select_all'>全选</th>
+                                    <th>商品品类</th>
+                                    <th>商品名称</th>
+                                    <th>品牌</th>
+                                    <th>商品型号</th>
+                                    <th>单位</th>
+                                    <th>售价</th>
+                                    <!--<th>已售数量</th>-->
+                                    <th>状态</th>
+                                    <th>是否售罄</th>
+                                    <th>上架人&时间</th>
+                                    <th>修改人&时间</th>
+                                    <th>是否允许退换货</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ms-if="goodsList.length>0" ms-repeat-el="goodsList" class="ctr" ms-class="tr-bg:($index%2==0)">
+                                    <td>
+                                        <input type='checkbox' ms-duplex-string="selected" ms-attr-value='el.goodsId'>
+                                    </td>
+                                    <td>{{el.productCategoryName}}</td>
+                                    <td>{{el.name}}</td>
+                                    <td>{{el.brandName}}</td>
+                                    <td>{{el.sn}}</td>
+                                    <td>{{el.unitName}}</td>
+                                    <td>{{el.price}}</td>
+                                    <!--<td>{{el.salesCount}}</td>-->
+                                    <td>{{el.marketStatusName}}</td>
+                                    <td>{{el.soldOutStatusName}}</td>
+                                    <td>{{el.marketStaffName}} / {{el.marketDate}}</td>
+                                    <td>{{el.modifierName}} / {{el.modifyTime}}</td>
+                                    <td>{{el.returnStatusName}}</td>
+                                    <td>
+                                        <a ms-href="detail.html?id={{el.goodsId}}">查看&修改</a>
+                                    </td>
+                                </tr>
+                                <tr ms-if="goodsList.length==0 && !showLoading">
+                                    <td colspan="7" class="cell-empty">
+                                        <div class="row">
+                                            <div class="col col-5" style="text-align: right">
+                                                <img src="/images/empty-list.png">
+                                            </div>
+                                            <div class="col col-5" style="text-align: left">
+                                                <span class="empty-tip" ms-text="orderListEmptyText"></span></div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr class="loading-wrapper" ms-if="showLoading">
+                                    <td colspan="8">
+                                        <div class="oni-loading" ms-widget="loading" data-loading-type="spinning-spin"></div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div ms-widget="pager,pp" ms-if="goodsList.length>0"></div>
+                </div>
+            </div>
+            <div ms-widget="dialog,dlgConfirmCancelOrder,opts1">
+                <div class="col offerset-2">
+                    <form ms-widget="validation">
+                        <div class="row es-body">
+                            <div class="col col-3">取消原因：</div>
+                            <div class="col col-9">
+                                <select class="inputbox inputbox-main" ms-duplex-required="cancelReason.option">
+                                    <option ms-repeat-el="cancelReasonType" ms-attr-value='{{el.value}}' ms-text="el.name"></option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row ">
+                            <div class="col col-3">取消原因：</div>
+                            <div class="col col-9 ">
+                                <textarea class="textarea textarea_inner" rows="15" ms-duplex="cancelReason.reason"></textarea>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col col-3"> &nbsp;</div>
+                            <div class="col col-9">
+                                <span>*确定取消后，系统自动退款给买家，请谨慎操作</span>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div ms-widget="dialog,dlgAfterAlert,opts2">
+                <div class="col offerset-2">
+                    {{confirmReceivedMsg}}
+                </div>
+            </div>
+        </div>
+    </div>
+    @@include('../../include/common/outro.html')
+    <script>
+    require(['conf/goods/FileSaver']);
+    require(['conf/goods/list']);
+    </script>
+</body>
+
+</html>

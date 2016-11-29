@@ -1,0 +1,170 @@
+/**
+ * Created by jason_wzl on 2015/11/5 005.
+ */
+.g-content {
+    margin: 30px auto;
+    width: 1200px;
+    border: 1px solid #dad6d4;
+    font-family: "Microsoft YaHei";
+    /*padding: 20px;*/
+    min-height: 580px;
+}
+
+/*tab页的样式 ++++++++++*/
+.content-head {
+    height: 42px;
+    border-bottom: 1px solid #dad6d4;
+}
+.content-nav{
+    width: 160px;
+    height: 39px;
+    line-height: 36px;
+    text-align: center;
+    font-size: 16px;
+    color: #333;
+    border-top: 4px solid #fff;
+    border-right: 1px solid #dad6d4;
+}
+.content-nav-next{
+    border-right-color: #fff;
+}
+.content-nav-active{
+    border-top: 4px solid #746565;
+    border-right-color: #dad6d4;
+    background-color: #fff;
+} 
+.module-header {
+	margin-top: 20px; 
+    clear:both;
+}
+.module-title {
+	font-size: 15px;
+    font-weight: bold;
+    padding-left: 20px;
+    border-left: 10px solid black;	
+} 
+.return-type-panel{
+    width: 700px;
+    height: 280px;
+    border: 1px solid #ddd;
+    float: left;
+    margin: 20px 10px 80px 30px;
+    cursor: pointer;
+}
+.return-order-panel{
+    width: 400px;
+    height: 280px;
+    border: 1px solid #ddd;
+    float: left;
+    margin: 19px 10px 50px 30px;
+}
+.return-type-panel div{ 
+    float: left;
+    text-align: center;
+    border: 4px solid #E9E3DC; 
+     font-size: 16px;
+     font-weight: bold;
+   height: 100px;
+    width: 134px;
+    line-height: 100px;
+        margin-top: 80px;
+    margin-left: 70px;
+    color: #585858;
+}
+.return-type-panel div:hover{ 
+    float: left;
+    border: 4px solid #746565;
+    background-color: #F6F6F6; 
+}
+.order-info{
+    width: 420px;
+    height: 180px;  
+}
+.order-info div{
+    padding: 20px 10px 20px 10px;
+    font-size: 14px;
+    float: left; 
+    width: 250px;   
+}
+.order-title{
+    padding: 15px;
+    font-size: 15px;
+    background-color: #eceae9;
+}   
+.order-link{
+    color: #2976BD;
+    text-decoration: underline;
+}
+.order-link:hover{
+    color: #2976BD;
+    text-decoration: underline;
+}
+.money{
+    color: red;
+}
+.title{
+
+}
+.link{
+    border: 1px solid #ddd; 
+    margin: 0px 10px 0px 10px;
+    padding: 10px;
+    text-align: center;
+    cursor: pointer;
+}
+.link-icon{
+    background: url('/images/afs/ic_contact.png') no-repeat center; 
+    padding: 10px;
+    margin-right: 10px;
+}
+ 
+.return-intro-panel{
+    margin: 20px 20px 20px 20px;
+    font-size: 14px;
+}
+.return-intro-panel a{
+    margin-left: 3px;
+}
+button {
+    cursor: pointer;
+}
+.intro-title{
+    line-height: 30px;
+    
+}
+.intro-content{
+    line-height: 25px;
+}
+
+
+.odgo-change {
+    margin-left: 10px;
+    color: #333;
+    width:50px;
+}
+
+.odgo-changetips{
+    width: 168px;
+    height: 78px;
+    padding: 12px 0 5px 28px; 
+    line-height: 25px;
+    font-size: 12px;
+    font-family: "microsoft yahei";
+    position: relative;
+    z-index: 1;
+    left: 235px;
+    top: -52px;
+    background: url("/images/common/shop-tips.png") no-repeat;
+    display: none;
+}
+
+.odgo-changetips .arrow{
+    width: 0;
+    height: 0;
+    border-top: 10px solid transparent;
+    border-right: 10px solid #bc9c7c;
+    border-bottom: 10px solid transparent;
+    position: absolute;
+    left: -10px;
+    top: 17px;
+}

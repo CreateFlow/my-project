@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>商品价格管理</title>
+    @@include('../../include/common/intro.html')
+    <link rel="stylesheet" href="/css/module/price/good-price.css" />
+</head>
+
+<body>
+    @@include('../../include/common/header.html') @@include('../../include/common/nav.html')
+    <div class="main good-price">
+        <div class="sidebar">
+            @@include('../../include/common/menu.html')
+        </div>
+        <div class="content ms-controller" ms-controller="goodPrice">
+            <div class="panel">
+                <div class="hd">
+                    <span class="title">商品价格管理</span>
+                </div>
+                <div class="bd">
+                    <div class="search">
+                        <div class="row">
+                            <div class="col col-1 title">商品ID</div>
+                            <div class="col col-3">
+                                <input type="text" placeholder="商品名称" class="inputbox" ms-duplex="searchData.goodsId" ms-keyup="onKeyup($event)" />
+                            </div>
+                            <div class="col col-1 title">商品名称</div>
+                            <div class="col col-3">
+                                <input type="text" placeholder="商品名称" class="inputbox" ms-duplex="searchData.goodsName" ms-keyup="onKeyup($event)" />
+                            </div>
+                            <div class="col col-1 title">品牌</div>
+                            <div class="col col-3">
+                                <select ms-widget="dropdownlist,brandListId,$brandListOption" ms-duplex="selectBrandId" ms-change="doSearch">
+                                </select>
+                            </div>
+                            <div class="col col-1 title">
+                                <span class="btn btn-large btn-primary" ms-click="doSearch">查询</span>
+                            </div>
+                            <!--<div class="col col-7 offset-1 export">
+                                <button class="btn btn-primary" ms-click="importTemplate">导入商品价格</button>
+                                <button class="btn btn-primary" ms-click="exportTemplate">模版下载</button>
+                            </div>-->
+                        </div>
+                    </div>
+                    <div class="table-wrap">
+                        <table class="ctable">
+                            <thead>
+                                <tr width="100%" class="thb ctr">
+                                    <th>商品ID</th>
+                                    <th>商品名称</th>
+                                    <th>品牌</th>
+                                    <th>销售价</th>
+                                    <th ms-repeat-tack="tackList" ms-text="tack.name"></th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ms-if="goodPriceList.length>0" ms-repeat-el="goodPriceList" class="ctr" ms-class="tr-bg:($index%2==0)">
+                                    <td>{{el.goodsId}}</td>
+                                    <td>{{el.goodsName}}</td>
+                                    <td>{{el.brandName}}</td>
+                                    <td>{{el.salePrice}}</td>
+                                    <td ms-repeat-goodprice="el.strategyPriceVOList">
+                                        <span ms-if="goodprice.id">{{goodprice.strategyPrice}}</span>
+                                        <span ms-if="!goodprice.id">-</span>
+                                    </td>
+                                    <td>
+                                        <a href="javascript:void(0)" ms-click="editPrice($index)">编辑价格</a>
+                                    </td>
+                                </tr>
+                                <tr ms-if="goodPriceList.length==0 && !showLoading">
+                                    <td colspan="7" class="cell-empty">
+                                        <div class="row">
+                                            <div class="col col-5" style="text-align: right">
+                                                <img src="/images/empty-list.png">
+                                            </div>
+                                            <div class="col col-5" style="text-align: left">
+                                                <span class="empty-tip" ms-text="orderListEmptyText"></span></div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr class="loading-wrapper" ms-if="showLoading">
+                                    <td colspan="8">
+                                        <div class="oni-loading" ms-widget="loading" data-loading-type="spinning-spin"></div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div ms-widget="pager,pp" ms-if="goodPriceList.length>0"></div>
+                </div>
+            </div>
+            <div ms-widget="dialog,dlgEditPriceId,dlgEditPriceOption">
+                <div class="col offerset-2 editPrice-main">
+                    <div class="row">
+                        <h3>
+                            <span>【 商品：<b ms-text="editDlgData.goodsName"></b> 】</span>
+                            <span>【 销售价：<b ms-text="editDlgData.price"></b>元 】</span>
+                        </h3>
+                        <table class="ctable col-12">
+                            <thead>
+                                <tr width="100%" class="thb ctr">
+                                    <th width="30%">
+                                    </th>
+                                    <th>价格（元）</th>
+                                    <th>折扣（折扣数）</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ms-repeat-el="goodPriceItemList" class="ctr" ms-class="tr-bg:($index%2==0)">
+                                    <td ms-text="el.tackname"></td>
+                                    <td>
+                                        <input type="number" placeholder="价格" class="inputbox" min="0" ms-duplex="el.strategyPrice" ms-keyup="priceChange(el)" ms-mouseup="priceChange(el)"/>
+                                    </td>
+                                    <td>
+                                        <input type="number" placeholder="折扣数" class="inputbox" step="0.05" min="0" max="1" ms-duplex="el.discount" ms-keyup="discountChange(el)" ms-mouseup="discountChange(el)"
+                                        />
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div ms-widget="dialog,dlgAfterAlert,opts">
+                <div class="col offerset-2">
+                    {{confirmReceivedMsg}}
+                </div>
+            </div>
+        </div>
+    </div>
+    @@include('../../include/common/outro.html')
+    <script>require(['conf/price/goodPrice']);</script>
+</body>
+
+</html>

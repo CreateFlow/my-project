@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>账期规则</title>
+    @@include('../../include/common/meta.html') @@include('../../include/common/common-include.html')
+    <link rel="stylesheet" type="text/css" href="/styles/module/payday/payrule.css"> 
+    <script src="/scripts/module/payday/payrule.js"></script>
+</head>
+
+<body ms-controller="payruleCtrl">
+    @@include('../../include/common/header.html')
+    <div class="gs-header">
+        @@include('../../include/common/account-head.html')
+    </div> 
+
+    <div class="g-content">
+        <div class="order-table-wrap">
+            <div class="order-table-title">
+                <span class="order-table-span f-ib">账期规则</span>
+            </div>
+        </div>
+        <div class="order-block">
+            <div class="content-body-block">
+                <span class="content-body-title">1、什么是账期服务？</span>
+                <p>账期支付是指，买家在授信额度内下单后不用付款就可以进货，在最后还款日内完成支付的交易方式。</p>
+             
+                <span class="content-body-title">2、为什么要使用账期？</span>
+                    <p>对于买家：缓解采购者的资金压力，提高资金的流转效率。</p>
+                    <p>对于卖家：有利于维护卖家的竞争力，维护客户。</p>
+                 
+                <span class="content-body-title">3、如何申请账期？</span>
+                    <p>买家可以通过联系卖家表达账期的诉求，由卖家决定是否同意授信。</p>
+                    <p>如果同意授信，卖家在后台选择对应的买家给予授信额度与周期，授信成功后，买家会受到短信通知，登录平台，也会在后台看到和管理自己的账期。</p>
+                 
+                <span class="content-body-title">4、什么是账单？</span>
+                    <p>买卖双方在账期内发生有关账期交易的核对凭证。</p>
+                 
+                <span class="content-body-title">5、如何使用账期支付？</span>
+                    <p>买家在购买给予自己授信的卖家的商品的时候，可用信用额度。</p>
+                 
+                <span class="content-body-title">6、账单规则</span>
+                    <p>周结：按每个自然周作为结算周期，到每周日的凌晨整点出上周的账单。</p>
+                    <p>月结：按每个自然月作为结算周期，到每月最后一天凌晨整点出上月的账单。</p>
+                    <p>双月结：按两个连续自然月作为结算周期，到双月最后一天凌晨整点出上两个月的账单。</p>
+                 
+                 
+                <span class="content-body-title">7、我该如何还款？</span>
+                    <p>买家在“账期管理”中可以查看自己的欠款金额、出账单日期以及最后还款时间。</p>
+                    <p>买家根据账单内容确认还款金额。确认无误并付款后上传付款的凭证。卖家收到还款后核销账单，还款完成。</p>
+                 
+                <span class="content-body-title">8、最后还款日逾期忘记付款怎么办</span>
+                    <p>预期还款将会停止买家的账期服务。</p>
+                    <p>如果存在恶意欠款，产生一切后果，买家自行承担。</p>
+
+                <span class="content-body-title">9、注意事项</span>
+                    <p>（1）最后还款日：卖家为每个买家设置最后的还款期限，超过该期限买家不支付账单，则买家不能再使用账期支付。</p>
+                    <p>（2）如果买家的信用额度透支完毕，或者买家超过最后还款日没有支付账单，则买家不可以继续使用账期支付。</p>
+                    <p>（3）卖家有权停用买家享受的账期支付额度，取消后买家无法再使用账期支付。</p>
+            </div>
+            <div style="margin-top:60px;text-align:center"><a class="trans_link_3 rule-btn f-ib stock-link" href="/payday/payday.html">好，我知道了</a></div>
+        </div> 
+
+    </div>
+    @@include('../../include/common/footer.html')
+</body>
+
+</html>

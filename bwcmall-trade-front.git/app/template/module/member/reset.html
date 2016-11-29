@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>重置密码</title>
+    @@include('../../include/common/common-include.html')
+    <link rel="stylesheet" href="/styles/module/member/find-password.css"/>
+</head>
+<body ms-controller="resetPasswordCtrl">
+    <div class="main mod-register">
+        <div class="main_content">
+            @@include('../../include/common/member-reset-header.html')
+            <div class="center">
+                <div class="flow">
+                    <div class="progress"><div class="progress_bar step2"></div></div>
+                    <ul>
+                        <li>
+                            <div class="step checked">
+                                <div class="step_bg">
+                                    <span class="step_num">1</span>
+                                </div>
+                                <div>
+                                    <span class="text">确认账号</span>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="step checked">
+                                <div class="step_bg">
+                                    <span class="step_num">2</span>
+                                </div>
+                                <div>
+                                    <span class="text">修改密码</span>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="step">
+                                <div class="step_bg">
+                                    <span class="step_num">3</span>
+                                </div>
+                                <div>
+                                    <span class="text">完成</span>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <form class="form">
+                    <div class="input-group">
+                        <input ms-blur="checkPassword" type="password" ms-duplex="password" class="input" placeholder="新密码" />
+                    </div>
+                    <div class="tips"><span ms-text="passwordErrorInfo"></span></div>
+                    <div class="input-group">
+                        <input ms-blur="checkConfirm" type="password" ms-duplex="confirm" class="input" placeholder="确定新密码" />
+                    </div>
+                    <div class="tips"><span ms-text="confirmErrorInfo"></span></div>
+                    <div class="btn-group">
+                        <a href="javascript: void(0)" ms-visible="btnVisible"  ms-class="btn-disabled:!valid" ms-click="submit" class="btn jSubmit">下一步</a>
+                    </div>
+                </form>
+            </div>
+            <div class="footer">
+                版权所有@2015 佰万仓网络科技有限公司&nbsp;&nbsp;
+                <a class="link" target="_blank" href="/images/index/zhizhao.jpg">沪ICP备15032859号-1
+                    <img class="f-ib" src="/images/common/icp_icon.png" alt="ICP"/>
+                </a>
+            </div>
+        </div>
+    </div>
+    <script src="/scripts/module/member/reset.js"></script>
+</body>
+</html>

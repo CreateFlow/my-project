@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>完善信息</title>
+    @@include('../../include/common/common-include.html')
+    <link rel="stylesheet" href="/styles/module/member/regintro.css"/>
+</head>
+<body ms-controller="regIntroCtrl">
+    <div class="main mod-register mod-regintro">
+        <div class="main_content">
+            @@include('../../include/common/member-header.html')
+            <div class="center">
+                <div class="flow">
+                    <div class="progress"><div class="progress_bar step2"></div></div>
+                    <ul>
+                        <li>
+                            <div class="step checked">
+                                <div class="step_bg">
+                                    <span class="step_num">1</span>
+                                </div>
+                                <div>
+                                    <span class="text">设置登录名</span>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="step checked">
+                                <div class="step_bg">
+                                    <span class="step_num">2</span>
+                                </div>
+                                <div>
+                                    <span class="text">完善用户信息</span>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="step">
+                                <div class="step_bg">
+                                    <span class="step_num">3</span>
+                                </div>
+                                <div>
+                                    <span class="text">等待佰万仓审核</span>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="step">
+                                <div class="step_bg">
+                                    <span class="step_num">4</span>
+                                </div>
+                                <div>
+                                    <span class="text">完成</span>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="layout-center">
+                    <div class="layout-center_reset">
+                        <div class="tips">
+                            <img src="/images/member/icon_tips.png" alt="" />
+                            <p ms-text="welcome"></p>
+                            <p>您的用户信息没有完善，是否继续完善用户信息？</p>
+                        </div>
+                        <div class="btn-group">
+                            <a href="/member/corp-info.html" class="btn">继续完善用户信息</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer">
+                版权所有@2015 佰万仓网络科技有限公司&nbsp;&nbsp;
+                <a class="link" target="_blank" href="/images/index/zhizhao.jpg">沪ICP备15032859号-1
+                    <img class="f-ib" src="/images/common/icp_icon.png" alt="ICP"/>
+                </a>
+            </div>
+        </div>
+    </div>
+    <script src="/scripts/module/member/regintro.js"></script>
+</body>
+</html>

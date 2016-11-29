@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>开票管理</title>
+    @@include('../../include/common/intro.html')
+    <!-- build:css css/module/sellerInvoice/info.css -->
+    <link rel="stylesheet" href="/css/module/seller-invoice/info.css"/>
+    <!-- endbuild -->
+</head>
+<body>
+@@include('../../include/common/header.html')
+@@include('../../include/common/nav.html')
+<div class="content" ms-controller="sellerInvoiceInfoCtrl">
+    <div class="nav-bar">卖家中心 > 开票管理 > 开票操作</div>
+    <div class="title">开票操作</div>
+    <div class="box">
+        <div class="status">
+            <span class="yuan yuan-pos1 yuan-img2"></span>
+            <span class="line line-pos1 line-img1" ms-class="line-img2:isShowLine1"></span>
+            <span class="yuan yuan-pos2 yuan-img1" ms-class="yuan-img2:isShowYuan2"></span>
+            <span class="line line-pos2 line-img1" ms-class="line-img2:isShowLine2"></span>
+            <span class="yuan yuan-pos3 yuan-img1" ms-class="yuan-img2:isShowYuan3"></span>
+            <span class="text text-pos1 c-red">冻结中</span>
+            <span class="text text-pos2" ms-class="c-red:isShowYuan2">待开票</span>
+            <span class="text text-pos3" ms-class="c-red:isShowYuan3">已开票</span>
+        </div>
+
+        <div class="info-border">
+            <div class="row info"><div class="col col-2 text-title">基础信息</div></div>
+            <div class="row info">
+                <div class="col col-4">客户名称 : {{invoiceInfo.customerName}}</div>
+                <div class="col col-4">公司名称 : {{invoiceInfo.corpName}}</div>
+                <div class="col col-4">客户手机 : {{invoiceInfo.phone}}</div>
+            </div>
+            <div class="row info">
+                <div class="col col-4">订单总金额 : ¥{{invoiceInfo.totalAmount}}</div>
+                <div class="col col-4">实际支付 : ¥{{invoiceInfo.totalPaid}}</div>
+                <div class="col col-4">申请时间 : {{invoiceInfo.createTime}}</div>
+            </div>
+        </div>
+
+        <div class="info-border">
+            <div class="row info"><div class="col col-2 text-title">发票信息</div></div>
+            <div class="row info">
+                <div class="col col-4">发票抬头 : {{invoiceInfo.corpTitle}}</div>
+                <div class="col col-4">发票类型 : {{invoiceInfo.typeDesc}}</div>
+                <div class="col col-4">发票号 : {{invoiceInfo.sn}}</div>
+            </div>
+            <div class="row info">
+                <div class="col col-4">发票号 : {{invoiceInfo.invoiceNumber}}</div>
+                <div class="col col-4">可开票金额 : ¥{{invoiceInfo.amount}}</div>
+                <div class="col col-4">未发货订单金额 : ¥{{invoiceInfo.unShippedAmount}}</div>
+            </div>
+        </div>
+
+        <div class="info-border" style="border-bottom:0;">
+            <div class="row info"><div class="col col-2 text-title">订单列表</div></div>
+        </div>
+
+        <table class="ctable" ms-if="isShowOperator">
+            <thead>
+            <tr width="100%" class="thb ctr">
+                <th width="14%">销售单号</th>
+                <th width="14%">下单时间</th>
+                <th width="12%">订单金额(元)</th>
+                <th width="12%">实付金额(元)</th>
+                <th width="12%">可开票金额(元)</th>
+                <th width="12%">订单状态</th>
+                <th width="12%">物流状态</th>
+                <th width="12%">操作</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr ms-if="sellerInvoiceList.length>0" ms-repeat-el="sellerInvoiceList" class="ctr" ms-class="tr-bg:($index%2==0)">
+                <td><a target="_blank" href="javascript:void(0)" ms-click="goOrderDetail(el)">{{el.orderSn}}</a></td>
+                <td>{{el.orderCreateTime}}</td>
+                <td>{{el.receivable}}</td>
+                <td>{{el.amountPaid}}</td>
+                <td>{{el.invoiceAmount}}</td>
+                <td>{{el.orderStatusDesc}}</td>
+                <td>{{el.shippingStatus}}</td>
+                <td>
+                    <span ms-html="getLink(el)"></span>
+                </td>
+            </tr>
+            <tr ms-if="sellerInvoiceList.length==0">
+                <td colspan="10" class="cell-empty" ms-text="afterSaleOrderEmptyText"></td>
+            </tr>
+            </tbody>
+        </table>
+        <table class="ctable" ms-if="!isShowOperator">
+            <thead>
+            <tr width="100%" class="thb ctr">
+                <th width="15%">销售单号</th>
+                <th width="15%">下单时间</th>
+                <th width="14%">订单金额(元)</th>
+                <th width="14%">实付金额(元)</th>
+                <th width="14%">可开票金额(元)</th>
+                <th width="14%">订单状态</th>
+                <th width="14%">物流状态</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr ms-if="sellerInvoiceList.length>0" ms-repeat-el="sellerInvoiceList" class="ctr" ms-class="tr-bg:($index%2==0)">
+                <td>{{el.orderId}}</td>
+                <td>{{el.orderCreateTime}}</td>
+                <td>{{el.receivable}}</td>
+                <td>{{el.amountPaid}}</td>
+                <td>{{el.invoiceAmount}}</td>
+                <td>{{el.orderStatusDesc}}</td>
+                <td>{{el.shippingStatus}}</td>
+            </tr>
+            <tr ms-if="sellerInvoiceList.length==0">
+                <td colspan="10" class="cell-empty" ms-text="afterSaleOrderEmptyText"></td>
+            </tr>
+            </tbody>
+        </table>
+        <div ms-widget="pager,pp" ms-if="sellerInvoiceList.length>0"></div>
+
+        <div class="info-border" ms-if="isShowOperator">
+            <div class="row info"><div class="col col-2 text-title">发票号</div></div>
+            <div class="row info">
+                <div class="col col-1" style="text-align: right;">发票号</div>
+                <div class="col col-2">
+                    <input type="text" class="text-input" ms-duplex="invoiceNumber"/>
+                </div>
+                <div class="col col-2">请输入已开具的发票号</div>
+            </div>
+        </div>
+
+        <div class="row btn-top">
+            <button class="default-btn btn-red" ms-click="confirmTheInvoice" ms-if="isShowOperator" style="margin-right:20px;">确定</button>
+            <button class="default-btn" ms-click="" ms-if="false">关闭</button>
+        </div>
+    </div>
+
+    <div ms-widget="dialog,dlgPutAmountConfirm,opts1">
+        <div class="row">
+            <div class="col col-2">&nbsp;</div>
+            <input type="text" class="dlg-input" ms-duplex="dlgInfo.newPrice"/>
+        </div>
+    </div>
+    <div ms-widget="dialog,dlgConfirmInvoiceAlert,opts2">
+        <div class="col offerset-2">
+            {{confirmReceivedMsg}}
+        </div>
+    </div>
+</div>
+@@include('../../include/common/outro.html')
+<script>require(['conf/seller-invoice/info']);</script>
+</body>
+</html>

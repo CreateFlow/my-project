@@ -1,0 +1,110 @@
+@import "../../common/common";
+
+.m-checkbox .m-checkbox-check {
+    vertical-align: middle;
+    display: block;
+    width: 16px;
+    height: 16px;
+    position: absolute;
+    top: -1px;
+    left: -2px;
+    opacity: 0;
+    filter: alpha(opacity=0);
+    z-index: -1;
+}
+
+.m-checkbox .m-checkbox-icon {
+    width: 16px;
+    height: 16px;
+    display: block;
+    float: left;
+    margin-top: 0px;
+    margin-right: 3px;
+    background-image: url(/images/common/common_checked.gif);
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+.m-checkbox .m-checkbox-icon-checked {
+    background-image: url(/images/common/common_checked_true.gif);
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+#queryLinksDialogId{
+    height:600px;
+    overflow:auto;
+    margin-top:15px;
+    width: 100%;
+    th {
+        height: 30px;
+        text-align: center;
+        color: #585858;
+        font-size: 12px;
+        font-weight: bold;
+    }
+
+    tr {
+        border: 1px solid #dad6d4;
+        margin-top: 1px;
+        position: relative;
+    }
+
+    .tr-active {
+        background-color: #f7eee2;
+    }
+
+    tr:hover .table-link {
+        color: #e83637;
+    }
+
+    td {
+        position: relative;
+        text-align: center;
+        color: #585858;
+        line-height: 1.7222;
+    }
+
+    .td-active {
+        background-color: #f7eee2;
+    }
+
+    .table-top {
+        border: 0;
+        border: 1px solid #dad6d4;
+        :hover {
+            border: 0;
+        }
+    }
+
+    .table-row {
+        height: 45px;
+        line-height: 45px;
+    }
+
+    input{
+        height:24px;
+        line-height:24px;
+        width:80%;
+        margin:0px auto;
+        text-align:center;
+    }
+
+    .inline-block{
+        display: inline-block;
+        height: 48px;
+        line-height: 40px;
+    }
+
+    select {
+        height: 34px;
+        width: 250px;
+        border: 1px solid #ddd;
+    }
+}
+
+
+
+.oni-dialog-footer{
+    display: none;
+}

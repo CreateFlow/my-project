@@ -1,0 +1,100 @@
+@charset "UTF-8";
+
+// variable
+$dialog-font-size: 12px !default;
+$primary-color: #e33333 !default;
+$default-color: #333 !default;
+
+
+.ms-controller {
+    visibility: hidden;
+}
+
+.oni-dropdown {
+    .oni-dropdown-source {
+        .oni-dropdown-input {
+            padding: 9px 21px 9px 6px !important;
+        }
+    }
+    .oni-dropdown-icon {
+        top: -28px !important;
+    }
+}
+
+.oni-dialog {
+    .oni-dialog-inner {
+        font-size: $dialog-font-size !important;
+    }
+    .oni-dialog-header {
+            background-color: transparent !important;
+            border-bottom: 1px solid #ccc !important;
+            .oni-dialog-close {
+                // float:right;
+                // padding: 1px 10px 1px 9px;
+                margin-top: 1em !important;
+                border: none !important;
+                // cursor: pointer;
+                background-color: transparent !important;
+                color: #999 !important;
+                // .oni-icon {
+                //     cursor: pointer;
+                // }
+                &:hover {
+                    color: $primary-color !important;
+                    background-color: transparent !important;
+                    border-color: transparent !important;
+                    border: none !important;
+                    padding: 1px 10px 1px 9px !important;
+                }
+            }
+            .oni-dialog-title {
+                padding: 1.5em 2em !important;
+                color: $default-color !important;
+                font-size: $dialog-font-size !important;
+                line-height: 1 !important;
+            }
+        }
+        .oni-dialog-content {
+            // font-size: 12px;
+            padding: 2em !important;
+        }
+        .oni-dialog-footer {
+            padding: 0.5em 2em 2em 2em !important;
+            background-color: transparent !important;
+            .oni-dialog-btns {
+                text-align: center;
+                float: none !important;
+            }
+            .oni-button {
+                @include border-radius(0);
+                height: auto !important;
+                color: $default-color !important;
+                padding: 1em 3.5em !important;
+                margin-left: 0 !important;
+                background-color: #fff !important;
+                border: 1px solid #ccc !important;
+                &-success {
+                    color: #fff !important;
+                    background-color: $primary-color !important;
+                    border-color: $primary-color !important;
+                }
+                & + .oni-button {
+                    margin-left: 1em !important;
+                }
+            }
+        }
+        .oni-button {
+            .oni-button-text {
+                font-size: $dialog-font-size !important;
+                line-height: 1 !important;
+                // height: auto !important;
+                vertical-align: baseline !important;
+                display: inline !important;
+            }
+        }
+}
+
+.oni-loading {
+    width: 24px;
+    height: 24px;
+}

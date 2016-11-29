@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="zh-cn">
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <title>单个商品处理</title>
+    @@include('../../include/common/meta.html') @@include('../../include/common/common-include.html')
+
+    <link rel="stylesheet" type="text/css" href="/styles/module/work/workdo.css">
+    <script src="/scripts/module/work/workdo.js"></script>
+</head>
+
+<body ms-controller="workdoCtrl">
+    @@include('../../include/common/header.html') @@include('../../include/common/account-head.html')
+    <!--主要内容-->
+    <div class="g-content g-clearfix">
+        <div class="content-head">
+            <div class="module-title">
+                <div><span>需求单详情</span></div>
+            </div>
+        </div>
+        <div class="detail-table-panel">
+            <div class="order-table-wrap">
+                <div class="detail-title">
+                    <div class="detail-title1">
+                        <span>找货单单号：</span><span ms-text="dataList.sn"></span>
+                    </div>
+                    <div class="detail-title2" style="">
+                        <span>完成度：</span><span ms-text="dataList.progress"></span><span style="color:red;margin-left:20px;"
+                            ms-text="dataList.requireStatusDesc"></span>
+                    </div>
+                </div>
+                <div class="detail-query-conditions" style="clear:both">
+                    <div class="detail-condition">
+                        <span>名称：</span><span ms-text="dataList.name"></span>
+                    </div>
+
+                    <div class="detail-condition">
+                        <span>电话：</span><span ms-text="dataList.mobile"></span>
+                    </div>
+                    <div class="detail-condition">
+                        <span>来源：</span><span ms-text="dataList.sourceDesc"></span>
+                    </div>
+                    <div class="detail-condition">
+                        <span>类型：</span><span ms-text="dataList.typeDesc"></span>
+                    </div>
+                    <div class="detail-condition">
+                        <span>创建者：</span><span ms-text="dataList.createName"></span>
+                    </div>
+                </div>
+                <div class="detail-query-conditions" style="clear:both">
+                    <div class="detail-condition" style="width:400px">
+                        <span>地址：</span><span ms-text="dataList.address"></span>
+                    </div>
+                    <div class="detail-condition" style="width:400px">
+                        <span>备注：</span><span ms-text="dataList.remarks"></span>
+                    </div>
+                    <div class="detail-condition" ms-if="dataList.itemDetail.reason">
+                        <span>无法处理原因：</span><span style="color:red" ms-text="dataList.itemDetail.reason"></span>
+                    </div>
+                </div>
+
+                <div class="order-block" style="clear:both">
+                    <div class="return-detail-row">
+                        <div class="uploaded-image-panel">
+                            <div class="upload-image-col" ms-repeat="dataList.resourceList">
+                                <div class="image-div">
+                                    <img ms-if="el.type != 1" ms-attr-src="el.resources" />
+                                    <a ms-if="el.type == 1" ms-href="el.resources"><img src="/images/common/download.png" /></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="detail-table">
+                    <table cellpadding="0" width="100%">
+                        <!--表单头部-->
+                        <tr class="order-table-top">
+
+                            <th width="15%">
+                                品牌
+                            </th>
+                            <th width="15%">
+                                品名
+                            </th>
+                            <th width="20%">
+                                型号
+                            </th>
+                            <th width="10%">
+                                数量
+                            </th>
+                            <th width="10%">
+                                单位
+                            </th>
+                            <th width="10%">
+                                分类
+                            </th>
+                            <th width="20%">
+                                操作
+                            </th>
+                        </tr>
+                        <!--商品一行-->
+                        <tr class="order-trone">
+                            <td>
+                                <div class="table-condition">
+                                    <input type="text" ms-duplex="dataList.itemDetail.brandName">
+                                </div>
+                            </td>
+                            <td>
+                                <div class="table-condition">
+                                    <input type="text" ms-duplex="dataList.itemDetail.itemName">
+                                </div>
+                            </td>
+                            <td>
+                                <div class="table-condition">
+                                    <input type="text" ms-duplex="dataList.itemDetail.skuSnSet">
+                                </div>
+                            </td>
+                            <td>
+                                <span ms-text="dataList.itemDetail.requiredQuantity"></span>
+                            </td>
+                            <td>
+                                <span ms-text="dataList.itemDetail.unit"></span>
+                            </td>
+                            <td>
+                                <span ms-text="dataList.itemDetail.category"></span>
+                            </td>
+                            <td>
+                                <button ms-click="match" type="button" id="queryBtn" name="queryBtn" class="add_btn">匹配</button>
+                            </td>
+
+                        </tr>
+                    </table>
+
+                </div>
+
+
+                <div class="detail-query-conditions">
+                    <button type="button" ms-click="getMore" class="query_btn">+ 添加临时商品</button>
+                </div>
+
+
+                <div class="detail-table">
+                    <table cellpadding="0" width="100%">
+                        <!--表单头部-->
+                        <tr class="order-table-top">
+
+                            <th width="8%">
+                                <font color="red">*</font>品牌
+                            </th>
+                            <th width="8%">
+                                <font color="red">*</font>品名
+                            </th>
+                            <th width="8%">
+                                <font color="red">*</font>型号
+                            </th>
+                            <th width="8%">
+                                <font color="red">*</font>单位
+                            </th>
+                            <th width="8%">
+                                分类
+                            </th>
+                            <th width="8%">
+                                店铺
+                            </th>
+                            <th width="12%">
+                                <font color="red">*</font>供应商
+                            </th>
+                            <th width="8%">
+                                销售价格
+                            </th>
+                            <th width="8%">
+                                采购价
+                            </th>
+                            <th width="10%">
+                                货期
+                            </th>
+                            <th width="10%">
+                                备注
+                            </th>
+                            <th>
+                                操作
+                            </th>
+                        </tr>
+                        <!--商品一行-->
+
+                        <tr ms-repeat="trArr" ms-if="trArr.length>0" class="order-trone">
+                            <!--品牌-->
+                            <td>
+
+                                <span ms-if="el.type == 1" ms-text="el.brandName"></span>
+                                <div class="table-condition" ms-if="el.type == 2">
+                                    <select ms-widget="dropdownlist, brandDropListId" ms-duplex="el.brandId">
+                                        <option ms-if="el.brandId" ms-attr-value="el.brandId" ms-text="el.brandName"></option>
+                                    </select>
+                                </div>
+                            </td>
+                            <!--品名-->
+                            <td>
+                                <span ms-if="el.type == 1" ms-text="el.itemName"></span>
+                                <div class="table-condition" ms-if="el.type == 2">
+                                    <input type="text" ms-duplex="el.itemName">
+                                </div>
+                            </td>
+
+
+                            <!--型号-->
+                            <td>
+                                <span ms-if="el.type == 1" ms-text="el.skuSnSet"></span>
+                                <div class="table-condition" ms-if="el.type == 2">
+                                    <input type="text" ms-duplex="el.skuSnSet">
+                                </div>
+                            </td>
+                            <td>
+                                <span ms-if="el.type == 1" ms-text="el.unit"></span>
+                                <div class="table-condition" ms-if="el.type == 2">
+                                    <select ms-widget="dropdownlist,$,dropdownListOption" ms-duplex="el.unitId">
+                                        <option value="">-请选择单位-</option>
+                                        <option ms-repeat-elunit="unitList" ms-attr-value="elunit.value" ms-text="elunit.name"></option> 
+                                    </select>
+                                </div>
+                            </td>
+
+                            <td>
+                                <span ms-if="el.type == 1" ms-text="el.spuCategoryName"></span>
+                                <div class="table-condition" ms-if="el.type == 2">
+                                    <select ms-widget="dropdownlist,$,dropdownListOption" ms-duplex="el.spuCategoryId">
+                                        <option value="">-请选择分类-</option>
+                                        <option ms-repeat-elcategory="categoryList" ms-attr-value="elcategory.id" ms-text="elcategory.name"></option> 
+                                    </select>
+                                </div>
+                            </td>
+                            <!--店铺-->
+                            <td>
+                                <span ms-if="el.type == 1" ms-text="el.shopName"></span>
+                                <div class="table-condition" ms-if="el.type == 2">
+                                    <span ms-text="el.shopName"></span>
+                                </div>
+                            </td>
+                            <!--供应商-->
+                            <td>
+                                <span ms-if="el.type == 1 && el.supplierList.length == 1" ms-text="el.supplierList[0].name"></span>
+                                <div class="table-condition" ms-if="el.type == 1 && el.sonType == 2">
+                                    <select id="typeList" name="typeList" ms-duplex="el.supplierId" ms-change="setSearchForm($index,el.supplierId)">
+                                        <option value="">全部</option>
+                                        <option ms-repeat-elson="el.supplierList" ms-attr-value="elson.id" ms-text="elson.name"></option> 
+                                    </select>
+                                </div>
+                                <div class="table-condition" ms-if="el.type == 2">
+                                    <a ms-if="!el.supplierId" href="javascript:void(0)" ms-click="show('aa',$index)">选择供应商</a>
+                                    <a ms-if="el.supplierId" href="javascript:void(0)" ms-click="show('aa',$index)" ms-text="el.supplierName"></a>
+                                </div>
+                            </td>
+                            <!--销售价格-->
+                            <td>
+                                <div class="table-condition">
+                                    ￥<input type="text" ms-duplex="el.salePrice">
+                                </div>
+                            </td>
+                            <!--采购价格-->
+                            <td>
+                                <div class="table-condition">
+                                    ￥<input type="text" ms-duplex="el.purchasePrice">
+                                </div>
+                            </td>
+                            <!--货期-->
+                            <td>
+                                <div class="table-condition">
+                                    <input type="text" ms-duplex="el.shipMin" style="width:2em">-<input type="text" ms-duplex="el.shipMax"
+                                        style="width:2em">天
+                                </div>
+                            </td>
+                            <!--备注-->
+                            <td>
+                                <div class="table-condition">
+                                    <input type="text" ms-duplex="el.remarks">
+                                </div>
+                            </td>
+
+                            <!--操作-->
+                            <td>
+                                <span class="f-ib goods-del" ms-click="delProduct($index)">
+                                    <!--<img style="width:32px;height:32px;" src="goods-del0.jpg"/>-->
+                                </span>
+                            </td>
+                        </tr>
+                    </table>
+
+                </div>
+
+                <div class="detail-query-conditions" style="height:48px;" ">
+                    <div class="detail-condition "> 
+                         <button ms-click="submit " style="height:34px;line-height:34px;width:120px; " type="button
+                    "  class="query_btn ">保存</button> 
+                    </div>
+                    
+                    <div class="detail-condition " style="width:300px; ">
+                        <input ms-duplex="reason " placeholder="请输入原因 " type="text " style="width:280px; ">
+                    </div> 
+                    <div class="detail-condition "> 
+                         <button ms-click="canNotProcess " style="height:34px;line-height:34px;width:120px; " type="button
+                    " class="del_btn ">无法处理</button> 
+                    </div>
+<!--
+                    <div class="detail-condition "> 
+                         <button ms-click="save " style="height:34px;line-height:34px;width:120px; " type="button
+                    "  class="query_btn ">保存当前进度</button> 
+                    </div>
+-->                       
+                </div>  
+
+                <div class="detail-table detail-table2 " ms-if="searchList.length>0">
+                    <table cellpadding="0" width="100%">
+                        <!--表单头部-->
+                        <tr class="order-table-top" style="background:#fafafa">
+
+                            <th colspan="11">
+                                备选区
+                            </th>
+
+                        </tr>
+                        <tr class="order-table-top">
+
+                            <th width="8%">
+                                品牌
+                            </th>
+                            <th width="8%">
+                                品名
+                            </th>
+                            <th width="20%">
+                                型号
+                            </th>
+                            <th width="8%">
+                                单位
+                            </th>
+                            <th width="8%">
+                                分类
+                            </th>
+
+                            <th width="8%">
+                                店铺
+                            </th>
+
+                            <th width="8%">
+                                图片
+                            </th>
+                            <th width="8%">
+                                销售价
+                            </th>
+                            <th width="8%">
+                                单位
+                            </th>
+                            <th width="8%">
+                                货期
+                            </th>
+                            <th>
+                                操作
+                            </th>
+                        </tr>
+                        <!--商品一行-->
+                        <tr ms-repeat="searchList" class="order-trone">
+                            <!--品牌-->
+                            <td>
+                                <span ms-text="el.brandName"></span>
+                            </td>
+                            <td>
+                                <span ms-text="el.goodsName"></span>
+                            </td>
+                            <!--型号-->
+                            <td>
+                                <span ms-text="el.sn"></span>
+                            </td>
+                            <td>
+                                <span ms-text="el.unit"></span>
+                            </td>
+                            <!--数量-->
+                            <td>
+                                <span ms-text="el.firstCatName"></span>
+                            </td>
+
+                            <td>
+                                <span ms-text="el.shopName"></span>
+                            </td>
+
+
+                            <td>
+                                <img ms-if="el.mainImage" ms-src="el.mainImage" width="60" height="60" style="position:relative;top:5px;">
+                            </td>
+                            <td>
+                                <span ms-html="formatPrice(el.salePrice)"></span>
+                            </td>
+                            <td>
+                                <span ms-text="el.unit"></span>
+                            </td>
+                            <!--销售价-->
+                            <td>
+                                <span ms-text="el.minDeliveryTime"></span>-<span ms-text="el.maxDeliveryTime"></span>天
+                            </td>
+                            <td>
+                                <a href="javascript:void(0)" ms-click="addDetail($index)">使用</a>
+                            </td>
+                        </tr>
+                    </table>
+                    <div class="paper">
+                        <div ms-widget="pager, pp"></div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div ms-widget="dialog,aa,$aaOpts" class="supaa">
+            <table cellpadding="0" width="100%">
+                <tr class="order-trone">
+                    <td width="50%">
+                        <div class="table-condition">
+                            <input placeholder="请输入供应商名称" type="text" ms-duplex="supName">
+                        </div>
+                    </td>
+                    <td width="30%">
+                        <input ms-duplex-checked="brandIdCheck" name="brand" type="checkbox" value="" />品牌
+                    </td>
+                    <td>
+                        <button ms-click="supNameSearch" type="button" id="queryBtn" name="queryBtn" class="add_btn">搜索供应商</button>
+                    </td>
+
+                </tr>
+            </table>
+            <div style="height:400px;overflow-y: auto;">
+                <table class="index-table">
+                    <tbody>
+                        <tr>
+                            <th width="35%">供应商名称</th>
+                            <th width="20%">联系人</th>
+                            <th width="15%">电话</th>
+                            <th width="15%">找货次数</th>
+                            <th>操作</th>
+                        </tr>
+                        <tr ms-repeat="supNameList">
+                            <td><span ms-text="el.name"></span></td>
+                            <td><span ms-text="el.contacts"></span></td>
+                            <td><span ms-text="el.mobile"></span></td>
+                            <td><span ms-text="el.useCount"></span></td>
+                            <td><a href="javascript:void(0)" ms-click="chooseSup($index)">选择</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div id="alertDialogCtrlId" ms-widget="dialog,alertDialogCtrlId,$alertDialogOption">
+        <p>{{message}}</p>
+        <button type="button" id="closeAlertBtn" name="closeAlertBtn" ms-click="onCloseAlert" style="margin-top: 30px;margin-left: 70px;margin-bottom: 20px;width: 120px;height: 30px;">确定</button>
+    </div>
+
+    @@include('../../include/common/footer.html')
+</body>
+
+</html>

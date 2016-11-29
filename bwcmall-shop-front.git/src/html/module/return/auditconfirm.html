@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>确认收货</title>
+        @@include('../../include/common/intro.html')
+        <!-- build:css css/module/return/auditconfirm.css -->
+        <link rel="stylesheet" href="/css/module/return/auditconfirm.css"/>
+        <!-- endbuild -->
+    </head>
+    <body>
+        @@include('../../include/common/header.html')
+        @@include('../../include/common/nav.html')
+        <div class="main mod-auditconfirm"  ms-controller="auditconfirm">
+            <div class="sidebar">
+                @@include('../../include/common/menu.html')
+            </div>
+            <div class="content">
+                <ul class="breadcrumb">
+                    <li>
+                        <a href="javascript:void(0);">卖家中心</a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);">客户服务</a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);">退换货订单</a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);">退换货编号: <span ms-text="result.sn"></span></a>
+                    </li>
+                </ul>
+                <div class="panel">
+                    <div class="hd">
+                        <span class="title"><span>确认收货</span>
+                        <div style="float:right;position:relative;top:-3px;">
+                            <span class="btn btn-default">联系卖家</span>
+                        </div>
+                    </div>
+                    <div class="bd">
+                        <div class="row pline">
+                            <div class="col col-4"><p>换货编号：<span ms-text="result.sn"></span></p></div>
+                            <div class="col col-4"><p>订单编号：<span ms-text="result.orderSn"></span></p></div>
+                            <div class="col col-4"><p>退换货类型：<span ms-text="result.afterSaleTypeDesc"></span></p></div>
+                        </div>
+                        <div class="row pline">
+                            <div class="col col-4"><p>买家名称：<span ms-text="result.customerName"></span></p></div>
+                            <div class="col col-4"><p>申请时间：<span ms-text="result.createTime"></span></p></div>
+                            <div class="col col-4"><p>退换货状态：<span ms-text="result.afterSaleStatusDesc"></span></p></div>
+                        </div>
+                        <div class="row pline" ms-if="result.payMethodType">
+                            <div class="col col-4"><p>支付方式：<span ms-text="result.payMethodType"></span></p></div>
+                            <div class="col col-4"></div>
+                            <div class="col col-4"></div>
+                        </div>
+
+                        <div class="row">
+                            <div class="class-title"><span ms-text="result.afterSaleTypeDesc"></span>商品</div>
+                
+                            <table class="return-table">
+                                <thead>
+                                    <tr>
+                                        <th width="10%">商品名称</th>
+                                        <th width="10%">商品小图</th>
+                                        <th width="10%">品牌</th>
+                                        <th width="15%">型号</th>
+                                        <th width="15%">商品编号</th>
+                                        <th width="10%">SKU NO.</th> 
+                                        <th width="10%"><span ms-if="result.afterSaleType==0">退</span><span ms-if="result.afterSaleType!=0">换</span>货数量</th>
+                                        <th width="10%">单位</th>
+                                        <th width="10%">成交单价</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="item" ms-repeat-item="result.afterSaleItem" ms-if="result.afterSaleItem.length>0">
+                                        <td><span ms-text="item.goodsName"></span></td>
+                                        <td>
+                                            <img class="image" ms-src="{{item.mainImage}}" style="margin:5px auto 0px;width:60px;height:60px;">
+                                        </td>
+                                        <td><span ms-text="item.brandSet"></span></td>
+                                        <td><span ms-text="item.skuSnSet"></span></td>
+                                        <td><span ms-text="item.goodsid"></span></td>
+                                        <td><span ms-text="item.skuNoSet"></span></td>
+                                        <td><span ms-text="item.returnQuantity"></span></td>
+                                        <td><span ms-text="item.unitName"></span></td>
+                                        <td><span ms-text="item.price"></span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="row" style="margin-top:20px;margin-bottom:20px;">
+                            <span ms-click="submit" class="btn btn-large btn-primary" style="margin-left:120px;">确认收货</span>
+                            <span ms-click="cancel" class="btn btn-large btn-default" style="margin-left:30px;">取消</span>
+                        </div>
+
+                        <div class="row">
+                            <div class="class-title">协商记录</div>
+                            <div class="return-talk" ms-repeat-item="result.afterSaleLog" ms-if="result.afterSaleLog.length>0">
+                                <p class="bottom-line"><span class="talk-title" ms-text="item.ownerType"></span><span ms-text="item.createTime"></span></p>
+                                <div ms-repeat-itemson="item.messages">
+                                    <p ms-text="itemson"></p>
+                                </div>
+                                <table ms-if="item.buyerOrSalerRes.length>0">
+                                    <tr>
+                                        <td><span ms-text="item.ownerType"></span>凭证：</td>
+                                        <td>
+                                            <ul>
+                                                <li ms-each-res="item.buyerOrSalerRes" ms-if-loop="item.buyerOrSalerRes.length>0">
+                                                    <a class="goodimg" href="javascript:void(0)" ms-attr-href="{{res}}" data-lightbox="res-image">
+                                                        <img class="image" ms-src="{{res}}">
+                                                    </a>
+                                                 </li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        @@include('../../include/common/outro.html')
+        <script>require(['conf/return/auditconfirm']);</script>
+    </body>
+</html>

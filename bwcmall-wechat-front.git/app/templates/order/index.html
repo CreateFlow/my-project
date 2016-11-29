@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <title>订单详情</title>
+    <meta name="description" content=""> @@include('../common/meta.html')
+</head>
+
+<body v-cloak class="order-wrap" id="app">
+    <div class="container">
+        <div class="spacing">
+            <div class="order-header">
+                <div class="header-con">
+                    <div>
+                        <h1>{{order.generalStatus}}</h1>
+                        <p v-if="order.generalStatus == '待支付'">请尽快完成支付</p>
+                        <p v-if="order.generalStatus == '待发货'">{{order.paymentDate}}支付成功</p>
+                        <p v-if="order.generalStatus == '待收货'">{{order.verificationTime}}发货</p>
+                        <p v-if="order.generalStatus == '已完成'">{{order.completeTime}}确认收货</p>
+                        <p v-if="order.generalStatus == '已取消'">{{order.completeTime}}取消订单</p>
+                    </div>
+                    <div class="header-right">
+                        <span class="order-after-tip" v-if="order.orderAfsStatus == 'InProgress'">售后处理中</span>
+                        <a href="javascript:;" class="weui_btn weui_btn_plain_default" v-if="order.generalStatus == '待支付' && order.orderAfsStatus != 'InProgress'" @click="setOrderCancel()">取消订单</a>
+                    </div>
+                </div>
+                <div class="header-step border-top" v-if="order.generalStatus != '已取消'">
+                    <div><span class="step-text">支付</span>
+                        <div class="step-icon"><i :class.sync="step1 ? 'active' : ''"></i></div>
+                    </div>
+                    <div><span class="step-text">发货</span>
+                        <div class="step-icon"><i :class.sync="step2 ? 'active' : ''"></i></div>
+                    </div>
+                    <div><span class="step-text">收货</span>
+                        <div class="step-icon"><i :class.sync="step3 ? 'active' : ''"></i></div>
+                    </div>
+                    <p class="step-line border-top"></p>
+                </div>
+            </div>
+            <div class="order-items">
+                <div class="weui_panel weui_panel_access">
+                    <div class="weui_panel_hd" style="color: #424242;"><i class="iconfont icon-order"></i> 订单单号: {{order.sn}} <span class="pull-right" style="line-height: 28px;">￥{{order.amount}}</span></div>
+                    <div class="weui_panel_bd">
+                        <div class="weui_media_box weui_media_appmsg" v-for="item in order.orderItems">
+                            <div class="weui_media_hd">
+                                <img class="weui_media_appmsg_thumb" v-bind:src="item.image" alt="">
+                            </div>
+                            <div class="weui_media_bd">
+                                <h4 class="item-title">{{item.name}}</h4>
+                                <p class="weui_media_desc">型号：{{item.sn}}<span class="pull-right">数量:x{{item.quantity}}{{item.unitName}}</span></p>
+                                <div class="item-right">
+                                    ￥{{item.salePrice}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="service">
+            <p>如果您要取消订单、申请退换货等服务 </p>
+            <p>请前往www.bwcmall.com</p>
+        </div>
+        <div class="weui_tabbar" v-if="order.generalStatus == '待支付'">
+            <div class="order-footer-tip" style="font-size: 13px;">
+                实付金额：￥{{order.amount}}
+            </div>
+            <a href="javascript:;" class="weui_btn weui_btn_warn" @click="setPayModal()">支付</a>
+        </div>
+        <div class="weui_tabbar" v-if="order.generalStatus == '待收货' && order.orderAfsStatus != 'InProgress'">
+            <div class="order-footer-tip" style="padding-top: 10px;">
+                温馨提示：发货7天后，会自动标注确认收货哟~
+            </div>
+            <a href="javascript:;" class="weui_btn weui_btn_primary" @click="setConfirmReceived()">确认收货</a>
+        </div>
+        <toast :show.sync="confirmModal">{{confirmMsg}}</toast>
+        <div class="pay-panel">
+            <div class="weui_mask_transition" :class.sync="payAction ? 'weui_fade_toggle': ''" :show.sync="payAction" @click="closePayModal()" v-bind:style="payStyle"></div>
+            <div class="weui_actionsheet" :class.sync="payAction ? 'weui_actionsheet_toggle': ''">
+                <div class="weui_cells">
+                    <div class="weui_cell">
+                        <div class="weui_cell_bd weui_cell_primary">
+                            <p><i class="iconfont icon-rmb"></i> 请选择支付方式</p>
+                        </div>
+                        <div class="weui_cell_ft" @click="closePayModal()">关闭</div>
+                    </div>
+                </div>
+                <div class="weui_cells weui_cells_radio pay-radio">
+                    <label class="weui_cell weui_check_label" for="x11" v-show="accountCredit.accountCreditId">
+                        <div class="weui_cell_bd weui_cell_primary">
+                            <div class="pull-left">
+                                <img class="pay-icon" src="../images/order/zhang.png">
+                            </div>
+                            <div class="pay-radio-con">
+                                <p>上海佰万仓科技有限公司</p>
+                                <p>可用额度：{{accountCredit.creditAmount}}元，本次使用{{accountCredit.orderAmount}}元</p>
+                            </div>
+                        </div>
+                        <div class="weui_cell_ft">
+                            <input type="radio" class="weui_check" name="radio1" value="4" id="x11" v-model="payMethod">
+                            <span class="weui_icon_checked"></span>
+                        </div>
+                    </label>
+                    <label class="weui_cell weui_check_label" for="x12" v-show="isME">
+                        <div class="weui_cell_bd weui_cell_primary">
+                            <p class="pay-text-single"><img class="pay-icon" src="../images/order/wechat.png">微信支付</p>
+                        </div>
+                        <div class="weui_cell_ft">
+                            <input type="radio" name="radio1" class="weui_check" value="5" id="x12" checked="checked" v-model="payMethod">
+                            <span class="weui_icon_checked"></span>
+                        </div>
+                    </label>
+                </div>
+                <div class="weui_tabbar" v-if="order.generalStatus=='待支付'">
+                    <div class="order-footer-tip" style="font-size: 13px;">
+                        实付金额：￥{{order.amount}}
+                    </div>
+                    <a href="javascript:;" class="weui_btn weui_btn_warn" :class.sync="noPayMethod ? 'disabled' : ''" @click="getPayInfo()">立即支付</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    @@include('../common/footer.html')
+    <!-- build:js(.) /js/page/order/order-modules.js -->
+    <script src="/bower_components/vux/dist/components/actionsheet/index.js"></script>
+    <!-- endbuild -->
+    <!-- build:js({.tmp,app}) /js/page/order/order.js -->
+    <script src="/js/page/order/order.js"></script>
+    <!-- endbuild -->
+</body>
+
+</html>

@@ -1,0 +1,66 @@
+ 
+<script type="text/javascript" src="/scripts/module/common/side-bar.js"></script>
+ <div class="bwc-side-bar-wrap" ms-controller="sideBarCtrl">
+    <div class="bwc-side-bar">
+        <div class="bwc-side">
+     <!--        <div class="bwc-side-plugin-fllow">
+                <div class="bwc-side-plugin-title trans_link_3">我的收藏</div>
+                <a href="/member/myFavorite.html" class="bwc-side-plugin-link trans_link_3">查看全部收藏</a>
+
+                <div class="bwc-side-fllow-list">
+                    <div class="bwc-side-fllow-block" ms-repeat="favoriteListData" ms-if="favoriteListData.length>0">
+                        <img ms-src="el.image+'!120'" alt="收藏商品"/>
+                        <a ms-href="/product/{{el.productId}}.html" class="bwc-side-fllow-title">{{el.brandNameEn}}{{'/'+el.brandName}} {{el.name}}</a>
+                        <span class="bwc-side-fllow-price">￥{{el.price}}/{{el.unit}}</span>
+                    </div>
+                    <div class="bwc-side-fllow-none" ms-visible="favoriteListData.length==0">
+                        暂无收藏的商品数据~
+                    </div>
+                    <a href="/member/myFavorite.html" class="more-favorite-link">全部收藏</a>
+                </div>
+            </div> -->
+
+            <div class="bwc-side-plugin-cart">
+                <div class="bwc-side-plugin-title trans_link_3">我的进货单</div>
+                <a href="/cart/list.html" class="bwc-side-plugin-link trans_link_3">去结算</a>
+                <div class="bwc-side-fllow-list">
+                    <div class="bwc-side-fllow-block-wrap" ms-repeat="cartListData" ms-if="cartListData.length>0">
+                        <img class="f-fl" ms-src="el.image+'!64'" alt="购物车商品"/>
+                        <div class="f-fr bwc-side-cart-block-inner">
+                            <a ms-href="/goods/detail.html?id={{el.goodsId}}" class="bwc-side-cart-title">{{el.brandName}} {{el.name}}</a>
+                            <span class="bwc-side-cart-price" ms-html=" formatPrice(el.price)+'/'+el.unit"></span>
+                            <span class="bwc-side-cart-num">X{{el.quantity}}</span>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="bwc-side-fllow-none" ms-visible="cartListData.length==0">
+                        暂无商品数据~
+                    </div>
+                    <div class="bwc-side-cart-bottom">
+                        <div class="bwc-side-cart-block" ms-text="'一共'+cartNum+'件商品'"></div>
+                        <div class="bwc-side-cart-block" ms-html="'总价：'+formatPrice(cartTotal)"></div>
+                        <a href="/cart/list.html" class="more-cart-link">去结算</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bwc-bar">
+            <a href="#" class="bwc-bar-btn"></a>
+           <!--  <div class="bwc-bar-fllow trans_link_3">
+                <div class="bwc-bar-line bwc-bar-line-top"></div>
+                <span class="bwc-bar-fllow-icon"></span>
+                <span class="bwc-bar-fllow-word">收</span>
+                <span class="bwc-bar-fllow-word">藏</span>
+                <span class="bwc-bar-fllow-num">{{favoriteNum>99?'99+':favoriteNum}}</span>
+                <div class="bwc-bar-line bwc-bar-line-bottom"></div>
+            </div> -->
+
+            <div class="bwc-bar-cart trans_link_3"  ms-mouseenter="showFllowWord()" ms-mouseleave ="hideFllowWord()" >
+                <div class="bwc-bar-line bwc-bar-line-top"></div>
+                 <span class="bwc-ic-round" ms-text="cartNum>99?'99+':cartNum"></span>
+                 <span class="bwc-bar-cart-icon"></span> 
+            </div>
+             <span class="bwc-bar-fllow-word  bwc-bar-cart trans_link_3" ms-visible="showWord">进货单</span>
+        </div>
+    </div>
+</div>    

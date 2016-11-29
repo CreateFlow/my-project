@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>商品详情</title>
+    @@include('../../include/common/intro.html')
+    <!-- build:css css/module/order/orderdetail.css -->
+    <link rel="stylesheet" href="/css/module/goods/detail.css" />
+    <!-- endbuild -->
+</head>
+
+<body>
+    @@include('../../include/common/header.html') @@include('../../include/common/nav.html')
+    <div class="main mod-orderdetail" ms-controller="goodsDetail">
+        <div class="sidebar">
+            @@include('../../include/common/menu.html')
+        </div>
+        <div class="content">
+<!--
+            <ul class="breadcrumb">
+                <li>
+                    <a href="javascript:void(0);">卖家中心</a>
+                </li>
+                <li>
+                    <a href="/goods/list.html">商品管理</a>
+                </li>
+                <li>
+                    <a href="/goods/list.html">商品管理首页</a>
+                </li>
+                <li>
+                    <a href="javascript:void(0);">商品详情</a>
+                </li>
+            </ul>
+-->
+            <div class="panel">
+                <div class="hd">
+                    <span class="title">商品详情</span>
+                </div>
+                <div class="bd">
+                    <div class="goods-info">
+                        <div class="box">
+                            <div class="box-title">
+                                <span class="title">商品SPU信息</span>
+                            </div>
+                            <div class="box-cont">
+                                <div class="item">
+                                    <span class="item_label">名称：</span>
+                                    <div class="item_value" ms-text="goodsInfo.sku.spu.name">
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <span class="item_label">品牌：</span>
+                                    <div class="item_value" ms-text="goodsInfo.sku.spu.brand.name">
+                                    </div>
+                                </div>
+                                <div class="item" ms-if="goodsInfo.sku.spu.categorys.length>0">
+                                    <span class="item_label">分类：</span>
+                                    <div class="item_value" ms-repeat-cate="goodsInfo.sku.spu.categorys">
+                                        <div ms-text="cate.pathName+' > '+cate.name"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="box">
+                            <div class="box-title table-related">
+                                <span class="title">商品SKU信息</span>
+                            </div>
+                            <div class="box-cont">
+                                <div class="item">
+                                    <span class="item_label">名称：</span>
+                                    <div class="item_value" ms-text="goodsInfo.sku.name">
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <span class="item_label">型号：</span>
+                                    <div class="item_value" ms-text="goodsInfo.sku.sn">
+                                    </div>
+                                </div>
+                                <div class="item" ms-if="goodsInfo.sku.attributes.lenght>0">
+                                    <span class="item_label">属性：</span>
+                                    <div class="item_value" ms-repeat-attr="goodsInfo.sku.attributes">
+                                        <div ms-text="attr.attributeName+'：'+attr.attributeValue"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="box">
+                            <div class="box-title">
+                                <span class="title">基本信息</span>
+                            </div>
+                            <div class="box-cont">
+                                <div class="item">
+                                    <span class="item_label"><span class="required">*</span>名称：</span>
+                                    <input class="item_value inputbox" ms-duplex="goodsInfo.name">
+                                </div>
+                                <div class="item" style="margin-bottom: 8px;">
+                                    <span class="item_label"><span class="required">*</span>单位：</span>
+                                    <!--<input class="item_value inputbox" ms-duplex="goodsInfo.unit">-->
+                                    <div class="item_value">
+                                        <select ms-widget="dropdownlist,unitListId,$unitListOptions" ms-duplex="unitValue">
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <span class="item_label"><span class="required">*</span>价格：</span>
+                                    <input class="item_value inputbox" type="number" ms-duplex="goodsInfo.subsidyPrice" ms-attr-disabled="goodsInfo.priceStatus==1">
+                                    <!--<a href="javascript:void(0)" ms-click="configPrices()">配置</a>-->
+                                </div>
+                                <div class="item">
+                                    <span class="item_label">标为待询价</span>
+                                    <div class="item_value">
+                                        <div class="radio-inline">
+                                            <label><input name="priceStatus" value="1" type="radio" ms-duplex-string="goodsInfo.priceStatus">&nbsp&nbsp是</label>
+                                        </div>
+                                        <div class="radio-inline">
+                                            <label><input name="priceStatus" value="0" type="radio" ms-duplex-string="goodsInfo.priceStatus">&nbsp&nbsp否</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <span class="item_label">上架设定</span>
+                                    <div class="item_value">
+                                        <div class="radio-inline">
+                                            <label><input name="marketStatus" value="1" type="radio" ms-duplex-string="goodsInfo.marketStatus">&nbsp&nbsp立即上架</label>
+                                        </div>
+                                        <div class="radio-inline">
+                                            <label><input name="marketStatus" value="0" type="radio" ms-duplex-string="goodsInfo.marketStatus">&nbsp&nbsp暂不上架</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <span class="item_label">是否售罄</span>
+                                    <div class="item_value">
+                                        <div class="radio-inline">
+                                            <label><input name="soldOutStatus" value="1" type="radio" ms-duplex-string="goodsInfo.soldOutStatus">&nbsp&nbsp是</label>
+                                        </div>
+                                        <div class="radio-inline">
+                                            <label><input name="soldOutStatus" value="0" type="radio" ms-duplex-string="goodsInfo.soldOutStatus">&nbsp&nbsp否</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <span class="item_label">是否支持退换货</span>
+                                    <div class="item_value">
+                                        <div class="radio-inline">
+                                            <label><input name="returnStatus" value="1" type="radio" ms-duplex-string="goodsInfo.returnStatus">&nbsp&nbsp支持</label>
+                                        </div>
+                                        <div class="radio-inline">
+                                            <label><input name="returnStatus" value="0" type="radio" ms-duplex-string="goodsInfo.returnStatus">&nbsp&nbsp不支持</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <span class="item_label">运费设置</span>
+                                    <div class="item_value">
+                                        <div class="radio-inline">
+                                            <label><input name="freightStatus" value="0" type="radio" ms-duplex-string="freightStatus">&nbsp&nbsp免运费</label>
+                                        </div>
+                                        <div class="radio-inline" style="width:500px;">
+                                            <label><input name="freightStatus" value="1" type="radio" ms-duplex-string="freightStatus">&nbsp&nbsp<input class="inputbox" type="number" ms-duplex="goodsInfo.freight" placeholder="请输入运费" />元/笔订单（不管单次购买多少此件商品）</label>
+                                        </div>
+                                    </div>
+                                </div>  
+                            </div>
+                        </div>     
+                        <div class="box">
+                            <div class="box-title">
+                                <span class="title">商品图片</span>
+                            </div>
+                            <div class="box-cont goods-detail-info">
+                                <div class="imgs-wrap">
+                                    <div class="img-item" ms-repeat-el="goodsInfo.resourceIds">
+                                        <img ms-attr-src="el.resources"/>
+                                        <div class="btns">
+                                            <button class="btn" ms-click="deleteGoodsImg($index)">删除</button>
+                                            <button class="btn btn-primary" ms-click="setGoodsImg($index)" ms-attr-disabled="$index==0">设为封面</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="upload-pic-wrap">
+                                    <input id="uploadPic" name="uploadPic" type="file" multiple="true" />
+                                </div>
+                                <div class="editor-wrap">
+                                    <textarea ms-widget="kindeditor,$,$editorOptions" ms-duplex="goodsInfo.remarks"></textarea>
+                                </div>
+                            </div>
+                        </div>                 
+                    </div>
+
+                    <div class="step-last">
+                        <button class="btn btn-primary btn-large" ms-click="save">保存</button>
+                    </div>
+
+                    <div ms-widget="dialog,dialogAlert,$alertOpts">
+                        <div>{{alertMessage}}</div>
+                        <div class="step-last">
+                            <button class="btn btn-primary btn-large" ms-click="onCloseAlert()">确定</button>
+                        </div>
+                    </div>
+
+                    <div ms-widget="dialog,dialogSubmitTip,$submitTipOpts">
+                        保存成功
+                    </div>  
+
+                    <div ms-if="showLoading">
+                            <div class="oni-loading" ms-widget="loading" data-loading-type="spinning-spin"></div>
+                    </div>
+
+                    <!-- config prices dialog -->
+                    <div id="dialogConfigPrices" ms-widget="dialog,dialogConfigPrices,$dialogConfigPricesOpts">
+                        <div class="box-cont">
+                            <div class="item">
+                                <span class="item_label">货期：</span>
+                                <label><input class="item_value inputbox" ms-duplex="goodsPrice.ship" type="number" style="width:250px">&nbsp天<span style="color:gray;">（必填，填入0天，即为当天发货）</span></label>
+                            </div>
+                            <div class="item">
+                                <span class="item_label">区间：</span>
+                                <lable>
+                                    从&nbsp<input class="item_value inputbox" type="number" style="width:104px" ms-duplex="goodsPrice.quantityMin">&nbsp&nbsp至&nbsp&nbsp<input class="item_value inputbox" type="number" style="width:104px" ms-duplex="goodsPrice.quantityMax">
+                                </lable>
+                            </div>
+                            <div class="item">
+                                <span class="item_label">价格：</span>
+                                <input class="item_value inputbox" type="number" style="width:250px" ms-duplex="goodsPrice.price"> <button class="btn btn-primary" ms-click="addPrice()" style="margin-left:50px;">添加</button>
+                            </div>
+                            <div>
+                                <label>注：请录入采购区间的定价，最多支持3个区间。</label>
+                            </div>
+                        </div>
+
+                        <div class="table-wrap">
+                            <table class="ctable">
+                                <thead>
+                                    <tr class="thb ctr">
+                                        <th style="width:100px;">货期（天）</th>
+                                        <th style="width:250px;">区间</th>
+                                        <th style="width:100px;">售价（元）</th>
+                                        <th style="width:50px;">操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="ctr tr-bg" ms-class="tr-bg:($index%2==0)" ms-repeat-price="goodsInfo.goodsShipPrices">
+                                        <td><span ms-if="price.ship!=0">{{price.ship}}</span><span ms-if="price.ship==0">当天</span></td>
+                                        <td><span>{{price.quantityMin}}</span><span ms-if="price.quantityMax!=-1">~{{price.quantityMax}}</span><span ms-if="price.quantityMax==-1">以上</span></td>
+                                        <td>{{price.price}}</td>
+                                        <td><a href="javascript:void(0)" ms-click="deletePrice($index)">删除</a></label></td>                                     
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="step-last">
+                            <button class="btn btn-primary" ms-click="onSavePrices()">确定</button>
+                        </div>
+                    </div> 
+                </div>
+            </div>
+        </div>
+        @@include('../../include/common/outro.html')
+        <script>
+        require(['conf/goods/detail']);
+        </script>
+</body>
+
+</html>

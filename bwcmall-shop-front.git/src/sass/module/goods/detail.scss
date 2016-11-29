@@ -1,0 +1,109 @@
+@charset "UTF-8";
+@import "../../common/scaffolding";
+.goods-info {
+	.btn-large {
+		height: 40px;
+        line-height: 40px;
+        padding: 0 15px;
+        font-size: 14px;
+        font-weight: bold;
+        text-align: center;
+        color: #fff;
+        background-color: #e33333;
+        margin-left: 80px;
+	}
+	.radio-inline {
+		display:inline-block;
+		width: 120px;
+	}
+	.item {
+		position: relative;
+		line-height: 36px;
+		.item_label {
+			position: absolute;
+			left: 10px;
+			top: 0;
+		}
+		.item_value {
+			margin-left: 150px;
+			height: 32px;
+		}
+	}
+	.imgs-wrap {
+		overflow: hidden;
+		.img-item {
+			float: left;
+			margin-left: 10px;
+			img {
+				width: 160px;
+				height: 140px;
+				display: block;
+				border: none;
+			}			
+		}
+		.img-item:first-of-type {
+			margin-left: 0;
+		}
+		.btn {
+			width: 50%;
+			float: left;
+			height: 26px;
+		}
+	}
+	.goods-detail-info {
+		padding: 10px;
+	}
+}
+.box {
+	.box-title {
+		.title {
+			background: #fafafa;
+			padding: 0 10px;
+			border: 1px solid #ddd;
+			display: inline-block;
+			height:40px;
+			line-height: 40px;
+			vertical-align: top;
+		}
+		font-size: 14px;
+		margin-top: 10px;		
+	}
+	.box-cont {
+		border: 1px solid #ddd;
+	}
+}
+
+.empty-tip {
+    line-height: 115px;
+    padding-left: 50px;
+}
+
+.upload-pic-wrap {
+	margin-top: 10px;
+}
+.inputbox {
+	border: 1px solid #e0e0e0;
+	width: 200px;
+	height: 30px;
+}
+.operation {
+	text-align: center;
+}
+.error {
+	border: 1px solid red;
+}
+
+.step-last {
+	text-align: center;
+	padding: 20px 0;
+}
+
+.oni-dialog-footer {
+    display: none;
+}
+
+#dialogConfigPrices {
+	.item {
+		height: 36px;
+	}
+}

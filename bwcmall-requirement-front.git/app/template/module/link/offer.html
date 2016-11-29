@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html> 
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <title>报价单</title>
+    @@include('../../include/common/meta.html')
+    @@include('../../include/common/member-include.html') 
+
+    <link rel="stylesheet" type="text/css" href="/styles/module/link/offer.css"> 
+    <script src="/scripts/module/link/offer.js"></script>
+</head>
+
+<body ms-controller="offerCtrl">
+    <div class="g-content g-clearfix" ms-if="dataList.invalid">
+        <div style="font-size: 20px; text-align: center; margin: 50px;">该报价信息已失效，无法查看相关信息，谢谢！</div>
+    </div>
+    <!--主要内容-->
+    <div class="g-content g-clearfix" ms-if="!dataList.invalid">
+        <div class="content-head">
+            <div class="module-title">
+                <div><span>报价单</span><span style="font-size:12px;font-weight: normal;" ms-text="expireInfo"></span><span style="float: right;font-weight: normal;font-size: 12px;margin-right: 30px;"><input type="checkbox" ms-duplex-checked="showItem">&nbsp&nbsp显示原始需求信息</span></div>
+            </div>
+        </div>
+        <div class="detail-table-panel">
+            <div class="order-table-wrap">
+                <div class="detail-table">
+                    <table cellpadding="0" width="100%">
+                        <!--表单头部-->
+                        <tr class="order-table-top">
+                           <th width="5%">
+                                <span ms-click="checkoutall" class="f-ib m-checkbox checkbox-fix" style="cursor: pointer;">
+                                    <strong ms-if="allstatus" ms-class="m-checkbox-icon m-checkbox-icon-checked"></strong>
+                                    <strong ms-if="!allstatus" ms-class="m-checkbox-icon"></strong>
+                                </span>
+                            </th>
+                            <th width="10%">
+                                品牌
+                            </th>
+                            <th width="10%">
+                                品名
+                            </th>
+                            <th width="10%">
+                                型号
+                            </th>
+     
+                            <th width="10%">
+                                单位
+                            </th>
+                            <th width="10%">
+                                数量
+                            </th>
+                            <th width="10%">
+                                销售价
+                            </th>
+
+                            <th width="10%">
+                                货期
+                            </th>
+                            <th width="10%">
+                                备注
+                            </th>
+                        </tr>
+
+                        <!--商品一行-->
+                        <tr ms-repeat="dataList.offerList">
+                            <!--品牌-->
+                            <td ms-if="el.itemRow&&showItem" style="height:20px;background-color: #E7E7E7;">
+                                原始需求
+                            </td>
+                            <td ms-if="el.itemRow&&showItem" style="height:20px;background-color: #E7E7E7;">
+                                <span ms-text="el.brandName"></span>
+                            </td>
+                            <td ms-if="el.itemRow&&showItem" style="height:20px;background-color: #E7E7E7;">
+                                <span ms-text="el.itemName"></span>
+                            </td>
+                            <!--型号-->
+                            <td ms-if="el.itemRow&&showItem" style="height:20px;background-color: #E7E7E7;">
+                                <span type="text" ms-text="el.skuSnSet"></span>
+                            </td>
+                            <td ms-if="el.itemRow&&showItem" style="height:20px;background-color: #E7E7E7;">
+                                <span type="text" ms-text="el.unit"></span>
+                            </td>
+                            <td colspan="4" ms-if="el.itemRow&&showItem" style="height:20px;background-color: #E7E7E7;">
+                            </td>
+                            <td ms-if="!el.itemRow">
+                                <span ms-click="checkout($index)" class="f-ib m-checkbox checkbox-fix" style="cursor: pointer;">
+                                    <strong ms-if="el.status" ms-class="m-checkbox-icon m-checkbox-icon-checked"></strong>
+                                    <strong ms-if="!el.status" ms-class="m-checkbox-icon"></strong>
+                                </span>
+                            </td>
+                            <td ms-if="!el.itemRow">
+                                <span ms-text="el.brandName"></span>
+                            </td>
+                            <td ms-if="!el.itemRow">
+                                <span ms-text="el.itemName"></span>
+                            </td>
+                            <!--型号-->
+                            <td ms-if="!el.itemRow">
+                                <span type="text" ms-text="el.skuSnSet"></span>
+                            </td>
+                            <td ms-if="!el.itemRow">
+                                <span type="text" ms-text="el.unit"></span>
+                            </td>
+                            <td ms-if="!el.itemRow">
+                                <input ms-duplex="el.requiredQuantity" ms-widget="spinner, $, $spinnerOpts" />         
+                            </td>
+                            <td ms-if="!el.itemRow">
+                                <span type="text" ms-text="el.salePrice"></span>
+                            </td>
+                            
+                            <td ms-if="!el.itemRow">
+                                <span type="text" ms-text="el.shipMin + '-' + el.shipMax + '天'"></span>
+                            </td>
+                            <!--销售价-->
+                            <td ms-if="!el.itemRow">
+                                <span type="text" ms-text="el.remarks"></span>
+                            </td>
+
+                        </tr>
+
+                        <tr ms-repeat="dataList.canNotProcessList">
+                            <!--品牌-->
+                            <td>
+  
+                            </td>
+                            <td>
+                                <span ms-text="el.brandName"></span>
+                            </td>
+                            <td>
+                                <span ms-text="el.itemName"></span>
+                            </td>
+                            <!--型号-->
+                            <td>
+                                <span type="text" ms-text="el.skuSnSet"></span>
+                            </td>
+                            <td>
+                                <span type="text" ms-text="el.unit"></span>
+                            </td>
+                            <td>
+                              
+                            </td>
+                            <td>
+                               
+                            </td>
+                            
+                            <td>
+                                
+                            </td>
+                            <!--销售价-->
+                            <td style="color:red">
+                                无法处理：<span type="text" ms-text="el.reason"></span>
+                            </td>
+                        </tr>
+                        <tr >
+                            <!--品牌-->
+                            <td>
+                                收货地址：
+                            </td>
+                            <td colspan="5" style="text-align:left">
+                                <div ms-repeat="dataList.custAddressList" style="margin-right:50px;">
+                                    <span ms-click="checkaddress($index)" class="f-ib m-checkbox checkbox-fix" style="cursor: pointer;">
+                                        <strong ms-if="$index == addressIndex" ms-class="m-checkbox-icon m-checkbox-icon-checked"></strong>
+                                        <strong ms-if="$index != addressIndex" ms-class="m-checkbox-icon"></strong>
+                                    </span>
+                                     <span>{{el.corpName}} - {{el.address}} - {{el.consignee}}({{el.phone}})</span>
+                                </div>
+                            </td>
+                            <td colspan="3" style="text-align:right;">
+                                 <span style="margin-right: 40px;">已经选中的商品总金额：<span style="font-size: 14px;color: #F00;">{{totalAmount}}</span></span>
+                            </td>
+                            
+                        </tr>
+                    </table>
+
+                </div>
+              
+                <div class="table-submit"> 
+                     
+                     <div class="detail-query-conditions">
+                        
+                        
+                        <div class="detail-condition" style="width:300px;">
+                            <input placeholder="如果您有任何意见或者要求，请在这里备注" type="text" style="width:280px;" ms-duplex="remark">
+                        </div> 
+                        <div class="detail-condition"> 
+                             <button ms-click="notBuy" style="height:34px;line-height:34px;" type="button" class="del_btn">我知道了，考虑以后购买</button> 
+                        </div>
+                        <div class="detail-condition"> 
+                             <button ms-click="query" style="height:34px;line-height:34px;" type="button" class="query_btn">下单</button> 
+                        </div>
+                        
+                        
+                    </div>
+
+                </div>
+            </div>     
+        </div>
+    </div>
+
+    <div id="alertDialogCtrlId" ms-widget="dialog,alertDialogCtrlId,$alertDialogOption">
+        <p>{{message}}</p>
+        <button type="button" id="closeAlertBtn" name="closeAlertBtn" ms-click="onCloseAlert" style="margin-top: 30px;margin-left: 70px;margin-bottom: 20px;width: 120px;height: 30px;">确定</button>
+    </div>
+       
+</body>
+
+</html>

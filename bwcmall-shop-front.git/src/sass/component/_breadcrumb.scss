@@ -1,0 +1,33 @@
+@charset "UTF-8";
+
+.breadcrumb {
+    background-color: #f5f5f5;
+    border: 1px solid #e0e0e0;
+    padding: 1em;
+    > li {
+        display: inline-block;
+        + li {
+            &:before {
+                color: #333;
+                content: "\003E";
+            }
+        }
+        > a {
+            cursor: pointer;
+            font-size: 12px;
+            color: #333;
+            text-decoration: none;
+            &:hover {
+                color: #e13539;
+            }
+        }
+        &:last-child {
+            > a {
+                cursor: default;
+                &:hover {
+                    color: #333;
+                }
+            }
+        }
+    }
+}

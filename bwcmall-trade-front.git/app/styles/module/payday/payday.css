@@ -1,0 +1,484 @@
+/**
+ * Created by jason_wzl on 2015/11/5 005.
+ */
+.g-content {
+    margin: 30px auto;
+    width: 1200px;
+    border: 1px solid #dad6d4;
+    font-family: "Microsoft YaHei";
+    /*padding: 20px;*/
+    min-height: 580px;
+}
+.g-content button,.g-content input,.g-content select{
+    font-family: "Microsoft YaHei";
+}
+
+/*tab页的样式 ++++++++++*/
+.content-head {
+    height: 42px;
+    border-bottom: 1px solid #dad6d4;
+}
+.content-nav{
+    width: 160px;
+    height: 39px;
+    line-height: 36px;
+    text-align: center;
+    font-size: 16px;
+    color: #333;
+    border-top: 4px solid #fff;
+    border-right: 1px solid #dad6d4;
+}
+.content-nav-next{
+    border-right-color: #fff;
+}
+.content-nav-active{
+    border-top: 4px solid #746565;
+    border-right-color: #dad6d4;
+    background-color: #fff;
+} 
+.module-header {
+    height: 40px;
+    line-height: 40px;
+    background-color: #dad6d4;
+}
+.module-title {
+    font-size: 15px;
+    font-weight: bold;
+    padding-left: 20px; 
+}
+.invoice-query-conditions{
+    margin: 30px 0px 0px 25px;
+    font-size: 14px; 
+}
+.invoice-condition{
+    margin:5px;
+    width: 300px;
+    height: 40px;
+    float: left;
+    line-height: 40px;
+}
+.invoice-condition span{
+    width: 100px;
+} 
+.invoice-condition  input{
+    height: 25px;  
+    width: 200px;
+    border: 1px solid #ddd;
+    padding-left: 5px;
+    margin-left: 10px;
+}
+.invoice-condition  select {
+  height: 25px;  
+  width: 200px;
+  border: 1px solid #ddd;
+  padding-left: 5px;
+  margin-left: 10px;
+}
+.invoice-actions{
+    padding: 10px 0px 20px 103px;
+    clear: both;
+}
+.query_btn{
+    height: 35px;
+    line-height: 35px;
+    width: 150px;
+    background-color: #e33333;
+    border: 0px;
+    color: white;
+    margin-left:57px;
+}
+.query_btn:hover{
+    background-color: #F54B4B;
+}
+.invoice-table-panel{
+    margin: 20px 20px 20px 20px;
+    min-height: 250px;
+}
+
+.invoice-table-panel2{
+    margin:20px;
+    height: 160px;
+}
+.invoice-table-panel2 table.payf{
+   width: 100%;
+   height:150px;
+   line-height: 40px;
+}
+.invoice-table-panel2 table.pays td,.invoice-table-panel2 table.pays2 td{
+    padding: 20px;
+}
+.invoice-table-panel2 table.pays{
+    width: 840px;
+    border:3px dashed #e7e3da;
+    height: 150px;
+}
+.invoice-table-panel2 table.payf .title{
+    font-size: 14px;
+    font-weight: bold;
+}
+.invoice-table-panel2 table.payf .total{
+    font-size: 20px;
+    font-weight: bold;
+}
+.invoice-table-panel2 table.pays2{
+    width: 270px;
+    border:3px dashed #e7e3da;
+    height: 150px;
+    float: right;
+}      
+.invoice-table{
+    border: 1px solid #dad6d4;
+    width: 100%;
+}
+.invoice-table th{
+    border-bottom: 1px solid #dad6d4;
+    background-color: #f8f8f8;
+    font-size: 15px;
+    color: #333;
+    line-height: 36px;
+    height: 40px;
+    text-align: center;
+}
+.invoice-table td{
+    font-size: 14px;
+    height: 30px;
+    line-height: 36px;
+    text-align: center;
+    color: #333;
+    border-bottom: 1px solid #dad6d4;
+}
+.invoice-table .tab-date{
+    color: #afaaa7;
+}
+.invoice-table .tab-add{
+    color: #24bd36;
+}
+.invoice-table .tab-sub{
+    color: #e83637;
+}
+
+.pager-switch{
+    color: #3f3145;
+    font-size: 14px;
+    text-align: center;
+    padding: 4px 11px;
+    border: 1px solid #d0d3d8;
+    -webkit-border-radius: 12px;
+    -moz-border-radius: 12px;
+    border-radius: 12px;
+    margin-right: 6px;
+}
+.pager-switch:hover{
+    background-color: #5b534e;
+    border-color: #5b534e;
+    color: #fff;
+}
+.pager-item{
+    font-size: 14px;
+    color: #3f3145;
+    margin-right: 10px;
+}
+.pager-item:hover{
+    color: #e83637;
+    text-decoration: underline;
+}
+.pager-item-active{
+    color: #e83637;
+    text-decoration: underline;
+}
+.pager-num{
+    font-size: 14px;
+}
+
+
+td a {
+    color: blue;
+    text-decoration: underline;
+}
+td a:hover {
+    color: blue;
+    text-decoration: underline;
+}
+#orderTime {
+     margin: -40px 0px 0px 80px
+}
+ 
+button {
+    cursor: pointer;
+}
+.f-fr{
+    margin-right: 10px;
+}
+.oni-datepicker-input-wrapper input{
+    margin:0px !important;
+    padding:0px 90px 0px 5px;
+}
+.oni-datepicker-input-wrapper {
+    border: none;
+}
+.oni-coupledatepicker{
+     
+}
+.oni-coupledatepicker .label{
+    margin-left: 10px;
+    margin-right: 10px;
+    line-height: 35px;
+}
+.oni-datepicker-input-wrapper{
+    height: 25px;
+}
+.oni-coupledatepicker-item{
+    line-height: 25px;
+}
+.table-header{
+    text-align: left !important;
+    float: left;
+}
+.table-header div{
+    float: left;
+    margin-right: 20px;
+    margin-left: 5px;
+}
+.table-header span{
+    margin-left: 10px;
+}
+.table-header a{
+  margin-left: 10px;
+}
+.money{
+    color: red;
+}
+.money:hover{
+    color: red;
+}
+ 
+
+
+/*tab页的样式 ++++++++++*/
+.content-head {
+    height: 42px; 
+    padding-left: 70px;
+    margin-top: 20px;
+}
+.content-nav{
+    width: 160px;
+    height: 39px;
+    line-height: 36px;
+    text-align: center;
+    font-size: 16px;
+    color: #333;
+    border-top: 1px solid #dad6d4;
+    border-right: 1px solid #dad6d4;
+    border-left: 1px solid #dad6d4;
+}
+.content-nav-next{
+    border-right-color: #fff;
+}
+.content-nav-active{
+    border-top: 4px solid #746565;
+    border-right-color: #dad6d4;
+    background-color: #fff;
+}
+/*tab页的样式 ----------*/
+
+.empty-invoice-alter{
+    min-height: 350px;
+    text-align: center;
+    margin-top: 70px;
+    font-size: 14px;
+    line-height: 25px;  
+}
+.empty-invoice-alter img{
+    margin-bottom: 20px;
+}
+.progress{
+    font-size: 15px;
+    margin-top: 20px;
+    color: gray;
+}
+.progress div{
+    float: left;
+}
+.progress-selected {
+    font-weight: bold;
+    color: black;
+}
+.invoice-content{
+    min-height: 350px;
+    overflow: auto    ; 
+}
+.action-panel{
+    text-align: center;
+    margin-top: 10px;
+}
+.action-panel button{
+    padding: 10px;
+    margin-left: 10px;
+    width: 150px;
+    background-color: white;
+    border: 1px solid #ddd;
+    font-size: 15px;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+.btn-confirm{
+    color: white !important;
+    background-color: #e83637 !important;
+}
+.dialog-apply-content{
+    margin-left: 40px;
+    margin-right: 40px;
+}
+.step-content{
+    clear: both;     
+    padding-top: 10px;
+    font-size: 15px;
+}
+.invoice-title-label{
+    float: left; 
+    margin-top: 10px;
+    clear: both;;
+}
+.invoice-title{
+    margin-left: 80px; 
+}
+.invoice-title div{
+    padding: 10px;
+    width: 350px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+.selected{
+    border: 2px solid #5c393b;
+    background: url("/images/invoice/san.png") no-repeat 355px 20px;
+}
+.address-panel{
+margin-left: 10px;
+}
+.address-consignee{
+    float: left; 
+   width: 70px;
+}
+.address-detail{
+    width: 350px;
+}
+.address-panel div.selected{
+  background: url("/images/invoice/san.png") no-repeat 475px 20px;
+}
+.address-one{
+    padding: 10px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    cursor: pointer;
+}
+.invoice-type-select{
+   margin-top: -15px;
+    margin-left: 80px;
+}
+
+.invoice-type-select span{
+   cursor: pointer;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
+.invoice-context-type-select{
+   margin-top: -15px;
+    margin-left: 80px;
+}
+.invoice-context-type-select span{
+    cursor: pointer;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
+.invoice-context-type-select span.selected{
+  background: url("/images/invoice/san.png") no-repeat 55px 10px;
+}
+.invoice-type-select span.selected{
+  background: url("/images/invoice/san.png") no-repeat 55px 10px;
+}
+.plaint-invoice-list{
+    clear: both;
+    padding-top: 10px;
+}
+/**
+ * 普通发票
+ */
+.invoice-simple-one{
+    float: left;
+    width: 500px;
+    line-height: 40px;
+    height: 40px;
+    margin-bottom: 20px;
+}
+.invoice-simple-title{
+   float: left;
+    width: 300px;
+    font-size: 15px;
+    margin-left: 80px;
+    border: 1px solid #ddd;
+    padding-left: 20px;
+    margin-right: 20px;
+    cursor: pointer;
+}
+.invoice-simple-one div.selected{
+  border: 2px solid #5c393b !important;
+  background: url("/images/invoice/san.png") no-repeat  305px 25px;
+}
+.invoice-simple-title input{
+    height: 41px;
+    width: 319px;
+    margin-left: -20px;
+    font-size: 18px;
+    border: none; 
+}
+.invoice-simple-actioin-panel{
+        font-size: 15px;
+}
+.invoice-simple-actioin-panel span{
+    cursor: pointer;
+}
+.invioce-simple-add{
+    text-align: center; 
+    border: 1px dotted #ddd;
+    width: 320px;
+    height: 40px;
+    margin-left: 80px;
+}
+.invoice-add-icon{
+    font-size: 30pt;
+    font-weight: bold;
+    float: left;
+    margin-left: 100px;
+    cursor: pointer;
+}
+.invoice-add-text{  
+    float: left;
+    margin-top: 3px;
+}
+
+.red {
+    color: red;
+}
+.invoice-content-panel{
+     padding-top: 60px;
+}
+.tips{
+    margin-bottom: 10px;
+}
+td a{
+
+}
+td :input{
+
+}
+td .f-ib{
+    margin-left: 7px;
+}
+.select-all{
+    margin-left: 12px !important;
+}

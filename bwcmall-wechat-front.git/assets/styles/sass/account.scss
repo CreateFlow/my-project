@@ -1,0 +1,206 @@
+$primary:#e33333;
+#login {
+    width: 100%;
+    height: 100vh;
+    background: url('/images/account/login-bg.png');
+    background-size: cover;
+    .logo-wrap {
+        padding-top: 58px;
+        margin-bottom: 46px;
+        background-color: transparent;
+        text-align: center;
+        .logo {
+            width: 94px;
+            height: auto;
+        }
+    }
+    .login-btn-warp {
+        margin-top: 12px;
+        margin-bottom: 20px;
+    }
+    .iconfont {
+        color: #c2c2c2;
+        font-size: 12px;
+    }
+    .weui_cells_form {
+        border-radius: 3px;
+    }
+    .weui_input {
+        text-indent: 10px;
+    }
+}
+
+.sign-header {
+    width: 100%;
+    height: 42px;
+    line-height: 42px;
+    text-align: center;
+    background-color: #fff;
+    span {
+        font-size: 9px;
+        font-weight: 500;
+        line-height: 1.3;
+        color: #999;
+    }
+    span.active {
+        color: $primary;
+    }
+    .iconfont {
+        display: inline-block;
+        padding: 0 10px;
+        font-size: 7px;
+        color: #999;
+    }
+    .iconfont.active {
+        color: $primary;
+    }
+}
+
+#sign-wrap {
+    margin-bottom: 100px;
+    overflow: auto;
+    .weui_cells_form .weui_cell_ft {
+        font-size: 12px;
+    }
+    .weui_cell:before {
+        left: 0;
+    }
+    .vux-popup-dialog {
+        position: absolute;
+        padding-bottom: 50px;
+        z-index: 500;
+        .ui-footer {
+            position: fixed;
+            z-index: 600;
+        }
+    }
+}
+
+.account-info {
+    .vux-popup-mask {
+        z-index: 2;
+        display: none !important;
+    }
+}
+
+.region-picker {
+    width: 100%;
+    select {
+        width: 30%;
+    }
+}
+
+.sign-select {
+    padding-bottom: 50px;
+    .weui_cell_ft:after {
+        -webkit-transform: rotate(135deg);
+        transform: rotate(135deg);
+    }
+    .weui_cell_ft.active:after {
+        -webkit-transform: rotate(-135deg);
+        transform: rotate(-135deg);
+    }
+    .weui_cell:not(.no_access):active {
+        background-color: #fff
+    }
+    .sign-select-list {
+        ul {
+            width: 100%;
+            list-style: none;
+            float: left;
+            position: relative;
+        }
+        li {
+            box-sizing: border-box;
+            float: left;
+            width: 33.3333%;
+            text-align: center;
+            padding-right: 10px;
+            padding-bottom: 10px;
+            position: relative;
+            span {
+                display: block;
+                width: 100%;
+                height: 31px;
+                line-height: 33px;
+                background-color: #eee;
+                border-radius: 3px;
+                overflow: hidden;
+                border: 1px solid #eee;
+            }
+            .select {
+                height: 31px;
+                border: 1px solid $primary;
+                background-color: #fff;
+                background-size: contain;
+                &:after {
+                    content: " ";
+                    position: absolute;
+                    bottom: 11px;
+                    right: 8px;
+                    width: 14px;
+                    height: 14px;
+                    background: url('/images/account/select-bg.png');
+                    background-size: contain;
+                }
+            }
+        }
+        li:nth-child(3n+0) {
+            //padding-right: 0;
+        }
+    }
+}
+
+.upload {
+    .weui_uploader_file,
+    .weui_uploader_input_wrp {
+        position: relative;
+        width: 105px;
+        height: 105px;
+    }
+    .weui_uploader_input {
+        z-index: 5;
+    }
+    .weui_uploader_file {
+        text-align: center;
+    }
+    .upload-icon {
+        padding-top: 30px;
+        width: 24px
+    }
+    .weui_uploader_status_content {
+        font-size: 9px;
+        color: #999;
+    }
+    .weui_uploader_input_wrp:before,
+    .weui_uploader_input_wrp:after {
+        position: absolute;
+        background-color: transparent;
+        z-index: 2;
+    }
+    .upload-img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+        border: none;
+    }
+}
+
+.success {
+    .success-img {
+        display: block;
+        margin: 60px auto 40px;
+        width: 112px;
+    }
+    .success-title {
+        margin-bottom: 22px;
+        font-size: 12px;
+        color: #00ba65;
+    }
+    .success-text {
+        font-size: 9px;
+    }
+}

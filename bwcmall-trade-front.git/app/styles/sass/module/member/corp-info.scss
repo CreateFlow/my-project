@@ -1,0 +1,216 @@
+@charset "UTF-8";
+
+%upload-image {
+    position: relative;
+    .btn {
+        position: absolute;
+        top: -6px;
+        right: -6px;
+        width: 20px;
+        height: 20px;
+        line-height: 20px;
+        text-align: center;
+        .icon {
+            width: 16px;
+            height: 16px;
+            display: inline-block;
+            background: url("/images/member/delete.png") no-repeat;
+        }
+        &:hover {
+            .icon {
+                background-position: 0 -16px;
+            }
+        }
+    }
+}
+
+.add-class-btn{
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    line-height: 24px;
+    text-align: center;
+    font-size: 24px;
+    border: 1px solid #d3d1cf;
+    color: #9f9e9d;
+    margin-left: 20px;
+}
+.remove-class-btn{
+    display: inline-block;
+    font-size: 14px;
+    color: #666;
+    margin-left: 4px;
+    position: absolute;
+    right: -15px;
+    top: 4px;
+}
+
+.del-class-btn {
+    position: absolute;
+    right: -20px;
+    bottom: 17px;
+}
+
+@import "register";
+
+.mod-corpinfo {
+    .user {
+        color: #ff7300;
+        margin-right: 0.5em;
+    }
+}
+
+.m-tabselect {
+    display: inline-block;
+    width: 110px;
+    margin: 0;
+    margin-right: 10px;
+    .m-tabselect-block {
+        @include box-sizing(border-box);
+        width: 110px;
+        height: 50px;
+        line-height: 50px;
+        border: 1px solid #ddd;
+    }
+    .m-tabselect-body {
+        @include box-sizing(border-box);
+        top: 50px;
+        width: 350px;
+    }
+    &-full {
+        width: 350px;
+        .m-tabselect-block {
+            width: 350px;
+        }
+    }
+    + .m-tabselect {
+        margin-top: 10px;
+    }
+    &:last-child {
+        margin-right: 0;
+    }
+}
+
+.area {
+    @include clearfix;
+    .m-tabselect {
+        float: left;
+        + .m-tabselect {
+            margin-top: 0;
+        }
+    }
+    // overflow: hidden;
+}
+
+.tabs {
+    .radio {
+        line-height: 50px;
+        margin-right: 55px;
+        input[type="radio"] {
+            margin-right: 0.5em;
+        }
+    }
+    .tabpanel {
+        margin-top: 1em;
+        ul {
+            @include clearfix;
+            // overflow: hidden;
+        }
+        li {
+            position: relative;
+            float: left;
+            width: 166px;
+            height: 96px;
+            margin-bottom: 1em;
+            // overflow: hidden;
+            .img {
+                @include box-sizing(border-box);
+                padding: 2px;
+                height: 100%;
+                text-align: center;
+                > img {
+                    display: block;
+                    width: 100%;
+                    height: 100%;
+                    vertical-align: middle;
+                }
+            }
+        }
+        .licensePic {
+            @extend %upload-image;
+            background: url("/images/member/bg_01.png");
+        }
+        .orgazitionPic {
+            @extend %upload-image;
+            float: right;
+            background: url("/images/member/bg_02.png");
+        }
+        .taxPic {
+            @extend %upload-image;
+            background: url("/images/member/bg_03.png");
+        }
+    }
+}
+
+.mod-corpinfo {
+    .validation {
+        position: absolute;
+        top: 13px;
+        left: 370px;
+    }
+}
+
+.uploadifive-button {
+  position: relative;
+  margin-bottom: 1em; 
+  margin-left: 0px;
+}
+.uploadifive-button:hover {
+  background-color: transparent;
+}
+
+.uploadify-queue {
+    margin-bottom: 0;
+    position: absolute;
+    bottom: 0;
+    left: 1px;
+    .cancel,
+    .fileName,
+    .data {
+        display: none;
+    }
+}
+.uploadify-queue-item {
+    background: transparent;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    font: 11px Verdana, Geneva, sans-serif;
+    margin-top: 5px;
+    width: 144px;
+    padding: 10px;
+}
+.uploadify-error {
+    background-color: #FDE5DD !important;
+}
+.uploadify-queue-item .cancel a {
+    background: url('/scripts/plugin/uploadifive/uploadifive-cancel.png') 0 0 no-repeat;
+    display: block;
+    float: right;
+    height: 16px;
+    text-indent: -9999px;
+    width: 16px;
+}
+.uploadify-queue-item.completed {
+    background-color: #E5E5E5;
+}
+.uploadify-progress {
+    background-color: #E5E5E5;
+    margin-top: 10px;
+    width: 100%;
+}
+.uploadify-progress-bar {
+    background-color: #0099FF;
+    height: 3px;
+    width: 1px;
+}

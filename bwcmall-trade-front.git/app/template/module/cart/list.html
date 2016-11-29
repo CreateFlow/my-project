@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="zh-CN"> 
+<head>
+    @@include('../../include/common/meta.html') 
+    @@include('../../include/common/common-include.html')
+
+    <link rel="stylesheet" type="text/css" href="/styles/module/cart/list.css">
+    <link rel="stylesheet" type="text/css" href="/styles/common/common.css">
+    <script type="text/javascript" src="/scripts/module/cart/list.js"></script>
+</head>
+
+<body ms-controller="cartListCtrl">
+    @@include('../../include/common/header.html')
+    <div class="gs-header">
+        @@include('../../include/common/account-head.html')
+    </div> 
+    <div class="g-content">
+        <div class="cart-null" ms-visible="cartShopVOs.length==0">
+            <span>购物车里空空如也~</span>
+            <a href="/wholesale.html" class="go-shop-btn trans_link_3">去逛逛</a>
+        </div>
+        <div class="order-table-wrap" ms-visible="cartShopVOs.length>0">
+            <div class="order-table-title">
+                <span class="order-table-span order-table-span-active f-ib">
+                <em>1</em>&nbsp;&nbsp;填写订单
+            </span>
+                <span class="order-table-span f-ib">
+                <em>2</em>&nbsp;&nbsp;提交订单
+            </span>
+                <span class="order-table-span-last f-ib">
+                <em>3</em>&nbsp;&nbsp;确认订单
+            </span>
+            </div>
+            <table class="order-table" cellpadding="0">
+                <tr class="order-table-top">
+                    <th width="18%" class="table-left">
+                         <span class="f-ib m-checkbox-all select-all" ms-click="checkAll" >
+                            <input class="m-checkbox-all-check" type="checkbox"   ms-duplex-checked="select_all" />
+                            <strong ms-attr-class="select_all?'m-checkbox-all-icon  m-checkbox-all-icon-checked':'m-checkbox-all-icon'"></strong>
+                            全选
+                        </span>
+                    </span>  
+                    </th>
+                    <th width="15%" class="table-left">
+                        品牌型号
+                    </th>
+                    <th width="14%" class="table-left">
+                        商品描述
+                    </th>
+                    <th width="10%">
+                        货期
+                    </th>
+                    <th width="5%">
+                        运费
+                    </th>
+                    <th width="4%">
+                        单位
+                    </th>
+                    <th width="10%">
+                        数量
+                    </th>
+                    <th width="10%">
+                        单价(元)
+                    </th>
+                    <th width="10%">
+                        金额(元)
+                    </th>
+                    <th>
+                        操作
+                    </th>
+                </tr> 
+            </table>
+            <table ms-if="cartShopVOs.length>0" ms-repeat-shop="cartShopVOs" class="order-table" cellpadding="0">
+                 <tr>
+                     <td  colspan="8"> <div class="shop-name" ms-text="shop.name"></div> </td>
+                 </tr>   
+                 <tr ms-repeat="shop.cartItemVOList" ms-class="{{el.status==0?'':'tr-active'}}" class="cart-data-row">
+                    <input class='cartItemId' type="hidden" ms-attr-value="el.id" ms-attr-marketable="el.marketable" ms-attr-soldOut="el.soldOut"/>
+                    <td width="18%"  class="table-left">
+                         <span class="f-ib m-checkbox checkbox-fix" ms-if=" el.marketable == true && el.soldOut == false && el.price" ms-click="onCheckBoxSelected(el)" >
+                            <input class="m-checkbox-check" type="checkbox" ms-duplex-checked="el.status" ms-attr-value='el.id'  />
+                            <strong ms-attr-class="el.status?'m-checkbox-icon select-order-tr m-checkbox-icon-checked':'m-checkbox-icon select-order-tr'"></strong>
+                        </span>
+                        <span class="f-ib table-img-wrap" style="">
+                            <a ms-attr-href="/goods/detail.html?id={{el.goodsId}}" target="_blank">
+                                <img width="120"
+                                     ms-attr-src="el.image+'!120'"
+                                     ms-attr-alt="{{el.name}}"/>
+                        <span class="have-shelf" ms-if="el.marketable == false"></span>
+                        <span class="have-sold"  ms-if="el.soldOut == true"></span>
+                        </a>
+                        </span>
+                    </td>
+                    <td class="table-left" ms-attr-title="el.brandName+el.sn" width="15%">
+                        {{el.brandName}} {{el.sn|subStr15}}
+                    </td>
+                    <td class="table-left"  width="14%">
+                        <a ms-attr-href="/goods/detail.html?id={{el.goodsId}}" ms-attr-title="el.name" target="_blank" style="color: #585858;">{{el.name|subGoodsNames}}</a>
+                    </td>
+                    <td  width="10%">
+                        <!--<span ms-if="el.ship==0">当天</span><span ms-if="el.ship!=0">{{el.ship}}天</span>-->
+                        <span ms-if="el.goodsShipOptions.length==0">
+                            <span ms-if="el.ship!=0" ms-text="el.ship+'天'"></span><span ms-if="el.ship==0">当天</span>
+                        </span>
+                        <span ms-if="el.goodsShipOptions.length>0">
+                            <select id="shipDisplay" name="shipDisplay"  ms-attr-value="el.ship" ms-duplex="el.ship" ms-change="changeShip(el)">
+                                <option  ms-repeat-ship="el.goodsShipOptions" ms-attr-value="ship" ms-text="ship==0?'当天':(ship+'天')"></option>
+                            </select>
+                        </span>
+                    </td>
+                    <td  width="5%">
+                        <span ms-if="el.freight==0">免运费</span><span ms-if="el.freight!=0" ms-text="parseFloat(el.freight).toFixed(2)"></span>
+                    </td>
+                    <td  width="4%">
+                        {{el.unit}}
+                    </td>
+                    <td  width="10%">
+                        <span class="m-inorder-minus f-ib" ms-click="reduceNum(el)" style="margin-left:28px;"
+                             ms-if=" el.marketable == true && el.soldOut == false && el.price">
+                                            -
+                         </span>
+                        <span class="f-ib m-inorder-middle" ms-if=" el.marketable == true && el.soldOut == false && el.price">
+                                <input ms-blur="inputChange(el)" ms-attr-cartId="el.id"
+                                                   type="text" ms-attr-value="el.quantity" class="m-inorder-num" />
+                         </span>
+                         <span class="f-ib m-inorder-middle" ms-if=" el.marketable == false || el.soldOut == true || !el.price"
+                            ms-text="el.quantity" style="width: 100%;">
+                                 
+                         </span>
+                        <span class="m-inorder-add f-ib" ms-click="addNum(el)" ms-if=" el.marketable == true && el.soldOut == false && el.price">+</span>
+                        <div class="clear"></div>
+                        <span></span>
+                    </td>
+                    <td   width="10%">  <span class="sub-order-bottom-money" ms-html="formatPrice(el.price)"></span>
+                    </td>
+                    <td class="subTotalPrice" width="10%"> 
+                        <span  class="sub-order-bottom-money"  ms-html="formatPrice(el.total)"></span>
+                    </td>
+                    <td>
+                        <a class="table-link delete-order-tr" href="javascript: void(0)" ms-click="deleteCart(el.id)">删除</a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="m-order-table-bottom"> 
+             <span class="f-ib m-checkbox-all select-all"  ms-click="checkAll()" >
+                <input class="m-checkbox-all-check" type="checkbox" ms-duplex-checked="select_all" />
+                <strong ms-attr-class="select_all?'m-checkbox-all-icon  m-checkbox-all-icon-checked':'m-checkbox-all-icon'"></strong>
+                全选
+            </span>
+            <a class="sub-order-del" href="javascript: void(0)" class="f-ib">删除选中商品</a>
+            <div class="f-fr">
+                <a href="javascript: void(0)" class="sub-order-btn f-fr">提交订单</a>
+                <div class="f-fr">
+                    <div>
+                        <span>
+                            <span class="sub-order-bottom-money f-fr f-ib" style="line-height:30px;">总金额：<span
+                                    id="total-price" ms-html="formatPrice(totalMoney)"></span>
+                            </span>
+                            <span class="sub-order-bottom-total f-fr f-ib" style="line-height:30px;margin-top: 4px;">总计<em id="total-quantity" ms-text="selectedQuantity"></em>件商品</span>
+                        </span>
+                    </div>
+                    <div ms-if="freightSelectedPrice!=0" class="f-fr" style="line-height:15px;">
+                        <span class="sub-order-bottom-total" style="line-height:15px;">商品共计：<span ms-html="formatPrice(selectedPrice)"></span>&nbsp&nbsp运费共计：<span ms-html="formatPrice(freightSelectedPrice)"></span></span>
+                    </div>
+                    <div ms-if="freightSelectedPrice==0" class="f-fr" style="line-height:15px;">
+                        <span class="sub-order-bottom-total" style="line-height:15px;">免运费</span>
+                    </div>
+                </div>
+            </div> 
+            <div class="clear"></div>
+        </div>
+    </div>
+    @@include('../../include/common/footer.html')
+</body>
+
+</html>

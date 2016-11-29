@@ -1,0 +1,176 @@
+/**
+ * Created by jason_wzl on 2015/11/5 005.
+ */
+.g-content {
+    margin: 30px auto;
+    width: 1200px;
+    border: 1px solid #dad6d4;
+    font-family: "Microsoft YaHei";
+    /*padding: 20px;*/
+    min-height: 580px;
+}
+
+/*tab页的样式 ++++++++++*/
+.content-head {
+    height: 42px;
+    border-bottom: 1px solid #dad6d4;
+}
+.content-nav{
+    width: 160px;
+    height: 39px;
+    line-height: 36px;
+    text-align: center;
+    font-size: 16px;
+    color: #333;
+    border-top: 4px solid #fff;
+    border-right: 1px solid #dad6d4;
+}
+.content-nav-next{
+    border-right-color: #fff;
+}
+.content-nav-active{
+    border-top: 4px solid #746565;
+    border-right-color: #dad6d4;
+    background-color: #fff;
+} 
+.module-header {
+	margin-top: 20px; 
+}
+.module-title {
+	font-size: 15px;
+    font-weight: bold;
+    padding-left: 20px;
+    border-left: 10px solid black;	
+}
+.return-query-conditions{
+	margin: 30px 0px 0px 25px;
+    font-size: 14px; 
+}
+.return-condition{
+ 	margin:5px;
+ 	width: 270px;
+ 	display: inline;
+}
+.return-condition span{
+ 	width: 100px;
+}
+.return-condition div{
+	margin-left:10px;
+	display: inline;
+}
+.return-condition  input{
+    height: 25px;  
+    width: 200px;
+    border: 1px solid #ddd;
+    padding-left: 5px;
+}
+.return-condition  select {
+  height: 25px;  
+  width: 200px;
+  border: 1px solid #ddd;
+  padding-left: 5px;
+}
+.return-actions{
+	padding: 30px 0px 0px 103px;
+}
+.query_btn{
+    height: 35px;
+    line-height: 35px;
+    width: 150px;
+    background-color: #e33333;
+    border: 0px;
+    color: white;
+}
+.query_btn:hover{
+    background-color: #F54B4B;
+}
+.return-table-panel{
+	margin: 50px 20px 20px 20px;
+    min-height: 250px;
+}
+ 	 
+.return-table{
+    border: 1px solid #dad6d4;
+    width: 100%;
+}
+.return-table th{
+    border-bottom: 1px solid #dad6d4;
+    background-color: #f8f8f8;
+    font-size: 15px;
+    color: #333;
+    line-height: 36px;
+    height: 40px;
+    text-align: center;
+}
+.return-table td{
+    font-size: 14px;
+    height: 30px;
+    line-height: 36px;
+    text-align: center;
+    color: #333;
+    border-bottom: 1px solid #dad6d4;
+}
+.return-table .tab-date{
+    
+}
+.return-table .tab-add{
+    color: #24bd36;
+}
+.return-table .tab-sub{
+    
+}
+
+.pager-switch{
+    color: #3f3145;
+    font-size: 14px;
+    text-align: center;
+    padding: 4px 11px;
+    border: 1px solid #d0d3d8;
+    -webkit-border-radius: 12px;
+    -moz-border-radius: 12px;
+    border-radius: 12px;
+    margin-right: 6px;
+}
+.pager-switch:hover{
+    background-color: #5b534e;
+    border-color: #5b534e;
+    color: #fff;
+}
+.pager-item{
+    font-size: 14px;
+    color: #3f3145;
+    margin-right: 10px;
+}
+.pager-item:hover{
+    color: #e83637;
+    text-decoration: underline;
+}
+.pager-item-active{
+    color: #e83637;
+    text-decoration: underline;
+}
+.pager-num{
+    font-size: 14px;
+}
+
+
+td a {
+    color: #5890D2;
+    text-decoration: underline;
+}
+td a:hover {
+    color: #5890D2;
+    text-decoration: underline;
+}
+#selfDateSelect {
+        margin: 15px 0px 0px 77px;
+}
+.oni-datepicker-input-wrapper{
+    width: 200px; 
+}
+button {
+    cursor: pointer;
+}
+.f-fr{
+    margin-right: 10px;
+}

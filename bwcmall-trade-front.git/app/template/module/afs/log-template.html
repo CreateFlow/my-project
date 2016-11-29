@@ -1,0 +1,25 @@
+<!--
+    协商记录
+-->
+
+<div class="log-title">
+	<span class="log-user-type" ms-text="item.ownerType"></span><span class="log-time" ms-text="item.createTime"></span>
+</div> 
+ <div class="log-content-panel">
+ 	<div class="log-row"  ms-repeat-itemson="item.messages" ms-text="itemson">
+ 		 
+ 	</div>   
+ 	<div class="log-row" ms-if="item.buyerOrSalerRes.length>0">
+ 		<div class="log-image-title">
+ 			<span ms-text="item.ownerType +'凭证:'"></span>
+ 		</div>
+ 		<div class="log-image-panel"> 
+ 			<div   class="log-image-content" ms-each-res="item.buyerOrSalerRes" ms-if-loop="item.buyerOrSalerRes.length>0">  
+ 				<div class="log-image" ms-click="viewBigImage(res)">
+ 					<img ms-attr-src="res">
+ 				</div>
+ 			</div>
+ 		</div>
+ 	</div>
+ 	<div style="clear:both"></div>
+ </div>

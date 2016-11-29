@@ -1,0 +1,97 @@
+<div class="g-content">
+    <script type="text/javascript">
+        function toPayment(orderGroupName) {
+             common.toPay(orderGroupName);
+        }
+    </script>
+    <div class="content-head">
+        <a href="javascript: void(0)" ms-repeat="currentData" ms-if="currentData.length>0" ms-click="changeTab(el.value)" ms-class="content-nav-active:currentTab==el.value" ms-class="content-nav-next:$index==1" class="trans_link_3 f-ib content-nav" ms-text="el.text"></a>
+        <a href="/help/hint.html" class="hint" target="_blank">小贴士：因系统升级，2016-07-18之前的订单请点我</a>
+    </div>
+
+    <div class="tab1" ms-visible="currentTab=='tab1'">
+         @@include('list-template-all.html')
+    </div>
+    <div class="tab2" ms-visible="currentTab=='tab2'">
+         @@include('list-template-topay.html')
+    </div>
+    <div class="tab3" ms-visible="currentTab=='tab3'">
+         @@include('list-template-complete.html')
+    </div>
+
+    <div class="order-list-pager" ms-if="orderlist.length>0">
+        <div ms-widget="pager,idOrderListPager"></div>
+    </div>
+
+</div>
+<div id="tips-no-order">
+    <div class="m-content-null" >
+        <img class="m-content-null-img" width="100" src="/images/product/sorry_null.png" alt="没有数据">
+        <span class="f-ib m-content-null-text">目前暂无数据</span>
+
+        <div class="clear"></div>
+    </div>
+</div>
+
+<div ms-widget="dialog,quickPayDialogErr,$quickPayDialogErrOptions" class="quickPayDialog" ms-controller="quickPayDialogErrCtrl">
+       <div class="dialog-inner">
+         <div class="dialog-header">
+            <div class="dialog-title">
+                <div><span>友情提示</span></div>
+            </div>
+            <div class="pop-close">
+                 <div class="icon-close" ms-click="onCancel()"></div>
+            </div>
+        </div>
+        <div class="dialog-alter-info-content">
+            <div class="dialog-pay-info-err-str" ms-text="quickPayErrStr1">
+            </div>
+        </div>
+          <div class="dialog-action-panel">
+             <button class="btn-ok" type="button" ms-click="onConfirm()">确定</button>
+            <button class="btn-cancel" type="button" ms-click="onCancel()">取消</button>
+        </div>
+    </div>
+</div>
+<div ms-widget="dialog,alertMsg,$alertMsgOptions" class="quickPayDialog" ms-controller="alertMsgCtrl">
+   <div class="dialog-inner">
+     <div class="dialog-header">
+        <div class="dialog-title">
+            <div><span>友情提示</span></div>
+        </div>
+        <div class="pop-close">
+             <div class="icon-close" ms-click="onCancel()"></div>
+        </div>
+    </div>
+    <div class="dialog-alter-info-content">
+        <div class="dialog-pay-info-err-str"  ms-text="alertMsgStr">
+        </div>
+    </div>
+      <div class="dialog-action-panel">
+         <button class="btn-ok" type="button" ms-click="onConfirm()">确定</button>
+        <button class="btn-cancel" type="button" ms-click="onCancel()">取消</button>
+    </div>
+</div>
+</div>
+<div ms-widget="dialog,ConfirmReceived,$ConfirmReceivedOptions" class="quickPayDialog" ms-controller="ConfirmReceivedCtrl">
+    <div class="dialog-inner">
+         <div class="dialog-header">
+            <div class="dialog-title">
+                <div><span>友情提示</span></div>
+            </div>
+            <div class="pop-close">
+                 <div class="icon-close" ms-click="onCancel()"></div>
+            </div>
+        </div>
+        <div class="dialog-alter-info-content">
+            <div class="dialog-pay-info-err-str" >
+                  1.若您已收到货物，请及时点击"确定"<br>
+                    2.发货7天后，系统将自动"确认收货"操作
+            </div>
+        </div>
+          <div class="dialog-action-panel">
+             <button class="btn-ok" type="button" ms-click="onConfirm()">确定</button>
+            <button class="btn-cancel" type="button" ms-click="onCancel()">取消</button>
+        </div>
+    </div>
+</div>

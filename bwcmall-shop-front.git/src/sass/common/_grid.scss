@@ -1,0 +1,58 @@
+@charset "UTF-8";
+
+// local variables
+// ==============================================
+// Default 960px grid
+// 960作为计算的参照值
+$grid-width: 960;
+$grid-gutter-width: 0;
+// 列数
+$grid-columns: 12;
+$grid-half-cols: $grid-columns / 2;
+// 间距数
+$grid-gutters: $grid-columns - 1;
+$grid-column-width: ($grid-width - $grid-gutter-width * $grid-gutters) / $grid-columns;
+$grid-row-width: ($grid-columns * $grid-column-width) + ($grid-gutter-width * $grid-gutters);
+
+// fluid grid
+$fluid-grid-column-width: percentage($grid-column-width / $grid-row-width);
+$fluid-grid-gutter-width: percentage($grid-gutter-width / $grid-row-width);
+
+$row-gap: 1.25em !default;
+
+// classes
+// ==============================================
+
+//
+// Grid system
+// --------------------------------------------------
+
+//
+// Layout usable table
+// --------------------------------------------------
+// mobile first - up
+// Extra small devices col-xs
+// Small devices Tablets col-sm
+// Medium devices Desktops col-md
+// Large devices Desktops  col-lg
+// without gutter col-
+.row {
+    margin-bottom: $row-gap;
+    @extend %clearfix;
+    .col {
+        @extend %float-left;
+    }
+}
+
+@mixin grid-fluid($column-width: $fluid-grid-column-width, $gutter-width: $fluid-grid-gutter-width) {
+    @for $i from 1 through $grid-columns {
+        .offset-#{$i} {
+            margin-left: $column-width * $i + ( $gutter-width * ($i - 1) );
+        }
+        .col-#{$i} {
+            width: $column-width * $i + ( $gutter-width * ($i - 1) );
+        }
+    }
+}
+
+@include grid-fluid();

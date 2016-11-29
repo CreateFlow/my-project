@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>会员价格管理</title>
+    @@include('../../include/common/intro.html')
+    <link rel="stylesheet" href="/css/module/price/member-price.css" />
+</head>
+
+<body>
+    @@include('../../include/common/header.html') @@include('../../include/common/nav.html')
+    <div class="main member-price">
+        <div class="sidebar">
+            @@include('../../include/common/menu.html')
+        </div>
+        <div class="content ms-controller" ms-controller="memberPrice">
+            <div class="panel">
+                <div class="hd">
+                    <span class="title">会员价格管理</span>
+                </div>
+                <div class="bd">
+                    <div class="search">
+                        <div class="row">
+                            <div class="col col-1 title">品牌：</div>
+                            <div class="col col-3">
+                                <select ms-widget="dropdownlist,brandListId,$brandListOption" ms-keyup="brandOnSearch()" ms-duplex="brandId">
+                                </select>
+                            </div>
+                            <div class="col col-1">
+                                <span class="btn btn-large btn-primary" ms-click="doSearch">查询</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="table-wrap">
+                        <table class="ctable">
+                            <thead>
+                                <tr width="100%" class="thb ctr">
+                                    <th>品牌</th>
+                                    <th>价格策略</th>
+                                    <th>客户数</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ms-if="shopBrandList.length>0" ms-repeat-el="shopBrandList" class="ctr" ms-class="tr-bg:($index%2==0)" ms-class-1="tr-lastrow:((shopBrandList[$index].brandName != shopBrandList[$index+1].brandName))">
+                                    <td>{{el.brandName}}</td>
+                                    <!--<td ms-if="$index != 0 && (shopBrandList[$index-1].brandName == shopBrandList[$index].brandName)"></td>-->
+                                    <div ms-if="$index != 0 && (shopBrandList[$index-1].brandName != shopBrandList[$index].brandName)"></div>
+                                    <td>{{el.strategyName}}</td>
+                                    <td>
+                                        <a href="javascript:void(0)" ms-click="showCustomers(el)">{{el.custCount}}</a>
+                                    </td>
+                                    <td>
+                                        <a href="javascript:void(0)" ms-click="edit(el)">编辑</a>
+                                    </td>
+                                </tr>
+                                <tr ms-if="shopBrandList.length==0">
+                                    <td colspan="7" class="cell-empty">
+                                        <div class="row">
+                                            <div class="col col-5" style="text-align: right">
+                                                <img src="/images/empty-list.png">
+                                            </div>
+                                            <div class="col col-5" style="text-align: left">
+                                                <span class="empty-tip" ms-text="orderListEmptyText"></span></div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div ms-widget="pager,pp" ms-if="shopBrandList.length>0"></div>
+                </div>
+            </div>
+            <div ms-widget="dialog,dlgEditId,dlgEditOption">
+                <div class="col offerset-2 doubleList-main">
+                    <div class="row">
+                        <h2>【 <span ms-text="currentEditData.tackName"></span> 】</h2>
+                        <div class="col col-5 doubleList">
+                            <div>
+                                <p>客户列表</p>
+                                <input type="text" placeholder="搜索框" class="inputbox" ms-keyup="doCustomSearch(searchInfo.customerName)" ms-duplex="searchInfo.customerName"
+                                />
+                            </div>
+                            <div class="doubleList-list customer">
+                                <ul>
+                                    <li ms-repeat-custom="customerList" ms-attr-custom-id="custom.id">
+                                        <span ms-text="custom.name"></span> /
+                                        <span ms-text="custom.mobile"></span> /
+                                        <span ms-text="custom.corpName"></span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col col-2">
+                            <div class="addOrDelete">
+                                <button class="btn btn-primary" ms-click="addToMember">添加 ></button>
+                                <button class="btn btn-primary" ms-click="removeMember">< 删除</button>
+                            </div>
+                        </div>
+                        <div class="col col-5 doubleList">
+                            <div>
+                                <p>会员列表</p>
+                                <div style="margin-top: 54px;"></div>
+                            </div>
+                            <div class="doubleList-list member">
+                                <ul>
+                                    <li ms-repeat-member="memberList" ms-attr-member-id="member.id">
+                                        <span ms-text="member.customerName"></span> /
+                                        <span ms-text="member.customerPhone"></span> /
+                                        <span ms-text="member.customerCompany"></span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div ms-widget="dialog,dlgShowCustomersId,dlgShowCustomersOption">
+                <div class="col offerset-2 showcustomers-main">
+                    <div class="row">
+                        <h3>
+                            <span>【 <b ms-text="currentEditData.brandName"></b> 】</span>
+                            <span>【 <b ms-text="currentEditData.tackName"></b> 】</span>
+                            <span>会员数量（ <b ms-text="memberList.length"></b> ）</span>
+                        </h3>
+                        <div class="table-wrap">
+                            <table class="ctable">
+                                <thead>
+                                    <tr width="100%" class="thb ctr">
+                                        <th>用户姓名</th>
+                                        <th>手机号</th>
+                                        <th>注册时间</th>
+                                        <th>公司名称</th>
+                                        <th>所在区域</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ms-if="memberList.length>0" ms-repeat-el="memberList" class="ctr" ms-class="tr-bg:($index%2==0)">
+                                        <td>{{el.customerName}}</td>
+                                        <td>{{el.customerPhone}}</td>
+                                        <td>{{el.customerCreateTime}}</td>
+                                        <td>{{el.customerCompany}}</td>
+                                        <td>{{el.customerArea}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div ms-widget="pager,pp1,option" ms-if="memberList.length>0"></div>
+                    </div>
+                </div>
+            </div>
+            <div ms-widget="dialog,dlgAfterAlert,opts">
+                <div class="col offerset-2">
+                    {{confirmReceivedMsg}}
+                </div>
+            </div>
+        </div>
+    </div>
+    @@include('../../include/common/outro.html')
+    <script>require(['conf/price/memberPrice']);</script>
+</body>
+
+</html>

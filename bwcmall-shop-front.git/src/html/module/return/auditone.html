@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>退换货初审</title>
+        @@include('../../include/common/intro.html')
+        <!-- build:css css/module/return/auditone.css -->
+        <link rel="stylesheet" href="/css/module/return/auditone.css"/>
+        <!-- endbuild -->
+    </head>
+    <body>
+        @@include('../../include/common/header.html')
+        @@include('../../include/common/nav.html')
+        <div class="main mod-auditone">
+            <div class="sidebar">
+                @@include('../../include/common/menu.html')
+            </div>
+            <div class="content">
+                <ul class="breadcrumb">
+                    <li>
+                        <a href="javascript:void(0);">卖家中心</a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);">客户服务</a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);">退换货订单</a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);">退换货编号: <span ms-text="afterSale.sn"></span></a>
+                    </li>
+                </ul>
+                <div class="panel" ms-controller="auditone">
+                    <div class="hd">
+                        <span class="title"><span ms-text="afterSale.afterSaleTypeDesc"></span>初审</span>
+                        <div style="float:right;position:relative;top:-3px;">
+                            <span class="btn btn-default">联系卖家</span>
+                        </div>
+                    </div>
+                    <div class="bd">
+                        <div class="row pline">
+                            <div class="col col-4"><p>换货编号：<span ms-text="afterSale.sn"></span></p></div>
+                            <div class="col col-4"><p>订单编号：<span ms-text="afterSale.orderSn"></span></p></div>
+                            <div class="col col-4"><p>退换货类型：<span ms-text="afterSale.afterSaleTypeDesc"></span></p></div>
+                        </div>
+                        <div class="row pline">
+                            <div class="col col-4"><p>买家名称：<span ms-text="afterSale.customerName"></span></p></div>
+                            <div class="col col-4"><p>申请时间：<span ms-text="afterSale.createTime"></span></p></div>
+                            <div class="col col-4"><p>退换货状态：<span ms-text="afterSale.afterSaleStatusDesc"></span></p></div>
+                        </div>
+                        <div class="row pline" ms-if="afterSale.payMethodType">
+                            <div class="col col-4"><p>支付方式：<span ms-text="afterSale.payMethodType"></span></p></div>
+                            <div class="col col-4"></div>
+                            <div class="col col-4"></div>
+                        </div>
+
+                        <div class="row">
+                            <div class="class-title"><span ms-text="afterSale.afterSaleLabel"></span></div>
+                            <table class="return-table">
+                                <thead>
+                                    <tr>
+                                        <th width="10%">商品名称</th>
+                                        <th width="10%">商品小图</th>
+                                        <th width="10%">品牌</th>
+                                        <th width="10%">型号</th>
+                                        <th width="10%">商品编号</th>
+                                        <th width="10%">SKU NO.</th> 
+                                        <th width="10%"><span ms-if="result.afterSaleType==0">退</span><span ms-if="result.afterSaleType!=0">换</span>货数量</th>
+                                        <th width="10%">单位</th>
+                                        <th width="10%">成交单价</th>
+                                        <th width="10%">是否支持退换货</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="item" ms-repeat-item="afterSale.afterSaleItem" ms-if="afterSale.afterSaleItem.length>0">
+                                        <td><span ms-text="item.goodsName"></span></td>
+                                        <td>
+                                            <img class="image" ms-src="{{item.mainImage}}" style="margin:5px auto 0px;width:60px;height:60px;">
+                                        </td>
+                                        <td><span ms-text="item.brandSet"></span></td>
+                                        <td><span ms-text="item.skuSnSet"></span></td>
+                                        <td><span ms-text="item.goodsid"></span></td>
+                                        <td><span ms-text="item.skuNoSet"></span></td>
+                                        <td><span ms-text="item.returnQuantity"></span></td>
+                                        <td><span ms-text="item.unitName"></span></td>
+                                        <td><span ms-text="item.price"></span></td>
+                                        <td><span ms-if="item.canReturn=='1'">是</span><span ms-if="item.canReturn!='1'" style="color:red">否</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="row" ms-if="!returnable">
+                            <label style="float:right;color:red">买家发起的售后单中包含不支持退换货的商品</label>
+                        </div>
+                        <div class="row">
+                            <div class="class-title">协商记录</div>
+                            <div class="return-talk" ms-repeat-item="afterSale.afterSaleLog" ms-if="afterSale.afterSaleLog.length>0">
+                                <p class="bottom-line"><span class="talk-title" ms-text="item.ownerType"></span><span ms-text="item.createTime"></span></p>
+                                <div ms-repeat-itemson="item.messages">
+                                    <p ms-text="itemson"></p>
+                                </div>
+                                <table ms-if="item.buyerOrSalerRes.length>0">
+                                    <tr>
+                                        <td><span ms-text="item.ownerType"></span>凭证：</td>
+                                        <td>
+                                            <ul>
+                                                <li ms-each-res="item.buyerOrSalerRes" ms-if-loop="item.buyerOrSalerRes.length>0">
+                                                    <a class="goodimg" href="javascript:void(0)" ms-attr-href="{{res}}" data-lightbox="res-image">
+                                                        <img class="image" ms-src="{{res}}">
+                                                    </a>
+                                                 </li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="auditone">
+                                <table>
+                                    <tr>
+                                        <td width="120">审核结果：</td>
+                                        <td>
+                                            <label ms-repeat-el="currentData" style="margin-right:20px;">
+                                                <input type="radio" name="audit" ms-click="changeTab(el.value)" ms-attr-checked =" currentTab == el.value ">
+                                                <span ms-text="el.text"></span>
+                                            </label>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="auditone-body">
+                                <table class="tab tab1" ms-visible="currentTab=='tab1'">
+                                    <tr>
+                                        <td width="120">驳回理由：</td>
+                                        <td>
+                                            <select ms-duplex="refuseReasonType" class="input" id="reasonType" name="reasonType" style="width:200px;">
+                                               <option ms-repeat="reasonTypeList" ms-attr-value="el.value" ms-text="el.name"></option> 
+                                            </select>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>驳回补充说明:</td>
+                                        <td>
+                                            <textarea class="textarea" ms-duplex="refuseReason"></textarea>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="vertical-top">卖家举证:</td>
+                                        <td>
+                                            <div class="row">
+                                                <input id="refusePic" name="refusePic" type="file" multiple="true" />
+                                            </div>
+                                            <ul>
+                                                <li class="goodimg" ms-repeat="refusePicList"><img ms-src="el.resources"></li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <table class="tab tab2" ms-visible="currentTab=='tab2'">
+                                    <tr>
+                                        <td width="120">寄回运费谁承担：</td>
+                                        <td>
+                                            <label ms-repeat-el="postData" style="margin-right:20px;">
+                                                <input type="radio" name="payment" ms-click="changePostTab(el.value)" ms-attr-checked =" postTab == el.value ">
+                                                <span ms-text="el.text"></span>
+                                            </label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>希望客户寄回地址：</td>
+                                        <td>
+                                            <select ms-duplex="provincesValue" ms-widget="dropdown, $, $provinceOpt">
+                                                <option ms-repeat-option="provinces" ms-attr-value="option.value" ms-attr-label="option.label"></option>
+                                            </select>
+                                            <select ms-duplex="citiesValue" ms-widget="dropdown, $, $cityOpt">
+                                                <option ms-repeat-option="cities" ms-attr-value="option.value" ms-attr-label="option.label"></option>
+                                            </select>
+                                            <select ms-duplex="regionsValue" ms-widget="dropdown, $, $regionOpt">
+                                                <option ms-repeat-option="regions" ms-attr-value="option.value"
+                                                        ms-attr-label="option.label"></option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>详细街道地址：</td>
+                                        <td>
+                                            <textarea ms-duplex="salerAddress" class="textarea" cols="30" rows="10" style="width:356px;"></textarea>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>收货联系人：</td>
+                                        <td>
+                                            <input class="input" type="text" ms-duplex="salerConsignee">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>联系人电话：</td>
+                                        <td>
+                                            <input class="input" type="text" ms-duplex="salerPhone">
+                                        </td>
+                                    </tr>
+                                </table>
+                                <table class="tab tab3" ms-visible="currentTab=='tab3'">
+                                    <tr>
+                                        <td width="120"><font color="red">*</font>协商补充说明：</td>
+                                        <td>
+                                            <textarea class="textarea" ms-duplex="remarks"></textarea>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <span ms-click="submit()" class="btn btn-large btn-primary" style="margin-left:120px;">确认</span>
+                            <span ms-click="cancel" class="btn btn-large btn-default" style="margin-left:30px;">取消</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @@include('../../include/common/outro.html')
+        <script>require(['conf/return/auditone']);</script>
+    </body>
+</html>

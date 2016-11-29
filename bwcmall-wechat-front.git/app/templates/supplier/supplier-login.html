@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="renderer" content="webkit" charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1,requiresActiveX=true">
+    <title>供应商登录绑定</title>
+    <link rel="stylesheet" href="../../css/common.css"/>
+    <link rel="stylesheet" href="../../css/weui.min.css"/>
+    <script src="../../js/lib/zepto.min.js"></script>
+    <script src="../../js/lib/fastclick.js"></script>
+    <script src="../../js/lib/vue.js"></script>
+    <script src="../../js/config.js"></script>
+    <script src="../../js/common.js"></script>
+    <script src="../../js/page/supplier/supplier-login.js"></script>
+    <style>
+        body,html,.content-body {
+            background-color: #efefef;
+            height: 100%;
+        }
+        .weui_label{
+            width: 5em;
+        }
+
+    </style>
+</head>
+<body>
+<div class="content-body" id="supplierLogin">
+    <div class="weui_toptips weui_warn js_tooltips">{{errorInfo}}</div>
+    <div class="weui_dialog_alert" id="dialog2" style="display: none;">
+        <div class="weui_mask"></div>
+        <div class="weui_dialog">
+            <div class="weui_dialog_hd"><strong class="weui_dialog_title">登录出错</strong></div>
+            <div class="weui_dialog_bd">{{errorResult}}</div>
+            <div class="weui_dialog_ft">
+                <a href="javascript:;" class="weui_btn_dialog primary">确定</a>
+            </div>
+        </div>
+    </div>
+    <div class="banner" class="weui_cells">
+        <img src="../../images/supplier/banner1.png" alt=""/>
+    </div>
+    <div class="weui_cells weui_cells_form weui_cells_form_custom">
+
+        <div class="weui_cell" v-bind:class="{'weui_cell_warn': !flag.phoneFlag&&errorInfo!==''}">
+            <div class="weui_cell_hd"><label class="weui_label">手机号码:</label></div>
+            <div class="weui_cell_bd weui_cell_primary">
+                <input class="weui_input" type="tel" placeholder=""  v-model="form.phone"/>
+            </div>
+            <div class="weui_cell_ft" v-show="!flag.phoneFlag&&errorInfo!==''">
+                <i class="weui_icon_warn"></i>
+            </div>
+        </div>
+
+
+        <div class="weui_cell" v-bind:class="{'weui_cell_warn': !flag.passwordFlag&&errorInfo!==''}">
+            <div class="weui_cell_hd"><label class="weui_label">验证码:</label></div>
+            <div class="weui_cell_bd weui_cell_primary">
+                <input class="weui_input" type="number" placeholder="" v-model="form.verCode"/>
+            </div>
+            <div class="weui_cell_ft" v-show="!flag.codeFlag&&errorInfo!==''">
+                <i class="weui_icon_warn"></i>
+            </div>
+            <div class="weui_cell_ft" style="padding: 8px 0;">
+                <a href="javascript:;" v-on:click="sendMessage()" style="margin: 0px 15px 0px 10px; max-width: 120px; font-size: 12px; padding: 0 12px; line-height: 2.5; border-color: #ef4f4f; color: #ef4f4f;" class="weui_btn wei_btn_mini weui_btn_plain_primary">获取验证码</a>
+            </div>
+        </div>
+    </div>
+    <div class="supplier-bottom">
+        <div class="spacing">
+            <a href="javascript:;" v-on:click="subLogin()" class="weui_btn weui_btn_warn">确认</a>
+        </div>
+        <div class="spacing" style="padding-top: 15px;padding-bottom: 10px">
+            <p>
+                如果完成身份验证,我们客服将会电话联系您确认。来自佰万仓的采购需求、询价单将会通过微信或者电话形式发送给您。
+            </p>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

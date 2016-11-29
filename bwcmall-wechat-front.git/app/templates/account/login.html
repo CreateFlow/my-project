@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <title>账户登录</title>
+    <meta name="description" content=""> @@include('../common/meta.html')
+</head>
+
+<body id="app">
+    <div id="login">
+        <div class="logo-wrap">
+            <img class="logo" src="/images/logo.png">
+        </div>
+        <div class="cell">
+            <div class="spacing">
+                <div class="weui_cells">
+                    <div class="weui_cell">
+                        <div class="weui_cell_hd">
+                            <i class="iconfont icon-phone"></i>
+                        </div>
+                        <div class="weui_cell_bd weui_cell_primary">
+                            <input class="weui_input" type="number" placeholder="手机号" v-model="login.phone.val">
+                        </div>
+                    </div>
+                    <div class="weui_cell">
+                        <div class="weui_cell_hd">
+                            <i class="iconfont icon-lock"></i>
+                        </div>
+                        <div class="weui_cell_bd weui_cell_primary">
+                            <input class="weui_input" type="password" placeholder="登录密码" v-model="login.password.val">
+                        </div>
+                        <div class="weui_cell_ft"><a href="password.html" style="color:#bbb">忘记密码？</a></div>
+                    </div>
+                </div>
+                <div class="login-btn-warp">
+                    <button class="weui_btn weui_btn_warn" @click="submit()">登录并绑定</button>
+                </div>
+                <div class="text-center">
+                    <a class="link-primary " href="signup.html">快速注册</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    @@include('common/footer.html')
+    <!-- build:js({.tmp,app}) /js/page/account/login.js -->
+    <script src="/js/page/account/login.js"></script>
+    <!-- endbuild -->
+</body>
+
+</html>

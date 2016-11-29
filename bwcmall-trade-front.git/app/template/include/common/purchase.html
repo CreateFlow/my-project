@@ -1,0 +1,36 @@
+<div class="purchase-order">
+    <a href="/cart/list.html" class="purchase-order-title">
+        <i class="purchase-icon1"></i>
+        <span>进货单 <span class="purchase-num" ms-if="isLogin" ms-text="'('+totalNum+')'"></span></span>
+        <i class="purchase-icon2"></i>
+        <p class="white-line"></p>
+    </a>
+    <div class="purchase-order-inner">
+        <div ms-if="!isLogin">
+            <p class="purchase-p1">您尚未登录，无法查看订货单</p>
+            <a class="login-now" href="javascript:void(0)" ms-click="goLogin">立即登录</a>
+        </div>
+        <div ms-if="isLogin">
+            <div class="m-inorder-null" ms-if="cartList.length==0">
+                <p class="purchase-p2">您的进货单中没有任何商品，赶紧选购吧~</p>
+            </div>
+            <div ms-if="cartList.length>0">
+                <p class="recently-add">最近加入的货品：</p>
+                <ul class="purchase-list">
+                    <li ms-repeat="cartList">
+                        <a ms-attr-href="/goods/detail.html?id={{el.goodsId}}" target="_blank" class="purchase-pic"><img ms-src="el.image+'!24'" alt=""/></a>
+                        <p class="purchase-text"><a ms-attr-href="/goods/detail.html?id={{el.goodsId}}" target="_blank" ms-text="el.name"></a></p>
+                        <div class="purchase-num-wrap">
+                            <span class="num-add" ms-click="reduceNum(el.id)">-</span>
+                            <input type="text" class="purchase-input" ms-on-keyup="inputKeyup()" ms-attr-cartId="el.id" ms-attr-value="el.quantity">
+                            <span class="num-min" ms-click="addNum(el.id)">+</span>
+                        </div>
+                        <span class="purchase-del" ms-click="deleteCart(el.id)">删除</span>
+                        <div class="clear"></div>
+                    </li>
+                </ul>
+                <a href="/cart/list.html" class="view-purchase">查看进货单</a>
+            </div>
+        </div>
+    </div>
+</div>

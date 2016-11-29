@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html> 
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <title>仅退款-申请</title>
+    @@include('../../include/common/meta.html')
+    @@include('../../include/common/common-include.html')
+    <link rel="stylesheet" type="text/css" href="/styles/module/afs/return-apply-02.css"> 
+    <script src="/scripts/plugin/uploadifive/jquery.uploadify.min.js"></script> 
+    <script src="/scripts/plugin/uploadifive/jquery.uploadifive.min.js"></script> 
+    <script src="/scripts/module/common/upload-button.js"></script> 
+    <link rel="stylesheet" type="text/css" href="/styles/common/upload_button.css"/>
+    <script src="/scripts/module/afs/return-apply-02.js"></script>
+<body>
+    @@include('../../include/common/header.html')
+    <div class="my-header">
+        @@include('../../include/common/account-head.html')
+    </div> 
+     <!--主要内容-->
+    <div class="g-content g-clearfix"  ms-controller="returnApplyCtrl02">
+        <div class="return-progress-panel">
+            <div class="progess-node progess-node-fist">
+                <div class="progress-image ">
+                    <div class="progress-round-enable"><div class="round-text">1</div></div>
+                    <div class="progress-line-enable-right process-line" ></div>
+                </div>
+                <div class="progress-text progress-text-enable">买家申请仅退款</div>
+            </div>
+           <div class="progess-node">
+                <div class="progress-image ">
+                     <div class="progress-line-disable-left process-line"></div>
+                    <div class="progress-round-disable"><div class="round-text">2</div></div>
+                    <div class="progress-line-disable-right process-line"></div>
+                </div>
+                <div class="progress-text progress-text-disable">申请成功,等待卖家确认</div>
+            </div> 
+             <div class="progess-node">
+                <div class="progress-image ">
+                     <div class="progress-line-disable-left process-line"></div>
+                    <div class="progress-round-disable"><div class="round-text">3</div></div> 
+                </div>
+                <div class="progress-text progress-text-disable">已完成</div>
+            </div>
+        </div>
+      <!--header -->
+       <div class="return-detail-content"> 
+            <div class="return-detail-panel">
+                 <div class="return-base-panel">
+                    <div class="return-detail-row">
+                        <div class="lable-text"><label>售后类型</label></div>
+                       <select id="returnType" name="returnType" ms-change="goReturnApply()">
+                            <option ms-repeat="returnTypes" ms-attr-selected="currentType==el.type?true:false" ms-attr-value="el.type" ms-text="el.name"></option>
+                        </select>
+                     </div>
+                     <div class="return-detail-row">
+                         <div class="lable-text"><label>退款原因</label></div>
+                        <select id="reasonType" name="reasonType">
+                            <option  ms-repeat="reasonTypeList" ms-value="el.id" ms-text="el.afterSaleCause"></option> 
+                        </select>
+                     </div>
+                      <div class="return-detail-row">
+                         <div class="lable-text"><label>退款金额</label></div>
+                          <input type="text" id="amount" name="amount" ms-keyup="amountCheck()" />
+                         <div class="lable-tips"><label>元<label class="require-tips">*</label><span ms-text="'(最多'+orderInfo.returnableAmount +'元'"></span><span ms-text="'，含发货运费'+
+                          orderInfo.shippingChange  +'元'" ms-if="orderInfo.shippingChange>0"></span><span>)</span></label></div>
+                     </div>
+                    <div class="return-detail-row">
+                        <div class="lable-textarea-text"> <label >说明</label></div>
+                        <textarea id="reason" name="reason" ></textarea>
+                     </div>
+                     <div class="return-detail-row">
+                         <div class="lable-text"><label>买家举证</label></div>
+                        <button  type="button" id="fileUploadBtn">选择凭证图片</button>
+                        <div id="fileQueue"></div>
+                        <div class="uploaded-image-panel">
+                            <div class="upload-image-col" ms-repeat="uploadImagesList">
+                               <div class="image-action-panel">
+                                  <div class="image-big-btn" ms-click="viewBigImage(el.resources)">放大</div>
+                                  <div class="image-delete-btn" ms-click="deleteImage(el.id)">删除</div>
+                                </div>
+                                <div class="image-div">
+                                    <img ms-attr-src="el.resources" />
+                                </div>
+                            </div>
+                        </div>
+                     </div>
+                </div> 
+            </div>
+            <div class="return-order-panel">
+                <div class="order-title">订单信息</div>
+                <div class="order-info"> 
+                    <div class="title" style="width:90px">订单编号:</div><div><a target="_blank"  ms-href="'/order/detail.html?orderSn='+sn" class="order-link" ms-text="sn" ></a></div>
+                     <div class="title" style="width:90px">订单金额(元):</div><div class="money" ms-html="formatPrice(orderInfo.amountPaid )"></div>
+                    <div class="title" style="width:90px">卖家:</div><div ms-text="orderInfo.shopName "></div>  
+                </div>
+                <div class="link" ms-mouseover="showShopInfo(this)" ms-mouseleave="hideShopInfo(this)"><i class="link-icon"></i>联系卖家</div>
+                 <div class="odgo-changetips">
+                    <p ms-html="'联系人：'+orderInfo.sellerName+'<br/>联系电话：'+orderInfo.sellerPhone"> </p> 
+                </div>
+            </div> 
+                <!-- 线下支付-->
+            <div class="module-header" ms-if="hasBank(orderInfo.accountTypes)">
+                    <span class="module-title">收款账号</span> 
+            </div> 
+             <div class="return-bank-panel" ms-if="hasBank(orderInfo.accountTypes)"> 
+                 <div class="return-detail-row">
+                     <div class="lable-text"><label>开户行名称</label></div>
+                      <input type="text" id="bankName" name="bankName"  /> 
+                       <div class="lable-tips"><label class="require-tips">*</label></div>
+                 </div>
+                 <div class="return-detail-row">
+                     <div class="lable-text"><label>银行账号</label></div>
+                      <input type="text"  id="bankAccount" name="bankAccount" /> 
+                       <div class="lable-tips"><label class="require-tips">*</label></div>
+                 </div>
+                 <div class="return-detail-row">
+                     <div class="lable-text"><label>账户姓名</label></div>
+                      <input type="text" id="accountName" name="accountName"  /> 
+                       <div class="lable-tips"><label class="require-tips">*</label></div>
+                 </div>
+             </div>
+             <div class="action-panel">
+                <button class="submit" type="button" ms-click="apply()">提交申请</button>
+                <button class="cancel" type="button" ms-click="cancelApply()">取消返回</button>
+            </div>
+       </div> 
+
+    </div>
+    <div ms-widget="dialog,confirmDialog,$confirmDialogOptions" class="confirmDialog" ms-controller="confirmDialogCtrl">
+        <div class="dialog-inner">
+             <div class="dialog-header">
+                <div class="dialog-title">
+                    <div><span>友情提示</span></div>
+                </div>    
+                <div class="pop-close"> 
+                     <div class="icon-close" ms-click="onCancel()"></div>
+                </div>
+            </div>
+            <div class="dialog-alter-info-content">
+                <div class="dialog-pay-info-err-str" >
+                    {{msg}}
+                </div> 
+            </div>
+            <div class="dialog-action-panel">
+                <button class="btn-ok" type="button" ms-click="onOK()">确定</button>
+                <button class="btn-cancel" type="button" ms-click="onCancel()">取消</button>
+            </div>
+        </div>
+    </div>
+        <div ms-widget="dialog,imageDialog,$imageDialogOptions" class="imageDialog" ms-controller="imageDialogCtrl">
+        <div class="dialog-inner">
+             <div class="dialog-header">
+                <div class="dialog-title">
+                    <div><span>查看大图</span></div>
+                </div>    
+                <div class="pop-close"> 
+                     <div class="icon-close" ms-click="closeDialog()"></div>
+                </div>
+            </div>
+            <div class="dialog-alter-info-content"> 
+                <div class="dialog-pay-info-err-str" style="font-size:24px;overflow: auto;max-height:600px;  text-align: center;">
+                  <a ms-attr-href="url" target="_blank"> <img ms-attr-src="url" style="height:550px; "/></a>
+                </div> 
+            </div>  
+        </div>
+    </div>
+    <div ms-widget="dialog,alertDialog,$alertDialogOptions" class="alertDialog" ms-controller="alertDialogCtrl">
+        <div class="dialog-inner">
+             <div class="dialog-header">
+                <div class="dialog-title">
+                    <div><span>友情提示</span></div>
+                </div>    
+                <div class="pop-close"> 
+                     <div class="icon-close" ms-click="closeDialog()"></div>
+                </div>
+            </div>
+            <div class="dialog-alter-info-content"> 
+                <div class="dialog-pay-info-err-str" >
+                    {{msg}}
+                </div> 
+            </div>
+              <div class="dialog-action-panel">
+                <button class="btn-ok" type="button" ms-click="closeDialog()">确定</button> 
+            </div>
+        </div>
+    </div>
+    @@include('../../include/common/footer.html')
+</body>
+
+</html>

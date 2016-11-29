@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>退换货订单</title>
+    @@include('../../include/common/intro.html')
+    <!-- build:css css/module/aftersale/aftersale.css -->
+    <link rel="stylesheet" href="/css/module/aftersale/aftersale.css"/>
+    <!-- endbuild -->
+</head>
+<body>
+@@include('../../include/common/header.html')
+@@include('../../include/common/nav.html')
+<div class="main mod-demo aftersale">
+    <div class="sidebar">
+        @@include('../../include/common/menu.html')
+    </div>
+    <div class="content ms-controller" ms-controller="afterSaleOrder">
+        <div class="panel">
+            <div class="hd">
+                <span class="title">退换货订单</span>
+            </div>
+            <div class="bd">
+                <div class="search">
+                    <div class="row">
+                        <div class="col col-1 title">订单编号</div>
+                        <div class="col col-3">
+                            <input type="text" class="inputbox" ms-duplex="searchInfo.orderSn"/>
+                        </div>
+                        <div class="col col-1 title">退换货编号</div>
+                        <div class="col col-3">
+                            <input type="text" class="inputbox" ms-duplex="searchInfo.sn"/>
+                        </div>
+                        <div class="col col-1 title">退换货状态</div>
+                        <div class="col col-3">
+                            <select class="inputbox" ms-duplex="searchInfo.afterSaleStatus">
+                                <option ms-repeat-el="afterSaleStatus" ms-attr-value='{{el.value}}' ms-text="el.name"></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col col-1 title">申请时间</div>
+                        <div class="col col-3">
+                            <input ms-widget="datepicker" ms-duplex="searchInfo.createTime__gte"/>
+                        </div>
+                        <div class="col col-1 title">到</div>
+                        <div class="col col-3">
+                            <input ms-widget="datepicker" ms-duplex="searchInfo.createTime__lte"/>
+                        </div>
+                        <div class="col col-1 title">退换货类型</div>
+                        <div class="col col-3">
+                            <select class="inputbox" ms-duplex="searchInfo.afterSaleType">
+                                <option ms-repeat-el="afterSaleType" ms-attr-value='{{el.value}}' ms-text="el.name"></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col col-3 offset-1">
+                            <!-- <input type="button" class="search-btn" value="搜索" ms-click="ckSearchList"> -->
+                            <span class="btn btn-large btn-primary" ms-click="ckSearchList">搜索</span>
+                        </div>
+
+                        <div class="col col-2 cbox">
+                            <input type="checkbox" checked="checked" ms-click="ckNoNeed"/>
+                            <span>排除已完成</span>
+                        </div>
+
+                        <div class="col col-3" style="display: none">
+                            <input type="button" class="search-btn" value="搜索" ms-click="ckShowInfo('dlgAfterSaleInfo')">
+                        </div>
+                    </div>
+                </div>
+                <table class="ctable">
+                    <thead>
+                        <tr width="100%" class="thb ctr">
+                            <th width="12%">订单号</th>
+                            <th width="12%">退换货编号</th>
+                            <th width="15%">买家</th>
+                            <th width="10%">退换货类型</th>
+                            <th width="12%">申请时间</th>
+                            <th width="18%">退换货状态</th>
+                            <th width="11%">操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ms-if="afterSaleOrderList.length>0" ms-repeat-el="afterSaleOrderList" class="ctr" ms-class="tr-bg:($index%2==0)">
+                            <td>{{el.orderSn}}</td>
+                            <td>{{el.sn}}</td>
+                            <td>{{el.serviceBuyerName}}</td>
+                            <td>{{el.afterSaleTypeDesc}}</td>
+                            <td>{{el.createTime}}</td>
+                            <td>{{el.afterSaleStatusDesc}}</td>
+                            <td>
+                                <span ms-html="getLink(el)"></span>
+                            </td>
+                        </tr>
+                        <tr ms-if="afterSaleOrderList.length==0">
+                            <td colspan="7" class="cell-empty" ms-text="afterSaleOrderEmptyText"></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div ms-widget="pager,pp" ms-if="afterSaleOrderList.length>0"></div>
+            </div>
+        </div>
+        <div ms-widget="dialog,dlgAfterSaleConfirm,opts1">
+            <div class="col offerset-2">
+                {{confirmReceivedMsg}}
+            </div>
+        </div>
+        <div ms-widget="dialog,dlgAfterSaleAlert,opts2">
+            <div class="col offerset-2">
+                {{confirmReceivedMsg}}
+            </div>
+        </div>
+    </div>
+</div>
+@@include('../../include/common/outro.html')
+<script>require(['conf/aftersale/aftersale']);</script>
+</body>
+</html>

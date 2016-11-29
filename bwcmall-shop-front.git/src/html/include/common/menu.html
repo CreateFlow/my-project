@@ -1,0 +1,13 @@
+<div class="menu" ms-controller="menuCtrl">
+    <ul class="list">
+        <li class="item" ms-repeat-item="menuItems" ms-if="menuItems.length>0">
+            <div class="hd">
+                <a ms-href="item.url" ms-if="item.url != undefined"><h3 class="title" ms-text="item.title"></h3></a>
+                <h3 class="title" ms-text="item.title" ms-if="item.url == undefined"></h3>
+            </div>
+            <div class="bd">
+                <a ms-repeat-subitem="item.subItems" ms-href="subitem.url" ms-if="item.subItems.length>0" ms-text="subitem.title"></a>
+            </div>
+        </li>
+    </ul>
+</div>

@@ -1,0 +1,343 @@
+<!--主要内容-->
+<div class="g-content g-clearfix" >
+  <!--订单详情header-->
+  <div class="order-detail-header gf-yahei gs-14">
+    <span class="g-ib odh-num" ms-text="' 订单号：'+order.sn + (order.orderStatus=='Canceled'?'(已取消)':'')"> 
+    </span>
+    <span class="g-ib odh-time">
+      {{order.createdTime}}
+    </span>   
+      <a class="g-ib odh-cancel" href="javascript: void(0)" ms-click="orderCancel(order.sn)"
+        ms-if=" order.orderStatus == 'PendingPay'">
+        取消订单
+      </a> 
+       <a class="g-ib ga-382 odh-cancel" ms-if="order.orderAfsStatus == 'Available' "  href="javascript: void(0)"   ms-click="toApply(order)" >申请售后</a>
+     
+        <a class="g-ib ga-382 odh-cancel" ms-if="order.orderAfsStatus == 'InProgress' " ms-click="viewAfsDetail(order.currentAfterSale)" href="javascript: void(0)" >售后处理中</a>
+  </div>
+  <!--订单状态-->
+  <div class="order-detail-status gf-song">
+       <div class="ods-one" style="margin-left:75px;">
+         <p class="ods-one-img"> 
+          <img src="/images/order/payment2.png" ms-if="order.paymentStatus == 'Bills' || order.paymentStatus == 'Paid' "/>  
+          <img src="/images/order/payment1.png" ms-if=" !order.paymentStatus || order.paymentStatus == 'PendingPay' || order.paymentStatus == 'NoBills' " />   
+          <p class="ods-one-line ods-lineno"  ms-if="!order.paymentStatus || order.paymentStatus == 'PendingPay' || order.paymentStatus == 'NoBills' "></p> 
+          <p class="ods-one-line ods-lineyes" ms-if="order.paymentStatus == 'Bills' || order.paymentStatus == 'Paid' "></p>  
+        </p>
+        <p class="ods-one-status ones-color1" ms-if="!order.paymentStatus || order.paymentStatus == 'PendingPay' || order.paymentStatus == 'NoBills' ">
+            待支付
+        </p> 
+        <p class="ods-one-status ones-color1" ms-if="order.paymentStatus == 'Bills' || order.paymentStatus == 'Paid' ">
+            已支付
+        </p> 
+      </div>
+      <div class="ods-one">
+         <p class="ods-one-img"> 
+          <img src="/images/order/shipping1.png"   ms-if=" (!order.shippingStatus || order.shippingStatus == 'Canceled'  || order.shippingStatus == 'NotOrder' ) &&  order.orderStatus !='PendingDelivery'" />  
+          <img src="/images/order/shipping2.png"   ms-if="order.shippingStatus == 'Ordered' || order.orderStatus =='PendingDelivery'"/>   
+          <img src="/images/order/shipping3.png"   ms-if="order.shippingStatus == 'Shipped' || order.shippingStatus == 'Received'  "/>   
+          <p class="ods-one-line ods-lineno"  ms-if="!order.shippingStatus ||  order.shippingStatus == 'Canceled' ||  order.shippingStatus == 'Ordered'   || order.shippingStatus == 'NotOrder' " ></p> 
+          <p class="ods-one-line ods-lineyes"  ms-if="order.shippingStatus == 'Shipped' || order.shippingStatus == 'Received'  "></p>  
+        </p>
+        <p class="ods-one-status ones-color1"  ms-if="!order.shippingStatus ||  order.shippingStatus == 'Canceled' ||  order.shippingStatus == 'Ordered'   || order.shippingStatus == 'NotOrder' ">
+            待发货
+        </p> 
+         <p class="ods-one-status ones-color1"  ms-if="order.shippingStatus == 'Shipped' || order.shippingStatus == 'Received'   ">
+            已发货
+        </p> 
+      </div>
+      <div class="ods-one">
+         <p class="ods-one-img"> 
+           <img src="/images/order/received1.png"  ms-if="!order.shippingStatus || order.shippingStatus  == 'Canceled'   || order.shippingStatus == 'NotOrder'  || order.shippingStatus  == 'Ordered'"/>  
+          <img src="/images/order/received2.png"  ms-if="  order.shippingStatus == 'Shipped'"/>  
+          <img src="/images/order/received3.png"  ms-if="order.shippingStatus == 'Received' "/>   
+          <p class="ods-one-line ods-lineno"  ms-if="order.shippingStatus != 'Received'"></p> 
+          <p class="ods-one-line ods-lineyes" ms-if="order.shippingStatus == 'Received' "></p>  
+        </p>
+        <p class="ods-one-status ones-color1" ms-if="!order.shippingStatus || order.shippingStatus != 'Received' ">
+            待收货
+        </p> 
+        <p class="ods-one-status ones-color1" ms-if="order.shippingStatus == 'Received' ">
+            已收货
+        </p> 
+      </div>
+      <div class="ods-one">
+         <p class="ods-one-img"> 
+          <img src="/images/order/finished1.png"  ms-if="order.orderStatus != 'Finished'"/>  
+          <img src="/images/order/finished3.png"  ms-if="order.orderStatus == 'Finished'"/>    
+        </p>
+        <p class="ods-one-status ones-color1"  ms-if="order.orderStatus != 'Finished'">
+            未完成
+        </p> 
+          <p class="ods-one-status ones-color1"  ms-if="order.orderStatus == 'Finished'">
+            已完成
+        </p> 
+      </div>
+      <div class="ods-one-line-left ods-lineyes" style="width:277px"></div>
+      <div class="ods-one-line-right ods-lineno"  style="width:295px"></div> 
+  </div>
+  <div class="order-shop-panel ">
+      <div class="order-shop-title">
+           <span class="gf-song">
+            卖家信息
+           </span>
+           <div class="link" ms-mouseover="showShopInfo(this)" ms-mouseleave="hideShopInfo(this)"><i class="link-icon"></i>联系卖家</div>
+            <div class="odgo-changetips">
+                <p ms-html="'联系人：'+order.sellerName+'<br/>联系电话：'+order.sellerPhone"> </p> 
+            </div>
+      </div>
+      <div class="order-shop-content">
+          <div class="order-shop-span">
+            <label>公司名称:</label><span ms-text="order.shopName"></span>
+          </div>
+          <div  class="order-shop-span">
+            <label>姓名:</label><span ms-text="order.sellerName"></span>
+          </div>
+          <div  class="order-shop-span order-shop-address">
+            <label>地址:</label><span ms-text="order.sellerAddress"></span>
+          </div> 
+      </div>
+
+  </div>
+  <!--商品列表-->
+  <div class="order-detail-goods gf-yahei">
+    
+      <div class="odg-one" ms-repeat-item="order.orderItems">
+        <span class="g-ib odgo-img">
+          <img ms-src="item.image+'!64'" />
+        </span>
+        <a class="g-ib odgo-name" ms-href="'/goods/detail.html?id='+item.goodsId" target="_blank"
+        ms-attr-title="{{item.name}}">
+          {{item.brandName}} {{item.sn|subStr10}} {{item.name|subStr25}}
+        </a>
+        <span class="g-ib odgo-price gc-e83" ms-html="formatPrice(item.price)"> 
+        </span> 
+        <span class="oogo-num-pos">
+          <span class="g-ib odgo-num">
+            ×{{item.quantity}}
+          
+              <span class="oogo-num-tips" ms-if="item.requiredQuantity != item.quantity">
+                &nbsp;
+                <span style="text-decoration:line-through;">
+                  {{item.requiredQuantity}}
+                </span>
+              </span> 
+          </span>
+          <span class="oogo-num-tips-info">
+            <i class="arrow">
+            </i>
+            <span>
+              下单{{item.requiredQuantity}}，发货{{item.quantity}}
+            </span>
+          </span>
+        </span>
+        <span><span ms-if="item.ship==0">当天</span><span ms-if="item.ship!=0" ms-text="item.ship+'天'"></span></span>
+        <a class="g-ib odgo-change" href="javascript:void(0)" ms-if="item.returnType == 0" >
+          退换货
+        </a>
+        <div class="odgo-changetips">
+          <i class="arrow">
+          </i>
+          <p>
+            请联系客服佰小仓
+          </p>
+          <p>
+            400-021-9898
+          </p>
+        </div>
+      </div> 
+  </div>
+  <!--收货信息-->
+  <div class="order-detail-receiver gf-song">
+    <!--收货信息-->
+    <p class="odr-title gs-14">
+      <b>
+        收货信息
+      </b>
+    </p>
+    <table class="odr-table gs-12">
+<!--    
+      <tr ms-if="order.orderStatus != 'Canceled'">
+        <td width="30%">
+          货期
+        </td>
+        <td width="70%" ms-text=" '预计'+computeShip(order.shipMin,order.shipMax)+'天送达'">
+         
+        </td>
+      </tr>
+-->      
+      <tr class="odr-bg">
+        <td width="30%">
+          公司
+        </td>
+        <td width="70%" ms-text="order.consigneeCorp"> 
+        </td>
+      </tr>
+      <tr>
+        <td>
+          收货人
+        </td>
+        <td ms-text="order.consignee"> 
+        </td>
+      </tr>
+      <tr class="odr-bg">
+        <td>
+          手机号
+        </td>
+        <td ms-text="order.phone"> 
+        </td>
+      </tr>
+      <tr>
+        <td>
+          收货地址
+        </td>
+        <td ms-text="order.fullAddress+order.address"> 
+        </td>
+      </tr>
+    </table>
+    <br/> 
+  </div>
+  <div class="clear">
+  </div>
+  
+  <!-- 备注 -->
+  <div class="comment">
+    <h2 class="comment-title">
+      备注详情
+    </h2>
+    <p class="comment-content" ms-text="order.remarks"> 
+    </p>
+  </div>
+</div>
+<!--内容的footer-->
+<div class="g-cbottom gf-yahei">
+<!--
+  <span class="g-ib gcb-num">
+    总计
+    <span class="gc-e83" ms-text="order.totalQuantity"> 
+    </span>
+    件商品
+  </span>
+  <span class="g-ib gcb-money ">
+    总金额：
+    <span class="gc-e83"> 
+      <span class="gs-24" ms-html="formatPrice(order.totalPrice)"> 
+      </span>
+    </span>
+  </span>
+ 
+    <span class="g-ib gcb-money-1" ms-if=" order.freight && order.freight>0  ">
+      商品金额：
+      <span class="gc-e83" ms-html="formatPrice(order.realPrice)">
+        
+      </span>
+    </span>
+    <span class="g-ib gcb-freight" ms-if=" order.freight && order.freight>0  ">
+      物流费用：
+      <span class="gc-e83" ms-html="formatPrice(order.freight)"> 
+      </span>
+    </span> 
+  <span class="g-ib gcb-money " ms-if=" order.freight && order.freight>0  ">
+    实付金额：
+    <span class="gc-e83" ms-html="formatPrice(order.amount)">  
+    </span>
+  </span>
+-->  
+  <div class="f-fr">
+      <div>
+          <span>
+              <span class="sub-order-bottom-money f-fr f-ib" style="line-height:30px;">总金额：<span
+                      id="total-price" ms-html="formatPrice(order.totalPrice)"></span>
+              </span>
+              <span class="sub-order-bottom-total f-fr f-ib" style="line-height:30px;margin-top: 4px;">总计<em ms-text="order.totalQuantity"></em>件商品</span>
+          </span>
+      </div>
+      <div ms-if="order.freight!=0" class="f-fr" style="line-height:15px;">
+          <span class="sub-order-bottom-total" style="line-height:15px;">商品共计：<span ms-html="formatPrice(order.realPrice)"></span>&nbsp&nbsp运费共计：<span ms-html="formatPrice(order.freight)"></span></span>
+      </div>
+      <div ms-if="order.freight==0" class="f-fr" style="line-height:15px;">
+          <span class="sub-order-bottom-total" style="line-height:15px;">免运费</span>
+      </div>
+  </div>
+  <span class="g-ib gcb-gopay" style="background-image: url(/images/order/goPay0.png);" ms-if="order.orderStatus=='PendingPay'"> 
+        <a class="g-ib gcb-gopay" href="javascript: void(0)" ms-click="payNow(order.sn)">
+              立即支付
+        </a>
+  </span>
+  <span class="g-ib gcb-gopay" style="background-image: url(/images/order/goPay0.png);" ms-if="order.orderStatus =='Shipped'  &&   order.orderAfsStatus != 'InProgress'  "> 
+         <a class="g-ib gcb-gopay" href="javascript: void(0)" ms-click="confirmReceived(order.sn)">
+              确认收货
+        </a>
+  </span>
+  <span class="g-ib gcb-gopay" style="background-image: url(/images/order/goPay0.png);" ms-if=" !(order.orderStatus =='Shipped'  &&  order.orderAfsStatus != 'InProgress'  ) && order.orderStatus !='PendingPay' " ms-text="order.orderStatusDisplay"> 
+       
+  </span>
+</div>
+
+<div ms-widget="dialog,quickPayDialogErr,$quickPayDialogErrOptions" class="quickPayDialog"
+ms-controller="quickPayDialogErrCtrl">
+     <div class="dialog-inner">
+         <div class="dialog-header">
+            <div class="dialog-title">
+                <div><span>友情提示</span></div>
+            </div>    
+            <div class="pop-close"> 
+                 <div class="icon-close" ms-click="onCancel()"></div>
+            </div>
+        </div>
+        <div class="dialog-alter-info-content"> 
+            <div class="dialog-pay-info-err-str" ms-text="quickPayErrStr1"> 
+            </div> 
+        </div>
+          <div class="dialog-action-panel">  
+             <button class="btn-ok" type="button" ms-click="onConfirm()">确定</button>
+            <button class="btn-cancel" type="button" ms-click="onCancel()">取消</button>
+        </div>
+    </div>
+</div>
+
+<div ms-widget="dialog,alertMsg,$alertMsgOptions" class="quickPayDialog" ms-controller="alertMsgCtrl">
+    <div class="dialog-inner">
+       <div class="dialog-header">
+          <div class="dialog-title">
+              <div><span>友情提示</span></div>
+          </div>    
+          <div class="pop-close"> 
+               <div class="icon-close" ms-click="onCancel()"></div>
+          </div>
+      </div>
+      <div class="dialog-alter-info-content"> 
+          <div class="dialog-pay-info-err-str"  ms-text="alertMsgStr"> 
+          </div> 
+      </div>
+        <div class="dialog-action-panel">  
+           <button class="btn-ok" type="button" ms-click="onConfirm()">确定</button>
+          <button class="btn-cancel" type="button" ms-click="onCancel()">取消</button>
+      </div>
+  </div>
+</div>
+
+<div ms-widget="dialog,ConfirmReceived,$ConfirmReceivedOptions" class="quickPayDialog" ms-controller="ConfirmReceivedCtrl">
+    <div class="dialog-inner">
+         <div class="dialog-header">
+            <div class="dialog-title">
+                <div><span>友情提示</span></div>
+            </div>    
+            <div class="pop-close"> 
+                 <div class="icon-close" ms-click="onCancel()"></div>
+            </div>
+        </div>
+        <div class="dialog-alter-info-content"> 
+            <div class="dialog-pay-info-err-str" >
+                  1.若您已收到货物，请及时点击"确定"<br>
+                    2.发货7天后，系统将自动"确认收货"操作
+            </div> 
+        </div>
+          <div class="dialog-action-panel">  
+             <button class="btn-ok" type="button" ms-click="onConfirm()">确定</button>
+            <button class="btn-cancel" type="button" ms-click="onCancel()">取消</button>
+        </div>
+    </div>
+</div>
+
+</div>
